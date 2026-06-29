@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <title>As 12 Palavras Sagradas | Gabriel Luz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, ::after, ::before, body { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Roboto, sans-serif; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; background: #fff; }
+    a { color: inherit; text-decoration: inherit; }
+
+    /* ---- HEADER ---- */
+    .site-header {
+      background: #a60b0d;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #a60b0d;
+    }
+    .logo-text {
+      font-family: Poppins, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+    .logo-text span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .header-icons { display: flex; gap: 18px; align-items: center; }
+    .header-icons svg { width: 20px; height: 20px; fill: #fff; cursor: pointer; }
+
+    /* ---- MAIN WRAPPER ---- */
+    .page-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 30px 16px 0;
+    }
+    @media (max-width: 480px) {
+      .page-wrap { padding: 14px 10px 0; }
+    }
+
+    /* ---- HEADLINE ---- */
+    .headline-section { margin-bottom: 6px; }
+    .headline-section h1 {
+      font-family: Poppins, sans-serif;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 42px;
+      color: #000;
+      text-align: left;
+    }
+    @media (max-width: 480px) {
+      .headline-section h1 { font-size: 19px; line-height: 26px; }
+    }
+    .headline-urgente { color: #b62619; }
+    .headline-destaque { background: #a60b0d; color: #fff; padding: 0 3px; }
+    .headline-underline { text-decoration: underline; }
+    .meta-author { font-size: 17px; color: #1f2123; margin-top: 8px; }
+    .meta-date { font-size: 12px; color: #1f2123; margin-top: 2px; line-height: 12px; }
+    @media (max-width: 480px) {
+      .meta-author { font-size: 12px; }
+      .meta-date { font-size: 10px; }
+    }
+
+    /* ---- VIDEO ---- */
+    .video-wrap {
+      margin: 30px 0;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16/9;
+      position: relative;
+    }
+    @media (max-width: 480px) { .video-wrap { margin: 16px 0; } }
+    .video-placeholder {
+      width: 100%; height: 100%; min-height: 300px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: white; text-align: center; padding: 20px; cursor: pointer;
+    }
+    .play-btn {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.15); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; border: 3px solid rgba(255,255,255,0.5);
+    }
+    .play-btn svg { width: 30px; height: 30px; fill: #fff; margin-left: 4px; }
+    .video-placeholder p { font-size: 16px; font-weight: 600; opacity: 0.85; }
+    .video-placeholder small { font-size: 12px; opacity: 0.6; margin-top: 6px; }
+
+    /* ---- MEDIA BAR ---- */
+    .media-bar {
+      margin: 0 0 28px;
+      padding: 16px 12px;
+      background: transparent;
+      border: none;
+      text-align: center;
+    }
+    .media-bar-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+    .media-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    /* BBC */
+    .logo-bbc {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 4px 8px;
+      letter-spacing: 1px;
+      border-radius: 2px;
+      line-height: 1;
+    }
+    /* CNN */
+    .logo-cnn {
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: #cc0000;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    /* NYT */
+    .logo-nyt {
+      font-family: 'Times New Roman', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.15;
+      text-align: center;
+    }
+    /* Globo */
+    .logo-globo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .logo-globo .globo-circle {
+      width: 36px;
+      height: 36px;
+    }
+    .logo-globo .globo-text {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #005bac;
+      letter-spacing: 0.5px;
+    }
+    /* SBT */
+    .logo-sbt {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 6px 10px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    @media (max-width: 480px) {
+      .media-logos { gap: 14px; }
+    }
+
+    /* ---- FB COMMENTS (espelhado do original) ---- */
+    .comments-wrap { margin-bottom: 40px; }
+    .flexBox { display: flex; flex-direction: column; gap: 8px; }
+    .a-co { border-radius: 12px; padding: 8px; }
+    .a-co-f { border-top: 1px solid #e9ebee; padding-bottom: 8px; padding-top: 8px; }
+    .a-co-f .a-co-fc { display: flex; align-items: center; gap: 5px; }
+    .a-co-f .a-co-fb { width: 14px; height: 14px; }
+    .a-co-f .a-co-ft { color: #385898; font-weight: 600; font-family: Helvetica, Arial, sans-serif; font-size: 11px; }
+    .a-co-h { border-bottom: 1px solid #e9ebee; padding-bottom: 20px; }
+    .a-co-h .a-co-hc { display: flex; align-items: center; gap: 5px; }
+    .a-co-ht { font-weight: 600; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
+    .a-fb-parent { display: flex; align-items: flex-start; gap: 8px; }
+    .a-fb-thumb { width: 48px; height: 48px; overflow: hidden; border-radius: 50%; flex-shrink: 0; }
+    .a-fb-thumb-child { width: 36px; height: 36px; }
+    .a-fb-thumb-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    .a-fb-info { width: 100%; }
+    .a-fb-text { width: 100%; font-family: Helvetica, Arial, sans-serif; }
+    .a-fb-user { color: #385898; font-weight: 600; font-size: 14px; line-height: 1.358; word-break: break-word; }
+    .a-fb-comm { color: #1c1e21; line-height: 19px; margin-top: 4px; margin-bottom: 6px; font-size: 14px; font-weight: 400; word-break: break-word; }
+    .a-fb-misc { display: flex; justify-content: space-between; }
+    .a-fb-misc-left { display: flex; line-height: 16px; gap: 4px; align-items: center; }
+    .a-fb-misc-txt { font-weight: 400; font-size: 12px; font-family: Helvetica, Arial, sans-serif; cursor: pointer; color: #4267b2; }
+    .a-fb-time { color: #90949c; font-size: 12px; font-family: Helvetica, Arial, sans-serif; }
+    .a-fb-dot { font-weight: 400; font-size: 12px; }
+    .a-fb-misc-txt:hover { text-decoration: underline; }
+    .a-fb-likes { display: flex; align-items: center; gap: 4px; color: #1c1e21; }
+    .a-fb-like-img { width: 14px; height: 14px; display: block; margin-top: -2px; }
+    .a-fb-likes span { font-size: 12px; font-weight: 400; }
+    .a-fb-children { margin-left: 48px; border-left: 1px dotted #d3d6db; padding-left: 8px; display: flex; flex-direction: column; gap: 4px; }
+    @media (max-width: 480px) { .a-fb-text { width: 90%; } }
+    .no-more-comments { font-size: 15px; font-weight: 500; text-align: center; margin-top: 12px; font-family: Helvetica, Arial, sans-serif; color: #1c1e21; }
+
+    /* ---- FOOTER ---- */
+    .site-footer { background: #1f1929; padding: 30px 20px; text-align: center; }
+    .footer-copyright { color: #fff; font-size: 14px; font-weight: 500; font-family: Poppins, sans-serif; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 10px; color: rgba(255,255,255,0.45); line-height: 1.5; max-width: 640px; margin: 0 auto 12px; }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+    .footer-links a { color: rgba(255,255,255,0.5); font-size: 11px; }
+    .footer-links a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="site-header">
+    <div class="logo-wrap">
+      <div class="logo-icon">
+        <!-- cruz estilizada -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        Notícias da Fé
+        <span>Portal Cristão</span>
+      </div>
+    </div>
+    <div class="header-icons">
+      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="page-wrap">
+
+    <!-- HEADLINE -->
+    <div class="headline-section">
+      <h1>
+        <span class="headline-urgente">URGENTE:</span> Pesquisador brasileiro <span class="headline-destaque">recebe ameaças de morte</span> após revelar as 12 Palavras Sagradas da Bíblia <span class="headline-underline">QUE ATRAEM ABUNDÂNCIA EM 24 HORAS</span>
+      </h1>
+      <p class="meta-author">Por <strong>Gabriel Luz</strong></p>
+      <p class="meta-date"><span id="data-hoje">28/06/2026</span> - Atualizado há 2 horas</p>
+    </div>
+
+    <!-- VIDEO (substitua pelo embed do vturb quando tiver o link) -->
+    <div class="video-wrap">
+      <div class="video-placeholder">
+        <div class="play-btn">
+          <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>
+        </div>
+        <p>▶ Clique para assistir o vídeo</p>
+        <small>⚠️ Este vídeo pode sair do ar a qualquer momento</small>
+      </div>
+    </div>
+
+    <!-- MEDIA BAR -->
+    <div class="media-bar">
+<div class="media-logos">
+
+        <img src="midias.png" alt="BBC CNN Globo Televisa SBT" style="max-width:100%;height:60px;object-fit:contain;">
+
+      </div>
+    </div>
+
+    <!-- COMENTÁRIOS -->
+    <div class="comments-wrap">
+      <div class="a-co a-fb flexBox">
+        <div class="a-co-h">
+          <div class="a-co-hc">
+            <p class="a-co-ht">Mostrando 4 de 641 comentários</p>
+          </div>
+        </div>
+
+        <!-- Comentário 1 com resposta -->
+        <div class="flexBox">
+          <div class="a-fb-parent">
+            <div class="a-fb-thumb">
+              <img src="https://i.pravatar.cc/70?img=47" alt="" class="a-fb-thumb-img" width="70" height="70">
+            </div>
+            <div class="a-fb-info">
+              <div class="a-fb-text">
+                <div class="a-fb-user">Maria Fernanda Costa</div>
+                <div class="a-fb-comm"><span>🙏 Rezei as 12 palavras por 7 dias e finalmente consegui o emprego que eu esperava. Coincidência? Não acredito nisso. Obrigada Gabriel!</span></div>
+              </div>
+              <div class="a-fb-misc">
+                <div class="a-fb-misc-left">
+                  <div class="a-fb-misc-txt">Curtir</div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-misc-txt">Responder</div>
+                  <div class="a-fb-likes">
+                    <p class="a-fb-dot">·</p>
+                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <span>412</span>
+                  </div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-time">2h</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="a-fb-children">
+            <div class="a-fb-parent">
+              <div class="a-fb-thumb a-fb-thumb-child">
+                <img src="https://i.pravatar.cc/48?img=32" alt="" class="a-fb-thumb-img" width="48" height="48">
+              </div>
+              <div class="a-fb-info">
+                <div class="a-fb-text">
+                  <div class="a-fb-user">Roberta Alves</div>
+                  <div class="a-fb-comm"><span>Eu nunca acreditava nesse tipo de coisa… mas resolvi tentar. Do nada, uma dívida antiga foi perdoada. Obrigada a Deus! 💙</span></div>
+                </div>
+                <div class="a-fb-misc">
+                  <div class="a-fb-misc-left">
+                    <div class="a-fb-misc-txt">Curtir</div>
+                    <p class="a-fb-dot">·</p>
+                    <div class="a-fb-misc-txt">Responder</div>
+                    <div class="a-fb-likes">
+                      <p class="a-fb-dot">·</p>
+                      <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                      <span>15</span>
+                    </div>
+                    <p class="a-fb-dot">·</p>
+                    <div class="a-fb-time">1h</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comentário 2 -->
+        <div class="flexBox">
+          <div class="a-fb-parent">
+            <div class="a-fb-thumb">
+              <img src="https://i.pravatar.cc/70?img=12" alt="" class="a-fb-thumb-img" width="70" height="70">
+            </div>
+            <div class="a-fb-info">
+              <div class="a-fb-text">
+                <div class="a-fb-user">João Roberto Silva</div>
+                <div class="a-fb-comm"><span>Era cético total. Mas minha esposa insistiu pra gente tentar. Em 3 semanas quitamos uma dívida de R$12.000 que tínhamos há 2 anos. Não sei explicar, mas funcionou 🙌</span></div>
+              </div>
+              <div class="a-fb-misc">
+                <div class="a-fb-misc-left">
+                  <div class="a-fb-misc-txt">Curtir</div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-misc-txt">Responder</div>
+                  <div class="a-fb-likes">
+                    <p class="a-fb-dot">·</p>
+                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <span>55</span>
+                  </div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-time">11m</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comentário 3 -->
+        <div class="flexBox">
+          <div class="a-fb-parent">
+            <div class="a-fb-thumb">
+              <img src="https://i.pravatar.cc/70?img=5" alt="" class="a-fb-thumb-img" width="70" height="70">
+            </div>
+            <div class="a-fb-info">
+              <div class="a-fb-text">
+                <div class="a-fb-user">Ana Paula Rodrigues</div>
+                <div class="a-fb-comm"><span>Que conteúdo incrível! Sempre soube que a Bíblia guardava segredos que não nos contaram. Já assisti o vídeo e comecei hoje ❤️🙏 Deus te abençoe Gabriel!</span></div>
+              </div>
+              <div class="a-fb-misc">
+                <div class="a-fb-misc-left">
+                  <div class="a-fb-misc-txt">Curtir</div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-misc-txt">Responder</div>
+                  <div class="a-fb-likes">
+                    <p class="a-fb-dot">·</p>
+                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <span>18</span>
+                  </div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-time">13m</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comentário 4 -->
+        <div class="flexBox">
+          <div class="a-fb-parent">
+            <div class="a-fb-thumb">
+              <img src="https://i.pravatar.cc/70?img=68" alt="" class="a-fb-thumb-img" width="70" height="70">
+            </div>
+            <div class="a-fb-info">
+              <div class="a-fb-text">
+                <div class="a-fb-user">Ricardo Moura</div>
+                <div class="a-fb-comm"><span>Pedi para vender meu carro que estava parado há 6 meses. Na mesma semana, alguém pagou à vista. Verdadeiramente milagroso!</span></div>
+              </div>
+              <div class="a-fb-misc">
+                <div class="a-fb-misc-left">
+                  <div class="a-fb-misc-txt">Curtir</div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-misc-txt">Responder</div>
+                  <div class="a-fb-likes">
+                    <p class="a-fb-dot">·</p>
+                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <span>18</span>
+                  </div>
+                  <p class="a-fb-dot">·</p>
+                  <div class="a-fb-time">13m</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="a-co-f">
+          <div class="a-co-fc">
+            <img class="a-co-fb" src="https://media.atomicatmedia.net/p/fblogo.webp?height=48&width=48" alt="fblogo">
+            <p class="a-co-ft">Facebook Social Plugin</p>
+          </div>
+        </div>
+      </div>
+      <p class="no-more-comments">Esta publicação não está mais recebendo comentários.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="site-footer">
+    <p class="footer-copyright">Todos os direitos reservados © 2026</p>
+    <p class="footer-disclaimer">
+      Este site não faz parte do Facebook nem é endossado pelo Facebook Inc. FACEBOOK é marca registrada da META PLATFORMS, INC. Os resultados apresentados são individuais e não representam resultados típicos. Os depoimentos são de pessoas reais com resultados excepcionais — os seus podem variar. Este conteúdo tem caráter educacional e espiritual, não se destina a diagnosticar, tratar, curar ou prevenir qualquer condição. A Hotmart atua como plataforma de hospedagem de produtos digitais e não é corresponsável pelos produtos nela vendidos. Os direitos do consumidor são assegurados pelo Código de Defesa do Consumidor (Lei nº 8.078/1990).
+    </p>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Contato</a>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var d = new Date();
+      var el = document.getElementById('data-hoje');
+      if(el) el.textContent = String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+    })();
+  </script>
+
+</body>
+</html>
