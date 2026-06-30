@@ -120,6 +120,57 @@
     .video-placeholder p { font-size: 16px; font-weight: 600; opacity: 0.85; }
     .video-placeholder small { font-size: 12px; opacity: 0.6; margin-top: 6px; }
 
+    /* ---- BLOCO CTA ---- */
+    #bloco-cta {
+      display: none;
+      text-align: center;
+      padding: 28px 20px 20px;
+      background: #fff;
+    }
+    .cta-preco-riscado {
+      font-size: 18px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .cta-preco-riscado span {
+      text-decoration: line-through;
+      color: #c0392b;
+      font-weight: 700;
+    }
+    .cta-preco-atual {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .cta-preco-atual span {
+      color: #27ae60;
+      font-size: 28px;
+    }
+    .cta-seguro {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 13px;
+      color: #666;
+      margin-top: 16px;
+      margin-bottom: 14px;
+    }
+    .cta-seguro svg { flex-shrink: 0; }
+    .cta-pagamentos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .cta-pagamentos img {
+      height: 26px;
+      opacity: 0.85;
+    }
+
     /* ---- MEDIA BAR ---- */
     .media-bar {
       margin: 0 0 28px;
@@ -251,6 +302,17 @@
     .footer-links a { color: rgba(255,255,255,0.5); font-size: 11px; }
     .footer-links a:hover { color: #fff; }
   </style>
+  <!-- VTurb Preload -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a4308ac40698aa96bc82b84/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/6a4307c36c1fb1e13ed979b1/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://license.vturb.com">
+  <!-- End VTurb Preload -->
+
   <!-- Meta Pixel -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -298,17 +360,28 @@
       <p class="meta-date"><span id="data-hoje">28/06/2026</span> - Atualizado há 2 horas</p>
     </div>
 
-    <!-- VIDEO (substitua pelo embed do vturb quando tiver o link) -->
+    <!-- VIDEO VTURB -->
     <div class="video-wrap">
-      <div class="video-placeholder">
-        <div class="play-btn">
-          <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>
-        </div>
-        <p>▶ Clique para assistir o vídeo</p>
-        <small>⚠️ Este vídeo pode sair do ar a qualquer momento</small>
-      </div>
+      <vturb-smartplayer id="vid-6a4308ac40698aa96bc82b84" style="display: block; margin: 0 auto; width: 100%;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+      <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a4308ac40698aa96bc82b84/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
     </div>
 
+
+    <!-- BLOCO CTA — aparece via Elementos Externos do vturb (id: bloco-cta) -->
+    <div id="bloco-cta">
+      <p class="cta-preco-riscado">Normalmente: <span>R$30.000</span></p>
+      <p class="cta-preco-atual">Hoje apenas: <span>R$167</span> — Pagamento Único</p>
+      <div class="cta-seguro">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Suas informações estão seguras e protegidas. A transação é realizada em ambiente SSL criptografado.
+      </div>
+      <div class="cta-pagamentos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard">
+        <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="Pix">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Boleto_bancário.png/200px-Boleto_bancário.png" alt="Boleto">
+      </div>
+    </div>
 
     <!-- COMENTÁRIOS -->
     <div class="comments-wrap">
