@@ -367,6 +367,41 @@
     </div>
 
 
+    <!-- SCRIPT: revela bloco-cta quando vturb mostrar o botão CTA -->
+    <script>
+    (function() {
+      function mostrarBloco() {
+        var el = document.getElementById('bloco-cta');
+        if (el) el.style.display = 'block';
+      }
+      function monitorarVturb() {
+        var intervalo = setInterval(function() {
+          // vturb injeta o botão CTA num iframe ou div com data-player-id
+          var cta = document.querySelector(
+            '[id^="vid-"] button, ' +
+            '.vturb-cta-button, ' +
+            '[class*="cta-button"], ' +
+            '[class*="action-button"], ' +
+            'a[href*="cloudfycheckout"], ' +
+            'a[href*="checkout"]'
+          );
+          if (cta) {
+            mostrarBloco();
+            clearInterval(intervalo);
+          }
+        }, 500);
+      }
+      // fallback: se vturb disparar evento customizado
+      window.addEventListener('smartplayer:cta:show', mostrarBloco);
+      window.addEventListener('vturb:cta', mostrarBloco);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', monitorarVturb);
+      } else {
+        monitorarVturb();
+      }
+    })();
+    </script>
+
     <!-- BLOCO CTA — aparece via Elementos Externos do vturb (id: bloco-cta) -->
     <div id="bloco-cta">
       <p class="cta-preco-riscado">Normalmente: <span>R$30.000</span></p>
