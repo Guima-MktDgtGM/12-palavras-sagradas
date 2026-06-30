@@ -97,11 +97,6 @@
     /* ---- VIDEO ---- */
     .video-wrap {
       margin: 30px 0;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #000;
-      aspect-ratio: 16/9;
-      position: relative;
     }
     @media (max-width: 480px) { .video-wrap { margin: 16px 0; } }
     .video-placeholder {
@@ -367,38 +362,33 @@
     </div>
 
 
-    <!-- SCRIPT: revela bloco-cta quando vturb mostrar o botão CTA -->
+    <!-- SCRIPT: revela bloco-cta no mesmo tempo do CTA do vturb (20s) -->
     <script>
     (function() {
+      var CTA_SEGUNDOS = 20;
+      var mostrado = false;
+
       function mostrarBloco() {
+        if (mostrado) return;
+        mostrado = true;
         var el = document.getElementById('bloco-cta');
-        if (el) el.style.display = 'block';
+        if (el) {
+          el.style.display = 'block';
+          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       }
-      function monitorarVturb() {
-        var intervalo = setInterval(function() {
-          // vturb injeta o botão CTA num iframe ou div com data-player-id
-          var cta = document.querySelector(
-            '[id^="vid-"] button, ' +
-            '.vturb-cta-button, ' +
-            '[class*="cta-button"], ' +
-            '[class*="action-button"], ' +
-            'a[href*="cloudfycheckout"], ' +
-            'a[href*="checkout"]'
-          );
-          if (cta) {
-            mostrarBloco();
-            clearInterval(intervalo);
-          }
-        }, 500);
-      }
-      // fallback: se vturb disparar evento customizado
+
+      // Timer principal: 20 segundos após o início do vídeo
+      setTimeout(mostrarBloco, CTA_SEGUNDOS * 1000);
+
+      // Backup: eventos do vturb caso disparem antes
       window.addEventListener('smartplayer:cta:show', mostrarBloco);
       window.addEventListener('vturb:cta', mostrarBloco);
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', monitorarVturb);
-      } else {
-        monitorarVturb();
-      }
+      window.addEventListener('message', function(e) {
+        if (e.data && (e.data.event === 'cta:show' || e.data.type === 'cta')) {
+          mostrarBloco();
+        }
+      });
     })();
     </script>
 
