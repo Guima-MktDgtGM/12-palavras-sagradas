@@ -162,9 +162,26 @@
       margin-top: 6px;
     }
     .cta-pagamentos img {
-      height: 26px;
+      height: 28px;
+      width: auto;
+      object-fit: contain;
       opacity: 0.85;
     }
+    .cta-pagamentos .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge-visa { background: #1a1f71; color: #fff; font-style: italic; font-size: 14px; }
+    .badge-mc { background: #fff; border: 1px solid #ddd; }
+    .badge-pix { background: #32bcad; color: #fff; }
+    .badge-boleto { background: #fff; color: #333; border: 1px solid #ddd; font-size: 10px; }
 
     /* ---- MEDIA BAR ---- */
     .media-bar {
@@ -401,10 +418,23 @@
         Suas informações estão seguras e protegidas. A transação é realizada em ambiente SSL criptografado.
       </div>
       <div class="cta-pagamentos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard">
-        <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="Pix">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Boleto_bancário.png/200px-Boleto_bancário.png" alt="Boleto">
+        <span class="badge badge-visa">VISA</span>
+        <!-- Mastercard -->
+        <span class="badge badge-mc">
+          <svg width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="12" r="10" fill="#EB001B"/>
+            <circle cx="23" cy="12" r="10" fill="#F79E1B"/>
+            <path d="M19 4.8a10 10 0 0 1 0 14.4A10 10 0 0 1 19 4.8z" fill="#FF5F00"/>
+          </svg>
+        </span>
+        <!-- Pix -->
+        <span class="badge badge-pix">
+          <svg width="16" height="16" viewBox="0 0 512 512" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin-right:4px">
+            <path d="M242.4 65.6c7.5-7.5 19.7-7.5 27.2 0l57.6 57.6c3.7 3.7 3.7 9.7 0 13.4L256 208l-71.2-71.4L242.4 65.6zM65.6 242.4L123.2 185c3.7-3.7 9.7-3.7 13.4 0L208 256l-71.4 71.2L65.6 269.6c-7.5-7.5-7.5-19.7 0-27.2zM256 304l71.2 71.4-57.6 57.6c-7.5 7.5-19.7 7.5-27.2 0l-57.6-57.6c-3.7-3.7-3.7-9.7 0-13.4L256 304zm75.4-47.2 71.4-71.2 57.6 57.6c7.5 7.5 7.5 19.7 0 27.2l-57.6 57.6c-3.7 3.7-9.7 3.7-13.4 0L256 256l75.4-75.2z"/>
+          </svg>
+          PIX
+        </span>
+        <span class="badge badge-boleto">🏦 Boleto</span>
       </div>
     </div>
 
