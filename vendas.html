@@ -381,14 +381,11 @@
     </div>
 
 
-    <!-- SCRIPT: revela bloco-cta em 24:37 do vídeo (1477s), sincronizado com o play do vturb -->
+    <!-- SCRIPT: revela bloco-cta quando vturb mostrar o botão CTA (MutationObserver) -->
     <script>
     (function() {
-      var CTA_EM = 1477; // 24 minutos e 37 segundos
       var COOKIE = 'cta_visto';
       var mostrado = false;
-      var timer = null;
-      var playStartTime = null;
 
       function setCookie() {
         var exp = new Date();
@@ -410,54 +407,36 @@
         if (el) el.style.display = 'block';
       }
 
-      function agendarTimer(segundosRestantes) {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(mostrarBloco, segundosRestantes * 1000);
-      }
-
       // Se já viu antes, mostra imediatamente
       if (getCookie()) {
         mostrarBloco();
         return;
       }
 
-      // Escuta eventos do vturb via postMessage
-      window.addEventListener('message', function(e) {
-        if (!e.data || typeof e.data !== 'object') return;
-        var d = e.data;
-
-        // Evento de play
-        if (d.event === 'play' || d.type === 'play' || d.eventName === 'play') {
-          var currentTime = d.currentTime || d.time || 0;
-          var restante = CTA_EM - currentTime;
-          if (restante <= 0) { mostrarBloco(); return; }
-          agendarTimer(restante);
-        }
-
-        // Evento de timeupdate — mais preciso
-        if (d.event === 'timeupdate' || d.type === 'timeupdate') {
-          var t = d.currentTime || d.time || 0;
-          if (t >= CTA_EM) { mostrarBloco(); return; }
-          // Reagenda se ainda não agendou
-          if (!timer && t > 0) {
-            agendarTimer(CTA_EM - t);
-          }
-        }
-
-        // Evento de pause — cancela o timer
-        if (d.event === 'pause' || d.type === 'pause') {
-          if (timer) { clearTimeout(timer); timer = null; }
-        }
-
-        // CTA direto do vturb (backup)
-        if (d.event === 'cta:show' || d.type === 'cta') {
+      // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
+      var observer = new MutationObserver(function() {
+        // Botão CTA do vturb aparece como <a> ou <button> dentro do player
+        var ctaBtn = document.querySelector(
+          '[id^="vid-"] a, [id^="vid-"] button, ' +
+          '[class*="smartplayer"] a[href], ' +
+          '[class*="vturb"] a[href], ' +
+          'a[href*="pay."], a[href*="checkout"], a[href*="cloudfycheckout"]'
+        );
+        if (ctaBtn) {
           mostrarBloco();
+          observer.disconnect();
         }
       });
 
-      // Eventos customizados do vturb
+      observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+      // Backup: eventos customizados
       window.addEventListener('smartplayer:cta:show', mostrarBloco);
       window.addEventListener('vturb:cta', mostrarBloco);
+      window.addEventListener('message', function(e) {
+        if (!e.data || typeof e.data !== 'object') return;
+        if (e.data.event === 'cta:show' || e.data.type === 'cta') mostrarBloco();
+      });
     })();
     </script>
 
