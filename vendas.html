@@ -417,10 +417,8 @@
       // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
       var observer = new MutationObserver(function() {
         // Só dispara quando o link do checkout real aparecer
-        var ctaBtn = document.querySelector(
-          'a[href*="cakto.com.br"]'
-        );
-        if (ctaBtn) {
+        var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
+        if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
           mostrarBloco();
           observer.disconnect();
         }
