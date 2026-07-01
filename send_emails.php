@@ -1,5 +1,4 @@
 <?php
-// Configurações
 define('RESEND_API_KEY', 're_P1HxxW7j_6wZEHYKmM5tG6nfndehc2Dtp');
 define('FROM_EMAIL', 'gabriel.luz@noticiasdafe.com.br');
 define('FROM_NAME', 'Gabriel Luz – Roteiro Divino das 12 Palavras');
@@ -14,6 +13,7 @@ $alterou = false;
 
 foreach ($fila as &$item) {
     if ($item['enviado']) continue;
+    if (($item['status'] ?? '') === 'pago') continue;
     if ($agora < $item['enviar_em']) continue;
 
     $template_path = TEMPLATES_DIR . $item['template'] . '.html';
@@ -22,14 +22,21 @@ foreach ($fila as &$item) {
     $html = file_get_contents($template_path);
     $html = str_replace('{{nome}}', htmlspecialchars($item['nome']), $html);
 
-    $assunto = $item['template'] === 'email1-30min'
-        ? '✨ Sua bênção ainda está reservada, ' . $item['nome']
-        : '⚠️ Última chance — sua bênção ainda está aqui';
+    $assuntos = [
+        'email1-30min'       => '✨ Sua bênção ainda está reservada, ' . $item['nome'],
+        'email2-24h'         => '⚠️ Última chance — sua bênção ainda está aqui',
+        'email-boleto-30min' => '📄 Seu boleto está esperando, ' . $item['nome'],
+        'email-boleto-24h'   => '⚠️ Seu boleto vence em breve — não perca sua bênção',
+        'email-abandono'     => '🙏 ' . $item['nome'] . ', o que aconteceu?',
+    ];
 
-    $response = enviarEmail($item['email'], $assunto, $html);
+    $assunto = $assuntos[$item['template']] ?? 'Mensagem importante';
 
-    if ($response) {
+    $ok = enviarEmail($item['email'], $assunto, $html);
+
+    if ($ok) {
         $item['enviado'] = true;
+        $item['status'] = 'enviado';
         $item['enviado_em'] = date('Y-m-d H:i:s');
         $alterou = true;
     }
@@ -59,6 +66,8 @@ function enviarEmail($para, $assunto, $html) {
     $result = curl_exec($ch);
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
+
+    file_put_contents(__DIR__ . '/emails/log.txt', date('Y-m-d H:i:s') . " para=$para status=$status result=$result\n", FILE_APPEND);
 
     return $status === 200;
 }

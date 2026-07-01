@@ -1,24 +1,16 @@
 <?php
-// Configurações
 define('WEBHOOK_SECRET', 'Jguimajo2@');
 define('FILA_FILE', __DIR__ . '/emails/fila.json');
 
-// Recebe o payload
 $payload = file_get_contents('php://input');
 $data = json_decode($payload, true);
 
-// Valida secret
 if (!isset($data['secret']) || $data['secret'] !== WEBHOOK_SECRET) {
     http_response_code(401);
     exit('Unauthorized');
 }
 
-// Só processa pix_gerado
-if (!isset($data['event']) || $data['event'] !== 'pix_gerado') {
-    http_response_code(200);
-    exit('Ignored');
-}
-
+$evento = $data['event'] ?? '';
 $customer = $data['data']['customer'] ?? [];
 $nome  = $customer['name']  ?? 'Amigo(a)';
 $email = $customer['email'] ?? '';
@@ -28,7 +20,6 @@ if (empty($email)) {
     exit('No email');
 }
 
-// Carrega fila existente
 $fila = [];
 if (file_exists(FILA_FILE)) {
     $fila = json_decode(file_get_contents(FILA_FILE), true) ?? [];
@@ -36,21 +27,27 @@ if (file_exists(FILA_FILE)) {
 
 $agora = time();
 
-// Adiciona os dois agendamentos
-$fila[] = [
-    'nome'       => $nome,
-    'email'      => $email,
-    'template'   => 'email1-30min',
-    'enviar_em'  => $agora + (30 * 60), // 30 minutos
-    'enviado'    => false,
-];
-$fila[] = [
-    'nome'       => $nome,
-    'email'      => $email,
-    'template'   => 'email2-24h',
-    'enviar_em'  => $agora + (24 * 60 * 60), // 24 horas
-    'enviado'    => false,
-];
+if ($evento === 'pix_gerado') {
+    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'pix', 'template' => 'email1-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'pix', 'template' => 'email2-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+
+} elseif ($evento === 'boleto_gerado') {
+    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'boleto', 'template' => 'email-boleto-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'boleto', 'template' => 'email-boleto-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+
+} elseif ($evento === 'abandono_de_checkout' || $evento === 'checkout_abandonado') {
+    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'abandono', 'template' => 'email-abandono', 'enviar_em' => $agora + (20 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+
+} elseif ($evento === 'purchase_approved' || $evento === 'compra_aprovada') {
+    // Marca todos os emails pendentes desse email como cancelados
+    foreach ($fila as &$item) {
+        if ($item['email'] === $email && !$item['enviado']) {
+            $item['status'] = 'pago';
+            $item['enviado'] = true;
+            $item['enviado_em'] = date('Y-m-d H:i:s');
+        }
+    }
+}
 
 file_put_contents(FILA_FILE, json_encode($fila, JSON_PRETTY_PRINT));
 
