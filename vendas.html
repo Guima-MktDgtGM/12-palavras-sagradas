@@ -416,12 +416,9 @@
 
       // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
       var observer = new MutationObserver(function() {
-        // Botão CTA do vturb aparece como <a> ou <button> dentro do player
+        // Só dispara quando o link do checkout real aparecer
         var ctaBtn = document.querySelector(
-          '[id^="vid-"] a, [id^="vid-"] button, ' +
-          '[class*="smartplayer"] a[href], ' +
-          '[class*="vturb"] a[href], ' +
-          'a[href*="pay."], a[href*="checkout"], a[href*="cloudfycheckout"]'
+          'a[href*="cakto.com.br"]'
         );
         if (ctaBtn) {
           mostrarBloco();
