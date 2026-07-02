@@ -1,11 +1,17 @@
 <?php
-define('WEBHOOK_SECRET', 'Jguimajo2@');
+define('WEBHOOK_SECRET', '519879a1-a743-425a-9a2b-af20ed3d92ff');
 define('FILA_FILE', __DIR__ . '/emails/fila.json');
 
 $payload = file_get_contents('php://input');
 $data = json_decode($payload, true);
 
-if (!isset($data['secret']) || $data['secret'] !== WEBHOOK_SECRET) {
+// Cakto envia o secret no header X-Cakto-Secret ou como campo no body
+$header_secret = $_SERVER['HTTP_X_CAKTO_SECRET'] ?? $_SERVER['HTTP_X_SECRET'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+$body_secret = $data['secret'] ?? '';
+
+if ($header_secret !== WEBHOOK_SECRET && $body_secret !== WEBHOOK_SECRET) {
+    // Loga para debug
+    file_put_contents(__DIR__ . '/emails/log.txt', date('Y-m-d H:i:s') . " 401 header=$header_secret body=$body_secret\n", FILE_APPEND);
     http_response_code(401);
     exit('Unauthorized');
 }
