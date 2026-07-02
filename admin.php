@@ -148,6 +148,7 @@ $cores_status = [
     <tr>
       <th>Nome</th>
       <th>Email</th>
+      <th>Telefone</th>
       <th>Tipo</th>
       <th>Email</th>
       <th>Status</th>
@@ -165,6 +166,7 @@ $cores_status = [
     <tr>
       <td><?= htmlspecialchars($item['nome'] ?? '-') ?></td>
       <td><?= htmlspecialchars($item['email'] ?? '-') ?></td>
+      <td style="color:#9a8fbb;"><?= htmlspecialchars($item['telefone'] ?? '-') ?></td>
       <td><span class="badge tipo-<?= $tipo ?>"><?= ucfirst($tipo) ?></span></td>
       <td style="color:#9a8fbb;font-size:13px;"><?= $labels[$item['template']] ?? $item['template'] ?></td>
       <td><span class="badge" style="background:<?= $cor ?>22;color:<?= $cor ?>"><?= ucfirst($status) ?></span></td>

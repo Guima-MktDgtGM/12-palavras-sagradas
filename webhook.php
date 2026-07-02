@@ -5,21 +5,20 @@ define('FILA_FILE', __DIR__ . '/emails/fila.json');
 $payload = file_get_contents('php://input');
 $data = json_decode($payload, true);
 
-// Cakto envia o secret no header X-Cakto-Secret ou como campo no body
 $header_secret = $_SERVER['HTTP_X_CAKTO_SECRET'] ?? $_SERVER['HTTP_X_SECRET'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? '';
 $body_secret = $data['secret'] ?? '';
 
 if ($header_secret !== WEBHOOK_SECRET && $body_secret !== WEBHOOK_SECRET) {
-    // Loga para debug
     file_put_contents(__DIR__ . '/emails/log.txt', date('Y-m-d H:i:s') . " 401 header=$header_secret body=$body_secret\n", FILE_APPEND);
     http_response_code(401);
     exit('Unauthorized');
 }
 
-$evento = $data['event'] ?? '';
+$evento   = $data['event'] ?? '';
 $customer = $data['data']['customer'] ?? [];
-$nome  = $customer['name']  ?? 'Amigo(a)';
-$email = $customer['email'] ?? '';
+$nome     = $customer['name']  ?? 'Amigo(a)';
+$email    = $customer['email'] ?? '';
+$telefone = $customer['phone'] ?? '';
 
 if (empty($email)) {
     http_response_code(200);
@@ -33,19 +32,35 @@ if (file_exists(FILA_FILE)) {
 
 $agora = time();
 
+// Anti-duplicata: verifica se já existe entrada do mesmo email+tipo nos últimos 5 minutos
+function jaExiste($fila, $email, $tipo, $agora) {
+    foreach ($fila as $item) {
+        if ($item['email'] === $email && ($item['tipo'] ?? '') === $tipo) {
+            $criado = strtotime($item['criado_em'] ?? '0');
+            if (($agora - $criado) < 300) return true; // 5 minutos
+        }
+    }
+    return false;
+}
+
 if ($evento === 'pix_gerado') {
-    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'pix', 'template' => 'email1-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
-    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'pix', 'template' => 'email2-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    if (!jaExiste($fila, $email, 'pix', $agora)) {
+        $fila[] = ['nome' => $nome, 'email' => $email, 'telefone' => $telefone, 'tipo' => 'pix', 'template' => 'email1-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+        $fila[] = ['nome' => $nome, 'email' => $email, 'telefone' => $telefone, 'tipo' => 'pix', 'template' => 'email2-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    }
 
 } elseif ($evento === 'boleto_gerado') {
-    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'boleto', 'template' => 'email-boleto-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
-    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'boleto', 'template' => 'email-boleto-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    if (!jaExiste($fila, $email, 'boleto', $agora)) {
+        $fila[] = ['nome' => $nome, 'email' => $email, 'telefone' => $telefone, 'tipo' => 'boleto', 'template' => 'email-boleto-30min', 'enviar_em' => $agora + (30 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+        $fila[] = ['nome' => $nome, 'email' => $email, 'telefone' => $telefone, 'tipo' => 'boleto', 'template' => 'email-boleto-24h',  'enviar_em' => $agora + (24 * 60 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    }
 
 } elseif ($evento === 'abandono_de_checkout' || $evento === 'checkout_abandonado') {
-    $fila[] = ['nome' => $nome, 'email' => $email, 'tipo' => 'abandono', 'template' => 'email-abandono', 'enviar_em' => $agora + (20 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    if (!jaExiste($fila, $email, 'abandono', $agora)) {
+        $fila[] = ['nome' => $nome, 'email' => $email, 'telefone' => $telefone, 'tipo' => 'abandono', 'template' => 'email-abandono', 'enviar_em' => $agora + (20 * 60), 'enviado' => false, 'status' => 'aguardando', 'criado_em' => date('Y-m-d H:i:s')];
+    }
 
 } elseif ($evento === 'purchase_approved' || $evento === 'compra_aprovada') {
-    // Marca todos os emails pendentes desse email como cancelados
     foreach ($fila as &$item) {
         if ($item['email'] === $email && !$item['enviado']) {
             $item['status'] = 'pago';
