@@ -28,6 +28,10 @@ foreach ($fila as &$item) {
         'email-boleto-30min' => '📄 Seu boleto está esperando, ' . $item['nome'],
         'email-boleto-24h'   => '⚠️ Seu boleto vence em breve — não perca sua bênção',
         'email-abandono'     => '🙏 ' . $item['nome'] . ', o que aconteceu?',
+        'email-picpay-30min' => '📲 Seu PicPay ainda está esperando, ' . $item['nome'],
+        'email-picpay-24h'   => '⚠️ Última chance — sua bênção ainda está aqui',
+        'email-nubank-30min' => '💜 Seu pagamento Nubank ainda está aberto, ' . $item['nome'],
+        'email-nubank-24h'   => '⚠️ ' . $item['nome'] . ', sua vaga ainda está reservada',
     ];
 
     $assunto = $assuntos[$item['template']] ?? 'Mensagem importante';
