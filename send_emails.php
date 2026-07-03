@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 define('RESEND_API_KEY', 're_P1HxxW7j_6wZEHYKmM5tG6nfndehc2Dtp');
 define('FROM_EMAIL', 'gabriel.luz@noticiasdafe.com.br');
 define('FROM_NAME', 'Gabriel Luz – Roteiro Divino das 12 Palavras');

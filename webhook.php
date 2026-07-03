@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 define('WEBHOOK_SECRET', '519879a1-a743-425a-9a2b-af20ed3d92ff');
 
 // Pasta FORA do public_html — nunca apagada por deploy
