@@ -203,39 +203,36 @@ $labels = [
       <th>Capturado em</th>
     </tr>
   </thead>
+  <?php function badgeEmail($em, $label) {
+    if (!$em) return '<span class="email-check email-pendente">— '.$label.'</span>';
+    if ($em['enviado'] ?? false) {
+        return '<span class="email-check email-ok">✅ '.$label.'<br><small style="opacity:.7">'.($em['enviado_em'] ?? '').'</small></span>';
+    }
+    if (($em['status'] ?? '') === 'pago') {
+        return '<span class="email-check email-ok">✅ Cancelado (pago)</span>';
+    }
+    $diff = $em['enviar_em'] - time();
+    if ($diff > 0) {
+        $h = floor($diff/3600); $m = floor(($diff%3600)/60);
+        return '<span class="email-check email-aguardando">⏳ '.$label.' (em '.$h.'h'.$m.'min)</span>';
+    }
+    return '<span class="email-check email-pendente">⏳ '.$label.' aguardando</span>';
+  } ?>
   <tbody>
   <?php foreach ($grupos as $g):
     $tipo = $g['tipo'];
     $emailsDoGrupo = $g['emails'];
 
-    // Verifica se esse lead virou cliente
     $virou_cliente = false;
     foreach ($clientes as $c) {
         if ($c['email'] === $g['email']) { $virou_cliente = true; break; }
     }
 
-    // Pega status de cada email do grupo
     $e1 = null; $e2 = null;
     foreach ($emailsDoGrupo as $em) {
         $tpl = $em['template'] ?? '';
-        if (in_array($tpl, ['email1-30min','email-boleto-30min','email-abandono'])) $e1 = $em;
-        if (in_array($tpl, ['email2-24h','email-boleto-24h'])) $e2 = $em;
-    }
-
-    function badgeEmail($em, $label) {
-        if (!$em) return '<span class="email-check email-pendente">— '.$label.'</span>';
-        if ($em['enviado'] ?? false) {
-            return '<span class="email-check email-ok">✅ '.$label.'<br><small style="opacity:.7">'.($em['enviado_em'] ?? '').'</small></span>';
-        }
-        if (($em['status'] ?? '') === 'pago') {
-            return '<span class="email-check email-ok">✅ Cancelado (pago)</span>';
-        }
-        $diff = $em['enviar_em'] - time();
-        if ($diff > 0) {
-            $h = floor($diff/3600); $m = floor(($diff%3600)/60);
-            return '<span class="email-check email-aguardando">⏳ '.$label.' (em '.$h.'h'.$m.'min)</span>';
-        }
-        return '<span class="email-check email-pendente">⏳ '.$label.' aguardando</span>';
+        if (in_array($tpl, ['email1-30min','email-boleto-30min','email-picpay-30min','email-nubank-30min','email-abandono'])) $e1 = $em;
+        if (in_array($tpl, ['email2-24h','email-boleto-24h','email-picpay-24h','email-nubank-24h'])) $e2 = $em;
     }
   ?>
     <tr>
