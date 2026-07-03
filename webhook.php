@@ -1,6 +1,7 @@
 <?php
 define('WEBHOOK_SECRET', '519879a1-a743-425a-9a2b-af20ed3d92ff');
 define('FILA_FILE', __DIR__ . '/emails/fila.json');
+define('CLIENTES_FILE', __DIR__ . '/emails/clientes.json');
 
 $payload = file_get_contents('php://input');
 $data = json_decode($payload, true);
@@ -67,6 +68,26 @@ if ($evento === 'pix_gerado') {
             $item['enviado'] = true;
             $item['enviado_em'] = date('Y-m-d H:i:s');
         }
+    }
+
+    // Salva no banco de clientes (persistente, separado da fila)
+    $clientes = [];
+    if (file_exists(CLIENTES_FILE)) {
+        $clientes = json_decode(file_get_contents(CLIENTES_FILE), true) ?? [];
+    }
+    $jaCliente = false;
+    foreach ($clientes as $c) {
+        if ($c['email'] === $email) { $jaCliente = true; break; }
+    }
+    if (!$jaCliente) {
+        $clientes[] = [
+            'nome'       => $nome,
+            'email'      => $email,
+            'telefone'   => $telefone,
+            'comprado_em'=> date('Y-m-d H:i:s'),
+            'evento'     => $evento,
+        ];
+        file_put_contents(CLIENTES_FILE, json_encode($clientes, JSON_PRETTY_PRINT));
     }
 }
 
