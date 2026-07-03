@@ -1,8 +1,8 @@
 <?php
 define('ADMIN_USER', 'j.gmarques');
 define('ADMIN_PASS', 'Jguimajo2@');
-define('FILA_FILE', __DIR__ . '/emails/fila.json');
-define('CLIENTES_FILE', __DIR__ . '/emails/clientes.json');
+define('FILA_FILE',     __DIR__ . '/../dados/fila.json');
+define('CLIENTES_FILE', __DIR__ . '/../dados/clientes.json');
 
 session_start();
 

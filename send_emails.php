@@ -2,7 +2,7 @@
 define('RESEND_API_KEY', 're_P1HxxW7j_6wZEHYKmM5tG6nfndehc2Dtp');
 define('FROM_EMAIL', 'gabriel.luz@noticiasdafe.com.br');
 define('FROM_NAME', 'Gabriel Luz – Roteiro Divino das 12 Palavras');
-define('FILA_FILE', __DIR__ . '/emails/fila.json');
+define('FILA_FILE', __DIR__ . '/../dados/fila.json');
 define('TEMPLATES_DIR', __DIR__ . '/emails/');
 
 if (!file_exists(FILA_FILE)) exit('Fila vazia');
@@ -67,7 +67,7 @@ function enviarEmail($para, $assunto, $html) {
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    file_put_contents(__DIR__ . '/emails/log.txt', date('Y-m-d H:i:s') . " para=$para status=$status result=$result\n", FILE_APPEND);
+    file_put_contents(__DIR__ . '/../dados/log.txt', date('Y-m-d H:i:s') . " para=$para status=$status result=$result\n", FILE_APPEND);
 
     return $status === 200;
 }
