@@ -75,7 +75,7 @@ if ($evento === 'pix_gerado') {
     }
 
 // ── Abandono de checkout ─────────────────────────────────────────────────────
-} elseif (in_array($evento, ['abandono_de_checkout','checkout_abandonado'])) {
+} elseif (in_array($evento, ['checkout_abandonment','abandono_de_checkout','checkout_abandonado'])) {
     if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, 'abandono', $agora)) {
         $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'abandono','template'=>'email-abandono','enviar_em'=>$agora+(20*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
