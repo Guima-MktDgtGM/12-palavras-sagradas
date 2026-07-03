@@ -140,6 +140,8 @@ $labels = [
   .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:bold;}
   .tipo-pix{background:#1a3a5e;color:#60b0f0;}
   .tipo-boleto{background:#3a2a0e;color:#f0c060;}
+  .tipo-picpay{background:#0a2e1a;color:#00d4a0;}
+  .tipo-nubank{background:#2a0a3a;color:#c084f0;}
   .tipo-abandono{background:#2a1a3a;color:#c080f0;}
 
   /* Status email */
@@ -181,6 +183,8 @@ $labels = [
       <option value="">Todos os tipos</option>
       <option value="pix"      <?= $filtro_tipo==='pix'?'selected':'' ?>>Pix</option>
       <option value="boleto"   <?= $filtro_tipo==='boleto'?'selected':'' ?>>Boleto</option>
+      <option value="picpay"   <?= $filtro_tipo==='picpay'?'selected':'' ?>>PicPay</option>
+      <option value="nubank"   <?= $filtro_tipo==='nubank'?'selected':'' ?>>Nubank</option>
       <option value="abandono" <?= $filtro_tipo==='abandono'?'selected':'' ?>>Abandono</option>
     </select>
     <a href="?aba=leads" class="btn">Limpar filtros</a>

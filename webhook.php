@@ -59,6 +59,14 @@ if ($evento === 'pix_gerado') {
         $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'pix','template'=>'email2-24h',     'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
+// ── PicPay / Nubank gerado (mesmo fluxo do Pix) ─────────────────────────────
+} elseif (in_array($evento, ['picpay_gerado','nubank_gerado'])) {
+    $tipo_evento = str_replace('_gerado', '', $evento); // 'picpay' ou 'nubank'
+    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, $tipo_evento, $agora)) {
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>$tipo_evento,'template'=>'email1-30min',   'enviar_em'=>$agora+(30*60),    'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>$tipo_evento,'template'=>'email2-24h',     'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+    }
+
 // ── Boleto gerado ────────────────────────────────────────────────────────────
 } elseif ($evento === 'boleto_gerado') {
     if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, 'boleto', $agora)) {
