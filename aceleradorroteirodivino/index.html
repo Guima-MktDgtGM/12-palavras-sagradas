@@ -232,8 +232,7 @@ cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
     </div>
 
     <div style="margin-top:32px;">
-      <!-- IMPORTANTE: troque o href pelo LINK DO CHECKOUT do Acelerador (dados serao preenchidos via JS) -->
-      <a href="COLE_AQUI_O_LINK_DO_CHECKOUT" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR POR R$ 120</a>
+      <a href="https://pay.cakto.com.br/zrfxbr2_959336" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR POR R$ 120</a>
       <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
       <a href="https://noticiasdafe.com.br/aceleradorgratis" class="decline">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
     </div>
@@ -255,5 +254,24 @@ cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
 
 </div>
 
+<script>
+(function(){
+  var CHECKOUT = "https://pay.cakto.com.br/zrfxbr2_959336";
+  var src = new URLSearchParams(window.location.search);
+  function pick(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return v; } return ""; }
+  var name  = pick(["name","nome","customer_name","cliente_nome"]);
+  var email = pick(["email","e-mail","customer_email","cliente_email"]);
+  var phone = pick(["phone","telefone","celular","customer_phone","cliente_telefone"]);
+  var doc   = pick(["document","cpf","doc","customer_document"]);
+  var out = new URLSearchParams();
+  if(name)  out.set("name", name);
+  if(email) out.set("email", email);
+  if(phone) out.set("phone", phone);
+  if(doc)   out.set("document", doc);
+  var qs = out.toString();
+  var btn = document.getElementById("btn-checkout");
+  if(btn) btn.setAttribute("href", qs ? CHECKOUT + "?" + qs : CHECKOUT);
+})();
+</script>
 </body>
 </html>
