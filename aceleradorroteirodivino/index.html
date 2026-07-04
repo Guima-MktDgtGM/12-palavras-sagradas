@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espere! Uma oferta única para você — Acelerador do Roteiro Divino</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0a0a1a;color:#e8dfc4;font-family:'Lato',sans-serif;line-height:1.7;}
+img{max-width:100%;display:block;}
+
+/* Barra de etapas */
+.steps-bar{background:#1a1040;padding:16px 12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #2a1f5e;}
+.step{display:flex;align-items:center;gap:7px;background:#0d0d2b;color:#6a5f8a;font-size:13px;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid #2a1f5e;}
+.step .n{width:20px;height:20px;border-radius:50%;background:#2a1f5e;color:#9a8fbb;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.step.done{background:#0d2e1a;color:#2ecc71;border-color:#2ecc71;}
+.step.done .n{background:#2ecc71;color:#0a0a1a;}
+.step.active{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;border-color:#e04352;box-shadow:0 4px 16px #e0435244;}
+.step.active .n{background:#fff;color:#b8232f;}
+
+/* Faixa congrats */
+.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:18px 20px;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(17px,3.6vw,26px);font-style:italic;letter-spacing:.5px;box-shadow:0 4px 20px #2ecc7133;}
+
+.container{max-width:680px;margin:0 auto;padding:36px 22px 80px;}
+
+/* Alerta */
+.alert{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;text-align:center;padding:14px 20px;border-radius:12px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;font-size:clamp(16px,3.5vw,20px);margin-bottom:8px;box-shadow:0 4px 24px #e0435244;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+.alert-sub{text-align:center;font-size:13px;color:#ff8a94;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:30px;}
+
+/* Header */
+.header{text-align:center;padding-bottom:32px;border-bottom:1px solid #2a1f5e;}
+.tag{display:inline-block;background:#1a1040;color:#f0c060;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:20px;margin-bottom:20px;font-family:'Cinzel',serif;border:1px solid #3a2f7e;}
+h1{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,36px);color:#fff;line-height:1.3;margin-bottom:16px;}
+h1 .gold{color:#f0c060;}
+.subtitle{font-size:16px;color:#b8afce;max-width:540px;margin:0 auto;}
+
+/* Imagem hero produto */
+.hero-img{margin:28px auto 0;max-width:460px;filter:drop-shadow(0 20px 50px rgba(240,192,96,.25));}
+
+.section{padding:38px 0;border-bottom:1px solid #2a1f5e;}
+.section:last-child{border-bottom:none;}
+.section-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#c9884c;margin-bottom:18px;text-align:center;}
+h2{font-family:'Cinzel',serif;font-size:clamp(20px,3.6vw,28px);color:#fff;margin-bottom:16px;line-height:1.35;text-align:center;}
+p.body{font-size:15.5px;color:#c4bbdd;margin-bottom:16px;}
+p.body strong{color:#f0c060;}
+
+/* Taxa de sucesso */
+.rate-box{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
+.rate{flex:1;min-width:150px;text-align:center;background:#0d0d2b;border:1px solid #2a1f5e;border-radius:14px;padding:24px 16px;}
+.rate .num{font-family:'Cinzel',serif;font-size:46px;font-weight:800;line-height:1;}
+.rate.low .num{color:#e04352;}
+.rate.high .num{color:#2ecc71;}
+.rate .lbl{font-size:13px;color:#9a8fbb;margin-top:10px;}
+.confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17px;color:#f0c060;font-weight:700;}
+
+/* Bloco destaque (No Brainer) */
+.highlight{background:linear-gradient(160deg,#150f38,#0d0d2b);border:1px solid #3a2f7e;border-radius:18px;padding:32px 26px;}
+.highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(19px,3.4vw,25px);color:#f0c060;text-align:center;margin-bottom:24px;line-height:1.35;}
+.hlist{list-style:none;padding:0;}
+.hlist li{position:relative;padding:11px 0 11px 34px;font-size:15px;color:#c4bbdd;border-bottom:1px solid #1e1745;}
+.hlist li:last-child{border-bottom:none;}
+.hlist li::before{content:"✓";position:absolute;left:0;top:11px;width:22px;height:22px;background:#2ecc71;color:#0a0a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.hlist li strong{color:#f0c060;}
+
+/* Meditações */
+.meds{list-style:none;padding:0;}
+.meds li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #1e1745;}
+.meds li:last-child{border-bottom:none;}
+.med-icon{font-size:22px;margin-top:2px;min-width:30px;text-align:center;}
+.med-text h4{font-size:15.5px;font-weight:700;color:#fff;margin-bottom:3px;}
+.med-text h4 span{color:#c9884c;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.med-text p{font-size:14px;color:#9a8fbb;}
+.med-val{margin-left:auto;color:#2ecc71;font-weight:700;font-size:13px;white-space:nowrap;padding-left:10px;}
+
+/* Recomendado */
+.reco{list-style:none;padding:0;max-width:560px;margin:0 auto;}
+.reco li{position:relative;padding:10px 0 10px 32px;font-size:15px;color:#c4bbdd;}
+.reco li::before{content:"→";position:absolute;left:0;color:#f0c060;font-weight:700;font-size:16px;}
+
+/* Stack de valor */
+.value-stack{background:linear-gradient(160deg,#150f38,#0d0d2b);border:2px solid #c9a84c;border-radius:18px;padding:32px 24px;text-align:center;box-shadow:0 10px 40px rgba(201,168,76,.15);}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #2a1f5e;font-size:14.5px;color:#b8afce;}
+.vrow span:last-child{color:#e8dfc4;font-weight:700;}
+.vrow.total{border-bottom:none;border-top:2px solid #c9a84c;margin-top:8px;padding-top:16px;font-size:16px;}
+.vrow.total span:last-child{color:#e04352;text-decoration:line-through;}
+.value-now{font-family:'Cinzel',serif;font-size:clamp(32px,7vw,50px);font-weight:800;color:#f0c060;line-height:1.1;margin:18px 0 4px;}
+.value-now small{font-size:18px;color:#c9884c;}
+.value-desc{font-size:13px;color:#9a8fbb;margin-top:6px;}
+
+/* CTA */
+.cta-area{text-align:center;}
+.btn{display:inline-block;width:100%;max-width:480px;padding:22px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.2vw,20px);font-weight:800;color:#fff;text-decoration:none;letter-spacing:.5px;box-shadow:0 8px 30px #2ecc7155;transition:transform .2s,box-shadow .2s;animation:glow 2.5s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 8px 30px #2ecc7155;}50%{box-shadow:0 8px 40px #2ecc7199;}}
+.btn:hover{transform:translateY(-2px);}
+.btn-note{font-size:13px;color:#9a8fbb;margin-top:14px;}
+.decline{display:inline-block;margin-top:24px;font-size:13px;color:#6a5f8a;text-decoration:underline;max-width:440px;}
+.decline:hover{color:#9a8fbb;}
+
+/* Garantia */
+.guarantee{background:#0d0d2b;border-left:3px solid #c9a84c;padding:20px 22px;border-radius:0 10px 10px 0;font-size:14.5px;color:#c4bbdd;}
+.guarantee strong{color:#f0c060;}
+
+.footer{text-align:center;font-size:12px;color:#4a4470;padding-top:36px;line-height:1.8;}
+.footer a{color:#c9884c;text-decoration:none;}
+
+@media(max-width:480px){.btn{padding:18px 16px;}.med-val{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- Barra de etapas -->
+<div class="steps-bar">
+  <div class="step done"><span class="n">✓</span> Roteiro Divino</div>
+  <div class="step active"><span class="n">2</span> Confirmar Upgrade</div>
+  <div class="step"><span class="n">3</span> Pedido Concluído</div>
+</div>
+
+<!-- Faixa congrats -->
+<div class="congrats">Parabéns! 🎉 Você foi selecionado(a) para um upgrade...</div>
+
+<div class="container">
+
+  <!-- Alerta -->
+  <div class="alert">⚠️ ESPERE! NÃO FECHE ESTA PÁGINA</div>
+  <div class="alert-sub">Sua compra ainda não terminou de processar</div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="tag">✦ Oferta única — só aparece uma vez ✦</div>
+    <h1>Você foi selecionado(a) para <span class="gold">acelerar seus resultados</span></h1>
+    <p class="subtitle">Antes de acessar seu app, leia com atenção. Esta oferta <strong>não vai aparecer de novo</strong> — nem pelo mesmo preço, nem em lugar nenhum.</p>
+    <img src="https://noticiasdafe.com.br/Imagens/acelerador-roteiro-divino.png" alt="Acelerador do Roteiro Divino" class="hero-img">
+  </div>
+
+  <!-- Intro -->
+  <div class="section">
+    <div class="section-label">→ Por que você está vendo isso</div>
+    <h2>O Roteiro Divino funciona.<br>O Acelerador faz funcionar mais rápido.</h2>
+    <p class="body">Parabéns por dar o primeiro passo com o <strong>Roteiro Divino das 12 Palavras Sagradas</strong>. Mas existe uma verdade que poucos entendem:</p>
+    <p class="body">Você pode conhecer todas as palavras, orações e frequências... e ainda assim demorar para ver resultado. Por quê? Porque <strong>a sua mente subconsciente ainda está programada para a escassez.</strong></p>
+    <p class="body">Enquanto o seu consciente declara abundância, o seu subconsciente sussurra "isso não é pra você". E o subconsciente sempre vence.</p>
+    <p class="body">O <strong>Acelerador do Roteiro Divino</strong> foi criado para resolver exatamente isso — reprogramando sua mente no nível mais profundo, enquanto você dorme.</p>
+  </div>
+
+  <!-- Taxa de sucesso -->
+  <div class="section">
+    <div class="section-label">→ A diferença que ele faz</div>
+    <h2>Membros que ativam o Acelerador manifestam muito mais rápido</h2>
+    <div class="rate-box">
+      <div class="rate low"><div class="num">18%</div><div class="lbl">Resultado rápido<br>SEM o Acelerador</div></div>
+      <div class="rate high"><div class="num">91%</div><div class="lbl">Resultado rápido<br>COM o Acelerador</div></div>
+    </div>
+    <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
+  </div>
+
+  <!-- Bloco No Brainer -->
+  <div class="section">
+    <div class="highlight">
+      <div class="htitle">Por que é <u>óbvio</u> confirmar o Acelerador</div>
+      <ul class="hlist">
+        <li><strong>Feito sob medida para você</strong>, desbloqueando as vias neurais que disparam a reprogramação do seu subconsciente.</li>
+        <li><strong>RESULTADOS RÁPIDOS:</strong> você vai manifestar de uma forma inesperada em 3 dias ou menos.</li>
+        <li><strong>Reprograma seu subconsciente em 24 horas:</strong> fazendo todo o conhecimento do Roteiro Divino penetrar ainda mais fundo na sua mente.</li>
+        <li>Reduz bloqueios mentais, cargas negativas e crenças limitantes que estão te segurando.</li>
+        <li><strong>Torna a manifestação sem esforço</strong>, acessando as frequências e a parte primal do seu cérebro — desbloqueando confiança e clareza.</li>
+        <li><strong>Eleva a sua vibração</strong> — porque você não consegue manifestar quando a sua vibração não corresponde ao que você quer atrair.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Recomendado -->
+  <div class="section">
+    <div class="section-label">→ Fortemente recomendado para</div>
+    <ul class="reco">
+      <li>Qualquer pessoa acima de 30 anos, homem ou mulher, que tem dificuldade de mudar o subconsciente</li>
+      <li>Quem sente baixa energia, preguiça e desânimo no geral</li>
+      <li>Quem está lutando com a saúde e quer manifestar juventude e vitalidade de novo</li>
+      <li>Quem está preso a maus hábitos que o mantêm parado, desmotivado e infeliz</li>
+      <li>Quem quer reduzir bloqueios, cargas negativas e crenças limitantes de uma vez por todas</li>
+    </ul>
+  </div>
+
+  <!-- Lista completa -->
+  <div class="section">
+    <div class="section-label">→ Tudo que você recebe hoje</div>
+    <h2>Lista completa do que vem<br>com o Acelerador</h2>
+    <p class="body" style="text-align:center;">Cada frequência foi elaborada para reprogramar sua mente no estado theta — pouco antes de dormir, quando o cérebro está mais receptivo:</p>
+    <ul class="meds">
+      <li><span class="med-icon">🧠</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Gênio de Newton</h4><p>Eleve seu poder mental a níveis cósmicos e desperte o gênio interior. Adeus névoa mental, olá inteligência ilimitada.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">💰</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Riqueza de Rockefeller</h4><p>Cultive uma mentalidade de abundância e comece a pensar como quem prospera de verdade.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🧲</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Atração de Dinheiro de Rothschild</h4><p>Sintonize sua vibração com a provisão e atraia oportunidades que antes passavam despercebidas.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🦁</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Fé e Crença de Gandhi</h4><p>Rompa com a dúvida e o medo, e caminhe com a convicção de quem move montanhas.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🎯</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Foco Destemido de Curie</h4><p>Chute o medo para longe e entre no seu poder com confiança. Conquiste seus objetivos como nunca.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">✨</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Carisma de Mandela</h4><p>Desperte sua presença e autoridade, e exale confiança e influência por onde passar.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🎨</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Visualização de Da Vinci</h4><p>Desbloqueie criatividade e visão para enxergar e construir a vida que você deseja.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Bônus:</span><br>Meditação do Estado Theta (antes de dormir)</h4><p>A sessão guiada que prepara sua mente para absorver todas as frequências enquanto você descansa.</p></div><span class="med-val">R$ 197</span></li>
+      <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Bônus:</span><br>Protocolo Acelerado de 7 Dias</h4><p>Um plano diário unindo as 12 Palavras + afirmações + a frequência certa para cada dia.</p></div><span class="med-val">R$ 197</span></li>
+    </ul>
+  </div>
+
+  <!-- Valor + CTA -->
+  <div class="section cta-area">
+    <div class="section-label">→ Sua condição especial de membro</div>
+    <div class="value-stack">
+      <div class="vrow"><span>9 Frequências e Meditações Divinas</span><span>R$ 1.773</span></div>
+      <div class="vrow"><span>Protocolo Acelerado de 7 Dias</span><span>R$ 197</span></div>
+      <div class="vrow"><span>Meditação do Estado Theta</span><span>R$ 197</span></div>
+      <div class="vrow total"><span>Valor real total</span><span>R$ 2.167</span></div>
+      <div class="value-now">R$ 120<small> à vista</small></div>
+      <div class="value-desc">Oferta exclusiva para novos membros do Roteiro Divino — apenas nesta página, uma única vez.</div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <!-- IMPORTANTE: troque o href pelo LINK DE ACEITE (one-click) do upsell gerado na Cakto -->
+      <a href="COLE_AQUI_O_LINK_DE_ACEITE_DA_CAKTO" class="btn">✅ SIM! QUERO ACELERAR POR R$ 120</a>
+      <div class="btn-note">🔒 Um clique. Sem preencher seus dados de novo. Acesso liberado na hora.</div>
+      <!-- IMPORTANTE: troque o href pelo LINK DE RECUSA do upsell na Cakto (ou aponte para obrigado.html) -->
+      <a href="COLE_AQUI_O_LINK_DE_RECUSA" class="decline">Não, obrigado. Prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
+    </div>
+  </div>
+
+  <!-- Garantia -->
+  <div class="section">
+    <div class="guarantee">
+      🛡️ <strong>Garantia incondicional de 60 dias.</strong> Ative o Acelerador, use por até 60 dias e, se por qualquer motivo não sentir a diferença, basta enviar um e-mail para <strong>gabriel.luz@noticiasdafe.com.br</strong> que devolvemos 100% do seu investimento. Todo o risco é nosso.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><em>Aviso: este produto tem caráter espiritual e educativo e não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença.</em></p>
+    <p style="margin-top:10px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas. Todos os direitos reservados.<br>
+    Dúvidas? <a href="mailto:gabriel.luz@noticiasdafe.com.br">gabriel.luz@noticiasdafe.com.br</a></p>
+  </div>
+
+</div>
+</body>
+</html>
