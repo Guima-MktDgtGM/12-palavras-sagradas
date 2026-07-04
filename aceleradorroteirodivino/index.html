@@ -106,6 +106,23 @@ p.body strong{color:#f0c060;}
 .footer{text-align:center;font-size:12px;color:#4a4470;padding-top:36px;line-height:1.8;}
 .footer a{color:#c9884c;text-decoration:none;}
 
+/* Botões Cakto estilizados */
+cakto-upsell-accept::part(button){
+  width:100%;max-width:480px;padding:22px 24px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60)!important;
+  border:none;border-radius:50px;
+  font-family:'Cinzel',serif;font-size:clamp(16px,3.2vw,20px);font-weight:800;color:#fff;
+  letter-spacing:.5px;box-shadow:0 8px 30px #2ecc7155;cursor:pointer;
+  transition:transform .2s;animation:glow 2.5s infinite;
+}
+cakto-upsell-accept::part(button):hover{transform:translateY(-2px);}
+cakto-upsell-reject::part(button){
+  background:none!important;border:none;color:#6a5f8a;
+  text-decoration:underline;font-size:13px;cursor:pointer;margin-top:24px;
+  font-family:'Lato',sans-serif;max-width:440px;line-height:1.5;
+}
+cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
+
 @media(max-width:480px){.btn{padding:18px 16px;}.med-val{display:none;}}
 </style>
 </head>
@@ -214,11 +231,22 @@ p.body strong{color:#f0c060;}
     </div>
 
     <div style="margin-top:32px;">
-      <!-- IMPORTANTE: troque o href pelo LINK DE ACEITE (one-click) do upsell gerado na Cakto -->
-      <a href="COLE_AQUI_O_LINK_DE_ACEITE_DA_CAKTO" class="btn">✅ SIM! QUERO ACELERAR POR R$ 120</a>
-      <div class="btn-note">🔒 Um clique. Sem preencher seus dados de novo. Acesso liberado na hora.</div>
-      <!-- IMPORTANTE: troque o href pelo LINK DE RECUSA do upsell na Cakto (ou aponte para obrigado.html) -->
-      <a href="COLE_AQUI_O_LINK_DE_RECUSA" class="decline">Não, obrigado. Prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept
+          bg-color="#2ecc71"
+          text-color="#ffffff"
+          upsell-accept-url="members_area"
+          offer-id="zrfxbr2"
+          app-base-url="https://app.cakto.com.br"
+          offer-type="upsell"
+          upsell-reject-url="members_area">
+          ✅ SIM! QUERO ACELERAR POR R$ 120
+        </cakto-upsell-accept>
+        <div class="btn-note">🔒 Um clique. Sem preencher seus dados de novo. Acesso liberado na hora.</div>
+        <cakto-upsell-reject upsell-reject-url="members_area">
+          Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.
+        </cakto-upsell-reject>
+      </cakto-upsell-buttons>
     </div>
   </div>
 
@@ -237,5 +265,7 @@ p.body strong{color:#f0c060;}
   </div>
 
 </div>
+
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 </body>
 </html>
