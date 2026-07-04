@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espere! Um presente exclusivo para você — Acelerador GRÁTIS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0a0a1a;color:#e8dfc4;font-family:'Lato',sans-serif;line-height:1.7;}
+img,video{max-width:100%;display:block;}
+
+/* Header verde */
+.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:22px 20px;box-shadow:0 4px 20px #2ecc7133;}
+.congrats h1{font-family:'Cinzel',serif;font-weight:800;font-size:clamp(20px,3.8vw,30px);line-height:1.3;}
+.congrats h1 .free{color:#f5e050;text-decoration:underline;}
+.congrats .sub{font-size:clamp(14px,2.6vw,17px);font-weight:700;margin-top:10px;opacity:.95;}
+
+.container{max-width:560px;margin:0 auto;padding:36px 22px 60px;text-align:center;}
+
+/* Vídeo VSL vertical */
+.video-wrap{position:relative;width:100%;max-width:360px;margin:0 auto 8px;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);border:1px solid #2a1f5e;background:#000;aspect-ratio:9/16;}
+.video-wrap video,.video-wrap iframe{width:100%;height:100%;object-fit:cover;border:none;display:block;}
+.video-hint{font-size:12px;color:#4a4470;margin-bottom:26px;}
+
+/* CTA */
+.cta-area{margin-top:10px;}
+.btn-note{font-size:13px;color:#9a8fbb;margin-top:14px;}
+.decline{display:inline-block;margin-top:22px;font-size:13px;color:#6a5f8a;text-decoration:underline;max-width:420px;line-height:1.5;}
+.decline:hover{color:#9a8fbb;}
+
+/* Botões Cakto */
+cakto-upsell-accept::part(button){
+  width:100%;max-width:440px;padding:22px 24px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60)!important;
+  border:none;border-radius:50px;
+  font-family:'Cinzel',serif;font-size:clamp(15px,3vw,19px);font-weight:800;color:#fff;
+  letter-spacing:.5px;box-shadow:0 8px 30px #2ecc7155;cursor:pointer;
+  transition:transform .2s;animation:glow 2.5s infinite;
+}
+@keyframes glow{0%,100%{box-shadow:0 8px 30px #2ecc7155;}50%{box-shadow:0 8px 40px #2ecc7199;}}
+cakto-upsell-accept::part(button):hover{transform:translateY(-2px);}
+cakto-upsell-reject::part(button){
+  background:none!important;border:none;color:#6a5f8a;
+  text-decoration:underline;font-size:13px;cursor:pointer;margin-top:22px;
+  font-family:'Lato',sans-serif;max-width:420px;line-height:1.5;
+}
+cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
+
+.footer{text-align:center;font-size:12px;color:#4a4470;padding:30px 20px;line-height:2;}
+.footer a{color:#c9884c;text-decoration:none;}
+.footer a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<!-- Header verde -->
+<div class="congrats">
+  <h1>Parabéns! Você foi selecionado(a) para receber o Acelerador <span class="free">GRÁTIS</span> + um desconto exclusivo!</h1>
+  <div class="sub">Assista ao vídeo curto abaixo para resgatar seu presente 👇</div>
+</div>
+
+<div class="container">
+
+  <!-- VÍDEO VSL -->
+  <div class="video-wrap">
+    <!-- OPÇÃO A (vídeo próprio hospedado): troque o src pelo link do seu .mp4 -->
+    <video controls playsinline poster="">
+      <source src="COLE_AQUI_O_LINK_DO_SEU_VIDEO.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+    <!-- OPÇÃO B (YouTube/Vimeo): apague o <video> acima e use um iframe:
+    <iframe src="https://www.youtube.com/embed/SEU_ID?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    -->
+  </div>
+  <div class="video-hint">🔊 Aumente o som e assista até o final</div>
+
+  <!-- CTA -->
+  <div class="cta-area">
+    <cakto-upsell-buttons>
+      <cakto-upsell-accept
+        bg-color="#2ecc71"
+        text-color="#ffffff"
+        upsell-accept-url="members_area"
+        offer-id="COLE_AQUI_O_OFFER_ID_DO_DOWNSELL"
+        app-base-url="https://app.cakto.com.br"
+        offer-type="upsell"
+        upsell-reject-url="members_area">
+        ✅ SIM! QUERO RESGATAR MEU PRESENTE AGORA
+      </cakto-upsell-accept>
+      <div class="btn-note">🔒 Um clique. Sem preencher seus dados de novo. Acesso liberado na hora.</div>
+      <cakto-upsell-reject upsell-reject-url="members_area">
+        Não, obrigado. Entendo que estou recusando meu presente e que nunca mais verei esta oferta.
+      </cakto-upsell-reject>
+    </cakto-upsell-buttons>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <a href="#">Política de Privacidade</a> &nbsp;|&nbsp;
+  <a href="#">Termos & Condições</a> &nbsp;|&nbsp;
+  <a href="mailto:gabriel.luz@noticiasdafe.com.br">Contato</a>
+  <br>
+  <span style="font-size:11px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas. Todos os direitos reservados.</span>
+</div>
+
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+</body>
+</html>
