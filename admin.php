@@ -62,6 +62,33 @@ if (file_exists(CLIENTES_FILE)) {
     $clientes = json_decode(file_get_contents(CLIENTES_FILE), true) ?? [];
 }
 
+// ─── Horários de pico (a partir do log.txt) ──────────────────────────────────
+$LOG_FILE   = __DIR__ . '/../dados/log.txt';
+$horas_ger  = array_fill(0, 24, 0);  // pix/boleto/picpay gerado
+$horas_pago = array_fill(0, 24, 0);  // compra aprovada
+$horas_ab   = array_fill(0, 24, 0);  // abandono de checkout
+if (file_exists($LOG_FILE)) {
+    $fh = fopen($LOG_FILE, 'r');
+    if ($fh) {
+        while (($linha = fgets($fh)) !== false) {
+            if (strpos($linha, 'evento=') === false) continue;
+            if (preg_match('/^\d{4}-\d{2}-\d{2} (\d{2}):\d{2}:\d{2} evento=(\w+)/', $linha, $m)) {
+                $h = (int)$m[1]; $ev = $m[2];
+                if ($ev === 'purchase_approved')                       $horas_pago[$h]++;
+                elseif (in_array($ev, ['pix_gerado','boleto_gerado','picpay_gerado','nubank_gerado'])) $horas_ger[$h]++;
+                elseif ($ev === 'checkout_abandonment')                $horas_ab[$h]++;
+            }
+        }
+        fclose($fh);
+    }
+}
+$horas_total = [];
+for ($i = 0; $i < 24; $i++) $horas_total[$i] = $horas_ger[$i] + $horas_pago[$i];
+$max_total   = max(1, max($horas_total));
+$tot_ger     = array_sum($horas_ger);
+$tot_pago    = array_sum($horas_pago);
+$tot_ab      = array_sum($horas_ab);
+
 // Agrupa leads por email+tipo para mostrar status dos 2 emails em uma linha
 $grupos = [];
 foreach ($fila as $item) {
@@ -172,6 +199,7 @@ $labels = [
 <div class="abas">
   <a href="?aba=leads" class="aba <?= $aba==='leads'?'ativa':'' ?>">📋 Leads</a>
   <a href="?aba=clientes" class="aba <?= $aba==='clientes'?'ativa':'' ?>">🏆 Clientes</a>
+  <a href="?aba=horarios" class="aba <?= $aba==='horarios'?'ativa':'' ?>">📊 Horários</a>
 </div>
 
 <?php if ($aba === 'leads'): ?>
@@ -254,7 +282,7 @@ $labels = [
   </tbody>
 </table>
 
-<?php else: // aba clientes ?>
+<?php elseif ($aba === 'clientes'): ?>
 
 <table>
   <thead>
@@ -282,6 +310,34 @@ $labels = [
   <?php endif; ?>
   </tbody>
 </table>
+
+<?php else: // aba horarios ?>
+
+<div class="cards" style="margin-bottom:20px;">
+  <div class="card"><div class="num"><?= $tot_ger ?></div><div class="label">Pgtos gerados</div></div>
+  <div class="card"><div class="num" style="color:#2ecc71"><?= $tot_pago ?></div><div class="label">Compras pagas</div></div>
+  <div class="card"><div class="num" style="color:#c080f0"><?= $tot_ab ?></div><div class="label">Abandonos</div></div>
+</div>
+
+<p style="font-size:13px;color:#9a8fbb;margin-bottom:18px;">
+  Barra = atividade total (intenção + pago) por hora do dia · <span style="color:#f0c060;">dourado</span> = horários de pico · <span style="color:#2ecc71;">✓ verde</span> = compras pagas na hora.
+</p>
+
+<div style="background:#0d0d2b;border:1px solid #2a1f5e;border-radius:10px;padding:20px;">
+<?php for ($i = 0; $i < 24; $i++):
+  $w = round($horas_total[$i] / $max_total * 100);
+  $isPeak = $horas_total[$i] >= $max_total * 0.6;
+?>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:13px;">
+    <span style="width:50px;color:#9a8fbb;text-align:right;"><?= sprintf('%02d:00', $i) ?></span>
+    <div style="flex:1;background:#1a1040;border-radius:5px;height:24px;overflow:hidden;">
+      <div style="width:<?= $w ?>%;height:100%;border-radius:5px;background:<?= $isPeak ? 'linear-gradient(90deg,#c9a84c,#f0c060)' : '#3a2f7e' ?>;min-width:<?= $horas_total[$i] > 0 ? '3px' : '0' ?>;"></div>
+    </div>
+    <span style="width:28px;font-weight:bold;color:#e8dfc4;text-align:right;"><?= $horas_total[$i] ?></span>
+    <span style="width:74px;color:#2ecc71;font-size:12px;"><?= $horas_pago[$i] > 0 ? '✓ '.$horas_pago[$i].' pago' : '' ?></span>
+  </div>
+<?php endfor; ?>
+</div>
 
 <?php endif; ?>
 
