@@ -35,6 +35,10 @@ img,video{max-width:100%;display:block;}
 .decline{display:inline-block;font-size:13.5px;color:#c96a72;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435266;border-radius:10px;padding:12px 22px;background:#e043520d;transition:.2s;}
 .decline:hover{color:#e04352;border-color:#e04352;background:#e043521a;}
 
+#bloco-cta{display:none;animation:fadein .5s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.cta-frase{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(17px,3.6vw,23px);color:#f0c060;line-height:1.4;margin:0 auto 22px;max-width:500px;}
+
 .footer{text-align:center;font-size:12px;color:#4a4470;padding:30px 20px;line-height:2;}
 .footer a{color:#c9884c;text-decoration:none;}
 .footer a:hover{text-decoration:underline;}
@@ -57,11 +61,50 @@ img,video{max-width:100%;display:block;}
   </div>
   <div class="video-hint">🔊 Aumente o som e assista até o final</div>
 
-  <!-- Recusa -->
-  <div class="cta-area">
-    <a href="https://noticiasdafe.com.br/obrigado" class="decline">
-      Não, obrigado. Prefiro seguir sem as Frequências Divinas e entendo que nunca mais verei esta oferta.
-    </a>
+  <!-- SCRIPT: revela bloco-cta quando o vturb mostrar o botão CTA (MutationObserver) -->
+  <script>
+  (function() {
+    var COOKIE = 'cta_down1_visto';
+    var mostrado = false;
+    function setCookie() {
+      var exp = new Date(); exp.setFullYear(exp.getFullYear() + 1);
+      document.cookie = COOKIE + '=1; expires=' + exp.toUTCString() + '; path=/';
+    }
+    function getCookie() {
+      return document.cookie.split(';').some(function(c){ return c.trim().startsWith(COOKIE + '='); });
+    }
+    function mostrarBloco() {
+      if (mostrado) return;
+      mostrado = true; setCookie();
+      var el = document.getElementById('bloco-cta');
+      if (el) el.style.display = 'block';
+    }
+    if (getCookie()) { mostrarBloco(); return; }
+    var observer = new MutationObserver(function() {
+      var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
+      if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
+        mostrarBloco(); observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+    window.addEventListener('smartplayer:cta:show', mostrarBloco);
+    window.addEventListener('vturb:cta', mostrarBloco);
+    window.addEventListener('message', function(e) {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.event === 'cta:show' || e.data.type === 'cta') mostrarBloco();
+    });
+  })();
+  </script>
+
+  <!-- BLOCO CTA — revela junto com o botão do vturb -->
+  <div id="bloco-cta">
+    <p class="cta-frase">⚠️ Esta é uma oportunidade única — e a decisão certa pode transformar a sua vida para sempre.</p>
+
+    <div class="cta-area">
+      <a href="https://noticiasdafe.com.br/obrigado" class="decline">
+        Não, obrigado. Prefiro seguir sem as Frequências Divinas e entendo que nunca mais verei esta oferta.
+      </a>
+    </div>
   </div>
 
 </div>
