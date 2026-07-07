@@ -8,122 +8,122 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:#0a0a1a;color:#e8dfc4;font-family:'Lato',sans-serif;line-height:1.7;}
+body{background:#faf7f0;color:#2e2a3f;font-family:'Lato',sans-serif;line-height:1.75;}
 img{max-width:100%;display:block;}
 
 /* Barra de etapas */
-.steps-bar{background:#1a1040;padding:16px 12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #2a1f5e;}
-.step{display:flex;align-items:center;gap:7px;background:#0d0d2b;color:#6a5f8a;font-size:13px;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid #2a1f5e;}
-.step .n{width:20px;height:20px;border-radius:50%;background:#2a1f5e;color:#9a8fbb;display:flex;align-items:center;justify-content:center;font-size:12px;}
-.step.done{background:#0d2e1a;color:#2ecc71;border-color:#2ecc71;}
-.step.done .n{background:#2ecc71;color:#0a0a1a;}
-.step.active{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;border-color:#e04352;box-shadow:0 4px 16px #e0435244;}
+.steps-bar{background:#fff;padding:16px 12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #ece7dc;}
+.step{display:flex;align-items:center;gap:7px;background:#f5f1e8;color:#9a8f7a;font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid #e6ddc9;}
+.step .n{width:20px;height:20px;border-radius:50%;background:#e6ddc9;color:#9a8f7a;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.step.done{background:#eafaf0;color:#1c8a4f;border-color:#8fe0b3;}
+.step.done .n{background:#2ecc71;color:#fff;}
+.step.active{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;border-color:#e04352;box-shadow:0 4px 16px #e0435233;}
 .step.active .n{background:#fff;color:#b8232f;}
 
 /* Faixa congrats */
-.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:18px 20px;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(17px,3.6vw,26px);font-style:italic;letter-spacing:.5px;box-shadow:0 4px 20px #2ecc7133;}
+.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:18px 20px;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(18px,3.7vw,27px);font-style:italic;letter-spacing:.5px;box-shadow:0 4px 20px #2ecc7133;}
 
 .container{max-width:680px;margin:0 auto;padding:36px 22px 80px;}
 
 /* Alerta */
-.alert{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;text-align:center;padding:14px 20px;border-radius:12px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;font-size:clamp(16px,3.5vw,20px);margin-bottom:8px;box-shadow:0 4px 24px #e0435244;animation:pulse 2s infinite;}
+.alert{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;text-align:center;padding:15px 20px;border-radius:12px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;font-size:clamp(17px,3.6vw,21px);margin-bottom:8px;box-shadow:0 4px 24px #e0435233;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
-.alert-sub{text-align:center;font-size:13px;color:#ff8a94;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:30px;}
+.alert-sub{text-align:center;font-size:13.5px;color:#c0392b;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:30px;}
 
 /* Header */
-.header{text-align:center;padding-bottom:32px;border-bottom:1px solid #2a1f5e;}
-.tag{display:inline-block;background:#1a1040;color:#f0c060;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:20px;margin-bottom:20px;font-family:'Cinzel',serif;border:1px solid #3a2f7e;}
-h1{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,36px);color:#fff;line-height:1.3;margin-bottom:16px;}
-h1 .gold{color:#f0c060;}
-.subtitle{font-size:16px;color:#b8afce;max-width:540px;margin:0 auto;}
+.header{text-align:center;padding-bottom:32px;border-bottom:1px solid #ece7dc;}
+.tag{display:inline-block;background:#f5efe0;color:#a67c1e;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:20px;margin-bottom:20px;font-family:'Cinzel',serif;border:1px solid #e6dcc4;}
+h1{font-family:'Cinzel',serif;font-size:clamp(25px,5vw,37px);color:#241f38;line-height:1.3;margin-bottom:16px;}
+h1 .gold{color:#bf8f2e;}
+.subtitle{font-size:17px;color:#5f5876;max-width:540px;margin:0 auto;}
 
 /* Imagem hero produto */
-.hero-img{margin:28px auto 0;max-width:460px;filter:drop-shadow(0 20px 50px rgba(240,192,96,.25));}
+.hero-img{margin:28px auto 0;max-width:460px;filter:drop-shadow(0 16px 40px rgba(180,140,40,.22));}
 
-.section{padding:38px 0;border-bottom:1px solid #2a1f5e;}
+.section{padding:38px 0;border-bottom:1px solid #ece7dc;}
 .section:last-child{border-bottom:none;}
-.section-label{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f0c060;margin-bottom:18px;text-align:center;}
-h2{font-family:'Cinzel',serif;font-size:clamp(20px,3.6vw,28px);color:#fff;margin-bottom:16px;line-height:1.35;text-align:center;}
-p.body{font-size:15.5px;color:#c4bbdd;margin-bottom:16px;}
-p.body strong{color:#f0c060;}
+.section-label{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#b07d1e;margin-bottom:18px;text-align:center;}
+h2{font-family:'Cinzel',serif;font-size:clamp(21px,3.7vw,29px);color:#241f38;margin-bottom:16px;line-height:1.35;text-align:center;}
+p.body{font-size:16.5px;color:#453f5c;margin-bottom:16px;}
+p.body strong{color:#a5741a;}
 
 /* Taxa de sucesso */
 .rate-box{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
-.rate{flex:1;min-width:150px;text-align:center;background:#0d0d2b;border:1px solid #2a1f5e;border-radius:14px;padding:24px 16px;}
+.rate{flex:1;min-width:150px;text-align:center;background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 16px;box-shadow:0 4px 16px rgba(120,100,50,.06);}
 .rate .num{font-family:'Cinzel',serif;font-size:46px;font-weight:800;line-height:1;}
 .rate.low .num{color:#e04352;}
-.rate.high .num{color:#2ecc71;}
-.rate .lbl{font-size:13px;color:#9a8fbb;margin-top:10px;}
-.confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17px;color:#f0c060;font-weight:700;}
+.rate.high .num{color:#27ae60;}
+.rate .lbl{font-size:13.5px;color:#6a6280;margin-top:10px;}
+.confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17.5px;color:#a5741a;font-weight:700;}
 
 /* Bloco destaque (No Brainer) */
-.highlight{background:linear-gradient(160deg,#150f38,#0d0d2b);border:1px solid #3a2f7e;border-radius:18px;padding:32px 26px;}
-.highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(19px,3.4vw,25px);color:#f0c060;text-align:center;margin-bottom:24px;line-height:1.35;}
+.highlight{background:#fffdf6;border:1px solid #e8dcc0;border-radius:18px;padding:32px 26px;box-shadow:0 6px 24px rgba(180,140,40,.08);}
+.highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(20px,3.5vw,26px);color:#a5741a;text-align:center;margin-bottom:24px;line-height:1.35;}
 .hlist{list-style:none;padding:0;}
-.hlist li{position:relative;padding:11px 0 11px 34px;font-size:15px;color:#c4bbdd;border-bottom:1px solid #1e1745;}
+.hlist li{position:relative;padding:12px 0 12px 36px;font-size:16px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
 .hlist li:last-child{border-bottom:none;}
-.hlist li::before{content:"✓";position:absolute;left:0;top:11px;width:22px;height:22px;background:#2ecc71;color:#0a0a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
-.hlist li strong{color:#f0c060;}
+.hlist li::before{content:"✓";position:absolute;left:0;top:12px;width:23px;height:23px;background:#2ecc71;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.hlist li strong{color:#a5741a;}
 
 /* Meditações */
 .meds{list-style:none;padding:0;}
-.meds li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #1e1745;}
+.meds li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f0e8d8;}
 .meds li:last-child{border-bottom:none;}
-.med-icon{font-size:22px;margin-top:2px;min-width:30px;text-align:center;}
-.med-text h4{font-size:15.5px;font-weight:700;color:#fff;margin-bottom:3px;}
-.med-text h4 span{color:#c9884c;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
-.med-text p{font-size:14px;color:#9a8fbb;}
-.med-val{margin-left:auto;color:#2ecc71;font-weight:700;font-size:13px;white-space:nowrap;padding-left:10px;}
+.med-icon{font-size:23px;margin-top:2px;min-width:30px;text-align:center;}
+.med-text h4{font-size:16.5px;font-weight:700;color:#241f38;margin-bottom:3px;}
+.med-text h4 span{color:#b07d1e;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.med-text p{font-size:14.5px;color:#6a6280;}
+.med-val{margin-left:auto;color:#1c8a4f;font-weight:700;font-size:14px;white-space:nowrap;padding-left:10px;}
 
 /* Recomendado */
 .reco{list-style:none;padding:0;max-width:560px;margin:0 auto;}
-.reco li{position:relative;padding:10px 0 10px 32px;font-size:15px;color:#c4bbdd;}
-.reco li::before{content:"→";position:absolute;left:0;color:#f0c060;font-weight:700;font-size:16px;}
+.reco li{position:relative;padding:11px 0 11px 34px;font-size:16.5px;color:#453f5c;}
+.reco li::before{content:"→";position:absolute;left:0;color:#bf8f2e;font-weight:700;font-size:17px;}
 
 /* Stack de valor */
-.value-stack{background:linear-gradient(160deg,#150f38,#0d0d2b);border:2px solid #c9a84c;border-radius:18px;padding:32px 24px;text-align:center;box-shadow:0 10px 40px rgba(201,168,76,.15);}
-.vrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #2a1f5e;font-size:14.5px;color:#b8afce;}
-.vrow span:last-child{color:#e8dfc4;font-weight:700;}
-.vrow.total{border-bottom:none;border-top:2px solid #c9a84c;margin-top:8px;padding-top:16px;font-size:16px;}
+.value-stack{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:32px 24px;text-align:center;box-shadow:0 10px 36px rgba(201,168,76,.18);}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #e8dcc4;font-size:15.5px;color:#5f5876;}
+.vrow span:last-child{color:#241f38;font-weight:700;}
+.vrow.total{border-bottom:none;border-top:2px solid #c9a84c;margin-top:8px;padding-top:16px;font-size:16.5px;}
 .vrow.total span:last-child{color:#e04352;text-decoration:line-through;}
-.value-now{font-family:'Cinzel',serif;font-size:clamp(32px,7vw,50px);font-weight:800;color:#f0c060;line-height:1.1;margin:18px 0 4px;}
-.value-now small{font-size:18px;color:#c9884c;}
-.value-desc{font-size:13px;color:#9a8fbb;margin-top:6px;}
+.value-now{font-family:'Cinzel',serif;font-size:clamp(34px,7.5vw,52px);font-weight:800;color:#b8860b;line-height:1.1;margin:18px 0 4px;}
+.value-now small{font-size:19px;color:#a5741a;}
+.value-desc{font-size:13.5px;color:#7a7488;margin-top:6px;}
 
 /* CTA */
 .cta-area{text-align:center;}
-.btn{display:inline-block;width:100%;max-width:480px;padding:22px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.2vw,20px);font-weight:800;color:#fff;text-decoration:none;letter-spacing:.5px;box-shadow:0 8px 30px #2ecc7155;transition:transform .2s,box-shadow .2s;animation:glow 2.5s infinite;}
-@keyframes glow{0%,100%{box-shadow:0 8px 30px #2ecc7155;}50%{box-shadow:0 8px 40px #2ecc7199;}}
+.btn{display:inline-block;width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(17px,3.3vw,21px);font-weight:800;color:#fff;text-decoration:none;letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;transition:transform .2s,box-shadow .2s;animation:glow 2.5s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 8px 28px #2ecc7144;}50%{box-shadow:0 8px 40px #2ecc7188;}}
 .btn:hover{transform:translateY(-2px);}
-.btn-note{font-size:13px;color:#9a8fbb;margin-top:14px;}
-.decline{display:inline-block;margin-top:24px;font-size:13.5px;color:#c96a72;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435266;border-radius:10px;padding:12px 22px;background:#e043520d;transition:.2s;}
-.decline:hover{color:#e04352;border-color:#e04352;background:#e043521a;}
+.btn-note{font-size:13.5px;color:#7a7488;margin-top:14px;}
+.decline{display:inline-block;margin-top:24px;font-size:14px;color:#c0392b;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435255;border-radius:10px;padding:13px 22px;background:#e043520a;transition:.2s;}
+.decline:hover{color:#a3251c;border-color:#e04352;background:#e0435218;}
 
 /* Garantia */
-.guarantee{background:#0d0d2b;border-left:3px solid #c9a84c;padding:20px 22px;border-radius:0 10px 10px 0;font-size:14.5px;color:#c4bbdd;}
-.guarantee strong{color:#f0c060;}
+.guarantee{background:#fdfaf3;border-left:4px solid #c9a84c;padding:20px 22px;border-radius:0 10px 10px 0;font-size:15.5px;color:#453f5c;}
+.guarantee strong{color:#a5741a;}
 
-.footer{text-align:center;font-size:12px;color:#4a4470;padding-top:36px;line-height:1.8;}
-.footer a{color:#c9884c;text-decoration:none;}
+.footer{text-align:center;font-size:12.5px;color:#9a9280;padding-top:36px;line-height:1.8;}
+.footer a{color:#b07d1e;text-decoration:none;}
 
 /* Botões Cakto estilizados */
 cakto-upsell-accept::part(button){
-  width:100%;max-width:480px;padding:22px 24px;
+  width:100%;max-width:480px;padding:23px 24px;
   background:linear-gradient(135deg,#2ecc71,#27ae60)!important;
   border:none;border-radius:50px;
-  font-family:'Cinzel',serif;font-size:clamp(16px,3.2vw,20px);font-weight:800;color:#fff;
-  letter-spacing:.5px;box-shadow:0 8px 30px #2ecc7155;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:clamp(17px,3.3vw,21px);font-weight:800;color:#fff;
+  letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;cursor:pointer;
   transition:transform .2s;animation:glow 2.5s infinite;
 }
 cakto-upsell-accept::part(button):hover{transform:translateY(-2px);}
 cakto-upsell-reject::part(button){
-  background:none!important;border:none;color:#6a5f8a;
-  text-decoration:underline;font-size:13px;cursor:pointer;margin-top:24px;
+  background:none!important;border:none;color:#9a8f7a;
+  text-decoration:underline;font-size:13.5px;cursor:pointer;margin-top:24px;
   font-family:'Lato',sans-serif;max-width:440px;line-height:1.5;
 }
-cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
+cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
-@media(max-width:480px){.btn{padding:18px 16px;}.med-val{display:none;}}
+@media(max-width:480px){.btn{padding:19px 16px;}.med-val{display:none;}}
 </style>
 </head>
 <body>
@@ -203,28 +203,28 @@ cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
   <!-- Depoimento -->
   <div class="section">
     <div class="section-label">→ Quem já ativou, aprova</div>
-    <div style="background:#0d0d2b;border:1px solid #2a1f5e;border-radius:14px;padding:24px 22px;max-width:520px;margin:0 auto;">
+    <div style="background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 22px;max-width:520px;margin:0 auto;box-shadow:0 4px 16px rgba(120,100,50,.06);">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-        <img src="https://noticiasdafe.com.br/Imagens/patricia-nogueira.jpg" alt="Patrícia Nogueira" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <img src="https://noticiasdafe.com.br/Imagens/patricia-nogueira.jpg" alt="Patrícia Nogueira" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
         <div>
-          <div style="color:#f0c060;font-size:15px;letter-spacing:1px;">★★★★★</div>
-          <div style="font-weight:700;font-size:15px;color:#fff;">Patrícia Nogueira</div>
-          <div style="font-size:12px;color:#9a8fbb;">Curitiba, PR &nbsp;·&nbsp; <span style="color:#2ecc71;font-weight:700;">✓ Compra verificada</span></div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Patrícia Nogueira</div>
+          <div style="font-size:12.5px;color:#7a7488;">Curitiba, PR &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
         </div>
       </div>
-      <p style="font-size:14.5px;color:#c4bbdd;line-height:1.8;margin:0;">Eu já tinha começado o Roteiro Divino, mas foi com o <strong style="color:#f0c060;">Acelerador</strong> que tudo mudou de verdade. Comecei a ouvir as frequências antes de dormir e, em <strong style="color:#f0c060;">poucos dias</strong>, senti minha mente mais leve e as coisas começaram a acontecer. Recebi uma proposta que eu esperava há meses e minha relação em casa melhorou demais. Foi como se destravasse tudo. Não tenho palavras pra agradecer. 🙏</p>
+      <p style="font-size:15.5px;color:#453f5c;line-height:1.8;margin:0;">Eu já tinha começado o Roteiro Divino, mas foi com o <strong style="color:#a5741a;">Acelerador</strong> que tudo mudou de verdade. Comecei a ouvir as frequências antes de dormir e, em <strong style="color:#a5741a;">poucos dias</strong>, senti minha mente mais leve e as coisas começaram a acontecer. Recebi uma proposta que eu esperava há meses e minha relação em casa melhorou demais. Foi como se destravasse tudo. Não tenho palavras pra agradecer. 🙏</p>
     </div>
 
-    <div style="background:#0d0d2b;border:1px solid #2a1f5e;border-radius:14px;padding:24px 22px;max-width:520px;margin:16px auto 0;">
+    <div style="background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 22px;max-width:520px;margin:16px auto 0;box-shadow:0 4px 16px rgba(120,100,50,.06);">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-        <img src="https://noticiasdafe.com.br/Imagens/joel-andrade.jpg" alt="Joel Andrade" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <img src="https://noticiasdafe.com.br/Imagens/joel-andrade.jpg" alt="Joel Andrade" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
         <div>
-          <div style="color:#f0c060;font-size:15px;letter-spacing:1px;">★★★★★</div>
-          <div style="font-weight:700;font-size:15px;color:#fff;">Joel Andrade</div>
-          <div style="font-size:12px;color:#9a8fbb;">Fortaleza, CE &nbsp;·&nbsp; <span style="color:#2ecc71;font-weight:700;">✓ Compra verificada</span></div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Joel Andrade</div>
+          <div style="font-size:12.5px;color:#7a7488;">Fortaleza, CE &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
         </div>
       </div>
-      <p style="font-size:14.5px;color:#c4bbdd;line-height:1.8;margin:0;">Confesso que peguei o <strong style="color:#f0c060;">Acelerador</strong> meio na dúvida, mas foi a melhor decisão. Em menos de uma semana minha cabeça mudou completamente — mais foco, mais disposição e uma paz que eu não sentia há anos. No trabalho as coisas destravaram e o dinheiro começou a entrar de um jeito que eu não esperava. Valeu cada centavo. 🙏</p>
+      <p style="font-size:15.5px;color:#453f5c;line-height:1.8;margin:0;">Confesso que peguei o <strong style="color:#a5741a;">Acelerador</strong> meio na dúvida, mas foi a melhor decisão. Em menos de uma semana minha cabeça mudou completamente — mais foco, mais disposição e uma paz que eu não sentia há anos. No trabalho as coisas destravaram e o dinheiro começou a entrar de um jeito que eu não esperava. Valeu cada centavo. 🙏</p>
     </div>
   </div>
 
@@ -255,7 +255,7 @@ cakto-upsell-reject::part(button):hover{color:#9a8fbb;}
       <div class="vrow"><span>Protocolo Acelerado de 7 Dias</span><span>R$ 497</span></div>
       <div class="vrow total"><span>Valor real de tudo</span><span>R$ 3.123</span></div>
       <div class="vrow" style="border-bottom:none;"><span>Preço normal</span><span style="color:#e04352;text-decoration:line-through;">R$ 997</span></div>
-      <div style="font-size:13px;color:#c9884c;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
+      <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
       <div class="value-now">R$ 539,90</div>
       <div class="value-desc">Oferta exclusiva para novos membros do Roteiro Divino — aparece uma única vez.</div>
     </div>
