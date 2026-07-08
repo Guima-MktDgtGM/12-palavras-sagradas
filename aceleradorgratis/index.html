@@ -61,11 +61,12 @@ img,video{max-width:100%;display:block;}
   </div>
   <div class="video-hint">🔊 Aumente o som e assista até o final</div>
 
-  <!-- SCRIPT: revela bloco-cta quando o vturb mostrar o botão CTA (MutationObserver) -->
+  <!-- SCRIPT: revela bloco-cta quando o vturb mostrar o botão CTA -->
   <script>
   (function() {
     var COOKIE = 'cta_down1_visto';
     var mostrado = false;
+
     function setCookie() {
       var exp = new Date(); exp.setFullYear(exp.getFullYear() + 1);
       document.cookie = COOKIE + '=1; expires=' + exp.toUTCString() + '; path=/';
@@ -79,14 +80,35 @@ img,video{max-width:100%;display:block;}
       var el = document.getElementById('bloco-cta');
       if (el) el.style.display = 'block';
     }
-    if (getCookie()) { mostrarBloco(); return; }
-    var observer = new MutationObserver(function() {
-      var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
-      if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
-        mostrarBloco(); observer.disconnect();
+
+    // procura o link da Cakto no documento E dentro do shadow DOM do player VTurb
+    function achouCta() {
+      if (document.querySelector('a[href*="cakto.com.br"], a[href*="pay.cakto"]')) return true;
+      var players = document.querySelectorAll('vturb-smartplayer, [id^="vid-"]');
+      for (var i = 0; i < players.length; i++) {
+        var sr = players[i].shadowRoot;
+        if (sr && sr.querySelector('a[href*="cakto.com.br"], a[href*="pay.cakto"]')) return true;
       }
+      return false;
+    }
+
+    if (getCookie()) { mostrarBloco(); return; }
+
+    // 1) MutationObserver no documento inteiro
+    var observer = new MutationObserver(function() {
+      if (achouCta()) { mostrarBloco(); observer.disconnect(); }
     });
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+    observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+
+    // 2) Verificação contínua (pega o botão mesmo dentro do player/shadow DOM)
+    var poll = setInterval(function() {
+      if (mostrado) { clearInterval(poll); return; }
+      if (achouCta()) { mostrarBloco(); clearInterval(poll); }
+    }, 400);
+    // para de verificar depois de 30 min
+    setTimeout(function(){ clearInterval(poll); }, 30 * 60 * 1000);
+
+    // 3) Eventos customizados do smartplayer (backup)
     window.addEventListener('smartplayer:cta:show', mostrarBloco);
     window.addEventListener('vturb:cta', mostrarBloco);
     window.addEventListener('message', function(e) {
