@@ -97,6 +97,10 @@ img,video{max-width:100%;display:block;}
 
     if (getCookie()) { mostrarBloco(); return; }
 
+    // ⏱️ AJUSTE AQUI: segundo do vídeo em que o botão de CTA aparece (ex: 90 = 1min30)
+    var REVEAL_SEGUNDOS = 90;
+    setTimeout(mostrarBloco, REVEAL_SEGUNDOS * 1000);
+
     // 1) MutationObserver no documento inteiro
     var observer = new MutationObserver(function() {
       if (achouCta()) { mostrarBloco(); observer.disconnect(); }
