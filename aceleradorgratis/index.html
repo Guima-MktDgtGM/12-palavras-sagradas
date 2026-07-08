@@ -81,13 +81,16 @@ img,video{max-width:100%;display:block;}
       if (el) el.style.display = 'block';
     }
 
-    // procura o link da Cakto no documento E dentro do shadow DOM do player VTurb
+    // só considera "achou" quando o botão da Cakto estiver REALMENTE VISÍVEL
+    function visivel(el){ return el && el.offsetWidth > 0 && el.offsetHeight > 0; }
     function achouCta() {
-      if (document.querySelector('a[href*="cakto.com.br"], a[href*="pay.cakto"]')) return true;
+      var sel = 'a[href*="cakto.com.br"], a[href*="pay.cakto"]';
+      var el = document.querySelector(sel);
+      if (visivel(el) && el.offsetParent !== null) return true;
       var players = document.querySelectorAll('vturb-smartplayer, [id^="vid-"]');
       for (var i = 0; i < players.length; i++) {
         var sr = players[i].shadowRoot;
-        if (sr && sr.querySelector('a[href*="cakto.com.br"], a[href*="pay.cakto"]')) return true;
+        if (sr) { var e2 = sr.querySelector(sel); if (visivel(e2)) return true; }
       }
       return false;
     }
