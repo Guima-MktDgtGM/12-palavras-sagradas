@@ -68,54 +68,43 @@ img,video{max-width:100%;display:block;}
     var mostrado = false;
 
     function setCookie() {
-      var exp = new Date(); exp.setFullYear(exp.getFullYear() + 1);
+      var exp = new Date();
+      exp.setFullYear(exp.getFullYear() + 1);
       document.cookie = COOKIE + '=1; expires=' + exp.toUTCString() + '; path=/';
     }
+
     function getCookie() {
-      return document.cookie.split(';').some(function(c){ return c.trim().startsWith(COOKIE + '='); });
+      return document.cookie.split(';').some(function(c) {
+        return c.trim().startsWith(COOKIE + '=');
+      });
     }
+
     function mostrarBloco() {
       if (mostrado) return;
-      mostrado = true; setCookie();
+      mostrado = true;
+      setCookie();
       var el = document.getElementById('bloco-cta');
       if (el) el.style.display = 'block';
     }
 
-    // só considera "achou" quando o botão da Cakto estiver REALMENTE VISÍVEL
-    function visivel(el){ return el && el.offsetWidth > 0 && el.offsetHeight > 0; }
-    function achouCta() {
-      var sel = 'a[href*="cakto.com.br"], a[href*="pay.cakto"]';
-      var el = document.querySelector(sel);
-      if (visivel(el) && el.offsetParent !== null) return true;
-      var players = document.querySelectorAll('vturb-smartplayer, [id^="vid-"]');
-      for (var i = 0; i < players.length; i++) {
-        var sr = players[i].shadowRoot;
-        if (sr) { var e2 = sr.querySelector(sel); if (visivel(e2)) return true; }
-      }
-      return false;
+    // Se já viu antes, mostra imediatamente
+    if (getCookie()) {
+      mostrarBloco();
+      return;
     }
 
-    if (getCookie()) { mostrarBloco(); return; }
-
-    // ⏱️ AJUSTE AQUI: segundo do vídeo em que o botão de CTA aparece (ex: 90 = 1min30)
-    var REVEAL_SEGUNDOS = 300;
-    setTimeout(mostrarBloco, REVEAL_SEGUNDOS * 1000);
-
-    // 1) MutationObserver no documento inteiro
+    // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
     var observer = new MutationObserver(function() {
-      if (achouCta()) { mostrarBloco(); observer.disconnect(); }
+      var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
+      if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
+        mostrarBloco();
+        observer.disconnect();
+      }
     });
-    observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
 
-    // 2) Verificação contínua (pega o botão mesmo dentro do player/shadow DOM)
-    var poll = setInterval(function() {
-      if (mostrado) { clearInterval(poll); return; }
-      if (achouCta()) { mostrarBloco(); clearInterval(poll); }
-    }, 400);
-    // para de verificar depois de 30 min
-    setTimeout(function(){ clearInterval(poll); }, 30 * 60 * 1000);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 
-    // 3) Eventos customizados do smartplayer (backup)
+    // Backup: eventos customizados
     window.addEventListener('smartplayer:cta:show', mostrarBloco);
     window.addEventListener('vturb:cta', mostrarBloco);
     window.addEventListener('message', function(e) {
