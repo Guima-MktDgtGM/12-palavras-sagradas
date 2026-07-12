@@ -92,12 +92,15 @@ $tot_ab      = array_sum($horas_ab);
 // Agrupa leads por email+tipo para mostrar status dos 2 emails em uma linha
 $grupos = [];
 foreach ($fila as $item) {
-    $key = ($item['email'] ?? '') . '||' . ($item['tipo'] ?? '');
+    // Identifica por e-mail; se não tiver, por telefone (leads de WhatsApp).
+    $lead_id = ($item['email'] ?? '') !== '' ? $item['email'] : ($item['telefone'] ?? '');
+    $key = $lead_id . '||' . ($item['tipo'] ?? '');
     if (!isset($grupos[$key])) {
         $grupos[$key] = [
             'nome'      => $item['nome'] ?? '-',
             'email'     => $item['email'] ?? '-',
             'telefone'  => $item['telefone'] ?? '-',
+            'canal'     => $item['canal'] ?? (($item['email'] ?? '') !== '' ? 'email' : 'whatsapp'),
             'tipo'      => $item['tipo'] ?? '-',
             'criado_em' => $item['criado_em'] ?? '-',
             'emails'    => [],
@@ -268,11 +271,21 @@ $labels = [
         <?= htmlspecialchars($g['nome']) ?>
         <?php if ($virou_cliente): ?><br><span class="cliente-badge">✓ Cliente</span><?php endif; ?>
       </td>
-      <td><?= htmlspecialchars($g['email']) ?></td>
-      <td style="color:#9a8fbb;"><?= htmlspecialchars($g['telefone']) ?></td>
+      <td>
+        <?php if (($g['canal'] ?? 'email') === 'whatsapp'): ?>
+          <span style="display:inline-block;background:#0a2e1a;color:#25d366;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;">📱 WhatsApp (sem e-mail)</span>
+        <?php else: ?>
+          <?= htmlspecialchars($g['email']) ?>
+        <?php endif; ?>
+      </td>
+      <td style="color:#9a8fbb;"><?php $tel = preg_replace('/\D/','',$g['telefone']); ?>
+        <?php if ($tel !== '' && $g['telefone'] !== '-'): ?>
+          <a href="https://wa.me/<?= (strlen($tel) <= 11 ? '55'.$tel : $tel) ?>" target="_blank" style="color:#25d366;text-decoration:none;"><?= htmlspecialchars($g['telefone']) ?></a>
+        <?php else: ?><?= htmlspecialchars($g['telefone']) ?><?php endif; ?>
+      </td>
       <td><span class="badge tipo-<?= $tipo ?>"><?= ucfirst($tipo) ?></span></td>
-      <td><?= badgeEmail($e1, '1º email') ?></td>
-      <td><?= badgeEmail($e2, '2º email') ?></td>
+      <td><?= ($g['canal'] ?? 'email') === 'whatsapp' ? '<span style="color:#6a5f8a;font-size:12px;">—</span>' : badgeEmail($e1, '1º email') ?></td>
+      <td><?= ($g['canal'] ?? 'email') === 'whatsapp' ? '<span style="color:#6a5f8a;font-size:12px;">—</span>' : badgeEmail($e2, '2º email') ?></td>
       <td style="font-size:12px;color:#6a5f8a;"><?= $g['criado_em'] ?></td>
     </tr>
   <?php endforeach; ?>

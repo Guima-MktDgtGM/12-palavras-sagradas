@@ -28,17 +28,24 @@ $nome     = $customer['name']  ?? 'Amigo(a)';
 $email    = $customer['email'] ?? '';
 $telefone = $customer['phone'] ?? '';
 
-file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . " evento=$evento email=$email\n", FILE_APPEND);
+file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . " evento=$evento email=$email tel=$telefone\n", FILE_APPEND);
 
-if (empty($email)) { http_response_code(200); exit('No email'); }
+// Precisa de PELO MENOS um canal de contato: e-mail OU telefone.
+if (empty($email) && empty($telefone)) { http_response_code(200); exit('No contact'); }
+
+// Identificador do lead (e-mail se tiver; senão, telefone) — usado na deduplicação.
+$ident = $email !== '' ? $email : $telefone;
+// Canal de recuperação: e-mail se tiver e-mail; senão, WhatsApp.
+$canal = $email !== '' ? 'email' : 'whatsapp';
 
 $fila    = file_exists(FILA_FILE)     ? (json_decode(file_get_contents(FILA_FILE),     true) ?? []) : [];
 $clientes = file_exists(CLIENTES_FILE) ? (json_decode(file_get_contents(CLIENTES_FILE), true) ?? []) : [];
 $agora   = time();
 
-function jaExisteFila($fila, $email, $tipo, $agora) {
+function jaExisteFila($fila, $ident, $tipo, $agora) {
     foreach ($fila as $item) {
-        if ($item['email'] === $email && ($item['tipo'] ?? '') === $tipo) {
+        $item_ident = ($item['email'] ?? '') !== '' ? $item['email'] : ($item['telefone'] ?? '');
+        if ($item_ident === $ident && ($item['tipo'] ?? '') === $tipo) {
             $criado = strtotime($item['criado_em'] ?? '0');
             if (($agora - $criado) < 300) return true;
         }
@@ -55,30 +62,30 @@ function jaEhCliente($clientes, $email) {
 
 // ── Pix gerado: agenda 2 emails de recuperação (só se não for cliente) ──────
 if ($evento === 'pix_gerado') {
-    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, 'pix', $agora)) {
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'pix','template'=>'email1-30min',   'enviar_em'=>$agora+(30*60),    'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'pix','template'=>'email2-24h',     'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, 'pix', $agora)) {
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'pix','template'=>'email1-30min',   'enviar_em'=>$agora+(30*60),    'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'pix','template'=>'email2-24h',     'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
 // ── PicPay / Nubank gerado (mesmo fluxo do Pix) ─────────────────────────────
 } elseif (in_array($evento, ['picpay_gerado','nubank_gerado'])) {
     $tipo_evento = str_replace('_gerado', '', $evento); // 'picpay' ou 'nubank'
-    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, $tipo_evento, $agora)) {
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>$tipo_evento,'template'=>"email-{$tipo_evento}-30min",'enviar_em'=>$agora+(30*60),    'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>$tipo_evento,'template'=>"email-{$tipo_evento}-24h", 'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, $tipo_evento, $agora)) {
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>$tipo_evento,'template'=>"email-{$tipo_evento}-30min",'enviar_em'=>$agora+(30*60),    'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>$tipo_evento,'template'=>"email-{$tipo_evento}-24h", 'enviar_em'=>$agora+(24*60*60), 'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
 // ── Boleto gerado ────────────────────────────────────────────────────────────
 } elseif ($evento === 'boleto_gerado') {
-    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, 'boleto', $agora)) {
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'boleto','template'=>'email-boleto-30min','enviar_em'=>$agora+(30*60),   'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'boleto','template'=>'email-boleto-24h', 'enviar_em'=>$agora+(24*60*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, 'boleto', $agora)) {
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'boleto','template'=>'email-boleto-30min','enviar_em'=>$agora+(30*60),   'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'boleto','template'=>'email-boleto-24h', 'enviar_em'=>$agora+(24*60*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
 // ── Abandono de checkout ─────────────────────────────────────────────────────
 } elseif (in_array($evento, ['checkout_abandonment','abandono_de_checkout','checkout_abandonado'])) {
-    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $email, 'abandono', $agora)) {
-        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'tipo'=>'abandono','template'=>'email-abandono','enviar_em'=>$agora+(20*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
+    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, 'abandono', $agora)) {
+        $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'abandono','template'=>'email-abandono','enviar_em'=>$agora+(20*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
 // ── Compra aprovada: cancela emails pendentes + salva como cliente ───────────

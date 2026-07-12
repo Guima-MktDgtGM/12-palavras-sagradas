@@ -15,6 +15,8 @@ $alterou = false;
 foreach ($fila as &$item) {
     if ($item['enviado']) continue;
     if (($item['status'] ?? '') === 'pago') continue;
+    // Lead sem e-mail (recuperação por WhatsApp) — não há o que enviar por e-mail.
+    if (empty($item['email'])) continue;
     if ($agora < $item['enviar_em']) continue;
 
     $template_path = TEMPLATES_DIR . $item['template'] . '.html';
