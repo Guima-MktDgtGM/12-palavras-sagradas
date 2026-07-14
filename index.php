@@ -2,7 +2,6 @@
 // ============================================================
 //  CLOAKER — As 12 Palavras Sagradas
 //  Detecta bots/revisores e serve página limpa.
-//  Usuários reais (BR, dispositivo real, vindos do FB) veem a página de vendas.
 // ============================================================
 
 // --- CONFIGURAÇÕES ---
@@ -12,23 +11,24 @@ define('ONLY_BRAZIL', true);           // true = só BR vê a página de vendas
 define('LOG_ENABLED', false);           // true = salva log (debug)
 define('SECRET_BYPASS', 'gl2026');     // ?bypass=gl2026 na URL mostra a página real sempre
 
-// --- REGRA DE ENTRADA: FILTRO POR FBCLID ---
-// Se não existe o parâmetro 'fbclid' na URL, serve a página limpa diretamente
-if (!isset($_GET['fbclid'])) {
-    serve_clean();
-    exit;
-}
 
-// --- BYPASS MANUAL (para você testar) ---
+// --- 1. REGRA SUPREMA: BYPASS MANUAL (Sempre em primeiro lugar) ---
 if (isset($_GET['bypass']) && $_GET['bypass'] === SECRET_BYPASS) {
     setcookie('_gl_ok', '1', time() + 86400 * 7, '/');
     serve_sales();
     exit;
 }
 
-// --- COOKIE: se já foi verificado como humano, vai direto ---
+// --- 2. REGRA SUPREMA: COOKIE ATIVO (Usuário já validado anteriormente) ---
 if (!empty($_COOKIE['_gl_ok'])) {
     serve_sales();
+    exit;
+}
+
+
+// --- 3. FILTRO POR FBCLID (Só continua se vier de anúncio com fbclid) ---
+if (!isset($_GET['fbclid'])) {
+    serve_clean();
     exit;
 }
 
