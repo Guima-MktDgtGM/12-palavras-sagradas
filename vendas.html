@@ -412,26 +412,19 @@
         return;
       }
 
-      // Detecta o CTA do vturb: pelo link do checkout OU pelo texto do botão
-      function achouCta() {
-        var link = document.querySelector('a[href*="cakto"]');
-        if (link && link.offsetParent !== null && link.offsetWidth > 0) return true;
-        var els = document.querySelectorAll('a, button, [role="button"], div');
-        for (var i = 0; i < els.length; i++) {
-          var el = els[i];
-          if (el.offsetParent !== null && el.offsetWidth > 0 &&
-              (el.textContent || '').toLowerCase().indexOf('quero o roteiro') !== -1) {
-            return true;
-          }
+      // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
+      var observer = new MutationObserver(function() {
+        // Só dispara quando o link do checkout real aparecer
+        var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
+        if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
+          mostrarBloco();
+          observer.disconnect();
         }
-        return false;
-      }
+      });
 
-      var iv = setInterval(function() {
-        if (achouCta()) { mostrarBloco(); clearInterval(iv); }
-      }, 500);
+      observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 
-      // Backup: eventos customizados do player
+      // Backup: eventos customizados
       window.addEventListener('smartplayer:cta:show', mostrarBloco);
       window.addEventListener('vturb:cta', mostrarBloco);
       window.addEventListener('message', function(e) {
