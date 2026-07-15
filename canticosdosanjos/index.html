@@ -165,6 +165,29 @@ p.body strong{color:#a5741a;}
     <div class="confirm-line">✅ 9 em cada 10 membros confirmam esta última etapa</div>
   </div>
 
+  <!-- GATE: pergunta de forma de pagamento -->
+  <div class="section" id="gate">
+    <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para liberar seu acesso ao bônus corretamente, confirme: você finalizou no cartão ou por Pix/Boleto?</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button id="btn-cartao" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
+        <button id="btn-pix" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
+      </div>
+    </div>
+
+    <!-- ONE-CLICK (1ª vez) — só aparece quando escolhe CARTÃO -->
+    <div id="oneclick-top" style="display:none;margin-top:28px;text-align:center;">
+      <p style="font-family:'Cinzel',serif;color:#1c8a4f;font-weight:700;font-size:17px;margin-bottom:16px;line-height:1.4;">✅ Confirmado! Como você pagou no cartão, receba os Cânticos com 1 clique:</p>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept bg-color="#0070ffff" text-color="#ffffff" upsell-accept-url="https://noticiasdafe.com.br/obrigado" offer-id="83y7urh" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">Sim! Quero o CÂNTICO dos ANJOS!</cakto-upsell-accept>
+        <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não, eu não quero me conectar aos Anjos!</cakto-upsell-reject>
+      </cakto-upsell-buttons>
+    </div>
+  </div>
+
+  <!-- RESTO DA PÁGINA: revela só após escolher a forma de pagamento -->
+  <div id="resto-pagina" style="display:none;">
+
   <!-- Bloco No Brainer -->
   <div class="section">
     <div class="highlight">
@@ -240,10 +263,19 @@ p.body strong{color:#a5741a;}
     </div>
 
     <div style="margin-top:32px;">
-      <!-- IMPORTANTE: troque pelo LINK DE CHECKOUT do Upsell 2 (Cânticos) na Cakto -->
-      <a href="https://pay.cakto.com.br/83y7urh_980708" class="btn" id="btn-checkout">✅ SIM! QUERO OS CÂNTICOS DOS ANJOS</a>
-      <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
-      <a href="https://noticiasdafe.com.br/obrigado" class="decline">Não, prefiro rezar sozinho(a) e entendo que os anjos não vão cantar comigo — e que nunca mais verei esta oferta.</a>
+      <!-- CTA PIX / boleto (padrão) -->
+      <div id="cta-pix">
+        <a href="https://pay.cakto.com.br/83y7urh_980708" class="btn" id="btn-checkout">✅ SIM! QUERO OS CÂNTICOS DOS ANJOS</a>
+        <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
+        <a href="https://noticiasdafe.com.br/obrigado" class="decline">Não, prefiro rezar sozinho(a) e entendo que os anjos não vão cantar comigo — e que nunca mais verei esta oferta.</a>
+      </div>
+      <!-- CTA CARTÃO — one-click (2ª vez) -->
+      <div id="cta-card" style="display:none;">
+        <cakto-upsell-buttons>
+          <cakto-upsell-accept bg-color="#0070ffff" text-color="#ffffff" upsell-accept-url="https://noticiasdafe.com.br/obrigado" offer-id="83y7urh" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">Sim! Quero o CÂNTICO dos ANJOS!</cakto-upsell-accept>
+          <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não, eu não quero me conectar aos Anjos!</cakto-upsell-reject>
+        </cakto-upsell-buttons>
+      </div>
     </div>
   </div>
 
@@ -253,6 +285,8 @@ p.body strong{color:#a5741a;}
       🛡️ <strong>Garantia incondicional de 60 dias.</strong> Receba os Cânticos, use por até 60 dias e, se por qualquer motivo não sentir a diferença, basta enviar um e-mail para <strong>gabriel.luz@noticiasdafe.com.br</strong> que devolvemos 100% do seu investimento. Todo o risco é nosso.
     </div>
   </div>
+
+  </div><!-- /resto-pagina -->
 
   <!-- Footer -->
   <div class="footer">
@@ -282,5 +316,46 @@ p.body strong{color:#a5741a;}
   if(btn) btn.setAttribute("href", qs ? CHECKOUT + "?" + qs : CHECKOUT);
 })();
 </script>
+
+<!-- Esconde o botão de recusar e o preço dentro do componente da Cakto + hover verde -->
+<style>
+  cakto-upsell-reject { display: none !important; }
+  cakto-upsell-accept::part(price) { display: none !important; }
+  .gate-btn { transition: background .15s, border-color .15s, color .15s; }
+  .gate-btn:hover { background: #eafaf0 !important; border-color: #2ecc71 !important; color: #1c8a4f !important; }
+</style>
+
+<!-- Lógica: escolha da forma de pagamento revela a página -->
+<script>
+(function(){
+  var resto   = document.getElementById('resto-pagina');
+  var gateBox = document.getElementById('gate-box');
+  var octop   = document.getElementById('oneclick-top');
+  var bc = document.getElementById('btn-cartao');
+  var bp = document.getElementById('btn-pix');
+  var ctaPix  = document.getElementById('cta-pix');
+  var ctaCard = document.getElementById('cta-card');
+
+  function revela(){ if(resto) resto.style.display = 'block'; }
+
+  if(bc) bc.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    if(octop)   octop.style.display = 'block';
+    if(ctaPix)  ctaPix.style.display = 'none';
+    if(ctaCard) ctaCard.style.display = 'block';
+    revela();
+    if(octop) octop.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  if(bp) bp.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    revela();
+    if(resto) resto.scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Script do one-click da Cakto -->
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 </body>
 </html>
