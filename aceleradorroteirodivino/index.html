@@ -211,8 +211,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
       <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para liberar seu acesso ao bônus corretamente, confirme: você finalizou no cartão ou por Pix/Boleto?</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <button id="btn-cartao" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
-        <button id="btn-pix" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
+        <button id="btn-cartao" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
+        <button id="btn-pix" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
       </div>
     </div>
 
@@ -398,6 +398,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 <style>
   cakto-upsell-reject { display: none !important; }
   cakto-upsell-accept::part(price) { display: none !important; }
+  .gate-btn { transition: background .15s, border-color .15s, color .15s; }
+  .gate-btn:hover { background: #eafaf0 !important; border-color: #2ecc71 !important; color: #1c8a4f !important; }
 </style>
 
 <!-- Lógica: escolha da forma de pagamento revela a página -->
