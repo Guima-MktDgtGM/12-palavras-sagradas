@@ -257,9 +257,18 @@ p.body strong{color:#a5741a;}
       <div class="vrow"><span>Ritual dos 7 Dias com os Anjos</span><span>R$ 197</span></div>
       <div class="vrow total"><span>Valor real de tudo</span><span>R$ 876</span></div>
       <div class="vrow" style="border-bottom:none;"><span>Preço normal</span><span style="color:#e04352;text-decoration:line-through;">R$ 297</span></div>
-      <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
-      <div class="value-now">R$ 97</div>
-      <div class="value-desc">Oferta exclusiva para quem chegou até aqui — aparece uma única vez.</div>
+      <!-- Preço PIX/boleto -->
+      <div id="preco-pix">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
+        <div class="value-now">R$ 97</div>
+        <div class="value-desc">Oferta exclusiva para quem chegou até aqui — aparece uma única vez.</div>
+      </div>
+      <!-- Preço CARTÃO (grátis) -->
+      <div id="preco-card" style="display:none;">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, como você pagou no cartão, sai por:</div>
+        <div class="value-now" style="color:#1c8a4f;">GRÁTIS</div>
+        <div class="value-desc">Um presente exclusivo para você que confirmou pelo cartão — aproveite agora.</div>
+      </div>
     </div>
 
     <div style="margin-top:32px;">
@@ -335,12 +344,16 @@ p.body strong{color:#a5741a;}
   var bp = document.getElementById('btn-pix');
   var ctaPix  = document.getElementById('cta-pix');
   var ctaCard = document.getElementById('cta-card');
+  var precoPix  = document.getElementById('preco-pix');
+  var precoCard = document.getElementById('preco-card');
 
   function revela(){ if(resto) resto.style.display = 'block'; }
 
   if(bc) bc.addEventListener('click', function(){
     if(gateBox) gateBox.style.display = 'none';
     if(octop)   octop.style.display = 'block';
+    if(precoPix)  precoPix.style.display = 'none';
+    if(precoCard) precoCard.style.display = 'block';
     if(ctaPix)  ctaPix.style.display = 'none';
     if(ctaCard) ctaCard.style.display = 'block';
     revela();
