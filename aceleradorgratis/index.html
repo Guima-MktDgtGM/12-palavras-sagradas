@@ -20,15 +20,12 @@ img,video{max-width:100%;display:block;}
 
 .container{max-width:620px;margin:0 auto;padding:30px 22px 70px;}
 
-.video-wrap{margin:0 auto 8px;max-width:420px;}
-.video-hint{font-size:14px;color:#7a7488;margin:14px 0 30px;font-weight:700;text-align:center;}
-
 /* Blocos de copy */
 .lead{font-size:clamp(19px,3.6vw,23px);font-weight:800;color:#241f38;text-align:center;line-height:1.4;font-family:'Montserrat',sans-serif;margin-bottom:18px;}
 .lead .r{color:#c0392b;}
 p.body{font-size:17px;color:#403a58;margin-bottom:16px;}
 p.body strong{color:#a5741a;}
-.emph{background:#fff7e6;border-left:4px solid #e0a92e;padding:14px 18px;border-radius:8px;font-size:17px;color:#5a4a1a;margin:20px 0;font-weight:700;}
+.emph{background:#fff7e6;border-left:4px solid #e0a92e;padding:16px 18px;border-radius:8px;font-size:18px;color:#5a4a1a;margin:20px 0;font-weight:800;text-align:center;}
 
 .section{padding:30px 0;border-bottom:1px solid #ece7dc;}
 .section:last-of-type{border-bottom:none;}
@@ -40,33 +37,36 @@ h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(20px,3.8v
 .gets li{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ece7dc;border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:0 3px 12px rgba(120,100,50,.05);}
 .gets .ic{font-size:26px;min-width:34px;text-align:center;}
 .gets h4{font-size:16.5px;color:#241f38;margin-bottom:3px;font-weight:800;}
+.gets h4 .free{color:#1e7a46;}
 .gets p{font-size:14.5px;color:#6a6280;margin:0;}
-.gets .free{color:#1e7a46;font-weight:800;}
-.gets .old{color:#b03030;text-decoration:line-through;font-size:13px;}
+.gets .old{color:#b03030;text-decoration:line-through;}
 
 /* Value stack */
 .value-box{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:28px 22px;text-align:center;box-shadow:0 10px 36px rgba(201,168,76,.18);max-width:480px;margin:0 auto;}
-.vrow{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#403a58;padding:9px 0;border-bottom:1px dashed #ece0c4;}
-.vrow.free span:last-child{color:#1e7a46;font-weight:800;}
-.vrow.total{font-weight:800;color:#241f38;border-bottom:none;padding-top:14px;}
-.strike{color:#b03030;text-decoration:line-through;}
-.now-kick{font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:16px;}
-.value-now{font-family:'Cinzel',serif;font-size:clamp(38px,8.5vw,56px);font-weight:800;color:#b8860b;line-height:1.05;margin:4px 0;}
-.value-desc{font-size:13.5px;color:#7a7488;}
+.vrow{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:15px;color:#403a58;padding:11px 0;border-bottom:1px dashed #ece0c4;text-align:left;}
+.vrow span:first-child{font-weight:700;}
+.vrow .val{white-space:nowrap;}
+.strike{color:#b03030;text-decoration:line-through;font-size:13px;margin-right:6px;}
+.free-tag{color:#1e7a46;font-weight:800;}
+.now-kick{font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;}
+.value-now{font-family:'Cinzel',serif;font-size:clamp(30px,7vw,44px);font-weight:800;color:#b8860b;line-height:1.05;margin:4px 0;}
+.value-sub{font-size:15px;color:#5a4a1a;font-weight:700;margin-bottom:4px;}
+.value-desc{font-size:13.5px;color:#7a7488;margin-top:8px;}
 
 /* Garantia dupla */
 .guarantee{background:#eafaf0;border:2px solid #2ecc71;border-radius:16px;padding:24px 22px;max-width:520px;margin:0 auto;}
-.guarantee h3{font-family:'Montserrat',sans-serif;font-size:19px;color:#1e7a46;margin-bottom:10px;text-align:center;font-weight:800;}
-.guarantee p{font-size:15px;color:#3a5a45;margin:0;}
+.guarantee h3{font-family:'Montserrat',sans-serif;font-size:19px;color:#1e7a46;margin-bottom:12px;text-align:center;font-weight:800;}
+.guarantee p{font-size:15px;color:#3a5a45;margin-bottom:10px;}
+.guarantee p:last-child{margin-bottom:0;}
 .guarantee strong{color:#127a3e;}
 
 /* CTA */
 .cta-area{text-align:center;margin-top:14px;}
-.cta-btn{display:inline-block;width:100%;max-width:500px;padding:22px 20px;background:linear-gradient(135deg,#ffd633,#f5b800);border-radius:50px;font-family:'Montserrat',sans-serif;font-size:clamp(16px,3.4vw,21px);font-weight:900;color:#3a2a00;text-decoration:none;letter-spacing:.3px;box-shadow:0 8px 28px #f5b80055;transition:transform .2s;animation:pulse 2s infinite;text-transform:uppercase;}
+.cta-btn{display:inline-block;width:100%;max-width:520px;padding:22px 20px;background:linear-gradient(135deg,#ffd633,#f5b800);border-radius:50px;font-family:'Montserrat',sans-serif;font-size:clamp(15px,3.2vw,20px);font-weight:900;color:#3a2a00;text-decoration:none;letter-spacing:.3px;box-shadow:0 8px 28px #f5b80055;transition:transform .2s;animation:pulse 2s infinite;text-transform:uppercase;line-height:1.3;}
 @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 8px 28px #f5b80055;}50%{transform:scale(1.02);box-shadow:0 10px 40px #f5b80099;}}
 .cta-btn:hover{transform:translateY(-2px);}
 .cta-note{font-size:13.5px;color:#7a7488;margin-top:12px;}
-.decline{display:inline-block;margin-top:22px;font-size:13.5px;color:#b0392b;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435244;border-radius:10px;padding:12px 20px;background:#e043520a;}
+.decline{display:inline-block;margin-top:22px;font-size:13.5px;color:#b0392b;text-decoration:none;max-width:480px;line-height:1.5;border:1px solid #e0435244;border-radius:10px;padding:12px 20px;background:#e043520a;}
 .decline:hover{background:#e0435216;}
 
 .footer{text-align:center;font-size:12.5px;color:#9a9280;padding:30px 20px;line-height:2;}
@@ -94,74 +94,76 @@ h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(20px,3.8v
 
   <!-- ABERTURA -->
   <div class="section">
-    <p class="lead">Escuta com atenção. Uma parte de você <span class="r">queria</span> o Acelerador — mas o medo falou mais alto e você clicou em “não”.</p>
-    <p class="body">Tudo bem. Eu entendo. Você não me conhece, e é normal ficar com o pé atrás. Mas eu não vou deixar você sair daqui de mãos vazias — porque o Acelerador é, provavelmente, o módulo <strong>mais poderoso</strong> de todo o Roteiro Divino.</p>
-    <p class="body">Mais de <strong>97% das pessoas</strong> que pegam o Acelerador me dizem a mesma coisa: <em>“Gabriel, o Roteiro já foi incrível… mas o Acelerador me levou muito mais rápido pra pessoa que eu queria ser, pro dinheiro que eu queria ter e pra vida que eu queria viver.”</em></p>
-    <div class="emph">Então aqui vai a minha decisão: aquele Acelerador que você acabou de passar pra trás? Ele agora é <strong>SEU. DE GRAÇA.</strong> 🎁</div>
+    <p class="lead">Escuta com atenção. Uma parte de você <span class="r">queria</span> o Acelerador — mas o seu mecanismo de autossabotagem falou mais alto e você clicou em “não”.</p>
+    <p class="body">Tudo bem, eu entendo. O cérebro humano é programado para manter você exatamente onde você está: quebrado, estressado e com medo de arriscar. É uma defesa biológica para te manter na zona de conforto, mesmo que essa “zona” seja uma vida cheia de contas para pagar e sonhos frustrados.</p>
+    <p class="body">Mas eu me recuso a deixar você sair daqui de mãos vazias. O Acelerador é o módulo <strong>mais violento</strong> de todo o Roteiro Divino. Mais de <strong>97% das pessoas</strong> que ativam essa ferramenta dizem que o Roteiro sozinho é ótimo, mas que o Acelerador é o que destrava a velocidade real para o dinheiro no bolso e a paz de espírito.</p>
+    <div class="emph">Então, eu tomei uma decisão insana: aquele Acelerador que você acabou de rejeitar? Ele agora é <strong>SEU. 100% DE GRAÇA.</strong> 🎁</div>
   </div>
 
   <!-- HISTÓRIA -->
   <div class="section">
-    <div class="label">→ Por que eu faço isso por você</div>
-    <p class="body">Eu tenho 47 anos e hoje vivo o meu sonho. Mas nem sempre foi assim. Eu sei <strong>exatamente</strong> o que é estar quebrado, sem conseguir cuidar direito dos meus filhos. Eu sei o que é ter o nome sujo, estar endividado e acordar todo dia pra um trabalho que eu não suportava.</p>
-    <p class="body">Eu dormia num colchão inflável. E foi ali, no meu pior momento, que eu descobri uma coisa que mudou tudo — e que <strong>reprogramou a forma como eu pensava</strong>. Quando eu mudei aquelas crenças, tudo se ajeitou. Eu faturei mais de <strong>R$ 1 milhão</strong>.</p>
-    <p class="body">E o que eu descobri tem um nome: as <strong>Frequências Divinas do Subconsciente</strong>.</p>
+    <div class="label">→ O Segredo por trás disso (que ninguém te conta)</div>
+    <p class="body">Eu tenho 47 anos. Hoje eu posso escolher para onde vou, o que compro e como cuido dos meus filhos sem olhar o saldo bancário. Mas eu já dormi em colchão inflável. Já tive o nome tão sujo que tinha vergonha de atender o telefone.</p>
+    <p class="body">O que me tirou do buraco e me fez faturar mais de <strong>R$ 1 milhão</strong> não foi trabalho duro. Se trabalho duro desse dinheiro, o pedreiro seria bilionário.</p>
+    <p class="body">O que muda o jogo é a <strong>reprogramação silenciosa</strong>. E existe uma brecha biológica no seu cérebro para fazer isso: as <strong>Frequências Divinas do Subconsciente</strong>.</p>
   </div>
 
-  <!-- O QUE É -->
+  <!-- COMO FUNCIONA -->
   <div class="section">
-    <div class="label">→ O que são as Frequências Divinas</div>
+    <div class="label">→ Como funciona essa brecha mental?</div>
     <h2>A tecnologia que reprograma a sua mente enquanto você dorme</h2>
-    <p class="body">Você tem duas mentes: a <strong>consciente</strong> e a <strong>subconsciente</strong>. É a subconsciente que comanda as suas crenças, os seus medos e — no fim das contas — a sua vida.</p>
-    <p class="body">Quando você está indo dormir, a sua mente entra no <strong>estado Theta</strong> — o estado hipnótico do cérebro. É nesse momento que as frequências certas conseguem reprogramar a sua mente. Isso se chama <strong>neuroplasticidade</strong>. É o mesmo ritual que todo milionário, todo bilionário usa: eles programam e reprogramam a mente todos os dias.</p>
-    <div class="emph">Em 7 dias usando as Frequências antes de dormir, as coisas começaram a ser atraídas pra minha vida: oportunidades, dinheiro, relacionamentos. Até a conexão com os meus filhos melhorou. E eu quero isso pra você.</div>
+    <p class="body">Sua mente consciente (a que sente medo e ceticismo agora) desliga quando você dorme. É aí que a sua mente subconsciente entra em <strong>Estado Theta</strong> — um estado de hipnose natural.</p>
+    <p class="body">Se você colocar as frequências certas para rodar nesse momento, você ignora as barreiras do medo e reprograma sua mente diretamente na fonte. Isso é <strong>neuroplasticidade pura</strong>. É o ritual secreto que a elite usa para manifestar oportunidades, dinheiro e poder de atração sem esforço consciente.</p>
   </div>
 
   <!-- O QUE VOCÊ RECEBE -->
   <div class="section">
-    <div class="label">→ Tudo que você leva agora</div>
+    <div class="label">→ O que você está levando agora</div>
     <ul class="gets">
-      <li><span class="ic">⚡</span><div><h4>O Acelerador completo <span class="free">— GRÁTIS</span></h4><p><span class="old">De R$ 189,90</span> — o módulo que leva você muito mais rápido pra vida que deseja. É seu, sem pagar nada.</p></div></li>
-      <li><span class="ic">🧠</span><div><h4>As Frequências Divinas do Subconsciente</h4><p>As frequências que eu usei pra reprogramar minha mente e faturar meu primeiro milhão.</p></div></li>
-      <li><span class="ic">🌙</span><div><h4>O ritual do Estado Theta</h4><p>Como usar as frequências antes de dormir pra reprogramar a mente na velocidade máxima.</p></div></li>
-      <li><span class="ic">🔒</span><div><h4>Acesso imediato e vitalício</h4><p>Tudo liberado na hora, dentro do seu app, pra sempre.</p></div></li>
+      <li><span class="ic">⚡</span><div><h4>O Acelerador Completo <span class="free">[GRÁTIS]</span></h4><p><span class="old">De R$ 189,90</span> por R$ 0,00. O acelerador de resultados definitivo.</p></div></li>
+      <li><span class="ic">🧠</span><div><h4>As Frequências Divinas do Subconsciente</h4><p>O áudio de engenharia acústica que usei para destravar meu primeiro milhão de reais.</p></div></li>
+      <li><span class="ic">🌙</span><div><h4>O Atalho do Estado Theta</h4><p>O passo a passo exato para usar antes de dormir e acelerar o processo em até 10x.</p></div></li>
+      <li><span class="ic">🔒</span><div><h4>Acesso Vitalício Imediato</h4><p>Tudo direto no seu celular, para sempre.</p></div></li>
     </ul>
   </div>
 
   <!-- VALOR + PREÇO -->
   <div class="section">
-    <div class="label">→ A sua condição, só nesta página</div>
+    <div class="label">→ A sua ÚNICA oportunidade (se fechar, já era)</div>
     <div class="value-box">
-      <div class="vrow free"><span>Acelerador completo</span><span>GRÁTIS</span></div>
-      <div class="vrow"><span>Frequências Divinas do Subconsciente</span><span class="strike">R$ 239,90</span></div>
-      <div class="vrow total"><span>Você leva os dois por:</span><span></span></div>
-      <div class="now-kick">Hoje, só aqui, por apenas:</div>
-      <div class="value-now">R$ 129,90</div>
+      <div class="vrow"><span>Acelerador Completo</span><span class="val"><span class="strike">R$ 189,90</span><span class="free-tag">GRÁTIS</span></span></div>
+      <div class="vrow"><span>Frequências Divinas</span><span class="val"><span class="strike">R$ 239,90</span><strong>R$ 129,90</strong></span></div>
+      <div class="vrow"><span>Garantia Dupla com PIX de R$ 200</span><span class="val free-tag">INCLUSO</span></div>
+      <div class="now-kick">Tudo por apenas:</div>
+      <div class="value-now">12x de R$ 12,90</div>
+      <div class="value-sub">ou R$ 129,90 à vista</div>
       <div class="value-desc">Uma única vez. Se você sair desta página, essa oferta desaparece para sempre.</div>
     </div>
   </div>
 
-  <!-- GARANTIA DUPLA -->
+  <!-- GARANTIA BLINDADA -->
   <div class="section">
     <div class="guarantee">
-      <h3>🛡️ Garantia DUPLA — todo o risco é meu</h3>
-      <p>Pega isso agora. Use as Frequências Divinas. Se em até <strong>60 dias</strong> você achar que não funcionou, é só me mandar um e-mail dizendo <em>“Gabriel, não gostei”</em> — e eu não só te <strong>devolvo 100% do seu dinheiro</strong>, como ainda te mando um <strong>Pix de R$ 200</strong> pela sua confiança. Sem perguntas. Você literalmente não tem como perder.</p>
+      <h3>🛡️ GARANTIA BLINDADA: eu coloco R$ 200 do meu bolso em risco</h3>
+      <p>Se você aplicar o protocolo por até <strong>60 dias</strong> e não ver diferença nas suas finanças, na sua sorte ou na sua vida:</p>
+      <p>→ Eu te devolvo <strong>100% do seu dinheiro</strong> imediatamente.</p>
+      <p>→ Eu te faço um <strong>PIX de R$ 200</strong> do meu próprio bolso para compensar o seu tempo perdido.</p>
+      <p>Basta me mandar um único e-mail dizendo: <em>“Gabriel, não funcionou”</em>. Sem perguntas, sem enrolação. <strong>Ou você ganha, ou eu perco R$ 200.</strong> É o negócio mais seguro do mundo para você.</p>
     </div>
   </div>
 
-  <!-- FECHAMENTO EMOCIONAL + CTA -->
+  <!-- FECHAMENTO + CTA -->
   <div class="section" style="text-align:center;">
-    <p class="lead">Talvez você esteja na casa dos 40, dos 50, pensando que é tarde demais. <span class="r">Não é.</span></p>
-    <p class="body">Agora é a sua vez de dar um salto de fé em direção aos seus sonhos. O <strong>antigo você</strong> está com medo, é cético — e, infelizmente, esse tipo de pessoa nunca alcança o que deseja. O <strong>novo você</strong> dá o passo. Seja o novo você <strong>hoje</strong>.</p>
+    <p class="lead">O velho “você” tem medo, duvida de tudo e vai continuar com as mesmas contas para pagar amanhã. <span class="r">O novo “você” toma uma atitude agora.</span></p>
 
     <div class="cta-area">
       <!-- IMPORTANTE: confirme na Cakto que este link cobra R$ 129,90 -->
-      <a href="https://pay.cakto.com.br/32t2whb_969229" class="cta-btn">✅ SIM, GABRIEL! EU QUERO ISSO AGORA</a>
-      <div class="cta-note">🔒 Acesso imediato · Acelerador grátis + Frequências Divinas · Garantia dupla</div>
+      <a href="https://pay.cakto.com.br/32t2whb_969229" class="cta-btn">✅ SIM, GABRIEL! QUERO ATIVAR O ACELERADOR GRÁTIS + FREQUÊNCIAS AGORA!</a>
+      <div class="cta-note">🔒 Acesso imediato · Acelerador grátis + Frequências Divinas · Garantia com PIX de R$200</div>
 
       <br>
       <a href="https://noticiasdafe.com.br/obrigado" class="decline">
-        Não, eu prefiro continuar do jeito que estou e entendo que estou recusando o Acelerador de graça, as Frequências Divinas e a garantia de R$200 — e que nunca mais verei esta oferta.
+        Não, eu prefiro continuar lutando contra as minhas dificuldades financeiras sozinho e aceito perder o Acelerador gratuito, as Frequências Divinas e a chance de ganhar R$ 200 de garantia, sabendo que essa tela nunca mais vai aparecer.
       </a>
     </div>
   </div>
