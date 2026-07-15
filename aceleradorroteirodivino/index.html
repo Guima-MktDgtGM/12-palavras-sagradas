@@ -305,10 +305,38 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     </div>
 
     <div style="margin-top:32px;">
-      <a href="https://pay.cakto.com.br/zrfxbr2_959336" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR MINHAS BÊNÇÃOS</a>
-      <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
-      <a href="https://noticiasdafe.com.br/aceleradorgratis" class="decline">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
+
+      <!-- BLOCO ONE-CLICK: aparece SÓ para quem pagou com CARTÃO -->
+      <div id="bloco-oneclick" style="display:none;">
+        <!-- ⬇️ COLE AQUI o componente de one-click da Cakto (accept + reject).
+             Pegue o código/OFFER no painel da Cakto (Upsell / One-Click). Exemplo:
+        <cakto-upsell-accept offer="OFFER_ID_DO_ACELERADOR">✅ SIM! QUERO ACELERAR — COMPRA COM 1 CLIQUE</cakto-upsell-accept>
+        <div class="btn-note">🔒 Cobrança segura no mesmo cartão — 1 clique, sem digitar nada.</div>
+        <cakto-upsell-reject offer="OFFER_ID_DO_ACELERADOR">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</cakto-upsell-reject>
+        -->
+      </div>
+
+      <!-- BLOCO LINK: PIX / boleto / qualquer outro método (padrão) -->
+      <div id="bloco-link">
+        <a href="https://pay.cakto.com.br/zrfxbr2_959336" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR MINHAS BÊNÇÃOS</a>
+        <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
+        <a href="https://noticiasdafe.com.br/aceleradorgratis" class="decline">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
+      </div>
+
     </div>
+    <script>
+    (function(){
+      var src = new URLSearchParams(window.location.search);
+      function g(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return String(v).toLowerCase(); } return ""; }
+      var pm = g(["payment_method","payment","metodo","metodo_pagamento","payment_type","forma_pagamento","metodo_de_pagamento"]);
+      var ehCartao = /cart|card|credit/.test(pm);
+      var one  = document.getElementById('bloco-oneclick');
+      var link = document.getElementById('bloco-link');
+      // só troca para one-click se: for cartão E o bloco one-click tiver conteúdo real (componente colado)
+      var oneOk = one && one.querySelector('cakto-upsell-accept, a, button');
+      if (ehCartao && oneOk) { one.style.display = 'block'; if(link) link.style.display = 'none'; }
+    })();
+    </script>
   </div>
 
   <!-- Garantia -->
