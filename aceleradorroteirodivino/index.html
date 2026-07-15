@@ -157,7 +157,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   <div class="header">
     <div class="tag">✦ Oferta única — só aparece uma vez ✦</div>
     <h1>Você foi selecionado(a) para <span class="gold">acelerar seus resultados</span></h1>
-    <p class="subtitle">Antes de acessar seu app, leia com atenção. Esta oferta <strong>não vai aparecer de novo</strong> — nem pelo mesmo preço, nem em lugar nenhum.</p>
+    <p class="subtitle">Antes de acessar seu app, leia com atenção. Esse <strong style="color:#bf8f2e;">bônus</strong> não vai aparecer <strong>NUNCA mais</strong>! Em lugar nenhum.</p>
     <img src="https://noticiasdafe.com.br/Imagens/acelerador-roteiro-divino.png" alt="Acelerador do Roteiro Divino" class="hero-img">
   </div>
 
@@ -205,6 +205,27 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     <p class="body">Enquanto o seu consciente declara abundância, o seu subconsciente sussurra "isso não é pra você". E o subconsciente sempre vence.</p>
     <p class="body">O <strong>Acelerador do Roteiro Divino</strong> foi criado para resolver exatamente isso — reprogramando sua mente no nível mais profundo, enquanto você dorme.</p>
   </div>
+
+  <!-- GATE: pergunta de forma de pagamento -->
+  <div class="section" id="gate">
+    <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para proteger a sua compra e liberar seu acesso corretamente, confirme: você finalizou no cartão ou por Pix/boleto?</p>
+      <button id="btn-cartao" class="btn" style="max-width:380px;border:none;cursor:pointer;">💳 Paguei no CARTÃO</button>
+      <button id="btn-pix" style="display:block;margin:16px auto 0;max-width:380px;width:100%;padding:16px 20px;border:1px solid #c9a84c;background:#fff;color:#a5741a;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:16px;cursor:pointer;">📱 Paguei por Pix / Boleto</button>
+    </div>
+
+    <!-- ONE-CLICK (1ª vez) — só aparece quando escolhe CARTÃO -->
+    <div id="oneclick-top" style="display:none;margin-top:28px;text-align:center;">
+      <p style="font-family:'Cinzel',serif;color:#1c8a4f;font-weight:700;font-size:17px;margin-bottom:16px;line-height:1.4;">✅ Confirmado! Como você pagou no cartão, ative o Acelerador com 1 clique:</p>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept bg-color="#3fff0078" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="zrfxbr2" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">SIM! Quero ACELERAR os RESULTADOS!</cakto-upsell-accept>
+        <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não. Eu não quero resultados rápidos...</cakto-upsell-reject>
+      </cakto-upsell-buttons>
+    </div>
+  </div>
+
+  <!-- RESTO DA PÁGINA: revela só após escolher a forma de pagamento -->
+  <div id="resto-pagina" style="display:none;">
 
   <!-- Taxa de sucesso -->
   <div class="section">
@@ -299,44 +320,38 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
       <div class="vrow"><span>Protocolo Acelerado de 7 Dias</span><span>R$ 197</span></div>
       <div class="vrow total"><span>Valor real de tudo</span><span>R$ 973</span></div>
       <div class="vrow" style="border-bottom:none;"><span>Preço normal</span><span style="color:#e04352;text-decoration:line-through;">R$ 397</span></div>
-      <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
-      <div class="value-now">R$ 167</div>
-      <div class="value-desc">Oferta exclusiva para novos membros do Roteiro Divino — aparece uma única vez.</div>
+      <!-- Preço PIX/boleto -->
+      <div id="preco-pix">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
+        <div class="value-now">R$ 167</div>
+        <div class="value-desc">Oferta exclusiva para novos membros do Roteiro Divino — aparece uma única vez.</div>
+      </div>
+      <!-- Preço CARTÃO (grátis) -->
+      <div id="preco-card" style="display:none;">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, como você pagou no cartão, sai por:</div>
+        <div class="value-now" style="color:#1c8a4f;">GRÁTIS</div>
+        <div class="value-desc">Um presente exclusivo para você que confirmou pelo cartão — aproveite agora.</div>
+      </div>
     </div>
 
     <div style="margin-top:32px;">
 
-      <!-- BLOCO ONE-CLICK: aparece SÓ para quem pagou com CARTÃO -->
-      <div id="bloco-oneclick" style="display:none;">
-        <!-- ⬇️ COLE AQUI o componente de one-click da Cakto (accept + reject).
-             Pegue o código/OFFER no painel da Cakto (Upsell / One-Click). Exemplo:
-        <cakto-upsell-accept offer="OFFER_ID_DO_ACELERADOR">✅ SIM! QUERO ACELERAR — COMPRA COM 1 CLIQUE</cakto-upsell-accept>
-        <div class="btn-note">🔒 Cobrança segura no mesmo cartão — 1 clique, sem digitar nada.</div>
-        <cakto-upsell-reject offer="OFFER_ID_DO_ACELERADOR">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</cakto-upsell-reject>
-        -->
-      </div>
-
-      <!-- BLOCO LINK: PIX / boleto / qualquer outro método (padrão) -->
-      <div id="bloco-link">
+      <!-- CTA PIX / boleto (padrão) -->
+      <div id="cta-pix">
         <a href="https://pay.cakto.com.br/zrfxbr2_959336" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR MINHAS BÊNÇÃOS</a>
         <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
         <a href="https://noticiasdafe.com.br/aceleradorgratis" class="decline">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
       </div>
 
+      <!-- CTA CARTÃO — one-click (2ª vez) -->
+      <div id="cta-card" style="display:none;">
+        <cakto-upsell-buttons>
+          <cakto-upsell-accept bg-color="#3fff0078" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="zrfxbr2" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">SIM! Quero ACELERAR os RESULTADOS!</cakto-upsell-accept>
+          <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não. Eu não quero resultados rápidos...</cakto-upsell-reject>
+        </cakto-upsell-buttons>
+      </div>
+
     </div>
-    <script>
-    (function(){
-      var src = new URLSearchParams(window.location.search);
-      function g(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return String(v).toLowerCase(); } return ""; }
-      var pm = g(["payment_method","payment","metodo","metodo_pagamento","payment_type","forma_pagamento","metodo_de_pagamento"]);
-      var ehCartao = /cart|card|credit/.test(pm);
-      var one  = document.getElementById('bloco-oneclick');
-      var link = document.getElementById('bloco-link');
-      // só troca para one-click se: for cartão E o bloco one-click tiver conteúdo real (componente colado)
-      var oneOk = one && one.querySelector('cakto-upsell-accept, a, button');
-      if (ehCartao && oneOk) { one.style.display = 'block'; if(link) link.style.display = 'none'; }
-    })();
-    </script>
   </div>
 
   <!-- Garantia -->
@@ -345,6 +360,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
       🛡️ <strong>Garantia incondicional de 60 dias.</strong> Ative o Acelerador, use por até 60 dias e, se por qualquer motivo não sentir a diferença, basta enviar um e-mail para <strong>gabriel.luz@noticiasdafe.com.br</strong> que devolvemos 100% do seu investimento. Todo o risco é nosso.
     </div>
   </div>
+
+  </div><!-- /resto-pagina -->
 
   <!-- Footer -->
   <div class="footer">
@@ -374,5 +391,49 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   if(btn) btn.setAttribute("href", qs ? CHECKOUT + "?" + qs : CHECKOUT);
 })();
 </script>
+
+<!-- Esconde o botão de recusar e o preço dentro do componente da Cakto -->
+<style>
+  cakto-upsell-reject { display: none !important; }
+  cakto-upsell-accept::part(price) { display: none !important; }
+</style>
+
+<!-- Lógica: escolha da forma de pagamento revela a página -->
+<script>
+(function(){
+  var resto   = document.getElementById('resto-pagina');
+  var gateBox = document.getElementById('gate-box');
+  var octop   = document.getElementById('oneclick-top');
+  var bc = document.getElementById('btn-cartao');
+  var bp = document.getElementById('btn-pix');
+  var precoPix  = document.getElementById('preco-pix');
+  var precoCard = document.getElementById('preco-card');
+  var ctaPix  = document.getElementById('cta-pix');
+  var ctaCard = document.getElementById('cta-card');
+
+  function revela(){ if(resto) resto.style.display = 'block'; }
+
+  if(bc) bc.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    if(octop)   octop.style.display = 'block';
+    if(precoPix)  precoPix.style.display = 'none';
+    if(precoCard) precoCard.style.display = 'block';
+    if(ctaPix)  ctaPix.style.display = 'none';
+    if(ctaCard) ctaCard.style.display = 'block';
+    revela();
+    if(octop) octop.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  if(bp) bp.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    // mantém preço R$167 e o link normal
+    revela();
+    if(resto) resto.scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Script do one-click da Cakto -->
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 </body>
 </html>
