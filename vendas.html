@@ -386,61 +386,7 @@
     </div>
 
 
-    <!-- SCRIPT: revela bloco-cta quando vturb mostrar o botão CTA (MutationObserver) -->
-    <script>
-    (function() {
-      var COOKIE = 'cta_visto';
-      var mostrado = false;
-
-      function setCookie() {
-        var exp = new Date();
-        exp.setFullYear(exp.getFullYear() + 1);
-        document.cookie = COOKIE + '=1; expires=' + exp.toUTCString() + '; path=/';
-      }
-
-      function getCookie() {
-        return document.cookie.split(';').some(function(c) {
-          return c.trim().startsWith(COOKIE + '=');
-        });
-      }
-
-      function mostrarBloco() {
-        if (mostrado) return;
-        mostrado = true;
-        setCookie();
-        var el = document.getElementById('bloco-cta');
-        if (el) el.style.display = 'block';
-      }
-
-      // Se já viu antes, mostra imediatamente
-      if (getCookie()) {
-        mostrarBloco();
-        return;
-      }
-
-      // MutationObserver: detecta quando vturb injeta o botão CTA no DOM
-      var observer = new MutationObserver(function() {
-        // Só dispara quando o link do checkout real aparecer
-        var ctaBtn = document.querySelector('a[href*="cakto.com.br"]');
-        if (ctaBtn && ctaBtn.offsetParent !== null && ctaBtn.offsetWidth > 0) {
-          mostrarBloco();
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-
-      // Backup: eventos customizados
-      window.addEventListener('smartplayer:cta:show', mostrarBloco);
-      window.addEventListener('vturb:cta', mostrarBloco);
-      window.addEventListener('message', function(e) {
-        if (!e.data || typeof e.data !== 'object') return;
-        if (e.data.event === 'cta:show' || e.data.type === 'cta') mostrarBloco();
-      });
-    })();
-    </script>
-
-    <!-- BLOCO CTA — aparece via Elementos Externos do vturb (id: bloco-cta) -->
+    <!-- BLOCO CTA — revelado nativamente pelo VTurb (ID: bloco-cta), fica display:none até o pitch -->
     <div id="bloco-cta">
       <p class="cta-preco-riscado">Normalmente: <span>R$997</span></p>
       <p class="cta-preco-atual">Hoje apenas: <span>R$67</span> — Pagamento Único</p>
