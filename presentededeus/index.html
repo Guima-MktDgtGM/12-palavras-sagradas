@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Seu Presente do Roteiro Divino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-slow {0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+        .animate-pulse-slow{animation:pulse-slow 2s infinite ease-in-out;}
+        @keyframes fade-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+        .animate-fade-in{animation:fade-in .6s ease-out both;}
+        .confetti{position:absolute;width:8px;height:8px;opacity:0;animation:fall 3s ease-out forwards;}
+        @keyframes fall{0%{transform:translateY(-50px) rotate(0);opacity:1;}100%{transform:translateY(320px) rotate(360deg);opacity:0;}}
+        @keyframes goldflash{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}50%{box-shadow:0 0 0 6px rgba(245,158,11,.35);}}
+        .gold-flash{animation:goldflash 1.2s ease-in-out 2;}
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans antialiased">
+
+    <!-- TOP BANNER -->
+    <div class="bg-gradient-to-r from-amber-600 to-yellow-500 text-white text-center py-3 px-4 text-xs md:text-sm font-bold uppercase tracking-wider shadow-md">
+        🎁 Você recebeu um presente do projeto Roteiro Divino das 12 Palavras
+    </div>
+
+    <main class="max-w-md mx-auto px-4 py-6 md:py-8 space-y-6">
+
+        <!-- SORTEADOR -->
+        <div id="sorteador-box" class="bg-white border-2 border-gray-200 rounded-2xl p-6 text-center shadow-lg transition-all duration-500">
+            <h2 id="sorteador-titulo" class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-3">
+                Buscando os presenteados de hoje...
+            </h2>
+            <div class="relative overflow-hidden bg-gray-900 rounded-xl py-4 my-2 border border-gray-700 shadow-inner">
+                <div id="roleta-numeros" class="text-4xl md:text-5xl font-mono font-black text-amber-400 tracking-widest transition-all">#000</div>
+                <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+            </div>
+            <p id="sorteador-status" class="text-sm font-semibold text-gray-600 mt-2">Aguarde só um instante...</p>
+        </div>
+
+        <!-- CONTEÚDO (aparece após o sorteio) -->
+        <div id="conteudo-premiado" class="hidden space-y-6">
+
+            <!-- TIMER (janela real de resgate) -->
+            <div class="bg-amber-100 border border-amber-300 rounded-xl p-4 text-center">
+                <p class="text-xs text-amber-800 font-bold uppercase tracking-wide">Resgate o seu presente em:</p>
+                <div class="text-3xl font-mono font-black text-amber-700 mt-1" id="timer">10:00</div>
+                <p class="text-xs text-amber-700 mt-1">Depois desse tempo, a vaga pode ser passada para o próximo da fila.</p>
+            </div>
+
+            <!-- HEADLINE -->
+            <div class="text-center space-y-3">
+                <h1 class="text-2xl md:text-3xl font-black text-gray-900 leading-tight">
+                    🎉 PARABÉNS! Você foi um dos <span class="text-amber-500">escolhidos</span> de hoje!
+                </h1>
+                <p class="text-base text-gray-600 font-medium">
+                    Como forma de agradecer a quem faz parte do projeto, você ganhou o acesso ao
+                    <strong class="text-gray-900">Acelerador 10x + o Grupo VIP</strong> — <strong class="text-emerald-600">100% de graça.</strong>
+                </p>
+            </div>
+
+            <hr class="border-gray-200">
+
+            <!-- EXPLICAÇÃO HONESTA -->
+            <div class="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                <h3 class="text-lg font-bold text-gray-900 border-l-4 border-amber-500 pl-2">
+                    É um presente de verdade — sem pegadinha
+                </h3>
+                <p>
+                    Você não precisa pagar nada, e a gente <strong>não vai pedir nenhum dado de pagamento</strong>.
+                    Escolhemos algumas pessoas que já confiaram no Roteiro Divino para receber esse presente e ajudar o projeto a crescer.
+                </p>
+
+                <!-- O QUE VOCÊ GANHA -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 space-y-2">
+                    <p class="font-bold text-emerald-900">O que você está levando, de graça:</p>
+                    <ul class="text-sm text-emerald-900 list-disc pl-5 space-y-1">
+                        <li><strong>Acelerador 10x</strong> — as frequências que aceleram seus resultados.</li>
+                        <li><strong>Grupo VIP</strong> — acesso à comunidade e ao suporte próximo.</li>
+                        <li><strong>Acesso vitalício</strong>, liberado direto no seu app.</li>
+                    </ul>
+                    <p class="text-sm text-emerald-900 font-bold pt-1">Custo pra você: R$ 0,00.</p>
+                </div>
+            </div>
+
+            <!-- BOX DE CONFIANÇA (honesto) -->
+            <div class="bg-gray-100 border border-gray-200 rounded-xl p-4 flex items-start space-x-3 shadow-inner">
+                <div class="text-2xl mt-1">🎁</div>
+                <div class="space-y-1">
+                    <p class="text-xs font-bold text-gray-800 uppercase tracking-wide">Presente 100% gratuito</p>
+                    <p class="text-xs text-gray-500 leading-normal">
+                        Você não vai pagar nada e não precisa informar cartão, PIX ou qualquer dado bancário.
+                        É só clicar no botão abaixo para liberar o seu acesso. Limite de 1 presente por pessoa.
+                    </p>
+                </div>
+            </div>
+
+            <!-- BOTÃO DE RESGATE -->
+            <div class="pt-2">
+                <!-- ⬇️ TROQUE pelo link do GRUPO VIP / liberação no app -->
+                <a href="COLE_AQUI_O_LINK_DO_GRUPO_OU_APP" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white text-center font-black text-lg py-4 px-6 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 animate-pulse-slow">
+                    🎁 RESGATAR MEU PRESENTE GRÁTIS
+                </a>
+                <p class="text-center text-xs text-gray-400 mt-2">
+                    Ao clicar, você será direcionado para liberar o seu acesso — sem nenhum custo.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const roleta = document.getElementById("roleta-numeros");
+        const statusText = document.getElementById("sorteador-status");
+        const tituloText = document.getElementById("sorteador-titulo");
+        const sorteadorBox = document.getElementById("sorteador-box");
+        const conteudoPremiado = document.getElementById("conteudo-premiado");
+        const confettiContainer = document.getElementById("confetti-container");
+
+        // Roleta girando ~3s
+        let counter = 0;
+        const interval = setInterval(() => {
+            roleta.textContent = "#" + (Math.floor(Math.random() * 900) + 100);
+            counter += 50;
+            if (counter >= 3000) {
+                clearInterval(interval);
+                roleta.textContent = "#888";
+                roleta.classList.remove("text-amber-400");
+                roleta.classList.add("text-emerald-400", "scale-110");
+                tituloText.textContent = "🏆 SORTEADO! VOCÊ FOI ESCOLHIDO!";
+                tituloText.classList.add("text-emerald-600");
+                statusText.innerHTML = "O seu presente do projeto foi liberado 🎉";
+                sorteadorBox.classList.add("border-amber-400", "gold-flash");
+                gerarConfetes();
+                setTimeout(() => {
+                    conteudoPremiado.classList.remove("hidden");
+                    conteudoPremiado.classList.add("animate-fade-in");
+                    conteudoPremiado.scrollIntoView({ behavior: 'smooth' });
+                    startTimer(600, document.getElementById('timer')); // 10 min
+                }, 800);
+            }
+        }, 50);
+
+        function gerarConfetes() {
+            const cores = ['#34d399', '#fbbf24', '#60a5fa', '#f87171', '#f59e0b'];
+            for (let i = 0; i < 45; i++) {
+                const p = document.createElement('div');
+                p.classList.add('confetti');
+                p.style.left = Math.random() * 100 + '%';
+                p.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+                p.style.animationDelay = Math.random() * 0.6 + 's';
+                const size = Math.random() * 6 + 6;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                confettiContainer.appendChild(p);
+            }
+        }
+
+        function startTimer(duration, display) {
+            let timer = duration;
+            const countdown = setInterval(() => {
+                let m = parseInt(timer / 60, 10);
+                let s = parseInt(timer % 60, 10);
+                m = m < 10 ? "0" + m : m;
+                s = s < 10 ? "0" + s : s;
+                display.textContent = m + ":" + s;
+                if (--timer < 0) {
+                    clearInterval(countdown);
+                    display.textContent = "00:00";
+                }
+            }, 1000);
+        }
+    });
+    </script>
+</body>
+</html>
