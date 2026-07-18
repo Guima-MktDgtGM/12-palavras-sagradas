@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espere! Uma oferta única para você — Os Cânticos Sagrados dos Anjos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#faf7f0;color:#2e2a3f;font-family:'Lato',sans-serif;line-height:1.75;}
+img{max-width:100%;display:block;}
+
+/* Barra de etapas */
+.steps-bar{background:#fff;padding:16px 12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #ece7dc;}
+.step{display:flex;align-items:center;gap:7px;background:#f5f1e8;color:#9a8f7a;font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid #e6ddc9;}
+.step .n{width:20px;height:20px;border-radius:50%;background:#e6ddc9;color:#9a8f7a;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.step.done{background:#eafaf0;color:#1c8a4f;border-color:#8fe0b3;}
+.step.done .n{background:#2ecc71;color:#fff;}
+.step.active{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;border-color:#e04352;box-shadow:0 4px 16px #e0435233;}
+.step.active .n{background:#fff;color:#b8232f;}
+
+/* Faixa congrats */
+.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:18px 20px;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(18px,3.7vw,27px);font-style:italic;letter-spacing:.5px;box-shadow:0 4px 20px #2ecc7133;}
+
+.container{max-width:680px;margin:0 auto;padding:36px 22px 80px;}
+
+/* Alerta */
+.alert{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;text-align:center;padding:15px 20px;border-radius:12px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;font-size:clamp(17px,3.6vw,21px);margin-bottom:8px;box-shadow:0 4px 24px #e0435233;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+.alert-sub{text-align:center;font-size:13.5px;color:#c0392b;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:30px;}
+
+/* Header */
+.header{text-align:center;padding-bottom:32px;border-bottom:1px solid #ece7dc;}
+.tag{display:inline-block;background:#f5efe0;color:#a67c1e;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:20px;margin-bottom:20px;font-family:'Cinzel',serif;border:1px solid #e6dcc4;}
+h1{font-family:'Cinzel',serif;font-size:clamp(25px,5vw,37px);color:#241f38;line-height:1.3;margin-bottom:16px;}
+h1 .gold{color:#bf8f2e;}
+.subtitle{font-size:17px;color:#5f5876;max-width:540px;margin:0 auto;}
+
+/* Imagem hero produto */
+.hero-img{margin:28px auto 0;max-width:460px;filter:drop-shadow(0 16px 40px rgba(180,140,40,.22));}
+
+.section{padding:38px 0;border-bottom:1px solid #ece7dc;}
+.section:last-child{border-bottom:none;}
+.section-label{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#b07d1e;margin-bottom:18px;text-align:center;}
+h2{font-family:'Cinzel',serif;font-size:clamp(21px,3.7vw,29px);color:#241f38;margin-bottom:16px;line-height:1.35;text-align:center;}
+p.body{font-size:16.5px;color:#453f5c;margin-bottom:16px;}
+p.body strong{color:#a5741a;}
+
+/* Taxa de sucesso */
+.rate-box{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
+.rate{flex:1;min-width:150px;text-align:center;background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 16px;box-shadow:0 4px 16px rgba(120,100,50,.06);}
+.rate .num{font-family:'Cinzel',serif;font-size:46px;font-weight:800;line-height:1;}
+.rate.low .num{color:#e04352;}
+.rate.high .num{color:#27ae60;}
+.rate .lbl{font-size:13.5px;color:#6a6280;margin-top:10px;}
+.confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17.5px;color:#a5741a;font-weight:700;}
+
+/* Bloco destaque (No Brainer) */
+.highlight{background:#fffdf6;border:1px solid #e8dcc0;border-radius:18px;padding:32px 26px;box-shadow:0 6px 24px rgba(180,140,40,.08);}
+.highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(20px,3.5vw,26px);color:#a5741a;text-align:center;margin-bottom:24px;line-height:1.35;}
+.hlist{list-style:none;padding:0;}
+.hlist li{position:relative;padding:12px 0 12px 36px;font-size:16px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
+.hlist li:last-child{border-bottom:none;}
+.hlist li::before{content:"✓";position:absolute;left:0;top:12px;width:23px;height:23px;background:#2ecc71;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.hlist li strong{color:#a5741a;}
+
+/* Cânticos */
+.meds{list-style:none;padding:0;}
+.meds li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f0e8d8;}
+.meds li:last-child{border-bottom:none;}
+.med-icon{font-size:23px;margin-top:2px;min-width:30px;text-align:center;}
+.med-text h4{font-size:16.5px;font-weight:700;color:#241f38;margin-bottom:3px;}
+.med-text h4 span{color:#b07d1e;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.med-text p{font-size:14.5px;color:#6a6280;}
+.med-val{margin-left:auto;color:#1c8a4f;font-weight:700;font-size:14px;white-space:nowrap;padding-left:10px;}
+
+/* Recomendado */
+.reco{list-style:none;padding:0;max-width:560px;margin:0 auto;}
+.reco li{position:relative;padding:11px 0 11px 34px;font-size:16.5px;color:#453f5c;}
+.reco li::before{content:"→";position:absolute;left:0;color:#bf8f2e;font-weight:700;font-size:17px;}
+
+/* Stack de valor */
+.value-stack{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:32px 24px;text-align:center;box-shadow:0 10px 36px rgba(201,168,76,.18);}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #e8dcc4;font-size:15.5px;color:#5f5876;}
+.vrow span:last-child{color:#241f38;font-weight:700;}
+.vrow.total{border-bottom:none;border-top:2px solid #c9a84c;margin-top:8px;padding-top:16px;font-size:16.5px;}
+.vrow.total span:last-child{color:#e04352;text-decoration:line-through;}
+.value-now{font-family:'Cinzel',serif;font-size:clamp(34px,7.5vw,52px);font-weight:800;color:#b8860b;line-height:1.1;margin:18px 0 4px;}
+.value-now small{font-size:19px;color:#a5741a;}
+.value-desc{font-size:13.5px;color:#7a7488;margin-top:6px;}
+
+/* CTA */
+.cta-area{text-align:center;}
+.btn{display:inline-block;width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(17px,3.3vw,21px);font-weight:800;color:#fff;text-decoration:none;letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;transition:transform .2s,box-shadow .2s;animation:glow 2.5s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 8px 28px #2ecc7144;}50%{box-shadow:0 8px 40px #2ecc7188;}}
+.btn:hover{transform:translateY(-2px);}
+.btn-note{font-size:13.5px;color:#7a7488;margin-top:14px;}
+.decline{display:inline-block;margin-top:24px;font-size:14px;color:#c0392b;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435255;border-radius:10px;padding:13px 22px;background:#e043520a;transition:.2s;}
+.decline:hover{color:#a3251c;border-color:#e04352;background:#e0435218;}
+
+/* Garantia */
+.guarantee{background:#fdfaf3;border-left:4px solid #c9a84c;padding:20px 22px;border-radius:0 10px 10px 0;font-size:15.5px;color:#453f5c;}
+.guarantee strong{color:#a5741a;}
+
+.footer{text-align:center;font-size:12.5px;color:#9a9280;padding-top:36px;line-height:1.8;}
+.footer a{color:#b07d1e;text-decoration:none;}
+
+@media(max-width:480px){.btn{padding:19px 16px;}.med-val{display:none;}}
+</style>
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+<!-- Utmify Pixel -->
+  <script>
+    window.pixelId = "6a53ea5224293bf6401a9234";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script></head>
+<body>
+
+<!-- Barra de etapas -->
+<div class="steps-bar">
+  <div class="step done"><span class="n">✓</span> Roteiro Divino</div>
+  <div class="step done"><span class="n">✓</span> Acelerador</div>
+  <div class="step active"><span class="n">3</span> Última Etapa</div>
+  <div class="step"><span class="n">4</span> Pedido Concluído</div>
+</div>
+
+<!-- Faixa congrats -->
+<div class="congrats">Perfeito! 🎉 Falta só um passo para o céu agir por você...</div>
+
+<div class="container">
+
+  <!-- Alerta -->
+  <div class="alert">⚠️ ESPERE! NÃO FECHE ESTA PÁGINA</div>
+  <div class="alert-sub">Sua compra ainda não terminou de processar</div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="tag">✦ Oferta única — só aparece uma vez ✦</div>
+    <h1>Falta só <span class="gold">uma coisa</span> para o céu agir por você</h1>
+    <p class="subtitle">Você já tem as palavras e as frequências. Mas existe uma última peça — a que faz os <strong>anjos descerem</strong> enquanto você reza. E ela não aparece de novo.</p>
+    <img src="https://noticiasdafe.com.br/Imagens/up2%20imagem.png" alt="Os Cânticos Sagrados dos Anjos" class="hero-img">
+  </div>
+
+  <!-- Intro -->
+  <div class="section">
+    <div class="section-label">→ Por que você está vendo isso</div>
+    <h2>As 12 Palavras chamam o céu.<br>Os Cânticos trazem os anjos até você.</h2>
+    <p class="body">Existe uma verdade que os antigos conheciam e que quase se perdeu no tempo: <strong>os anjos respondem ao som.</strong> Não a qualquer som — mas aos cânticos sagrados, nas frequências certas, que abrem um canal direto entre a sua casa e o céu.</p>
+    <p class="body">Quando você declara as 12 Palavras Sagradas <strong>ao mesmo tempo</strong> em que esses cânticos tocam, algo muda: é como se a sua oração ganhasse asas. Os anjos passam a interceder por você, blindando a sua casa e acelerando cada bênção.</p>
+    <p class="body">Foi por isso que preparei <strong>Os Cânticos Sagrados dos Anjos</strong> — para você não rezar sozinho nunca mais. E hoje, só nesta página, ele é seu por uma fração do valor.</p>
+  </div>
+
+  <!-- Taxa de sucesso -->
+  <div class="section">
+    <div class="section-label">→ A diferença que fazem</div>
+    <h2>Quem reza com os Cânticos sente a presença dos anjos muito mais forte</h2>
+    <div class="rate-box">
+      <div class="rate low"><div class="num">23%</div><div class="lbl">Sentem proteção forte<br>SÓ com as palavras</div></div>
+      <div class="rate high"><div class="num">89%</div><div class="lbl">Sentem proteção forte<br>COM os Cânticos</div></div>
+    </div>
+    <div class="confirm-line">✅ 9 em cada 10 membros confirmam esta última etapa</div>
+  </div>
+
+  <!-- GATE: pergunta de forma de pagamento -->
+  <div class="section" id="gate">
+    <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para liberar seu acesso ao bônus corretamente, confirme: você finalizou no cartão ou por Pix/Boleto?</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button id="btn-cartao" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
+        <button id="btn-pix" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
+      </div>
+    </div>
+
+    <!-- ONE-CLICK (1ª vez) — só aparece quando escolhe CARTÃO -->
+    <div id="oneclick-top" style="display:none;margin-top:28px;text-align:center;">
+      <p style="font-family:'Cinzel',serif;color:#1c8a4f;font-weight:700;font-size:17px;margin-bottom:16px;line-height:1.4;">✅ Confirmado! Como você pagou no cartão, receba os Cânticos com 1 clique:</p>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept bg-color="#0070ffff" text-color="#ffffff" upsell-accept-url="https://noticiasdafe.com.br/obrigado" offer-id="83y7urh" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">Sim! Quero o CÂNTICO dos ANJOS!</cakto-upsell-accept>
+        <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não, eu não quero me conectar aos Anjos!</cakto-upsell-reject>
+      </cakto-upsell-buttons>
+      <a href="https://noticiasdafe.com.br/obrigado" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não quero me conectar aos Anjos!</a>
+    </div>
+  </div>
+
+  <!-- RESTO DA PÁGINA: revela só após escolher a forma de pagamento -->
+  <div id="resto-pagina" style="display:none;">
+
+  <!-- Bloco No Brainer -->
+  <div class="section">
+    <div class="highlight">
+      <div class="htitle">Por que é <u>óbvio</u> receber os Cânticos agora</div>
+      <ul class="hlist">
+        <li><strong>Abrem um canal direto com os anjos</strong> enquanto você declara as 12 Palavras, potencializando cada oração.</li>
+        <li><strong>Blindam a sua casa e a sua família</strong> contra inveja, olho grande e todo mal — dia e noite.</li>
+        <li><strong>Aceleram as respostas</strong>: muitos relatam sinais e bênçãos em poucos dias após começar.</li>
+        <li>Trazem uma <strong>paz profunda</strong> — a calma de quem sabe que não está mais sozinho na batalha.</li>
+        <li><strong>Perfeitos para ouvir antes de dormir</strong>, no estado theta, quando o céu fala mais forte ao seu coração.</li>
+        <li>Você <strong>nunca mais vai rezar sozinho</strong>. A partir de hoje, o céu reza com você.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Recomendado -->
+  <div class="section">
+    <div class="section-label">→ Fortemente recomendado para</div>
+    <ul class="reco">
+      <li>Quem quer sentir a presença e a proteção dos anjos de forma real na sua casa</li>
+      <li>Quem tem medo de inveja, olho grande e energias pesadas sobre a família</li>
+      <li>Quem deseja acelerar as respostas às suas orações</li>
+      <li>Quem sente que precisa de mais fé, paz e companhia espiritual no dia a dia</li>
+      <li>Quem quer blindar a casa enquanto dorme, todas as noites</li>
+    </ul>
+  </div>
+
+  <!-- Depoimento -->
+  <div class="section">
+    <div class="section-label">→ Quem já ativou, sente a diferença</div>
+    <div style="background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 22px;max-width:520px;margin:0 auto;box-shadow:0 4px 16px rgba(120,100,50,.06);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <img src="https://noticiasdafe.com.br/Imagens/maria%20do%20carmo.jpg" alt="Maria do Carmo" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Maria do Carmo</div>
+          <div style="font-size:12.5px;color:#7a7488;">Salvador, BA &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
+        </div>
+      </div>
+      <p style="font-size:15.5px;color:#453f5c;line-height:1.8;margin:0;">Quando comecei a tocar os <strong style="color:#a5741a;">Cânticos dos Anjos</strong> junto com as palavras, foi outra coisa. A casa ficou mais leve, eu durmo em paz e sinto uma proteção que não sei explicar. É como se eu não estivesse mais sozinha. 🙏</p>
+    </div>
+  </div>
+
+  <!-- Lista completa -->
+  <div class="section">
+    <div class="section-label">→ Tudo que você recebe hoje</div>
+    <h2>Os Cânticos que vêm<br>na sua coleção completa</h2>
+    <p class="body" style="text-align:center;">Cada cântico foi preparado na frequência certa para tocar enquanto você declara as 12 Palavras — de preferência antes de dormir:</p>
+    <ul class="meds">
+      <li><span class="med-icon">🛡️</span><div class="med-text"><h4><span>Proteção:</span><br>Cântico do Arcanjo Miguel</h4><p>O guerreiro dos céus blindando você, sua casa e sua família contra todo mal e ataque.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🕊️</span><div class="med-text"><h4><span>Renovação:</span><br>Cântico do Arcanjo Rafael</h4><p>Traz paz, bem-estar e a serenidade de quem está sob o cuidado do céu.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">💰</span><div class="med-text"><h4><span>Provisão:</span><br>Cântico do Arcanjo Uriel</h4><p>Abre os caminhos da prosperidade e da provisão que estavam fechados.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">❤️</span><div class="med-text"><h4><span>Amor:</span><br>Cântico do Arcanjo Chamuel</h4><p>Restaura relações, aproxima quem se afastou e enche o lar de harmonia.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🌟</span><div class="med-text"><h4><span>Direção:</span><br>Cântico do Arcanjo Gabriel</h4><p>Traz clareza e mensagens do céu para os momentos de decisão.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🎺</span><div class="med-text"><h4><span>Blindagem:</span><br>Cântico dos Coros Celestiais</h4><p>A união dos coros angelicais formando um escudo de luz sobre a sua casa.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Bônus:</span><br>Cântico Angelical do Sono (Theta)</h4><p>Para ouvir ao deitar — reprograma o seu descanso e chama os anjos para a sua noite.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Bônus:</span><br>Ritual dos 7 Dias com os Anjos</h4><p>Um guia diário unindo as 12 Palavras + o cântico certo para cada dia da semana.</p></div><span class="med-val">R$ 197</span></li>
+    </ul>
+  </div>
+
+  <!-- Valor + CTA -->
+  <div class="section cta-area">
+    <div class="section-label">→ Sua condição especial de membro</div>
+    <div class="value-stack">
+      <div class="vrow"><span>6 Cânticos Angelicais Sagrados</span><span>R$ 582</span></div>
+      <div class="vrow"><span>Cântico Angelical do Sono</span><span>R$ 97</span></div>
+      <div class="vrow"><span>Ritual dos 7 Dias com os Anjos</span><span>R$ 197</span></div>
+      <div class="vrow total"><span>Valor real de tudo</span><span>R$ 876</span></div>
+      <div class="vrow" style="border-bottom:none;"><span>Preço normal</span><span style="color:#e04352;text-decoration:line-through;">R$ 297</span></div>
+      <!-- Preço PIX/boleto -->
+      <div id="preco-pix">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
+        <div class="value-now">R$ 97</div>
+        <div class="value-desc">Oferta exclusiva para quem chegou até aqui — aparece uma única vez.</div>
+      </div>
+      <!-- Preço CARTÃO (grátis) -->
+      <div id="preco-card" style="display:none;">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, como você pagou no cartão, sai por:</div>
+        <div class="value-now" style="color:#1c8a4f;">GRÁTIS</div>
+        <div class="value-desc">Um presente exclusivo para você que confirmou pelo cartão — aproveite agora.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <!-- CTA PIX / boleto (padrão) -->
+      <div id="cta-pix">
+        <a href="https://pay.cakto.com.br/83y7urh_980708" class="btn" id="btn-checkout">✅ SIM! QUERO OS CÂNTICOS DOS ANJOS</a>
+        <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
+        <a href="https://noticiasdafe.com.br/obrigado" class="decline">Não, prefiro rezar sozinho(a) e entendo que os anjos não vão cantar comigo — e que nunca mais verei esta oferta.</a>
+      </div>
+      <!-- CTA CARTÃO — one-click (2ª vez) -->
+      <div id="cta-card" style="display:none;">
+        <cakto-upsell-buttons>
+          <cakto-upsell-accept bg-color="#0070ffff" text-color="#ffffff" upsell-accept-url="https://noticiasdafe.com.br/obrigado" offer-id="83y7urh" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/obrigado">Sim! Quero o CÂNTICO dos ANJOS!</cakto-upsell-accept>
+          <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/obrigado">Não, eu não quero me conectar aos Anjos!</cakto-upsell-reject>
+        </cakto-upsell-buttons>
+        <a href="https://noticiasdafe.com.br/obrigado" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não quero me conectar aos Anjos!</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Garantia -->
+  <div class="section">
+    <div class="guarantee">
+      🛡️ <strong>Garantia incondicional de 60 dias.</strong> Receba os Cânticos, use por até 60 dias e, se por qualquer motivo não sentir a diferença, basta enviar um e-mail para <strong>gabriel.luz@noticiasdafe.com.br</strong> que devolvemos 100% do seu investimento. Todo o risco é nosso.
+    </div>
+  </div>
+
+  </div><!-- /resto-pagina -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><em>Aviso: este produto tem caráter espiritual e educativo e não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença.</em></p>
+    <p style="margin-top:10px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas. Todos os direitos reservados.<br>
+    Dúvidas? <a href="mailto:gabriel.luz@noticiasdafe.com.br">gabriel.luz@noticiasdafe.com.br</a></p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var CHECKOUT = "https://pay.cakto.com.br/83y7urh_980708";
+  var src = new URLSearchParams(window.location.search);
+  function pick(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return v; } return ""; }
+  var name  = pick(["name","nome","customer_name","cliente_nome"]);
+  var email = pick(["email","e-mail","customer_email","cliente_email"]);
+  var phone = pick(["phone","telefone","celular","customer_phone","cliente_telefone"]);
+  var doc   = pick(["document","cpf","doc","customer_document"]);
+  var out = new URLSearchParams();
+  if(name)  out.set("name", name);
+  if(email) out.set("email", email);
+  if(phone) out.set("phone", phone);
+  if(doc)   out.set("document", doc);
+  var qs = out.toString();
+  var btn = document.getElementById("btn-checkout");
+  if(btn) btn.setAttribute("href", qs ? CHECKOUT + "?" + qs : CHECKOUT);
+})();
+</script>
+
+<!-- Esconde o botão de recusar e o preço dentro do componente da Cakto + hover verde -->
+<style>
+  cakto-upsell-reject { display: none !important; }
+  cakto-upsell-accept::part(price) { display: none !important; }
+  .gate-btn { transition: background .15s, border-color .15s, color .15s; }
+  .gate-btn:hover { background: #eafaf0 !important; border-color: #2ecc71 !important; color: #1c8a4f !important; }
+</style>
+
+<!-- Lógica: escolha da forma de pagamento revela a página -->
+<script>
+(function(){
+  var resto   = document.getElementById('resto-pagina');
+  var gateBox = document.getElementById('gate-box');
+  var octop   = document.getElementById('oneclick-top');
+  var bc = document.getElementById('btn-cartao');
+  var bp = document.getElementById('btn-pix');
+  var ctaPix  = document.getElementById('cta-pix');
+  var ctaCard = document.getElementById('cta-card');
+  var precoPix  = document.getElementById('preco-pix');
+  var precoCard = document.getElementById('preco-card');
+
+  function revela(){ if(resto) resto.style.display = 'block'; }
+
+  if(bc) bc.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    if(octop)   octop.style.display = 'block';
+    if(ctaPix)  ctaPix.style.display = 'none';
+    if(ctaCard) ctaCard.style.display = 'block';
+    revela();
+    if(octop) octop.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  if(bp) bp.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    revela();
+    if(resto) resto.scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Script do one-click da Cakto -->
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+</body>
+</html>
