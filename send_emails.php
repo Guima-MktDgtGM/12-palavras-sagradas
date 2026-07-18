@@ -8,6 +8,10 @@ define('TEMPLATES_DIR', __DIR__ . '/emails/');
 
 if (!file_exists(FILA_FILE)) exit('Fila vazia');
 
+// Mesma trava do webhook.php — evita gravar por cima de um webhook simultâneo.
+$lock_fp = fopen(__DIR__ . '/../dados/webhook.lock', 'c');
+if ($lock_fp) { flock($lock_fp, LOCK_EX); }
+
 $fila = json_decode(file_get_contents(FILA_FILE), true) ?? [];
 $agora = time();
 $alterou = false;
@@ -52,6 +56,8 @@ foreach ($fila as &$item) {
 if ($alterou) {
     file_put_contents(FILA_FILE, json_encode($fila, JSON_PRETTY_PRINT));
 }
+
+if ($lock_fp) { flock($lock_fp, LOCK_UN); fclose($lock_fp); }
 
 function enviarEmail($para, $assunto, $html) {
     $payload = json_encode([

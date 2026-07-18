@@ -22,6 +22,12 @@ if ($header_secret !== WEBHOOK_SECRET && $body_secret !== WEBHOOK_SECRET) {
     exit('Unauthorized');
 }
 
+// ── Trava global: serializa o read-modify-write pra não perder registros ──────
+// Sem isso, dois webhooks simultâneos leem o mesmo JSON e um sobrescreve o outro.
+define('LOCK_FILE', $dados_dir . '/webhook.lock');
+$lock_fp = fopen(LOCK_FILE, 'c');
+if ($lock_fp) { flock($lock_fp, LOCK_EX); }
+
 $evento   = $data['event'] ?? '';
 $customer = $data['data']['customer'] ?? [];
 $nome     = $customer['name']  ?? 'Amigo(a)';
@@ -111,6 +117,9 @@ if ($evento === 'pix_gerado') {
 }
 
 file_put_contents(FILA_FILE, json_encode($fila, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+// Libera a trava só depois de gravar tudo.
+if ($lock_fp) { flock($lock_fp, LOCK_UN); fclose($lock_fp); }
 
 http_response_code(200);
 echo 'OK';
