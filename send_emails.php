@@ -1,6 +1,9 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
-define('RESEND_API_KEY', 're_P1HxxW7j_6wZEHYKmM5tG6nfndehc2Dtp');
+// Segredos ficam FORA do Git, em /dados/config.php (não versionado).
+$cfg = __DIR__ . '/../dados/config.php';
+if (file_exists($cfg)) require $cfg;
+if (!defined('RESEND_API_KEY')) { http_response_code(500); exit('Config ausente: defina RESEND_API_KEY em /dados/config.php'); }
 define('FROM_EMAIL', 'gabriel.luz@noticiasdafe.com.br');
 define('FROM_NAME', 'Gabriel Luz – Roteiro Divino das 12 Palavras');
 define('FILA_FILE', __DIR__ . '/../dados/fila.json');

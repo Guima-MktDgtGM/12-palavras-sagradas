@@ -1,10 +1,14 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
-define('WEBHOOK_SECRET', '519879a1-a743-425a-9a2b-af20ed3d92ff');
 
 // Pasta FORA do public_html — nunca apagada por deploy
 $dados_dir = __DIR__ . '/../dados';
 if (!is_dir($dados_dir)) mkdir($dados_dir, 0755, true);
+
+// Segredos ficam FORA do Git, em /dados/config.php (não versionado).
+$cfg = $dados_dir . '/config.php';
+if (file_exists($cfg)) require $cfg;
+if (!defined('WEBHOOK_SECRET')) { http_response_code(500); exit('Config ausente: defina WEBHOOK_SECRET em /dados/config.php'); }
 
 define('FILA_FILE',     $dados_dir . '/fila.json');
 define('CLIENTES_FILE', $dados_dir . '/clientes.json');
