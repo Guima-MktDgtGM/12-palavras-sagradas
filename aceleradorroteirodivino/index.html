@@ -456,6 +456,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
   if(bp) bp.addEventListener('click', function(){
     if(gateBox) gateBox.style.display = 'none';
+    // TESTE: mostra também o botão one-click no fluxo Pix/Boleto (além do link normal)
+    if(ctaCard) ctaCard.style.display = 'block';
     // mantém preço R$167 e o link normal
     revela();
     if(resto) resto.scrollIntoView({behavior:'smooth'});
