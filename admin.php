@@ -1,6 +1,9 @@
 <?php
-define('ADMIN_USER', 'j.gmarques');
-define('ADMIN_PASS', 'Jguimajo2@');
+// Credenciais ficam FORA do Git, em /dados/config.php (não versionado).
+$cfg = __DIR__ . '/../dados/config.php';
+if (file_exists($cfg)) require $cfg;
+if (!defined('ADMIN_USER')) define('ADMIN_USER', 'admin_desativado');
+if (!defined('ADMIN_PASS')) define('ADMIN_PASS', bin2hex(random_bytes(16))); // senha impossível se config faltar
 define('FILA_FILE',     __DIR__ . '/../dados/fila.json');
 define('CLIENTES_FILE', __DIR__ . '/../dados/clientes.json');
 
@@ -67,6 +70,7 @@ $LOG_FILE   = __DIR__ . '/../dados/log.txt';
 $horas_ger  = array_fill(0, 24, 0);  // pix/boleto/picpay gerado
 $horas_pago = array_fill(0, 24, 0);  // compra aprovada
 $horas_ab   = array_fill(0, 24, 0);  // abandono de checkout
+$leads_log  = [];                    // TODOS os leads do log (fonte que nunca perde)
 if (file_exists($LOG_FILE)) {
     $fh = fopen($LOG_FILE, 'r');
     if ($fh) {
@@ -78,10 +82,32 @@ if (file_exists($LOG_FILE)) {
                 elseif (in_array($ev, ['pix_gerado','boleto_gerado','picpay_gerado','nubank_gerado'])) $horas_ger[$h]++;
                 elseif ($ev === 'checkout_abandonment')                $horas_ab[$h]++;
             }
+            // Coleta contato de cada lead direto do log (nunca perde nada).
+            if (preg_match('/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) evento=(\w+) email=(\S*) tel=(\S*)/', $linha, $mm)) {
+                $ev2 = $mm[2];
+                if (!in_array($ev2, ['pix_gerado','boleto_gerado','picpay_gerado','nubank_gerado','checkout_abandonment'])) continue;
+                $tel2 = preg_replace('/\D/', '', $mm[4]);
+                $em2  = trim($mm[3]);
+                if ($tel2 === '' && $em2 === '') continue;
+                $chave = $tel2 !== '' ? $tel2 : $em2;   // dedup por telefone (ou e-mail)
+                // mantém a ocorrência mais recente
+                $leads_log[$chave] = [
+                    'quando' => $mm[1],
+                    'tipo'   => str_replace(['_gerado','checkout_'], ['',''], $ev2),
+                    'email'  => $em2,
+                    'tel'    => $tel2,
+                ];
+            }
         }
         fclose($fh);
     }
 }
+// Marca quem já é cliente (pagou) e ordena por mais recente.
+$emails_clientes = array_column($clientes, 'email');
+foreach ($leads_log as &$L) { $L['pago'] = ($L['email'] !== '' && in_array($L['email'], $emails_clientes)); }
+unset($L);
+$leads_log = array_values($leads_log);
+usort($leads_log, fn($a,$b) => strcmp($b['quando'], $a['quando']));
 $horas_total = [];
 for ($i = 0; $i < 24; $i++) $horas_total[$i] = $horas_ger[$i] + $horas_pago[$i];
 $max_total   = max(1, max($horas_total));
@@ -201,6 +227,7 @@ $labels = [
 
 <div class="abas">
   <a href="?aba=leads" class="aba <?= $aba==='leads'?'ativa':'' ?>">📋 Leads</a>
+  <a href="?aba=recuperacao" class="aba <?= $aba==='recuperacao'?'ativa':'' ?>">📱 Recuperação (WhatsApp)</a>
   <a href="?aba=clientes" class="aba <?= $aba==='clientes'?'ativa':'' ?>">🏆 Clientes</a>
   <a href="?aba=horarios" class="aba <?= $aba==='horarios'?'ativa':'' ?>">📊 Horários</a>
 </div>
@@ -292,6 +319,55 @@ $labels = [
   <?php if (empty($grupos)): ?>
     <tr><td colspan="7" style="text-align:center;color:#6a5f8a;padding:30px;">Nenhum registro encontrado.</td></tr>
   <?php endif; ?>
+  </tbody>
+</table>
+
+<?php elseif ($aba === 'recuperacao'):
+  $rec_pendentes = array_filter($leads_log, fn($l) => !$l['pago'] && $l['tel'] !== '');
+?>
+
+<p style="font-size:13px;color:#9a8fbb;margin-bottom:8px;">
+  Lista completa direto do <strong>log.txt</strong> (nunca perde ninguém). Clique em <span style="color:#25d366;">Falar no WhatsApp</span> pra abrir a conversa — <strong>sem precisar salvar o número</strong>.
+</p>
+<div class="cards" style="margin-bottom:18px;">
+  <div class="card"><div class="num"><?= count($leads_log) ?></div><div class="label">Total no log</div></div>
+  <div class="card"><div class="num" style="color:#c9884c"><?= count($rec_pendentes) ?></div><div class="label">Não pagaram (recuperar)</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Nome/Contato</th><th>Telefone</th><th>Tipo</th><th>Quando</th><th>Status</th><th>Ação</th></tr>
+  </thead>
+  <tbody>
+  <?php if (empty($leads_log)): ?>
+    <tr><td colspan="6" style="text-align:center;color:#6a5f8a;padding:30px;">Nenhum lead no log ainda.</td></tr>
+  <?php else: foreach ($leads_log as $l):
+    $tel = $l['tel'];
+    $wa  = strlen($tel) <= 11 ? '55'.$tel : $tel;
+  ?>
+    <tr>
+      <td style="font-size:13px;"><?= htmlspecialchars($l['email'] !== '' ? $l['email'] : '(sem e-mail)') ?></td>
+      <td style="color:#9a8fbb;"><?= $tel !== '' ? htmlspecialchars($tel) : '—' ?></td>
+      <td><span class="badge tipo-<?= htmlspecialchars($l['tipo']) ?>"><?= ucfirst(htmlspecialchars($l['tipo'])) ?></span></td>
+      <td style="font-size:12px;color:#6a5f8a;"><?= htmlspecialchars($l['quando']) ?></td>
+      <td>
+        <?php if ($l['pago']): ?>
+          <span class="cliente-badge">✓ Pagou</span>
+        <?php else: ?>
+          <span style="color:#c9884c;font-size:12px;font-weight:bold;">⚠️ Não pagou</span>
+        <?php endif; ?>
+      </td>
+      <td>
+        <?php if ($tel !== '' && !$l['pago']): ?>
+          <a href="https://wa.me/<?= $wa ?>" target="_blank" style="display:inline-block;background:#25d366;color:#052e16;font-weight:700;font-size:13px;padding:7px 14px;border-radius:8px;text-decoration:none;">💬 Falar no WhatsApp</a>
+        <?php elseif ($tel !== ''): ?>
+          <a href="https://wa.me/<?= $wa ?>" target="_blank" style="color:#25d366;font-size:12px;text-decoration:none;">abrir chat</a>
+        <?php else: ?>
+          <span style="color:#6a5f8a;font-size:12px;">sem telefone</span>
+        <?php endif; ?>
+      </td>
+    </tr>
+  <?php endforeach; endif; ?>
   </tbody>
 </table>
 
