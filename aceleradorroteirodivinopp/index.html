@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espere! Uma oferta única para você — Acelerador do Roteiro Divino</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#faf7f0;color:#2e2a3f;font-family:'Lato',sans-serif;line-height:1.75;}
+img{max-width:100%;display:block;}
+
+/* Barra de etapas */
+.steps-bar{background:#fff;padding:16px 12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #ece7dc;}
+.step{display:flex;align-items:center;gap:7px;background:#f5f1e8;color:#9a8f7a;font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid #e6ddc9;}
+.step .n{width:20px;height:20px;border-radius:50%;background:#e6ddc9;color:#9a8f7a;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.step.done{background:#eafaf0;color:#1c8a4f;border-color:#8fe0b3;}
+.step.done .n{background:#2ecc71;color:#fff;}
+.step.active{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;border-color:#e04352;box-shadow:0 4px 16px #e0435233;}
+.step.active .n{background:#fff;color:#b8232f;}
+
+/* Faixa congrats */
+.congrats{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;text-align:center;padding:18px 20px;font-family:'Cinzel',serif;font-weight:800;font-size:clamp(18px,3.7vw,27px);font-style:italic;letter-spacing:.5px;box-shadow:0 4px 20px #2ecc7133;}
+
+.container{max-width:680px;margin:0 auto;padding:36px 22px 80px;}
+
+/* Alerta */
+.alert{background:linear-gradient(135deg,#b8232f,#e04352);color:#fff;text-align:center;padding:15px 20px;border-radius:12px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;font-size:clamp(17px,3.6vw,21px);margin-bottom:8px;box-shadow:0 4px 24px #e0435233;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+.alert-sub{text-align:center;font-size:13.5px;color:#c0392b;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:30px;}
+
+/* Header */
+.header{text-align:center;padding-bottom:32px;border-bottom:1px solid #ece7dc;}
+.tag{display:inline-block;background:#f5efe0;color:#a67c1e;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:20px;margin-bottom:20px;font-family:'Cinzel',serif;border:1px solid #e6dcc4;}
+h1{font-family:'Cinzel',serif;font-size:clamp(25px,5vw,37px);color:#241f38;line-height:1.3;margin-bottom:16px;}
+h1 .gold{color:#bf8f2e;}
+.subtitle{font-size:17px;color:#5f5876;max-width:540px;margin:0 auto;}
+
+/* Imagem hero produto */
+.hero-img{margin:28px auto 0;max-width:460px;filter:drop-shadow(0 16px 40px rgba(180,140,40,.22));}
+
+.section{padding:38px 0;border-bottom:1px solid #ece7dc;}
+.section:last-child{border-bottom:none;}
+.section-label{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#b07d1e;margin-bottom:18px;text-align:center;}
+h2{font-family:'Cinzel',serif;font-size:clamp(21px,3.7vw,29px);color:#241f38;margin-bottom:16px;line-height:1.35;text-align:center;}
+p.body{font-size:16.5px;color:#453f5c;margin-bottom:16px;}
+p.body strong{color:#a5741a;}
+
+/* Taxa de sucesso */
+.rate-box{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
+.rate{flex:1;min-width:150px;text-align:center;background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 16px;box-shadow:0 4px 16px rgba(120,100,50,.06);}
+.rate .num{font-family:'Cinzel',serif;font-size:46px;font-weight:800;line-height:1;}
+.rate.low .num{color:#e04352;}
+.rate.high .num{color:#27ae60;}
+.rate .lbl{font-size:13.5px;color:#6a6280;margin-top:10px;}
+.confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17.5px;color:#a5741a;font-weight:700;}
+
+/* Bloco destaque (No Brainer) */
+.highlight{background:#fffdf6;border:1px solid #e8dcc0;border-radius:18px;padding:32px 26px;box-shadow:0 6px 24px rgba(180,140,40,.08);}
+.highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(20px,3.5vw,26px);color:#a5741a;text-align:center;margin-bottom:24px;line-height:1.35;}
+.hlist{list-style:none;padding:0;}
+.hlist li{position:relative;padding:12px 0 12px 36px;font-size:16px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
+.hlist li:last-child{border-bottom:none;}
+.hlist li::before{content:"✓";position:absolute;left:0;top:12px;width:23px;height:23px;background:#2ecc71;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.hlist li strong{color:#a5741a;}
+
+/* Meditações */
+.meds{list-style:none;padding:0;}
+.meds li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #f0e8d8;}
+.meds li:last-child{border-bottom:none;}
+.med-icon{font-size:23px;margin-top:2px;min-width:30px;text-align:center;}
+.med-text h4{font-size:16.5px;font-weight:700;color:#241f38;margin-bottom:3px;}
+.med-text h4 span{color:#b07d1e;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.med-text p{font-size:14.5px;color:#6a6280;}
+.med-val{margin-left:auto;color:#1c8a4f;font-weight:700;font-size:14px;white-space:nowrap;padding-left:10px;}
+
+/* Recomendado */
+.reco{list-style:none;padding:0;max-width:560px;margin:0 auto;}
+.reco li{position:relative;padding:11px 0 11px 34px;font-size:16.5px;color:#453f5c;}
+.reco li::before{content:"→";position:absolute;left:0;color:#bf8f2e;font-weight:700;font-size:17px;}
+
+/* Stack de valor */
+.value-stack{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:32px 24px;text-align:center;box-shadow:0 10px 36px rgba(201,168,76,.18);}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #e8dcc4;font-size:15.5px;color:#5f5876;}
+.vrow span:last-child{color:#241f38;font-weight:700;}
+.vrow.total{border-bottom:none;border-top:2px solid #c9a84c;margin-top:8px;padding-top:16px;font-size:16.5px;}
+.vrow.total span:last-child{color:#e04352;text-decoration:line-through;}
+.value-now{font-family:'Cinzel',serif;font-size:clamp(34px,7.5vw,52px);font-weight:800;color:#b8860b;line-height:1.1;margin:18px 0 4px;}
+.value-now small{font-size:19px;color:#a5741a;}
+.value-desc{font-size:13.5px;color:#7a7488;margin-top:6px;}
+
+/* CTA */
+.cta-area{text-align:center;}
+.btn{display:inline-block;width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(17px,3.3vw,21px);font-weight:800;color:#fff;text-decoration:none;letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;transition:transform .2s,box-shadow .2s;animation:glow 2.5s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 8px 28px #2ecc7144;}50%{box-shadow:0 8px 40px #2ecc7188;}}
+.btn:hover{transform:translateY(-2px);}
+.btn-note{font-size:13.5px;color:#7a7488;margin-top:14px;}
+.decline{display:inline-block;margin-top:24px;font-size:14px;color:#c0392b;text-decoration:none;max-width:460px;line-height:1.5;border:1px solid #e0435255;border-radius:10px;padding:13px 22px;background:#e043520a;transition:.2s;}
+.decline:hover{color:#a3251c;border-color:#e04352;background:#e0435218;}
+
+/* Garantia */
+.guarantee{background:#fdfaf3;border-left:4px solid #c9a84c;padding:20px 22px;border-radius:0 10px 10px 0;font-size:15.5px;color:#453f5c;}
+.guarantee strong{color:#a5741a;}
+
+.footer{text-align:center;font-size:12.5px;color:#9a9280;padding-top:36px;line-height:1.8;}
+.footer a{color:#b07d1e;text-decoration:none;}
+
+/* Botões Cakto estilizados */
+cakto-upsell-accept::part(button){
+  width:100%;max-width:480px;padding:23px 24px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60)!important;
+  border:none;border-radius:50px;
+  font-family:'Cinzel',serif;font-size:clamp(17px,3.3vw,21px);font-weight:800;color:#fff;
+  letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;cursor:pointer;
+  transition:transform .2s;animation:glow 2.5s infinite;
+}
+cakto-upsell-accept::part(button):hover{transform:translateY(-2px);}
+cakto-upsell-reject::part(button){
+  background:none!important;border:none;color:#9a8f7a;
+  text-decoration:underline;font-size:13.5px;cursor:pointer;margin-top:24px;
+  font-family:'Lato',sans-serif;max-width:440px;line-height:1.5;
+}
+cakto-upsell-reject::part(button):hover{color:#6a6280;}
+
+@media(max-width:480px){.btn{padding:19px 16px;}.med-val{display:none;}}
+</style>
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+<!-- Utmify Pixel -->
+  <script>
+    window.pixelId = "6a53ea5224293bf6401a9234";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script></head>
+<body>
+
+<!-- Barra de etapas -->
+<div class="steps-bar">
+  <div class="step done"><span class="n">✓</span> Roteiro Divino</div>
+  <div class="step active"><span class="n">2</span> Confirmar Upgrade</div>
+  <div class="step"><span class="n">3</span> Pedido Concluído</div>
+</div>
+
+<!-- Faixa congrats -->
+<div class="congrats">Parabéns! 🎉 Você foi selecionado(a) para um upgrade...</div>
+
+<div class="container">
+
+  <!-- Alerta -->
+  <div class="alert">⚠️ ESPERE! NÃO FECHE ESTA PÁGINA</div>
+  <div class="alert-sub">Sua compra ainda não terminou de processar</div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="tag">✦ Oferta única — só aparece uma vez ✦</div>
+    <h1>Você foi selecionado(a) para <span class="gold">acelerar seus resultados</span></h1>
+    <p class="subtitle">Antes de acessar seu app, leia com atenção. Esse <strong style="color:#bf8f2e;">bônus</strong> não vai aparecer <strong>NUNCA mais</strong>! Em lugar nenhum.</p>
+    <img src="https://noticiasdafe.com.br/Imagens/acelerador-roteiro-divino.png" alt="Acelerador do Roteiro Divino" class="hero-img">
+  </div>
+
+  <!-- Áudio Relatos -->
+  <div class="section">
+    <div class="section-label">→ Ouça com seus próprios ouvidos</div>
+    <h2>🔊 Você NÃO vai acreditar<br>nesses relatos</h2>
+
+    <!-- Relato 1: José Neres -->
+    <div class="aud-card" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:24px 22px;max-width:520px;margin:0 auto;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="https://noticiasdafe.com.br/Imagens/jose%20neres.jpg" alt="José Neres" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">José Neres</div>
+          <div style="font-size:12.5px;color:#7a7488;">43 anos &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
+        </div>
+      </div>
+      <p style="font-size:14.5px;color:#6a6280;margin-bottom:16px;text-align:center;">Aperte o play e ouça o relato dele até o final. 🙏</p>
+      <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e8dcc4;border-radius:50px;padding:8px 16px 8px 8px;">
+        <button class="aud-btn" aria-label="Tocar relato" style="width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 12px #2ecc7155;">▶</button>
+        <div style="flex:1;height:8px;background:#eee4cf;border-radius:5px;overflow:hidden;"><div class="aud-fill" style="height:100%;width:0;background:linear-gradient(90deg,#c9a84c,#b8860b);transition:width .2s;"></div></div>
+        <span class="aud-time" style="font-size:13px;color:#7a7488;min-width:40px;text-align:right;">0:00</span>
+      </div>
+      <audio preload="metadata">
+        <source src="https://noticiasdafe.com.br/Imagens/audios%20relatos/relato%203.ogg" type="audio/ogg">
+      </audio>
+    </div>
+
+    <!-- Relato 2: Rosângela -->
+    <div class="aud-card" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:24px 22px;max-width:520px;margin:16px auto 0;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="https://noticiasdafe.com.br/Imagens/rosangela.jpg" alt="Rosângela Freitas" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Rosângela Freitas</div>
+          <div style="font-size:12.5px;color:#7a7488;">59 anos · Uberlândia, MG &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
+        </div>
+      </div>
+      <p style="font-size:14.5px;color:#6a6280;margin-bottom:16px;text-align:center;">Aperte o play e ouça o relato dela até o final. 🙏</p>
+      <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e8dcc4;border-radius:50px;padding:8px 16px 8px 8px;">
+        <button class="aud-btn" aria-label="Tocar relato" style="width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 12px #2ecc7155;">▶</button>
+        <div style="flex:1;height:8px;background:#eee4cf;border-radius:5px;overflow:hidden;"><div class="aud-fill" style="height:100%;width:0;background:linear-gradient(90deg,#c9a84c,#b8860b);transition:width .2s;"></div></div>
+        <span class="aud-time" style="font-size:13px;color:#7a7488;min-width:40px;text-align:right;">0:00</span>
+      </div>
+      <audio preload="metadata">
+        <source src="https://noticiasdafe.com.br/Imagens/audios%20relatos/relato%201.MP3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+  <script>
+  (function(){
+    function fmt(s){s=Math.floor(s||0);var m=Math.floor(s/60),ss=s%60;return m+':'+(ss<10?'0':'')+ss;}
+    var cards=document.querySelectorAll('.aud-card');
+    for(var i=0;i<cards.length;i++){(function(card){
+      var a=card.querySelector('audio'),b=card.querySelector('.aud-btn'),f=card.querySelector('.aud-fill'),t=card.querySelector('.aud-time');
+      if(!a) return;
+      b.addEventListener('click',function(){ if(a.paused){a.play();b.textContent='❚❚';}else{a.pause();b.textContent='▶';} });
+      a.addEventListener('timeupdate',function(){ var p=a.duration?(a.currentTime/a.duration*100):0; f.style.width=p+'%'; t.textContent=fmt(a.currentTime); });
+      a.addEventListener('ended',function(){ b.textContent='▶'; f.style.width='100%'; });
+    })(cards[i]);}
+  })();
+  </script>
+
+  <!-- Intro -->
+  <div class="section">
+    <div class="section-label">→ Por que você está vendo isso</div>
+    <h2>O Roteiro Divino funciona.<br>O Acelerador faz funcionar mais rápido.</h2>
+    <p class="body">Parabéns por dar o primeiro passo com o <strong>Roteiro Divino das 12 Palavras Sagradas</strong>. Mas existe uma verdade que poucos entendem:</p>
+    <p class="body">Você pode conhecer todas as palavras, orações e frequências... e ainda assim demorar para ver resultado. Por quê? Porque <strong>a sua mente subconsciente ainda está programada para a escassez.</strong></p>
+    <p class="body">Enquanto o seu consciente declara abundância, o seu subconsciente sussurra "isso não é pra você". E o subconsciente sempre vence.</p>
+    <p class="body">O <strong>Acelerador do Roteiro Divino</strong> foi criado para resolver exatamente isso — reprogramando sua mente no nível mais profundo, enquanto você dorme.</p>
+  </div>
+
+  <!-- GATE: pergunta de forma de pagamento -->
+  <div class="section" id="gate">
+    <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+      <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para liberar seu acesso ao bônus corretamente, confirme: você finalizou no cartão ou por Pix/Boleto?</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button id="btn-cartao" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
+        <button id="btn-pix" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
+      </div>
+    </div>
+
+    <!-- ONE-CLICK (1ª vez) — só aparece quando escolhe CARTÃO -->
+    <div id="oneclick-top" style="display:none;margin-top:28px;text-align:center;">
+      <p style="font-family:'Cinzel',serif;color:#1c8a4f;font-weight:700;font-size:17px;margin-bottom:16px;line-height:1.4;">✅ Confirmado! Como você pagou no cartão, ative o Acelerador com 1 clique:</p>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="zrfxbr2" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">SIM! Quero ACELERAR os RESULTADOS!</cakto-upsell-accept>
+        <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">Não. Eu não quero resultados rápidos...</cakto-upsell-reject>
+      </cakto-upsell-buttons>
+      <a href="https://noticiasdafe.com.br/aceleradorgratis" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não preciso de resultados rápidos!</a>
+    </div>
+  </div>
+
+  <!-- RESTO DA PÁGINA: revela só após escolher a forma de pagamento -->
+  <div id="resto-pagina" style="display:none;">
+
+  <!-- Taxa de sucesso -->
+  <div class="section">
+    <div class="section-label">→ A diferença que ele faz</div>
+    <h2>Membros que ativam o Acelerador manifestam muito mais rápido</h2>
+    <div class="rate-box">
+      <div class="rate low"><div class="num">18%</div><div class="lbl">Resultado rápido<br>SEM o Acelerador</div></div>
+      <div class="rate high"><div class="num">91%</div><div class="lbl">Resultado rápido<br>COM o Acelerador</div></div>
+    </div>
+    <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
+  </div>
+
+  <!-- Bloco No Brainer -->
+  <div class="section">
+    <div class="highlight">
+      <div class="htitle">Por que é <u>óbvio</u> confirmar o Acelerador</div>
+      <ul class="hlist">
+        <li><strong>Feito sob medida para você</strong>, desbloqueando as vias neurais que disparam a reprogramação do seu subconsciente.</li>
+        <li><strong>RESULTADOS RÁPIDOS:</strong> você vai manifestar de uma forma inesperada em 3 dias ou menos.</li>
+        <li><strong>Reprograma seu subconsciente em 24 horas:</strong> fazendo todo o conhecimento do Roteiro Divino penetrar ainda mais fundo na sua mente.</li>
+        <li>Reduz bloqueios mentais, cargas negativas e crenças limitantes que estão te segurando.</li>
+        <li><strong>Torna a manifestação sem esforço</strong>, acessando as frequências e a parte primal do seu cérebro — desbloqueando confiança e clareza.</li>
+        <li><strong>Eleva a sua vibração</strong> — porque você não consegue manifestar quando a sua vibração não corresponde ao que você quer atrair.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Recomendado -->
+  <div class="section">
+    <div class="section-label">→ Fortemente recomendado para</div>
+    <ul class="reco">
+      <li>Qualquer pessoa acima de 40 anos, homem ou mulher, que tem dificuldade de mudar o subconsciente</li>
+      <li>Quem sente baixa energia, preguiça e desânimo no geral</li>
+      <li>Quem está lutando com a saúde e quer manifestar juventude e vitalidade de novo</li>
+      <li>Quem está preso a maus hábitos que o mantêm parado, desmotivado e infeliz</li>
+      <li>Quem quer reduzir bloqueios, cargas negativas e crenças limitantes de uma vez por todas</li>
+    </ul>
+  </div>
+
+  <!-- Depoimento -->
+  <div class="section">
+    <div class="section-label">→ Quem já ativou, aprova</div>
+    <div style="background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 22px;max-width:520px;margin:0 auto;box-shadow:0 4px 16px rgba(120,100,50,.06);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <img src="https://noticiasdafe.com.br/Imagens/patricia-nogueira.jpg" alt="Patrícia Nogueira" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Patrícia Nogueira</div>
+          <div style="font-size:12.5px;color:#7a7488;">Curitiba, PR &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
+        </div>
+      </div>
+      <p style="font-size:15.5px;color:#453f5c;line-height:1.8;margin:0;">Eu já tinha começado o Roteiro Divino, mas foi com o <strong style="color:#a5741a;">Acelerador</strong> que tudo mudou de verdade. Comecei a ouvir as frequências antes de dormir e, em <strong style="color:#a5741a;">poucos dias</strong>, senti minha mente mais leve e as coisas começaram a acontecer. Recebi uma proposta que eu esperava há meses e minha relação em casa melhorou demais. Foi como se destravasse tudo. Não tenho palavras pra agradecer. 🙏</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 22px;max-width:520px;margin:16px auto 0;box-shadow:0 4px 16px rgba(120,100,50,.06);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <img src="https://noticiasdafe.com.br/Imagens/joel-andrade.jpg" alt="Joel Andrade" style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #c9a84c;flex-shrink:0;">
+        <div>
+          <div style="color:#d4a017;font-size:16px;letter-spacing:1px;">★★★★★</div>
+          <div style="font-weight:700;font-size:15.5px;color:#241f38;">Joel Andrade</div>
+          <div style="font-size:12.5px;color:#7a7488;">Fortaleza, CE &nbsp;·&nbsp; <span style="color:#1c8a4f;font-weight:700;">✓ Compra verificada</span></div>
+        </div>
+      </div>
+      <p style="font-size:15.5px;color:#453f5c;line-height:1.8;margin:0;">Confesso que peguei o <strong style="color:#a5741a;">Acelerador</strong> meio na dúvida, mas foi a melhor decisão. Em menos de uma semana minha cabeça mudou completamente — mais foco, mais disposição e uma paz que eu não sentia há anos. No trabalho as coisas destravaram e o dinheiro começou a entrar de um jeito que eu não esperava. Valeu cada centavo. 🙏</p>
+    </div>
+  </div>
+
+  <!-- Lista completa -->
+  <div class="section">
+    <div class="section-label">→ Tudo que você recebe hoje</div>
+    <h2>Lista completa do que vem<br>com o Acelerador</h2>
+    <p class="body" style="text-align:center;">Cada frequência foi elaborada para reprogramar sua mente no estado theta — pouco antes de dormir, quando o cérebro está mais receptivo:</p>
+    <ul class="meds">
+      <li><span class="med-icon">🧠</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Gênio de Newton</h4><p>Eleve seu poder mental a níveis cósmicos e desperte o gênio interior. Adeus névoa mental, olá inteligência ilimitada.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">💰</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Riqueza de Rockefeller</h4><p>Cultive uma mentalidade de abundância e comece a pensar como quem prospera de verdade.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🧲</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Atração de Dinheiro de Rothschild</h4><p>Sintonize sua vibração com a provisão e atraia oportunidades que antes passavam despercebidas.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🦁</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Fé e Crença de Gandhi</h4><p>Rompa com a dúvida e o medo, e caminhe com a convicção de quem move montanhas.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🎯</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Foco Destemido de Curie</h4><p>Chute o medo para longe e entre no seu poder com confiança. Conquiste seus objetivos como nunca.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">✨</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Carisma de Mandela</h4><p>Desperte sua presença e autoridade, e exale confiança e influência por onde passar.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🎨</span><div class="med-text"><h4><span>Sob Medida:</span><br>Meditação Visualização de Da Vinci</h4><p>Desbloqueie criatividade e visão para enxergar e construir a vida que você deseja.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Bônus:</span><br>Meditação do Estado Theta (antes de dormir)</h4><p>A sessão guiada que prepara sua mente para absorver todas as frequências enquanto você descansa.</p></div><span class="med-val">R$ 97</span></li>
+      <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Bônus:</span><br>Protocolo Acelerado de 7 Dias</h4><p>Um plano diário unindo as 12 Palavras + afirmações + a frequência certa para cada dia.</p></div><span class="med-val">R$ 197</span></li>
+    </ul>
+  </div>
+
+  <!-- Valor + CTA -->
+  <div class="section cta-area">
+    <div class="section-label">→ Sua condição especial de membro</div>
+    <div class="value-stack">
+      <div class="vrow"><span>7 Meditações Divinas Personalizadas</span><span>R$ 679</span></div>
+      <div class="vrow"><span>Meditação do Estado Theta</span><span>R$ 97</span></div>
+      <div class="vrow"><span>Protocolo Acelerado de 7 Dias</span><span>R$ 197</span></div>
+      <div class="vrow total"><span>Valor real de tudo</span><span>R$ 973</span></div>
+      <div class="vrow" style="border-bottom:none;"><span>Preço normal</span><span style="color:#e04352;text-decoration:line-through;">R$ 397</span></div>
+      <!-- Preço PIX/boleto -->
+      <div id="preco-pix">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, só nesta página, por apenas:</div>
+        <div class="value-now">R$ 167</div>
+        <div class="value-desc">Oferta exclusiva para novos membros do Roteiro Divino — aparece uma única vez.</div>
+      </div>
+      <!-- Preço CARTÃO (grátis) -->
+      <div id="preco-card" style="display:none;">
+        <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:18px;">Hoje, como você pagou no cartão, sai por:</div>
+        <div class="value-now" style="color:#1c8a4f;">GRÁTIS</div>
+        <div class="value-desc">Um presente exclusivo para você que confirmou pelo cartão — aproveite agora.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+
+      <!-- CTA PIX / boleto (padrão) -->
+      <div id="cta-pix">
+        <a href="https://pay.cakto.com.br/zrfxbr2_959336" class="btn" id="btn-checkout">✅ SIM! QUERO ACELERAR MINHAS BÊNÇÃOS</a>
+        <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
+        <a href="https://noticiasdafe.com.br/aceleradorgratis" class="decline">Não, prefiro esperar muito mais tempo pelos meus resultados e entendo que nunca mais verei esta oferta.</a>
+      </div>
+
+      <!-- CTA CARTÃO — one-click (2ª vez) -->
+      <div id="cta-card" style="display:none;">
+        <cakto-upsell-buttons>
+          <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="zrfxbr2" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">SIM! Quero ACELERAR os RESULTADOS!</cakto-upsell-accept>
+          <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">Não. Eu não quero resultados rápidos...</cakto-upsell-reject>
+        </cakto-upsell-buttons>
+        <a href="https://noticiasdafe.com.br/aceleradorgratis" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não preciso de resultados rápidos!</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Garantia -->
+  <div class="section">
+    <div class="guarantee">
+      🛡️ <strong>Garantia incondicional de 60 dias.</strong> Ative o Acelerador, use por até 60 dias e, se por qualquer motivo não sentir a diferença, basta enviar um e-mail para <strong>gabriel.luz@noticiasdafe.com.br</strong> que devolvemos 100% do seu investimento. Todo o risco é nosso.
+    </div>
+  </div>
+
+  </div><!-- /resto-pagina -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><em>Aviso: este produto tem caráter espiritual e educativo e não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença.</em></p>
+    <p style="margin-top:10px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas. Todos os direitos reservados.<br>
+    Dúvidas? <a href="mailto:gabriel.luz@noticiasdafe.com.br">gabriel.luz@noticiasdafe.com.br</a></p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var CHECKOUT = "https://pay.cakto.com.br/zrfxbr2_959336";
+  var src = new URLSearchParams(window.location.search);
+  function pick(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return v; } return ""; }
+  var name  = pick(["name","nome","customer_name","cliente_nome"]);
+  var email = pick(["email","e-mail","customer_email","cliente_email"]);
+  var phone = pick(["phone","telefone","celular","customer_phone","cliente_telefone"]);
+  var doc   = pick(["document","cpf","doc","customer_document"]);
+  var out = new URLSearchParams();
+  if(name)  out.set("name", name);
+  if(email) out.set("email", email);
+  if(phone) out.set("phone", phone);
+  if(doc)   out.set("document", doc);
+  var qs = out.toString();
+  var btn = document.getElementById("btn-checkout");
+  if(btn) btn.setAttribute("href", qs ? CHECKOUT + "?" + qs : CHECKOUT);
+})();
+</script>
+
+<!-- Esconde o botão de recusar e o preço dentro do componente da Cakto -->
+<style>
+  cakto-upsell-reject { display: none !important; }
+  cakto-upsell-accept::part(price) { display: none !important; }
+  .gate-btn { transition: background .15s, border-color .15s, color .15s; }
+  .gate-btn:hover { background: #eafaf0 !important; border-color: #2ecc71 !important; color: #1c8a4f !important; }
+</style>
+
+<!-- Lógica: escolha da forma de pagamento revela a página -->
+<script>
+(function(){
+  var resto   = document.getElementById('resto-pagina');
+  var gateBox = document.getElementById('gate-box');
+  var octop   = document.getElementById('oneclick-top');
+  var bc = document.getElementById('btn-cartao');
+  var bp = document.getElementById('btn-pix');
+  var precoPix  = document.getElementById('preco-pix');
+  var precoCard = document.getElementById('preco-card');
+  var ctaPix  = document.getElementById('cta-pix');
+  var ctaCard = document.getElementById('cta-card');
+
+  function revela(){ if(resto) resto.style.display = 'block'; }
+
+  if(bc) bc.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    if(octop)   octop.style.display = 'block';
+    if(ctaPix)  ctaPix.style.display = 'none';
+    if(ctaCard) ctaCard.style.display = 'block';
+    revela();
+    if(octop) octop.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  if(bp) bp.addEventListener('click', function(){
+    if(gateBox) gateBox.style.display = 'none';
+    // mantém preço R$167 e o link normal
+    revela();
+    if(resto) resto.scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Script do one-click da Cakto -->
+<script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+
+<!-- Auto-clique invisível no botão "Pagar" (one-click sem confirmação) — robusto para múltiplos botões -->
+<script>
+(function() {
+  function interceptarEConfirmar() {
+    var todos = Array.prototype.slice.call(document.querySelectorAll('button, a, div, [role="button"]'));
+    document.querySelectorAll('cakto-upsell-accept, cakto-upsell-buttons').forEach(function(comp){
+      if (comp.shadowRoot) {
+        todos = todos.concat(Array.prototype.slice.call(comp.shadowRoot.querySelectorAll('button, a, div, [role="button"]')));
+      }
+    });
+    var botaoPagar = todos.find(function(el){
+      var texto = el.textContent ? el.textContent.trim().toLowerCase() : '';
+      return texto === 'pagar';
+    });
+    if (botaoPagar) { botaoPagar.click(); return true; }
+    return false;
+  }
+  document.addEventListener('click', function(event){
+    var target = event.target;
+    if (target && ((target.closest && target.closest('cakto-upsell-accept')) || target.tagName === 'CAKTO-UPSELL-ACCEPT')) {
+      var tentativas = 0;
+      var varredura = setInterval(function(){
+        tentativas++;
+        var ok = interceptarEConfirmar();
+        if (ok || tentativas > 130) clearInterval(varredura);
+      }, 30);
+    }
+  });
+})();
+</script>
+</body>
+</html>
