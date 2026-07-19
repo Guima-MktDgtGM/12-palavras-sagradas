@@ -348,6 +348,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
       <script>
         (function(){
           var BACKEND="https://noticiasdafe.com.br/pagamento.php", OFFER="x8q7utk";
+          function cpfValido(c){c=(c||'').replace(/\D/g,'');if(c.length!==11||/^(\d)\1{10}$/.test(c))return false;var s=0,r,i;for(i=0;i<9;i++)s+=parseInt(c[i])*(10-i);r=(s*10)%11;if(r===10)r=0;if(r!==parseInt(c[9]))return false;s=0;for(i=0;i<10;i++)s+=parseInt(c[i])*(11-i);r=(s*10)%11;if(r===10)r=0;return r===parseInt(c[10]);}
           var bC=document.getElementById('metodo-cartao'), bP=document.getElementById('metodo-pix');
           var pC=document.getElementById('painel-cartao'), pP=document.getElementById('painel-pix');
           function sel(cartao){
@@ -365,6 +366,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
             var tel=(document.getElementById('pa-tel').value||'').replace(/\D/g,'');
             var cpf=(document.getElementById('pa-cpf').value||'').replace(/\D/g,'');
             if(!nome||!email||!tel||!cpf){ alert('Preencha todos os campos.'); return; }
+            if(!cpfValido(cpf)){ alert('CPF inválido. Confira os números e tente novamente.'); return; }
             document.getElementById('pa-loading').style.display='block'; gerar.disabled=true;
             fetch(BACKEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
               method:'pix_auto', offerId:OFFER, antifraudRef:'up-'+Date.now(),
