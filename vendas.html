@@ -728,7 +728,7 @@
       <p class="cta-preco-riscado">Normalmente: <span>R$997</span></p>
       <p class="cta-preco-atual">Hoje apenas: <span>R$67</span> — Pagamento Único</p>
       <p class="cta-aviso">⚠️ Preço especial válido apenas para as primeiras pessoas.</p>
-      <a href="#" id="btn-checkout-front" class="cta-comprar">
+      <a href="https://pay.cakto.com.br/96yyuuz_949695" id="btn-checkout-front" class="cta-comprar">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span>Comprar o Roteiro Divino agora</span>
       </a>
@@ -1340,15 +1340,9 @@
       const checkoutBtn = document.getElementById("btn-checkout-front");
       const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
-      if (checkoutBtn && checkoutWrapper) {
-        checkoutBtn.addEventListener("click", function(e) {
-          e.preventDefault();
-          checkoutWrapper.style.display = "block";
-          setTimeout(function() {
-            checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 150);
-        });
-      }
+      // TEMPORÁRIO: botão leva direto pro checkout hospedado da Cakto (transparente em teste).
+      // Mantém o formulário transparente escondido até finalizarmos a integração.
+      if (checkoutWrapper) checkoutWrapper.style.display = "none";
 
       // 2. Lógica das Abas de Pagamento (PIX vs Cartão)
       const tabPix = document.getElementById("tab-pix");
