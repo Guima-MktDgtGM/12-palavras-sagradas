@@ -493,60 +493,65 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 })();
 </script>
 
-<!-- NOVO SCRIPT DE ONE-CLICK ATUALIZADO (SUPORTE A SHADOW DOM DA CAKTO) -->
+<!-- LÓGICA DE ONE-CLICK DE ALTA PERFORMANCE (IGNORA O MODAL E DISPARA A COMPRA DIRETO) -->
 <script>
 (function() {
-  function fecharPopUpEConsolidar() {
-    // 1. Acessa o elemento customizado do Upsell da Cakto
+  function dispararCompraDireta() {
+    // 1. Localiza o componente de Upsell da Cakto
     var upsellComponent = document.querySelector('cakto-upsell-accept');
     if (!upsellComponent) return false;
 
-    // 2. Se o elemento tiver um Shadow DOM ativo, vasculha lá dentro
-    if (upsellComponent.shadowRoot) {
-      // Procura o botão real ou qualquer gatilho de confirmação dentro do escopo isolado
-      var botaoInterno = upsellComponent.shadowRoot.querySelector('button, [role="button"], .cakto-confirm-btn');
+    try {
+      // 2. Tenta disparar diretamente a função de aceitar do ecossistema da Cakto
+      if (typeof upsellComponent.accept === 'function') {
+        upsellComponent.accept();
+        return true;
+      }
       
-      // Se a Cakto renderizar o modal injetado direto no body, procuramos pelo documento principal também
-      var botoesGlobais = Array.prototype.slice.call(document.querySelectorAll('button, div, a'));
-      var botaoPagarModal = botoesGlobais.find(function(el) {
-        var txt = el.textContent ? el.textContent.trim().toLowerCase() : '';
-        return txt === 'pagar' || txt === 'confirmar' || txt.includes('1 x de');
-      });
-
-      if (botaoPagarModal) {
-        botaoPagarModal.click();
-        return true;
+      // 3. Segunda tentativa: se a função estiver dentro do protótipo ou do elemento interno
+      var elementoInterno = upsellComponent.shadowRoot ? upsellComponent.shadowRoot.querySelector('button') : null;
+      if (elementoInterno && typeof elementoInterno.click === 'function') {
+        // Dispara o clique no botão nativo do Shadow DOM
+        elementoInterno.click();
       }
-    }
-    
-    // Fallback de varredura profunda alternativa por texto exato
-    var todosElementos = document.querySelectorAll('button, a, div');
-    for (var i = 0; i < todosElementos.length; i++) {
-      var textoEl = todosElementos[i].textContent ? todosElementos[i].textContent.trim().toLowerCase() : '';
-      if (textoEl === 'pagar' || textoEl === 'confirmar') {
-        todosElementos[i].click();
-        return true;
-      }
+    } catch (erro) {
+      console.log('Erro ao tentar forçar o clique direto:', erro);
     }
     return false;
   }
 
-  // Intercepta o clique inicial para rodar o loop ultra-rápido de liquidação do modal
+  // Intercepta o evento no momento do clique (fase de captura, antes do modal abrir)
   document.addEventListener('click', function(e) {
     var target = e.target;
+    
+    // Verifica se o clique foi no botão da Cakto ou em algo dentro dele
     if (target && (target.closest('cakto-upsell-accept') || target.tagName === 'CAKTO-UPSELL-ACCEPT')) {
-      var tentativas = 0;
-      var intervalLoop = setInterval(function() {
-        tentativas++;
-        var foiClicado = fecharPopUpEConsolidar();
-        // Roda o laço a cada 5ms para garantir que o clique ocorra antes da animação do modal terminar
-        if (foiClicado || tentativas > 60) {
-          clearInterval(intervalLoop);
-        }
-      }, 5);
+      // Impede o fluxo normal que traria o modal visual para a tela
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Executa a compra imediatamente nos bastidores
+      var sucesso = dispararCompraDireta();
+      
+      // Caso a Cakto tenha mudado a estrutura interna, rodamos um fallback ultra-rápido
+      if (!sucesso) {
+        var tentativas = 0;
+        var loopForcado = setInterval(function() {
+          tentativas++;
+          // Varre o DOM em busca de qualquer modal injetado no body
+          var botoes = document.querySelectorAll('button, [role="button"]');
+          for (var i = 0; i < botoes.length; i++) {
+            var txt = botoes[i].textContent ? botoes[i].textContent.trim().toLowerCase() : '';
+            if (txt === 'pagar' || txt === 'confirmar' || txt.includes('1 x de')) {
+              botoes[i].click();
+              clearInterval(loopForcado);
+              break;
+            }
+          }
+          if (tentativas > 40) clearInterval(loopForcado);
+        }, 10);
+      }
     }
-  });
+  }, true); // O 'true' aqui ativa a fase de captura, interceptando antes do script da Cakto rodar!
 })();
 </script>
-</body>
-</html>
