@@ -143,14 +143,17 @@ if ($method === 'pix') {
         'installments'  => intval($input['installments'] ?? 1),
     ];
 } else {
-    // Cartão SEM 3DS (credit_card), mas COM a ref antifraude obrigatoria (que faltava antes).
+    // Cartão SEM 3DS (credit_card) — estrutura que a Cakto ja aceitava (items + card),
+    // agora COM a ref antifraude obrigatoria que faltava antes.
     $payload = [
-        'offerId'       => $offerId,
         'paymentMethod' => 'credit_card',
         'customer'      => $customer,
-        'cardToken'     => $input['cardToken'] ?? '',
+        'items'         => [['offerId' => $offerId]],
+        'card'          => [
+            'token'        => $input['cardToken'] ?? '',
+            'installments' => intval($input['installments'] ?? 1),
+        ],
         'antifraud_profiling_attempt_reference' => $ref,
-        'installments'  => intval($input['installments'] ?? 1),
     ];
 }
 

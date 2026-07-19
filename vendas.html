@@ -1542,10 +1542,10 @@
             corpo.cardToken = tokenResp.cardToken;
             corpo.installments = document.getElementById("card-installments").value;
 
-            // 2) Autentica com 3D Secure (joga a responsabilidade pro banco = aprova mais).
-            //    Pode ser pulado com ?sem3ds=1 pra testar se o campo antifraude sozinho ja resolve.
-            const pular3ds = new URLSearchParams(window.location.search).has("sem3ds");
-            if (!pular3ds) {
+            // 2) 3D Secure DESLIGADO por padrao (Cakto confirmou que nao precisa).
+            //    So roda se forcar ?com3ds=1. O antifraude sozinho deve aprovar.
+            const usar3ds = new URLSearchParams(window.location.search).has("com3ds");
+            if (usar3ds) {
               const authResult = await caktoSdk.authenticate3DS({
                 card: card,
                 customer: {
@@ -1579,7 +1579,10 @@
           const data = await resp.json();
 
           if (!resp.ok) {
-            throw new Error((data && (data.detail || data.error)) || "Não foi possível processar o pagamento.");
+            const dbg = new URLSearchParams(window.location.search).has("teste")
+              ? ("\n\n[DEBUG] http=" + resp.status + "\nantifraudRef=" + JSON.stringify(corpo.antifraudRef) + "\nresposta=" + JSON.stringify(data))
+              : "";
+            throw new Error(((data && (data.detail || data.error)) || "Não foi possível processar o pagamento.") + dbg);
           }
 
           loadingScreen.style.display = "none";
