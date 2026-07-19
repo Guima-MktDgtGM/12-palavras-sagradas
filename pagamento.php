@@ -78,6 +78,32 @@ if (isset($_GET['status'])) {
     exit;
 }
 
+// ─── MODO DEBUG: cria um Pix de teste e mostra a resposta CRUA da Cakto ───────
+// Uso: /pagamento.php?debug=pix  (nao afeta o checkout dos clientes)
+if (isset($_GET['debug']) && $_GET['debug'] === 'pix') {
+    $payload = [
+        'productId'     => CAKTO_PRODUCT_ID,
+        'paymentMethod' => 'pix',
+        'customer'      => [
+            'name' => 'Teste Debug', 'email' => 'teste@teste.com',
+            'phone' => '5511999999999', 'fingerprint' => 'debug-ref-123',
+            'docType' => 'cpf', 'docNumber' => '12345678909',
+        ],
+        'items' => [['offerId' => ($_GET['offer'] ?? '96yyuuz')]],
+        'antifraudProfilingAttemptReference' => 'debug-ref-123',
+    ];
+    $ch = curl_init(CAKTO_BASE . '/public_api/payments/');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Authorization: Bearer '.$token,'Content-Type: application/json','X-Idempotency-Key: '.uuidv4()],
+        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_TIMEOUT => 40,
+    ]);
+    $r = curl_exec($ch); $co = curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+    echo json_encode(['http_code'=>$co, 'payload_enviado'=>$payload, 'resposta_cakto'=>json_decode($r, true)], JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // ─── Criar cobranca (Pix ou Cartao/3DS) ──────────────────────────────────────
 $input = json_decode(file_get_contents('php://input'), true);
 if (!$input) {
