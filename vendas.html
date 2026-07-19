@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
   <!-- VTurb speed optimization -->
   <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
   <link rel="preload" href="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a4308ac40698aa96bc82b84/v4/player.js" as="script">
@@ -16,7 +17,10 @@
   <link rel="dns-prefetch" href="https://images.converteai.net">
   <link rel="dns-prefetch" href="https://license.vturb.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Cakto SDK (tokenizacao de cartao, 3DS e antifraude) -->
+  <script src="https://cakto-sdk.pages.dev/cakto-sdk.min.js"></script>
+  
   <style>
     *, ::after, ::before, body { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -109,21 +113,6 @@
       margin: 30px 0;
     }
     @media (max-width: 480px) { .video-wrap { margin: 16px 0; } }
-    .video-placeholder {
-      width: 100%; height: 100%; min-height: 300px;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: white; text-align: center; padding: 20px; cursor: pointer;
-    }
-    .play-btn {
-      width: 72px; height: 72px;
-      background: rgba(255,255,255,0.15); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px; border: 3px solid rgba(255,255,255,0.5);
-    }
-    .play-btn svg { width: 30px; height: 30px; fill: #fff; margin-left: 4px; }
-    .video-placeholder p { font-size: 16px; font-weight: 600; opacity: 0.85; }
-    .video-placeholder small { font-size: 12px; opacity: 0.6; margin-top: 6px; }
 
     /* ---- BLOCO CTA ---- */
     #bloco-cta {
@@ -318,7 +307,7 @@
       .media-logos { gap: 14px; }
     }
 
-    /* ---- FB COMMENTS (espelhado do original) ---- */
+    /* ---- FB COMMENTS ---- */
     .comments-wrap { margin-bottom: 40px; }
     .flexBox { display: flex; flex-direction: column; gap: 8px; }
     .a-co { border-radius: 12px; padding: 8px; }
@@ -358,72 +347,338 @@
     .footer-links a { color: rgba(255,255,255,0.5); font-size: 11px; }
     .footer-links a:hover { color: #fff; }
 
-    /* ---- CHECKOUT INLINE CONTAINER ---- */
-    .checkout-inline-container {
-      margin: 30px auto;
-      border: 1px solid #e0e0e0;
+    /* =======================================================
+       CHECKOUT TRANSPARENTE NATIVO (Alta Conversão)
+       ======================================================= */
+    .checkout-wrapper {
+      max-width: 520px;
+      margin: 35px auto;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      background: #fff;
-      display: none; /* Começa oculto */
-      position: relative;
-      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      padding: 24px;
+      font-family: 'Poppins', sans-serif;
+      display: none; /* Inicia oculto até o clique no CTA */
     }
-    
-    .checkout-inline-loader {
-      padding: 50px 20px;
-      text-align: center;
-      background: #fff;
+
+    .checkout-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
       display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px dashed #f1f5f9;
+      padding-bottom: 12px;
+    }
+
+    .checkout-title svg {
+      color: #a60b0d;
+    }
+
+    .checkout-section {
+      margin-bottom: 22px;
+    }
+
+    .section-num {
+      background: #a60b0d;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Inputs */
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .input-group label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .input-group input, .input-group select {
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      color: #334155;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #f8fafc;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      border-color: #a60b0d;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(166, 11, 13, 0.12);
+    }
+
+    .input-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Abas de Pagamento */
+    .payment-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab-btn {
+      background: #f1f5f9;
+      border: 2px solid transparent;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .tab-btn.active {
+      background: #fff;
+      border-color: #27ae60;
+      color: #27ae60;
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.1);
+    }
+
+    .tab-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Área Dinâmica de Pagamento */
+    .payment-content {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+      min-height: 80px;
+    }
+
+    #credit-card-form {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    #pix-info {
+      animation: fadeIn 0.3s ease;
+    }
+
+    .pix-notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .pix-notice svg {
+      color: #32bcad;
+      flex-shrink: 0;
+    }
+
+    /* Botão Final */
+    .checkout-btn-submit {
+      width: 100%;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(39, 174, 96, 0.25);
+      transition: all 0.2s ease;
+      animation: btnPulse 1.5s infinite;
+    }
+
+    .checkout-btn-submit:hover {
+      background: #219653;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(39, 174, 96, 0.35);
+    }
+
+    .checkout-btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Selos de Segurança */
+    .security-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .security-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .security-badge svg {
+      color: #27ae60;
+    }
+
+    /* Spinner Interno */
+    .checkout-loading-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      z-index: 10;
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.3s ease;
+      border-radius: 16px;
     }
-    
-    .checkout-inline-loader.hidden {
-      display: none;
-    }
-    
-    .spinner {
-      width: 50px;
-      height: 50px;
+
+    .checkout-loading-overlay .spinner {
+      width: 44px;
+      height: 44px;
       border: 4px solid rgba(166, 11, 13, 0.1);
       border-left-color: #a60b0d;
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-    
-    .checkout-inline-loader p {
-      margin-top: 15px;
-      font-family: Poppins, sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: #333;
+
+    .checkout-loading-overlay p {
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
     }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+
+    /* Tela de Pix Gerado */
+    .pix-generated-area {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+      animation: fadeIn 0.3s ease;
     }
-    
-    .checkout-iframe {
-      width: 100%;
-      height: 720px;
-      border: none;
+
+    .qrcode-img-placeholder {
+      margin: 15px auto;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .qrcode-img-placeholder img {
+      max-width: 180px;
+      height: auto;
       display: block;
-      background: transparent;
     }
-    
-    @media (max-width: 480px) {
-      .checkout-inline-container {
-        margin: 20px 0;
-        border-radius: 12px;
-      }
-      .checkout-iframe {
-        height: 760px; /* Um pouco mais alto no mobile para caber o teclado sem espremer o layout */
-      }
+
+    .pix-copia-cola-box {
+      margin-top: 15px;
+      position: relative;
+    }
+
+    .pix-input-textarea {
+      width: 100%;
+      height: 70px;
+      padding: 10px;
+      font-size: 11px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      color: #475569;
+      resize: none;
+      background: #f1f5f9;
+      outline: none;
+      font-family: monospace;
+    }
+
+    .btn-copy-pix {
+      width: 100%;
+      background: #ffd60a;
+      color: #1a1a1a;
+      border: none;
+      padding: 12px;
+      margin-top: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-copy-pix:hover {
+      background: #ffca08;
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.25); }
+      50% { transform: scale(1.02); box-shadow: 0 8px 24px rgba(39, 174, 96, 0.4); }
     }
   </style>
 </head>
@@ -473,7 +728,7 @@
       <p class="cta-preco-riscado">Normalmente: <span>R$997</span></p>
       <p class="cta-preco-atual">Hoje apenas: <span>R$67</span> — Pagamento Único</p>
       <p class="cta-aviso">⚠️ Preço especial válido apenas para as primeiras pessoas.</p>
-      <a href="https://pay.cakto.com.br/96yyuuz_949695" id="btn-checkout-front" class="cta-comprar">
+      <a href="#" id="btn-checkout-front" class="cta-comprar">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span>Comprar o Roteiro Divino agora</span>
       </a>
@@ -507,16 +762,167 @@
       </div>
     </div>
 
-    <!-- CHECKOUT INLINE INTEGRADO (Abaixo do CTA e acima dos comentários do FB) -->
-    <div id="checkout-inline-wrap" class="checkout-inline-container">
-      <!-- Loader para o checkout na própria página -->
-      <div id="checkout-inline-loader" class="checkout-inline-loader">
+    <!-- =======================================================
+         CHECKOUT TRANSPARENTE INLINE (NATIVO)
+         ======================================================= -->
+    <div id="checkout-inline-wrap" class="checkout-wrapper" style="position: relative;">
+      
+      <!-- Overlay de carregamento ao submeter o formulário -->
+      <div id="checkout-loading-screen" class="checkout-loading-overlay">
         <div class="spinner"></div>
-        <p>Preparando formulário de pagamento seguro...</p>
+        <p id="checkout-loading-text">Processando pagamento seguro...</p>
       </div>
 
-      <!-- Iframe do checkout da Cakto -->
-      <iframe class="checkout-iframe" id="checkout-inline-iframe" src="about:blank" allow="payment"></iframe>
+      <div class="checkout-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Checkout 100% Criptografado & Seguro</span>
+      </div>
+
+      <!-- Formulário de Coleta de Leads / Pagamento -->
+      <form id="transparent-checkout-form" novalidate>
+        
+        <!-- SEÇÃO 1: DADOS PESSOAIS -->
+        <div class="checkout-section">
+          <div class="section-title">
+            <span class="section-num">1</span> Dados de Acesso e Contato
+          </div>
+          <div class="input-grid">
+            <div class="input-group">
+              <label for="client-name">Nome Completo</label>
+              <input type="text" id="client-name" name="name" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="input-group">
+              <label for="client-email">E-mail (Para receber o Roteiro)</label>
+              <input type="email" id="client-email" name="email" placeholder="nome@provedor.com" required>
+            </div>
+            <div class="input-row-2">
+              <div class="input-group">
+                <label for="client-whatsapp">WhatsApp (com DDD)</label>
+                <input type="tel" id="client-whatsapp" name="whatsapp" placeholder="(00) 90000-0000" required>
+              </div>
+              <div class="input-group">
+                <label for="client-cpf">CPF</label>
+                <input type="text" id="client-cpf" name="cpf" placeholder="000.000.000-00" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 2: SELEÇÃO DE PAGAMENTO -->
+        <div class="checkout-section">
+          <div class="section-title">
+            <span class="section-num">2</span> Forma de Pagamento
+          </div>
+          <div class="payment-tabs">
+            <button type="button" class="tab-btn active" id="tab-pix">
+              <!-- Ícone PIX -->
+              <svg viewBox="0 0 512 512" fill="currentColor">
+                <path d="M242.4 65.6c7.5-7.5 19.7-7.5 27.2 0l57.6 57.6c3.7 3.7 3.7 9.7 0 13.4L256 208l-71.2-71.4L242.4 65.6zM65.6 242.4L123.2 185c3.7-3.7 9.7-3.7 13.4 0L208 256l-71.4 71.2L65.6 269.6c-7.5-7.5-7.5-19.7 0-27.2zM256 304l71.2 71.4-57.6 57.6c-7.5 7.5-19.7 7.5-27.2 0l-57.6-57.6c-3.7-3.7-3.7-9.7 0-13.4L256 304zm75.4-47.2 71.4-71.2 57.6 57.6c7.5 7.5 7.5 19.7 0 27.2l-57.6 57.6c-3.7 3.7-9.7 3.7-13.4 0L256 256l75.4-75.2z"/>
+              </svg>
+              <span>PIX (Instantâneo)</span>
+            </button>
+            <button type="button" class="tab-btn" id="tab-card">
+              <!-- Ícone Cartão -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Cartão de Crédito</span>
+            </button>
+          </div>
+
+          <div class="payment-content">
+            <!-- Informação do PIX -->
+            <div id="pix-info">
+              <div class="pix-notice">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                <p>Liberado imediatamente. O código Pix e o QR Code serão gerados no próximo passo.</p>
+              </div>
+            </div>
+
+            <!-- Formulário de Cartão de Crédito -->
+            <div id="credit-card-form">
+              <div class="input-grid">
+                <div class="input-group">
+                  <label for="card-holder-name">Nome Impresso no Cartão</label>
+                  <input type="text" id="card-holder-name" placeholder="Como no cartão" autocomplete="cc-name">
+                </div>
+                <div class="input-group">
+                  <label for="card-number">Número do Cartão</label>
+                  <input type="text" id="card-number" placeholder="0000 0000 0000 0000" autocomplete="cc-number">
+                </div>
+                <div class="input-row-2">
+                  <div class="input-group">
+                    <label for="card-expiry">Validade</label>
+                    <input type="text" id="card-expiry" placeholder="MM/AA" autocomplete="cc-exp">
+                  </div>
+                  <div class="input-group">
+                    <label for="card-cvv">Código CVV</label>
+                    <input type="text" id="card-cvv" placeholder="000" autocomplete="cc-csc">
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label for="card-installments">Parcelas</label>
+                  <select id="card-installments">
+                    <option value="1">1x de R$ 67,00 (Sem Juros)</option>
+                    <option value="2">2x de R$ 33,50 (Sem Juros)</option>
+                    <option value="3">3x de R$ 22,33 (Sem Juros)</option>
+                    <option value="4">4x de R$ 18,22</option>
+                    <option value="5">5x de R$ 14,83</option>
+                    <option value="6">6x de R$ 12,58</option>
+                    <option value="12">12x de R$ 6,70</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Área de Sucesso do Pix (Inserida dinamicamente no pós-geração) -->
+            <div id="pix-generated-screen" class="pix-generated-area">
+              <p style="font-size: 14px; font-weight: 600; color: #27ae60;">PIX Gerado com Sucesso! 🎁</p>
+              <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Pague em até 10 minutos para garantir o preço promocional.</p>
+              
+              <div class="qrcode-img-placeholder">
+                <img id="pix-qrcode-img" src="" alt="QR Code PIX">
+              </div>
+              
+              <div class="pix-copia-cola-box">
+                <p style="font-size: 11px; font-weight: 600; color: #475569; text-align: left; margin-bottom: 4px;">Código Copia e Cola:</p>
+                <textarea id="pix-code-text" class="pix-input-textarea" readonly></textarea>
+                <button type="button" class="btn-copy-pix" id="btn-copy-pix-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span id="copy-btn-text">Copiar Código PIX</span>
+                </button>
+              </div>
+              
+              <p style="font-size: 11px; color: #ef4444; font-weight: 600; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Não feche essa página! Redirecionaremos você logo após o pagamento.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOTÃO SUBMIT DINÂMICO -->
+        <button type="submit" class="checkout-btn-submit" id="btn-submit-checkout">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span id="submit-btn-text">GERAR PIX SEGURO</span>
+        </button>
+
+        <!-- SELOS DE SEGURANÇA -->
+        <div class="security-badges">
+          <div class="security-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>SSL Blindado</span>
+          </div>
+          <div class="security-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Garantia de 7 Dias</span>
+          </div>
+          <div class="security-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Processamento Seguro</span>
+          </div>
+        </div>
+
+      </form>
     </div>
 
     <!-- COMENTÁRIOS -->
@@ -891,7 +1297,7 @@
     </div>
   </div>
 
-  <!-- Repassa UTMs/query string para o checkout (Utmify atribuir a venda) -->
+  <!-- Repassa UTMs/query string para o botão se necessário -->
   <script>
     (function(){
       var qs = window.location.search.replace(/^\?/, "");
@@ -899,47 +1305,362 @@
       var btn = document.getElementById("btn-checkout-front");
       if(!btn) return;
       var base = btn.getAttribute("href");
-      btn.setAttribute("href", base + (base.indexOf("?") > -1 ? "&" : "?") + qs);
+      if(base && base !== "#") {
+        btn.setAttribute("href", base + (base.indexOf("?") > -1 ? "&" : "?") + qs);
+      }
     })();
   </script>
 
-  <!-- SCRIPT FOR INTEGRATING AND AUTO-SCROLLING TO INLINE CHECKOUT -->
+  <!-- LÓGICA DE INTERACTION E INTEGRAÇÃO DO CHECKOUT TRANSPARENTE -->
   <script>
+    // ==========================================
+    // CONFIGURAÇÕES DO CHECKOUT TRANSPARENTE (Cakto SDK)
+    // ==========================================
+    const CAKTO_CLIENT_ID = "aiX1U4ryg2nDatNXD10NFWZ8QFvc41qyzNK0UtMS"; // client_id (público — só identifica o app)
+    const CAKTO_OFFER_ID   = "96yyuuz";  // offerId da oferta de R$ 67 (CONFIRMAR no painel Cakto)
+    const VALOR_CENTAVOS   = 6700;       // R$ 67,00 em centavos (para o 3DS)
+    const UPSELL_URL       = "https://noticiasdafe.com.br/aceleradorroteirodivino"; // upsell R$ 167
+    const BACKEND_URL      = "https://noticiasdafe.com.br/pagamento.php"; // nosso backend seguro
+
+    // Inicializa o SDK da Cakto (uma única instância por página)
+    let caktoSdk = null;
+    try {
+      caktoSdk = new Cakto.CaktoSDK({ client_id: CAKTO_CLIENT_ID });
+    } catch (err) {
+      console.error("Falha ao iniciar o Cakto SDK:", err);
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
-      var checkoutBtn = document.getElementById("btn-checkout-front");
-      var checkoutWrap = document.getElementById("checkout-inline-wrap");
-      var iframe = document.getElementById("checkout-inline-iframe");
-      var loader = document.getElementById("checkout-inline-loader");
+      // Inicia o antifraude cedo (coleta sinais durante o preenchimento)
+      if (caktoSdk && caktoSdk.initAntifraud) {
+        caktoSdk.initAntifraud().catch(function(e){ console.warn("initAntifraud:", e); });
+      }
 
-      if (!checkoutBtn || !checkoutWrap || !iframe) return;
+      // 1. Mostrar/Ocultar Formulário ao clicar no CTA
+      const checkoutBtn = document.getElementById("btn-checkout-front");
+      const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
-      // Click event for the CTA button
-      checkoutBtn.addEventListener("click", function(e) {
-        e.preventDefault(); // Prevent standard page navigation
+      if (checkoutBtn && checkoutWrapper) {
+        checkoutBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          checkoutWrapper.style.display = "block";
+          setTimeout(function() {
+            checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        });
+      }
+
+      // 2. Lógica das Abas de Pagamento (PIX vs Cartão)
+      const tabPix = document.getElementById("tab-pix");
+      const tabCard = document.getElementById("tab-card");
+      const pixInfo = document.getElementById("pix-info");
+      const creditCardForm = document.getElementById("credit-card-form");
+      const btnSubmit = document.getElementById("btn-submit-checkout");
+      const submitBtnText = document.getElementById("submit-btn-text");
+      const pixGeneratedScreen = document.getElementById("pix-generated-screen");
+      
+      let selectedMethod = "pix"; // Padrão é Pix
+
+      function switchPaymentMethod(method) {
+        selectedMethod = method;
         
-        var targetUrl = checkoutBtn.getAttribute("href");
+        // Limpa a tela de Pix gerado anteriormente caso mude de aba
+        pixGeneratedScreen.style.display = "none";
         
-        // Show the checkout container if hidden
-        checkoutWrap.style.display = "block";
-        
-        // Set the checkout URL to iframe (only if not loaded yet)
-        if (iframe.src === "about:blank" || iframe.src !== targetUrl) {
-          loader.classList.remove("hidden");
-          iframe.src = targetUrl;
+        if (method === "pix") {
+          tabPix.classList.add("active");
+          tabCard.classList.remove("active");
+          pixInfo.style.display = "block";
+          creditCardForm.style.display = "none";
+          submitBtnText.textContent = "GERAR PIX SEGURO";
+          btnSubmit.style.display = "flex"; // Mostra o botão novamente
+        } else {
+          tabPix.classList.remove("active");
+          tabCard.classList.add("active");
+          pixInfo.style.display = "none";
+          creditCardForm.style.display = "block";
+          submitBtnText.textContent = "CONCLUIR MINHA COMPRA SEGURA";
+          btnSubmit.style.display = "flex";
         }
+      }
+
+      tabPix.addEventListener("click", () => switchPaymentMethod("pix"));
+      tabCard.addEventListener("click", () => switchPaymentMethod("card"));
+
+
+      // 3. Máscaras de Digitação Automática
+      const inputCpf = document.getElementById("client-cpf");
+      const inputWhatsapp = document.getElementById("client-whatsapp");
+      const inputCard = document.getElementById("card-number");
+      const inputExpiry = document.getElementById("card-expiry");
+      const inputCvv = document.getElementById("card-cvv");
+
+      // Máscara CPF (000.000.000-00)
+      inputCpf.addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 9) {
+          v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+        } else if (v.length > 6) {
+          v = v.replace(/^(\d{3})(\d{3})(\d{0,3})$/, "$1.$2.$3");
+        } else if (v.length > 3) {
+          v = v.replace(/^(\d{3})(\d{0,3})$/, "$1.$2");
+        }
+        e.target.value = v;
+      });
+
+      // Máscara WhatsApp ((00) 00000-0000)
+      inputWhatsapp.addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 10) {
+          v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+        } else if (v.length > 6) {
+          v = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+        } else if (v.length > 2) {
+          v = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+        } else if (v.length > 0) {
+          v = v.replace(/^(\d{0,2})$/, "($1");
+        }
+        e.target.value = v;
+      });
+
+      // Máscara Cartão (0000 0000 0000 0000)
+      inputCard.addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 16) v = v.slice(0, 16);
+        v = v.match(/.{1,4}/g)?.join(" ") || v;
+        e.target.value = v;
+      });
+
+      // Máscara Validade (MM/AA)
+      inputExpiry.addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 4) v = v.slice(0, 4);
+        if (v.length > 2) {
+          v = v.replace(/^(\d{2})(\d{0,2})$/, "$1/$2");
+        }
+        e.target.value = v;
+      });
+
+      // Limitar tamanho CVV
+      inputCvv.addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 4) v = v.slice(0, 4);
+        e.target.value = v;
+      });
+
+
+      // 4. Submissão do Formulário de Checkout Transparente
+      const form = document.getElementById("transparent-checkout-form");
+      const loadingScreen = document.getElementById("checkout-loading-screen");
+      const loadingText = document.getElementById("checkout-loading-text");
+
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        // Limpeza de erros anteriores nas bordas
+        const inputsToValidate = form.querySelectorAll("input[required]");
+        let formValid = true;
         
-        // Smooth scroll to the top of the checkout form
+        inputsToValidate.forEach(input => {
+          if (!input.value.trim()) {
+            input.style.borderColor = "#ef4444";
+            formValid = false;
+          } else {
+            input.style.borderColor = "";
+          }
+        });
+
+        // Validação específica se Cartão de Crédito estiver selecionado
+        if (selectedMethod === "card") {
+          const cardFields = [
+            document.getElementById("card-holder-name"),
+            document.getElementById("card-number"),
+            document.getElementById("card-expiry"),
+            document.getElementById("card-cvv")
+          ];
+          cardFields.forEach(field => {
+            if (!field.value.trim()) {
+              field.style.borderColor = "#ef4444";
+              formValid = false;
+            } else {
+              field.style.borderColor = "";
+            }
+          });
+        }
+
+        if (!formValid) {
+          alert("Por favor, preencha todos os campos obrigatórios em vermelho.");
+          return;
+        }
+
+        // Dados base do cliente
+        const name = document.getElementById("client-name").value;
+        const email = document.getElementById("client-email").value;
+        const phone = document.getElementById("client-whatsapp").value.replace(/\D/g, "");
+        const cpf = document.getElementById("client-cpf").value.replace(/\D/g, "");
+
+        // Ativa a tela de carregamento
+        loadingText.textContent = "Processando pagamento seguro...";
+        loadingScreen.style.display = "flex";
+
+        try {
+          // Finaliza o perfil antifraude e pega a referência
+          if (caktoSdk && caktoSdk.completeAntifraudProfile) {
+            await caktoSdk.completeAntifraudProfile();
+          }
+          const antifraudRef = (caktoSdk && caktoSdk.getAntifraudReference) ? caktoSdk.getAntifraudReference() : "";
+
+          const corpo = {
+            method: selectedMethod === "card" ? "card" : "pix",
+            offerId: CAKTO_OFFER_ID,
+            antifraudRef: antifraudRef,
+            customer: { name: name, email: email, phone: phone, cpf: cpf }
+          };
+
+          // ── CARTÃO: tokeniza + 3DS antes de enviar ao backend ──
+          if (selectedMethod === "card") {
+            const rawExpiry = document.getElementById("card-expiry").value.split("/");
+            const card = {
+              holderName: document.getElementById("card-holder-name").value,
+              cardNumber: document.getElementById("card-number").value.replace(/\D/g, ""),
+              cvv: document.getElementById("card-cvv").value,
+              expMonth: (rawExpiry[0] || "").trim(),
+              expYear: rawExpiry[1] ? ("20" + rawExpiry[1].trim()) : ""
+            };
+
+            // 1) Tokeniza (número/CVV nunca saem daqui)
+            const tokenResp = await caktoSdk.createToken(card);
+            const cardToken = tokenResp.cardToken;
+
+            // 2) Autentica com 3D Secure
+            const authResult = await caktoSdk.authenticate3DS({
+              card: card,
+              customer: {
+                amount: VALOR_CENTAVOS,
+                currency: "BRL",
+                email: email,
+                name: name,
+                phone: phone,
+                paymentMethod: "credit"
+              }
+            });
+            if (!authResult || !authResult.success) {
+              throw new Error((authResult && authResult.error) || "Falha na autenticação 3DS do cartão.");
+            }
+
+            corpo.cardToken = cardToken;
+            corpo.installments = document.getElementById("card-installments").value;
+            corpo.threeDSecure = {
+              cavv: authResult.cavv,
+              eci: authResult.eci,
+              xid: authResult.xid,
+              referenceId: authResult.referenceId,
+              version: authResult.version
+            };
+          }
+
+          // 3) Envia pro nosso backend seguro (ele cobra com o client_secret)
+          const resp = await fetch(BACKEND_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(corpo)
+          });
+          const data = await resp.json();
+
+          if (!resp.ok) {
+            throw new Error((data && (data.detail || data.error)) || "Não foi possível processar o pagamento.");
+          }
+
+          loadingScreen.style.display = "none";
+
+          if (selectedMethod === "pix") {
+            const qr   = data.pix ? data.pix.qrCodeBase64 : "";
+            const code = data.pix ? data.pix.qrCode : "";
+            const img  = document.getElementById("pix-qrcode-img");
+            img.src = (qr && qr.indexOf("data:") === 0) ? qr : ("data:image/png;base64," + qr);
+            document.getElementById("pix-code-text").value = code || "";
+
+            pixInfo.style.display = "none";
+            btnSubmit.style.display = "none";
+            pixGeneratedScreen.style.display = "block";
+            pixGeneratedScreen.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            if (data.id) iniciarVerificacaoPix(data.id);
+
+          } else {
+            // Cartão aprovado (ou em processamento) → segue pro upsell
+            if (caktoSdk && caktoSdk.cleanupAntifraud) caktoSdk.cleanupAntifraud();
+            window.location.href = UPSELL_URL;
+          }
+
+        } catch (error) {
+          loadingScreen.style.display = "none";
+          alert("Ocorreu um erro no processamento:\n" + (error && error.message ? error.message : error) + "\n\nRevise os dados ou tente outra forma de pagamento.");
+        }
+
+      });
+
+      // 5. Função de Copiar Código PIX
+      const btnCopyPix = document.getElementById("btn-copy-pix-action");
+      if (btnCopyPix) {
+        btnCopyPix.addEventListener("click", function() {
+          const textarea = document.getElementById("pix-code-text");
+          const copyBtnText = document.getElementById("copy-btn-text");
+          
+          textarea.select();
+          textarea.setSelectionRange(0, 99999); // Suporte para mobile
+          
+          navigator.clipboard.writeText(textarea.value)
+            .then(() => {
+              copyBtnText.textContent = "CÓDIGO COPIADO! ✅";
+              btnCopyPix.style.background = "#27ae60";
+              btnCopyPix.style.color = "#fff";
+              
+              setTimeout(function() {
+                copyBtnText.textContent = "Copiar Código PIX";
+                btnCopyPix.style.background = "#ffd60a";
+                btnCopyPix.style.color = "#1a1a1a";
+              }, 2500);
+            })
+            .catch(() => {
+              alert("Não foi possível copiar automaticamente. Selecione o código e copie manualmente.");
+            });
+        });
+      }
+
+      // 6. Polling (Checagem periódica) do Status do PIX
+      let pollingInterval;
+      function iniciarVerificacaoPix(transactionId) {
+        // Verifica a cada 5 segundos se o Pix foi pago
+        pollingInterval = setInterval(function() {
+          fetch(BACKEND_URL + "?status=" + encodeURIComponent(transactionId), {
+            method: "GET"
+          })
+          .then(res => res.json())
+          .then(data => {
+            // Se retornar status aprovado ou pago
+            if (data.status === "paid" || data.status === "approved" || data.status === "completed" || data.status === "authorized") {
+              clearInterval(pollingInterval);
+              loadingText.textContent = "Pagamento confirmado! Redirecionando...";
+              loadingScreen.style.display = "flex";
+              setTimeout(function() {
+                window.location.href = UPSELL_URL;
+              }, 1500);
+            }
+          })
+          .catch(err => {
+            console.log("Erro na verificação do Pix:", err);
+          });
+        }, 5000);
+
+        // Cancela a verificação automática após 10 minutos (expiração do Pix)
         setTimeout(function() {
-          checkoutWrap.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100); // 100ms delay to ensure DOM styling has updated
-      });
+          clearInterval(pollingInterval);
+        }, 600000);
+      }
 
-      // Hide loading spinner once the iframe has completed loading
-      iframe.addEventListener("load", function() {
-        if (iframe.src !== "about:blank") {
-          loader.classList.add("hidden");
-        }
-      });
     });
   </script>
 
