@@ -1534,7 +1534,7 @@
               cardNumber: document.getElementById("card-number").value.replace(/\D/g, ""),
               cvv: document.getElementById("card-cvv").value,
               expMonth: (rawExpiry[0] || "").trim(),
-              expYear: rawExpiry[1] ? ("20" + rawExpiry[1].trim()) : ""
+              expYear: (rawExpiry[1] || "").trim()
             };
 
             // Tokeniza (número/CVV nunca saem daqui — só o token)
