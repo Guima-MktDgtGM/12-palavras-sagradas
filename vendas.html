@@ -1526,7 +1526,7 @@
             customer: { name: name, email: email, phone: phone, cpf: cpf }
           };
 
-          // ── CARTÃO (sem 3DS, mínimo atrito): só tokeniza e envia ──
+          // ── CARTÃO (com 3DS): tokeniza → autentica 3DS → envia ──
           if (selectedMethod === "card") {
             const rawExpiry = document.getElementById("card-expiry").value.split("/");
             const card = {
@@ -1537,10 +1537,33 @@
               expYear: (rawExpiry[1] || "").trim()
             };
 
-            // Tokeniza (número/CVV nunca saem daqui — só o token)
+            // 1) Tokeniza (número/CVV nunca saem daqui — só o token)
             const tokenResp = await caktoSdk.createToken(card);
             corpo.cardToken = tokenResp.cardToken;
             corpo.installments = document.getElementById("card-installments").value;
+
+            // 2) Autentica com 3D Secure (joga a responsabilidade pro banco = aprova mais)
+            const authResult = await caktoSdk.authenticate3DS({
+              card: card,
+              customer: {
+                amount: VALOR_CENTAVOS,
+                currency: "BRL",
+                email: email,
+                name: name,
+                phone: phone,
+                paymentMethod: "credit"
+              }
+            });
+            if (!authResult || !authResult.success) {
+              throw new Error((authResult && authResult.error) || "Falha na autenticação 3DS do cartão.");
+            }
+            corpo.threeDSecure = {
+              cavv: authResult.cavv,
+              eci: authResult.eci,
+              xid: authResult.xid,
+              referenceId: authResult.referenceId,
+              version: authResult.version
+            };
           }
 
           // 3) Envia pro nosso backend seguro (ele cobra com o client_secret)

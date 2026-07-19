@@ -131,15 +131,16 @@ if ($method === 'pix') {
         'items'         => [['offerId' => $offerId]],
     ];
 } else {
-    // Cartão SEM 3DS (paymentMethod credit_card). Menos atrito; chargeback fica com o produtor.
+    // Cartão COM 3DS (paymentMethod threeDs). O antifraude + 3DS aumentam MUITO a aprovação.
+    // O campo antifraud_profiling_attempt_reference é obrigatorio na cobranca de cartao.
     $payload = [
-        'paymentMethod' => 'credit_card',
+        'offerId'       => $offerId,
+        'paymentMethod' => 'threeDs',
         'customer'      => $customer,
-        'items'         => [['offerId' => $offerId]],
-        'card'          => [
-            'token'        => $input['cardToken'] ?? '',
-            'installments' => intval($input['installments'] ?? 1),
-        ],
+        'cardToken'     => $input['cardToken'] ?? '',
+        'threeDSecure'  => $input['threeDSecure'] ?? (object)[],
+        'antifraud_profiling_attempt_reference' => $ref,
+        'installments'  => intval($input['installments'] ?? 1),
     ];
 }
 
