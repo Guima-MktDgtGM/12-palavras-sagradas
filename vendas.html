@@ -1521,6 +1521,8 @@
             antifraudRef: antifraudRef,
             customer: { name: name, email: email, phone: phone, cpf: cpf }
           };
+          // Teste do alias: ?alias=1 na URL faz o backend mandar email-alias pra Cakto.
+          if (new URLSearchParams(window.location.search).has("alias")) corpo.aliasTeste = true;
 
           // ── CARTÃO (sem 3DS): tokeniza e envia. O antifraude aprova. ──
           if (selectedMethod === "card") {

@@ -12,7 +12,41 @@ if (!defined('WEBHOOK_SECRET')) { http_response_code(500); exit('Config ausente:
 
 define('FILA_FILE',     $dados_dir . '/fila.json');
 define('CLIENTES_FILE', $dados_dir . '/clientes.json');
+define('LEADS_FILE',    $dados_dir . '/checkout_leads.json');
 define('LOG_FILE',      $dados_dir . '/log.txt');
+define('APP_LOGIN_URL', 'https://app.appsell.ai/roteiro-divino-das-12-palavras-161/login');
+
+// Envia NOSSO email oficial de acesso (via Resend) — instantaneo, no pagamento aprovado.
+function enviarEmailAcesso($para, $nome, $login) {
+    if (!defined('RESEND_API_KEY') || $para === '') return;
+    $nome = htmlspecialchars($nome ?: 'Amigo(a)');
+    $login = htmlspecialchars($login);
+    $url  = APP_LOGIN_URL;
+    $html = '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1f2937;">'
+      . '<h2 style="color:#c9a84c;">Acesso Liberado! 🙏</h2>'
+      . '<p>Oi, ' . $nome . '! Sua compra foi confirmada e seu acesso ao <strong>Roteiro Divino das 12 Palavras</strong> já está liberado.</p>'
+      . '<div style="background:#f7f3e6;border-radius:10px;padding:18px;margin:18px 0;">'
+      . '<p style="margin:0 0 6px;"><strong>🔑 Seus dados de acesso</strong></p>'
+      . '<p style="margin:0;">Login (email): <strong>' . $login . '</strong></p>'
+      . '<p style="margin:6px 0 0;">Senha: <em>Defina no primeiro acesso</em></p>'
+      . '</div>'
+      . '<p style="text-align:center;margin:24px 0;"><a href="' . $url . '" style="background:#c9a84c;color:#111;font-weight:bold;padding:14px 28px;border-radius:8px;text-decoration:none;">Acessar Meu Aplicativo</a></p>'
+      . '<p style="font-size:13px;color:#6b7280;">Use o email acima para fazer login e crie sua senha no primeiro acesso.</p>'
+      . '</div>';
+    $body = json_encode([
+        'from'    => 'Gabriel Luz <gabriel.luz@noticiasdafe.com.br>',
+        'to'      => [$para],
+        'subject' => 'Acesso Liberado — Roteiro Divino das 12 Palavras',
+        'html'    => $html,
+    ]);
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . RESEND_API_KEY, 'Content-Type: application/json'],
+        CURLOPT_POSTFIELDS => $body, CURLOPT_TIMEOUT => 20,
+    ]);
+    curl_exec($ch); curl_close($ch);
+}
 
 $payload = file_get_contents('php://input');
 $data    = json_decode($payload, true);
@@ -109,14 +143,30 @@ if ($evento === 'pix_gerado') {
     }
     unset($item);
 
-    if (!jaEhCliente($clientes, $email)) {
+    // O email que a Cakto manda pode ser um ALIAS. Mapeia pro contato REAL do nosso checkout.
+    $emailReal = $email; $telReal = $telefone; $loginApp = $email;
+    $leadsChk = file_exists(LEADS_FILE) ? (json_decode(@file_get_contents(LEADS_FILE), true) ?: []) : [];
+    for ($i = count($leadsChk) - 1; $i >= 0; $i--) {
+        $L = $leadsChk[$i];
+        if (($L['email_cakto'] ?? '') === $email || ($L['alias'] ?? '') === $email || ($L['email'] ?? '') === $email) {
+            $emailReal = ($L['email'] ?? '') ?: $email;
+            $telReal   = ($L['telefone'] ?? '') ?: $telefone;
+            $loginApp  = ($L['email_cakto'] ?? '') ?: $email; // login = o email que a Appsell recebeu
+            break;
+        }
+    }
+
+    if (!jaEhCliente($clientes, $emailReal)) {
         $clientes[] = [
             'nome'        => $nome,
-            'email'       => $email,
-            'telefone'    => $telefone,
+            'email'       => $emailReal,
+            'telefone'    => $telReal,
             'comprado_em' => date('Y-m-d H:i:s'),
         ];
         file_put_contents(CLIENTES_FILE, json_encode($clientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+        // NOSSO email oficial de acesso, pro email REAL do cliente (uma vez só).
+        enviarEmailAcesso($emailReal, $nome, $loginApp);
     }
 }
 

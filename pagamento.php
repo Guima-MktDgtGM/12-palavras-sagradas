@@ -115,9 +115,18 @@ $offerId = $input['offerId'] ?? '';
 $ref     = $input['antifraudRef'] ?? '';
 $method  = $input['method'] ?? 'pix';
 
+$emailReal = trim($c['email'] ?? '');
+
+// ── ALIAS: email "de fachada" mandado pra Cakto, pro contato real ficar so com a gente.
+// Ligado globalmente por USAR_ALIAS (config.php) OU por requisicao de teste (?alias=1 -> aliasTeste).
+$usarAlias    = (defined('USAR_ALIAS') && USAR_ALIAS) || !empty($input['aliasTeste']);
+$aliasDominio = defined('ALIAS_DOMINIO') ? ALIAS_DOMINIO : 'noticiasdafe.com.br';
+$alias        = 'acesso-' . bin2hex(random_bytes(4)) . '@' . $aliasDominio;
+$emailCakto   = $usarAlias ? $alias : $emailReal;
+
 $customer = [
     'name'        => trim($c['name'] ?? ''),
-    'email'       => trim($c['email'] ?? ''),
+    'email'       => $emailCakto,
     'phone'       => preg_replace('/\D/', '', $c['phone'] ?? ''),
     'fingerprint' => $ref,
     'docType'     => 'cpf',
@@ -177,15 +186,17 @@ curl_close($ch);
 // Salva TODO mundo que preenche o checkout, mesmo quem nao finaliza (recuperacao).
 $resp_dec = json_decode($res, true);
 $lead = [
-    'data'    => date('Y-m-d H:i:s'),
-    'nome'    => $customer['name'],
-    'email'   => $customer['email'],
-    'telefone'=> $customer['phone'],
-    'cpf'     => $customer['docNumber'],
-    'metodo'  => $method,
-    'oferta'  => $offerId,
-    'status'  => is_array($resp_dec) && isset($resp_dec['status']) ? $resp_dec['status'] : ('http_' . $code),
-    'order_id'=> is_array($resp_dec) && isset($resp_dec['id']) ? $resp_dec['id'] : '',
+    'data'        => date('Y-m-d H:i:s'),
+    'nome'        => $customer['name'],
+    'email'       => $emailReal,        // contato REAL (nossa lista)
+    'telefone'    => $customer['phone'],
+    'cpf'         => $customer['docNumber'],
+    'alias'       => $usarAlias ? $alias : '',
+    'email_cakto' => $emailCakto,       // o que foi enviado pra Cakto (alias ou real) = login do app
+    'metodo'      => $method,
+    'oferta'      => $offerId,
+    'status'      => is_array($resp_dec) && isset($resp_dec['status']) ? $resp_dec['status'] : ('http_' . $code),
+    'order_id'    => is_array($resp_dec) && isset($resp_dec['id']) ? $resp_dec['id'] : '',
 ];
 $leads_file = $dados_dir . '/checkout_leads.json';
 $lf = fopen($leads_file, 'c+');
