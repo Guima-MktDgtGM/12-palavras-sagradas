@@ -397,32 +397,43 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 })();
 </script>
 
-<!-- Auto-clique invisível no botão "Pagar" -->
+<!-- Novo Script de One-Click Direto para Cakto -->
 <script>
 (function() {
-  function interceptarEConfirmar() {
-    var todos = Array.prototype.slice.call(document.querySelectorAll('button, a, div, [role="button"]'));
+  function dispararCobrancaSilenciosa() {
+    var elementos = Array.prototype.slice.call(document.querySelectorAll('button, a, div, [role="button"]'));
+    
+    // Varre inclusive os elementos escondidos no Shadow DOM da Cakto
     document.querySelectorAll('cakto-upsell-accept, cakto-upsell-buttons').forEach(function(comp){
       if (comp.shadowRoot) {
-        todos = todos.concat(Array.prototype.slice.call(comp.shadowRoot.querySelectorAll('button, a, div, [role="button"]')));
+        elementos = elementos.concat(Array.prototype.slice.call(comp.shadowRoot.querySelectorAll('button, a, div, [role="button"]')));
       }
     });
-    var botaoPagar = todos.find(function(el){
+
+    // Procura o botão real de cobrança "Pagar" dentro do modal
+    var botaoConfirmarReal = elementos.find(function(el){
       var texto = el.textContent ? el.textContent.trim().toLowerCase() : '';
-      return texto === 'pagar';
+      return texto === 'pagar' || texto === 'confirmar';
     });
-    if (botaoPagar) { botaoPagar.click(); return true; }
+
+    if (botaoConfirmarReal) { 
+      botaoConfirmarReal.click(); 
+      return true; 
+    }
     return false;
   }
+
+  // Monitora o clique no botão principal para liquidar o pop-up instantaneamente
   document.addEventListener('click', function(event){
     var target = event.target;
     if (target && ((target.closest && target.closest('cakto-upsell-accept')) || target.tagName === 'CAKTO-UPSELL-ACCEPT')) {
+      // Executa varreduras ultra-rápidas (a cada 10ms) para clicar no "Pagar" antes do modal desenhar na tela
       var tentativas = 0;
-      var varredura = setInterval(function(){
+      var loopCobranca = setInterval(function(){
         tentativas++;
-        var ok = interceptarEConfirmar();
-        if (ok || tentativas > 130) clearInterval(varredura);
-      }, 30);
+        var sucesso = dispararCobrancaSilenciosa();
+        if (sucesso || tentativas > 50) clearInterval(loopCobranca);
+      }, 10);
     }
   });
 })();
