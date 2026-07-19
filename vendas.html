@@ -1616,7 +1616,7 @@
             // Cartão: resposta é síncrona (paid / declined / refused)
             if (data.status !== "paid") {
               const dbg = new URLSearchParams(window.location.search).has("teste")
-                ? ("\n\n[DEBUG] status=" + (data.status || "?") + "\nresposta=" + JSON.stringify(data))
+                ? ("\n\n[DEBUG] status=" + (data.status || "?") + "\nantifraudRef=" + JSON.stringify(corpo.antifraudRef) + "\nresposta=" + JSON.stringify(data))
                 : "";
               throw new Error((data.status === "declined"
                 ? "Cartão recusado pelo banco. Confira os dados ou use outro cartão."
