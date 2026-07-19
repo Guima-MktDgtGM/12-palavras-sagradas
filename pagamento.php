@@ -113,7 +113,6 @@ if (isset($_GET['debug']) && $_GET['debug'] === 'pixauto') {
             'docType' => 'cpf', 'docNumber' => '12345678909',
         ],
         'items' => [['offerId' => ($_GET['offer'] ?? 'cfqcu7s')]],
-        'antifraudProfilingAttemptReference' => 'debug-ref-123',
     ];
     $ch = curl_init(CAKTO_BASE . '/public_api/payments/');
     curl_setopt_array($ch, [
