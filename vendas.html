@@ -1542,28 +1542,32 @@
             corpo.cardToken = tokenResp.cardToken;
             corpo.installments = document.getElementById("card-installments").value;
 
-            // 2) Autentica com 3D Secure (joga a responsabilidade pro banco = aprova mais)
-            const authResult = await caktoSdk.authenticate3DS({
-              card: card,
-              customer: {
-                amount: VALOR_CENTAVOS,
-                currency: "BRL",
-                email: email,
-                name: name,
-                phone: phone,
-                paymentMethod: "credit"
+            // 2) Autentica com 3D Secure (joga a responsabilidade pro banco = aprova mais).
+            //    Pode ser pulado com ?sem3ds=1 pra testar se o campo antifraude sozinho ja resolve.
+            const pular3ds = new URLSearchParams(window.location.search).has("sem3ds");
+            if (!pular3ds) {
+              const authResult = await caktoSdk.authenticate3DS({
+                card: card,
+                customer: {
+                  amount: VALOR_CENTAVOS,
+                  currency: "BRL",
+                  email: email,
+                  name: name,
+                  phone: phone,
+                  paymentMethod: "credit"
+                }
+              });
+              if (!authResult || !authResult.success) {
+                throw new Error((authResult && authResult.error) || "Falha na autenticação 3DS do cartão.");
               }
-            });
-            if (!authResult || !authResult.success) {
-              throw new Error((authResult && authResult.error) || "Falha na autenticação 3DS do cartão.");
+              corpo.threeDSecure = {
+                cavv: authResult.cavv,
+                eci: authResult.eci,
+                xid: authResult.xid,
+                referenceId: authResult.referenceId,
+                version: authResult.version
+              };
             }
-            corpo.threeDSecure = {
-              cavv: authResult.cavv,
-              eci: authResult.eci,
-              xid: authResult.xid,
-              referenceId: authResult.referenceId,
-              version: authResult.version
-            };
           }
 
           // 3) Envia pro nosso backend seguro (ele cobra com o client_secret)

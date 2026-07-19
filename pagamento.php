@@ -130,7 +130,7 @@ if ($method === 'pix') {
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
     ];
-} else {
+} elseif (!empty($input['threeDSecure'])) {
     // Cartão COM 3DS (paymentMethod threeDs). O antifraude + 3DS aumentam MUITO a aprovação.
     // O campo antifraud_profiling_attempt_reference é obrigatorio na cobranca de cartao.
     $payload = [
@@ -138,7 +138,17 @@ if ($method === 'pix') {
         'paymentMethod' => 'threeDs',
         'customer'      => $customer,
         'cardToken'     => $input['cardToken'] ?? '',
-        'threeDSecure'  => $input['threeDSecure'] ?? (object)[],
+        'threeDSecure'  => $input['threeDSecure'],
+        'antifraud_profiling_attempt_reference' => $ref,
+        'installments'  => intval($input['installments'] ?? 1),
+    ];
+} else {
+    // Cartão SEM 3DS (credit_card), mas COM a ref antifraude obrigatoria (que faltava antes).
+    $payload = [
+        'offerId'       => $offerId,
+        'paymentMethod' => 'credit_card',
+        'customer'      => $customer,
+        'cardToken'     => $input['cardToken'] ?? '',
         'antifraud_profiling_attempt_reference' => $ref,
         'installments'  => intval($input['installments'] ?? 1),
     ];
