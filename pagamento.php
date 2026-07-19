@@ -14,6 +14,7 @@ if (!defined('CAKTO_CLIENT_ID') || !defined('CAKTO_CLIENT_SECRET')) {
 
 define('CAKTO_BASE', 'https://api.cakto.com.br');
 define('TOKEN_CACHE', $dados_dir . '/cakto_token.json');
+define('CAKTO_PRODUCT_ID', '944bd7e8-aac1-4a19-9864-0d81c4f90cbc'); // produto R$67
 
 function uuidv4() {
     $d = random_bytes(16);
@@ -101,6 +102,7 @@ $customer = [
 
 if ($method === 'pix') {
     $payload = [
+        'productId'     => CAKTO_PRODUCT_ID,
         'paymentMethod' => 'pix',
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
@@ -109,6 +111,7 @@ if ($method === 'pix') {
 } else {
     // Cartão SEM 3DS (paymentMethod credit_card). Menos atrito; chargeback fica com o produtor.
     $payload = [
+        'productId'     => CAKTO_PRODUCT_ID,
         'paymentMethod' => 'credit_card',
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
