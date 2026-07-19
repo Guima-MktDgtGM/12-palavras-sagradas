@@ -107,13 +107,15 @@ if ($method === 'pix') {
         'antifraudProfilingAttemptReference' => $ref,
     ];
 } else {
+    // Cartão SEM 3DS (paymentMethod credit_card). Menos atrito; chargeback fica com o produtor.
     $payload = [
-        'paymentMethod' => 'threeDs',
+        'paymentMethod' => 'credit_card',
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
-        'cardToken'     => $input['cardToken'] ?? '',
-        'threeDSecure'  => $input['threeDSecure'] ?? (object)[],
-        'installments'  => intval($input['installments'] ?? 1),
+        'card'          => [
+            'token'        => $input['cardToken'] ?? '',
+            'installments' => intval($input['installments'] ?? 1),
+        ],
         'antifraudProfilingAttemptReference' => $ref,
     ];
 }
