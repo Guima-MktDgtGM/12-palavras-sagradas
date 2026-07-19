@@ -146,7 +146,11 @@ $telReal   = preg_replace('/\D/', '', $c['phone'] ?? '');
 // LIGADO por padrao. Para desligar em emergencia: define('USAR_ALIAS', false) no config.php.
 $usarAlias    = !(defined('USAR_ALIAS') && USAR_ALIAS === false);
 $aliasDominio = defined('ALIAS_DOMINIO') ? ALIAS_DOMINIO : 'noticiasdafe.com.br';
-$alias        = 'acesso-' . bin2hex(random_bytes(4)) . '@' . $aliasDominio;
+// Alias DETERMINISTICO por CPF: mesma pessoa (mesmo CPF) => mesmo alias => mesma conta na Appsell.
+// Assim o upsell/acelerador cai na MESMA conta do produto principal. Sem CPF, cai em aleatorio.
+$cpfDigits    = preg_replace('/\D/', '', $c['cpf'] ?? '');
+$aliasSeed    = $cpfDigits !== '' ? substr(hash('sha256', $cpfDigits . '_rd777'), 0, 12) : bin2hex(random_bytes(6));
+$alias        = 'acesso-' . $aliasSeed . '@' . $aliasDominio;
 $telFake      = '119' . str_pad((string)random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
 $emailCakto   = $usarAlias ? $alias   : $emailReal;
 $telCakto     = $usarAlias ? $telFake : $telReal;
