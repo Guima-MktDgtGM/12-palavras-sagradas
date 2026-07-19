@@ -176,6 +176,7 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.18);
       animation: ctaPulse 1.4s ease-in-out infinite;
       transition: transform .15s ease, background .15s ease;
+      cursor: pointer;
     }
     .cta-comprar svg { flex-shrink: 0; }
     .cta-comprar:hover { transform: translateY(-2px); background: #ffca08; }
@@ -356,29 +357,76 @@
     .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
     .footer-links a { color: rgba(255,255,255,0.5); font-size: 11px; }
     .footer-links a:hover { color: #fff; }
-  </style>
-  <!-- VTurb Preload -->
-  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-  <link rel="preload" href="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a4308ac40698aa96bc82b84/v4/player.js" as="script">
-  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-  <link rel="preload" href="https://cdn.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/6a4307c36c1fb1e13ed979b1/main.m3u8" as="fetch">
-  <link rel="dns-prefetch" href="https://cdn.converteai.net">
-  <link rel="dns-prefetch" href="https://scripts.converteai.net">
-  <link rel="dns-prefetch" href="https://images.converteai.net">
-  <link rel="dns-prefetch" href="https://license.vturb.com">
-  <!-- End VTurb Preload -->
 
-  <!-- Utmify Pixel (substitui o Meta Pixel; envia eventos ao Meta via Utmify com atribuicao de UTM) -->
-  <script>
-    window.pixelId = "6a53ea5224293bf6401a9234";
-    var a = document.createElement("script");
-    a.setAttribute("async", "");
-    a.setAttribute("defer", "");
-    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-    document.head.appendChild(a);
-  </script>
-  <!-- End Utmify Pixel -->
-  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    /* ---- CHECKOUT INLINE CONTAINER ---- */
+    .checkout-inline-container {
+      margin: 30px auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      background: #fff;
+      display: none; /* Começa oculto */
+      position: relative;
+      max-width: 500px;
+    }
+    
+    .checkout-inline-loader {
+      padding: 50px 20px;
+      text-align: center;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    
+    .checkout-inline-loader.hidden {
+      display: none;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(166, 11, 13, 0.1);
+      border-left-color: #a60b0d;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    .checkout-inline-loader p {
+      margin-top: 15px;
+      font-family: Poppins, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .checkout-iframe {
+      width: 100%;
+      height: 720px;
+      border: none;
+      display: block;
+      background: transparent;
+    }
+    
+    @media (max-width: 480px) {
+      .checkout-inline-container {
+        margin: 20px 0;
+        border-radius: 12px;
+      }
+      .checkout-iframe {
+        height: 760px; /* Um pouco mais alto no mobile para caber o teclado sem espremer o layout */
+      }
+    }
+  </style>
+</head>
 <body>
 
   <!-- HEADER -->
@@ -457,6 +505,18 @@
           Apple Pay
         </span>
       </div>
+    </div>
+
+    <!-- CHECKOUT INLINE INTEGRADO (Abaixo do CTA e acima dos comentários do FB) -->
+    <div id="checkout-inline-wrap" class="checkout-inline-container">
+      <!-- Loader para o checkout na própria página -->
+      <div id="checkout-inline-loader" class="checkout-inline-loader">
+        <div class="spinner"></div>
+        <p>Preparando formulário de pagamento seguro...</p>
+      </div>
+
+      <!-- Iframe do checkout da Cakto -->
+      <iframe class="checkout-iframe" id="checkout-inline-iframe" src="about:blank" allow="payment"></iframe>
     </div>
 
     <!-- COMENTÁRIOS -->
@@ -841,6 +901,46 @@
       var base = btn.getAttribute("href");
       btn.setAttribute("href", base + (base.indexOf("?") > -1 ? "&" : "?") + qs);
     })();
+  </script>
+
+  <!-- SCRIPT FOR INTEGRATING AND AUTO-SCROLLING TO INLINE CHECKOUT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var checkoutBtn = document.getElementById("btn-checkout-front");
+      var checkoutWrap = document.getElementById("checkout-inline-wrap");
+      var iframe = document.getElementById("checkout-inline-iframe");
+      var loader = document.getElementById("checkout-inline-loader");
+
+      if (!checkoutBtn || !checkoutWrap || !iframe) return;
+
+      // Click event for the CTA button
+      checkoutBtn.addEventListener("click", function(e) {
+        e.preventDefault(); // Prevent standard page navigation
+        
+        var targetUrl = checkoutBtn.getAttribute("href");
+        
+        // Show the checkout container if hidden
+        checkoutWrap.style.display = "block";
+        
+        // Set the checkout URL to iframe (only if not loaded yet)
+        if (iframe.src === "about:blank" || iframe.src !== targetUrl) {
+          loader.classList.remove("hidden");
+          iframe.src = targetUrl;
+        }
+        
+        // Smooth scroll to the top of the checkout form
+        setTimeout(function() {
+          checkoutWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100); // 100ms delay to ensure DOM styling has updated
+      });
+
+      // Hide loading spinner once the iframe has completed loading
+      iframe.addEventListener("load", function() {
+        if (iframe.src !== "about:blank") {
+          loader.classList.add("hidden");
+        }
+      });
+    });
   </script>
 
 </body>
