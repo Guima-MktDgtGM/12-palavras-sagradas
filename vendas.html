@@ -20,6 +20,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <!-- Cakto SDK (tokenizacao de cartao, 3DS e antifraude) -->
   <script src="https://cakto-sdk.pages.dev/cakto-sdk.min.js"></script>
+  <!-- Gerador de QR Code (para o Pix copia-e-cola) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   
   <style>
     *, ::after, ::before, body { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1340,9 +1342,20 @@
       const checkoutBtn = document.getElementById("btn-checkout-front");
       const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
-      // TEMPORÁRIO: botão leva direto pro checkout hospedado da Cakto (transparente em teste).
-      // Mantém o formulário transparente escondido até finalizarmos a integração.
-      if (checkoutWrapper) checkoutWrapper.style.display = "none";
+      // MODO TESTE: só quando a URL tem ?teste=1 o formulário transparente é ativado.
+      // O público normal continua indo pro checkout hospedado (href do botão).
+      const modoTeste = new URLSearchParams(window.location.search).has("teste");
+      if (modoTeste && checkoutBtn && checkoutWrapper) {
+        checkoutBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          checkoutWrapper.style.display = "block";
+          setTimeout(function() {
+            checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        });
+      } else if (checkoutWrapper) {
+        checkoutWrapper.style.display = "none";
+      }
 
       // 2. Lógica das Abas de Pagamento (PIX vs Cartão)
       const tabPix = document.getElementById("tab-pix");
@@ -1545,11 +1558,22 @@
           loadingScreen.style.display = "none";
 
           if (selectedMethod === "pix") {
-            const qr   = data.pix ? data.pix.qrCodeBase64 : "";
             const code = data.pix ? data.pix.qrCode : "";
+            const b64  = data.pix ? data.pix.qrCodeBase64 : "";
             const img  = document.getElementById("pix-qrcode-img");
-            img.src = (qr && qr.indexOf("data:") === 0) ? qr : ("data:image/png;base64," + qr);
             document.getElementById("pix-code-text").value = code || "";
+
+            // A Cakto devolve só o texto (copia-e-cola). Geramos a imagem do QR aqui.
+            if (b64) {
+              img.src = (b64.indexOf("data:") === 0) ? b64 : ("data:image/png;base64," + b64);
+            } else if (code && typeof qrcode !== "undefined") {
+              try {
+                const q = qrcode(0, "M");
+                q.addData(code);
+                q.make();
+                img.src = q.createDataURL(6, 8);
+              } catch (e) { console.warn("Falha ao gerar QR:", e); }
+            }
 
             pixInfo.style.display = "none";
             btnSubmit.style.display = "none";
