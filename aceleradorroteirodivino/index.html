@@ -47,7 +47,7 @@ h1 .gold{color:#bf8f2e;}
 .subtitle{font-size:17px;color:#5f5876;max-width:560px;margin:15px auto 0;}
 
 /* Estilo do Container do Vídeo */
-.video-wrapper {width:100%;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,0.15);margin:25px 0;}
+.video-wrapper {width:100%;margin:25px 0;}
 
 /* Resto da página oculto inicialmente */
 #resto-pagina{display:none;}
@@ -205,12 +205,16 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         </div>
         <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
 
-        <!-- Primeiro CTA Intermediário -->
+        <!-- Primeiro CTA Intermediário — rola ate a area de pagamento -->
         <div class="cta-area" style="margin-top: 32px;">
-          <cakto-upsell-buttons>
-            <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="x8q7utk" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">QUERO ADICIONAR O ACELERADOR AGORA</cakto-upsell-accept>
-          </cakto-upsell-buttons>
+          <button type="button" id="btn-ir-pagamento" style="width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border:none;border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.1vw,20px);font-weight:800;color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,.3);">QUERO ADICIONAR O ACELERADOR AGORA</button>
         </div>
+        <script>
+          (function(){
+            var b=document.getElementById('btn-ir-pagamento');
+            if(b) b.addEventListener('click',function(){ var a=document.getElementById('area-pagamento'); if(a) a.scrollIntoView({behavior:'smooth',block:'start'}); });
+          })();
+        </script>
       </div>
 
       <!-- Recomendado -->
@@ -289,7 +293,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         </div>
 
         <!-- CHECKOUT UNIFICADO DO UPSELL -->
-        <div class="section" style="text-align:center;">
+        <div class="section" id="area-pagamento" style="text-align:center;">
           <h2 style="margin-bottom:18px;">Como você vai confirmar o presente?</h2>
 
           <!-- Cabecalho PayPal (igual landing) -->
