@@ -229,6 +229,7 @@ $labels = [
   <a href="?aba=leads" class="aba <?= $aba==='leads'?'ativa':'' ?>">📋 Leads</a>
   <a href="?aba=recuperacao" class="aba <?= $aba==='recuperacao'?'ativa':'' ?>">📱 Recuperação (WhatsApp)</a>
   <a href="?aba=clientes" class="aba <?= $aba==='clientes'?'ativa':'' ?>">🏆 Clientes</a>
+  <a href="?aba=checkout" class="aba <?= $aba==='checkout'?'ativa':'' ?>">🛒 Checkout</a>
   <a href="?aba=horarios" class="aba <?= $aba==='horarios'?'ativa':'' ?>">📊 Horários</a>
 </div>
 
@@ -394,6 +395,60 @@ $labels = [
       <td><?= htmlspecialchars($c['email'] ?? '-') ?></td>
       <td style="color:#9a8fbb;"><?= htmlspecialchars($c['telefone'] ?? '-') ?></td>
       <td style="font-size:13px;color:#2ecc71;"><?= $c['comprado_em'] ?? '-' ?></td>
+    </tr>
+    <?php endforeach; ?>
+  <?php endif; ?>
+  </tbody>
+</table>
+
+<?php elseif ($aba === 'checkout'):
+  // Leads capturados no checkout transparente (email/telefone REAIS, mesmo quem nao pagou)
+  $chk_file = __DIR__ . '/../dados/checkout_leads.json';
+  $chk = file_exists($chk_file) ? json_decode(@file_get_contents($chk_file), true) : [];
+  if (!is_array($chk)) $chk = [];
+  // Dedup por telefone, mantendo o registro mais recente
+  $chk_uniq = [];
+  foreach ($chk as $r) { $chk_uniq[$r['telefone'] ?? uniqid()] = $r; }
+  $chk_uniq = array_values($chk_uniq);
+?>
+
+<p style="font-size:14px;color:#9a8fbb;margin-bottom:18px;">
+  Contatos <strong>reais</strong> capturados no checkout transparente — <strong>sua lista</strong>, incluindo quem preencheu e <strong>não finalizou</strong> (ótimo pra recuperação). Deduplicado por telefone.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Data</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Método</th>
+      <th>Status</th>
+      <th>WhatsApp</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php if (empty($chk_uniq)): ?>
+    <tr><td colspan="8" style="text-align:center;color:#6a5f8a;padding:30px;">Nenhum lead de checkout ainda.</td></tr>
+  <?php else: ?>
+    <?php foreach (array_reverse($chk_uniq) as $i => $r):
+      $tel = preg_replace('/\D/', '', $r['telefone'] ?? '');
+      $wa  = (strlen($tel) <= 11 ? '55'.$tel : $tel);
+      $pago = ($r['status'] ?? '') === 'paid';
+    ?>
+    <tr>
+      <td style="color:#6a5f8a;"><?= count($chk_uniq) - $i ?></td>
+      <td style="font-size:13px;color:#9a8fbb;"><?= htmlspecialchars($r['data'] ?? '-') ?></td>
+      <td><?= htmlspecialchars($r['nome'] ?? '-') ?></td>
+      <td><?= htmlspecialchars($r['email'] ?? '-') ?></td>
+      <td style="color:#9a8fbb;"><?= htmlspecialchars($r['telefone'] ?? '-') ?></td>
+      <td style="font-size:13px;color:#c080f0;"><?= htmlspecialchars($r['metodo'] ?? '-') ?></td>
+      <td style="font-size:13px;color:<?= $pago ? '#2ecc71' : '#f0c060' ?>;"><?= htmlspecialchars($r['status'] ?? '-') ?></td>
+      <td>
+        <a href="https://wa.me/<?= $wa ?>" target="_blank" style="display:inline-block;background:#25d366;color:#052e16;font-weight:700;font-size:13px;padding:7px 14px;border-radius:8px;text-decoration:none;">💬 Chamar</a>
+      </td>
     </tr>
     <?php endforeach; ?>
   <?php endif; ?>

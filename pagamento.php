@@ -173,5 +173,36 @@ $res = curl_exec($ch);
 $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
+// ─── Captura do lead REAL (email/telefone do cliente) pro nosso banco ─────────
+// Salva TODO mundo que preenche o checkout, mesmo quem nao finaliza (recuperacao).
+$resp_dec = json_decode($res, true);
+$lead = [
+    'data'    => date('Y-m-d H:i:s'),
+    'nome'    => $customer['name'],
+    'email'   => $customer['email'],
+    'telefone'=> $customer['phone'],
+    'cpf'     => $customer['docNumber'],
+    'metodo'  => $method,
+    'oferta'  => $offerId,
+    'status'  => is_array($resp_dec) && isset($resp_dec['status']) ? $resp_dec['status'] : ('http_' . $code),
+    'order_id'=> is_array($resp_dec) && isset($resp_dec['id']) ? $resp_dec['id'] : '',
+];
+$leads_file = $dados_dir . '/checkout_leads.json';
+$lf = fopen($leads_file, 'c+');
+if ($lf) {
+    if (flock($lf, LOCK_EX)) {
+        $raw = stream_get_contents($lf);
+        $leads = $raw ? json_decode($raw, true) : [];
+        if (!is_array($leads)) $leads = [];
+        $leads[] = $lead;
+        ftruncate($lf, 0);
+        rewind($lf);
+        fwrite($lf, json_encode($leads, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        fflush($lf);
+        flock($lf, LOCK_UN);
+    }
+    fclose($lf);
+}
+
 http_response_code($code);
 echo $res ?: json_encode(['error' => 'Sem resposta da Cakto.']);
