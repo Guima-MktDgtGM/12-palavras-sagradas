@@ -22,16 +22,16 @@ function enviarEmailAcesso($para, $nome, $login) {
     $nome = htmlspecialchars($nome ?: 'Amigo(a)');
     $login = htmlspecialchars($login);
     $url  = APP_LOGIN_URL;
-    $html = '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1f2937;">'
-      . '<h2 style="color:#c9a84c;">Acesso Liberado! 🙏</h2>'
-      . '<p>Oi, ' . $nome . '! Sua compra foi confirmada e seu acesso ao <strong>Roteiro Divino das 12 Palavras</strong> já está liberado.</p>'
-      . '<div style="background:#f7f3e6;border-radius:10px;padding:18px;margin:18px 0;">'
-      . '<p style="margin:0 0 6px;"><strong>🔑 Seus dados de acesso</strong></p>'
-      . '<p style="margin:0;">Login (email): <strong>' . $login . '</strong></p>'
-      . '<p style="margin:6px 0 0;">Senha: <em>Defina no primeiro acesso</em></p>'
+    $html = '<div style="font-family:Arial,sans-serif;max-width:440px;margin:0 auto;text-align:center;color:#1f2937;">'
+      . '<img src="https://noticiasdafe.com.br/Imagens/logo.png" alt="Roteiro Divino" style="max-width:120px;height:auto;margin-bottom:12px;">'
+      . '<h2 style="color:#c9a84c;margin:0 0 4px;font-size:22px;">Acesso Liberado! 🙏</h2>'
+      . '<p style="margin:0 0 16px;font-size:14px;">Oi, ' . $nome . '! Seu acesso já está liberado.</p>'
+      . '<div style="background:#f7f3e6;border-radius:10px;padding:16px;margin:0 0 20px;text-align:left;">'
+      . '<p style="margin:0 0 6px;font-size:13px;"><strong>🔑 Seus dados de acesso</strong></p>'
+      . '<p style="margin:0;font-size:14px;">Login: <strong>' . $login . '</strong></p>'
+      . '<p style="margin:6px 0 0;font-size:14px;">Senha: <em>Defina no primeiro acesso</em></p>'
       . '</div>'
-      . '<p style="text-align:center;margin:24px 0;"><a href="' . $url . '" style="background:#c9a84c;color:#111;font-weight:bold;padding:14px 28px;border-radius:8px;text-decoration:none;">Acessar Meu Aplicativo</a></p>'
-      . '<p style="font-size:13px;color:#6b7280;">Use o email acima para fazer login e crie sua senha no primeiro acesso.</p>'
+      . '<a href="' . $url . '" style="display:inline-block;background:#c9a84c;color:#111;font-weight:bold;padding:15px 34px;border-radius:8px;text-decoration:none;font-size:16px;">Acessar Meu Aplicativo</a>'
       . '</div>';
     $body = json_encode([
         'from'    => 'Gabriel Luz <gabriel.luz@noticiasdafe.com.br>',
