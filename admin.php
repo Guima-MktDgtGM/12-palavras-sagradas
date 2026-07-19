@@ -422,7 +422,8 @@ $labels = [
       <th>#</th>
       <th>Data</th>
       <th>Nome</th>
-      <th>Email</th>
+      <th>Email (real)</th>
+      <th>Alias (Cakto)</th>
       <th>Telefone</th>
       <th>Método</th>
       <th>Status</th>
@@ -431,7 +432,7 @@ $labels = [
   </thead>
   <tbody>
   <?php if (empty($chk_uniq)): ?>
-    <tr><td colspan="8" style="text-align:center;color:#6a5f8a;padding:30px;">Nenhum lead de checkout ainda.</td></tr>
+    <tr><td colspan="9" style="text-align:center;color:#6a5f8a;padding:30px;">Nenhum lead de checkout ainda.</td></tr>
   <?php else: ?>
     <?php foreach (array_reverse($chk_uniq) as $i => $r):
       $tel = preg_replace('/\D/', '', $r['telefone'] ?? '');
@@ -443,6 +444,7 @@ $labels = [
       <td style="font-size:13px;color:#9a8fbb;"><?= htmlspecialchars($r['data'] ?? '-') ?></td>
       <td><?= htmlspecialchars($r['nome'] ?? '-') ?></td>
       <td><?= htmlspecialchars($r['email'] ?? '-') ?></td>
+      <td style="font-size:12px;color:#6a5f8a;"><?= htmlspecialchars($r['email_cakto'] ?? $r['alias'] ?? '-') ?></td>
       <td style="color:#9a8fbb;"><?= htmlspecialchars($r['telefone'] ?? '-') ?></td>
       <td style="font-size:13px;color:#c080f0;"><?= htmlspecialchars($r['metodo'] ?? '-') ?></td>
       <td style="font-size:13px;color:<?= $pago ? '#2ecc71' : '#f0c060' ?>;"><?= htmlspecialchars($r['status'] ?? '-') ?></td>
