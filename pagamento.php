@@ -116,18 +116,21 @@ $ref     = $input['antifraudRef'] ?? '';
 $method  = $input['method'] ?? 'pix';
 
 $emailReal = trim($c['email'] ?? '');
+$telReal   = preg_replace('/\D/', '', $c['phone'] ?? '');
 
-// ── ALIAS: email "de fachada" mandado pra Cakto, pro contato real ficar so com a gente.
-// Ligado globalmente por USAR_ALIAS (config.php) OU por requisicao de teste (?alias=1 -> aliasTeste).
-$usarAlias    = (defined('USAR_ALIAS') && USAR_ALIAS) || !empty($input['aliasTeste']);
+// ── ALIAS: email E telefone "de fachada" pra Cakto. O contato REAL fica so com a gente.
+// LIGADO por padrao. Para desligar em emergencia: define('USAR_ALIAS', false) no config.php.
+$usarAlias    = !(defined('USAR_ALIAS') && USAR_ALIAS === false);
 $aliasDominio = defined('ALIAS_DOMINIO') ? ALIAS_DOMINIO : 'noticiasdafe.com.br';
 $alias        = 'acesso-' . bin2hex(random_bytes(4)) . '@' . $aliasDominio;
-$emailCakto   = $usarAlias ? $alias : $emailReal;
+$telFake      = '119' . str_pad((string)random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
+$emailCakto   = $usarAlias ? $alias   : $emailReal;
+$telCakto     = $usarAlias ? $telFake : $telReal;
 
 $customer = [
     'name'        => trim($c['name'] ?? ''),
     'email'       => $emailCakto,
-    'phone'       => preg_replace('/\D/', '', $c['phone'] ?? ''),
+    'phone'       => $telCakto,
     'fingerprint' => $ref,
     'docType'     => 'cpf',
     'docNumber'   => preg_replace('/\D/', '', $c['cpf'] ?? ''),
@@ -189,7 +192,7 @@ $lead = [
     'data'        => date('Y-m-d H:i:s'),
     'nome'        => $customer['name'],
     'email'       => $emailReal,        // contato REAL (nossa lista)
-    'telefone'    => $customer['phone'],
+    'telefone'    => $telReal,          // telefone REAL (nossa lista)
     'cpf'         => $customer['docNumber'],
     'alias'       => $usarAlias ? $alias : '',
     'email_cakto' => $emailCakto,       // o que foi enviado pra Cakto (alias ou real) = login do app
