@@ -1342,10 +1342,8 @@
       const checkoutBtn = document.getElementById("btn-checkout-front");
       const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
-      // MODO TESTE: só quando a URL tem ?teste=1 o formulário transparente é ativado.
-      // O público normal continua indo pro checkout hospedado (href do botão).
-      const modoTeste = new URLSearchParams(window.location.search).has("teste");
-      if (modoTeste && checkoutBtn && checkoutWrapper) {
+      // Checkout transparente ATIVO pra todo mundo. O CTA abre o formulário inline.
+      if (checkoutBtn && checkoutWrapper) {
         checkoutBtn.addEventListener("click", function(e) {
           e.preventDefault();
           checkoutWrapper.style.display = "block";
@@ -1353,8 +1351,6 @@
             checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 150);
         });
-      } else if (checkoutWrapper) {
-        checkoutWrapper.style.display = "none";
       }
 
       // 2. Lógica das Abas de Pagamento (PIX vs Cartão)
@@ -1526,7 +1522,7 @@
             customer: { name: name, email: email, phone: phone, cpf: cpf }
           };
 
-          // ── CARTÃO (com 3DS): tokeniza → autentica 3DS → envia ──
+          // ── CARTÃO (sem 3DS): tokeniza e envia. O antifraude aprova. ──
           if (selectedMethod === "card") {
             const rawExpiry = document.getElementById("card-expiry").value.split("/");
             const card = {
@@ -1537,37 +1533,10 @@
               expYear: (rawExpiry[1] || "").trim()
             };
 
-            // 1) Tokeniza (número/CVV nunca saem daqui — só o token)
+            // Tokeniza (número/CVV nunca saem daqui — só o token)
             const tokenResp = await caktoSdk.createToken(card);
             corpo.cardToken = tokenResp.cardToken;
             corpo.installments = document.getElementById("card-installments").value;
-
-            // 2) 3D Secure DESLIGADO por padrao (Cakto confirmou que nao precisa).
-            //    So roda se forcar ?com3ds=1. O antifraude sozinho deve aprovar.
-            const usar3ds = new URLSearchParams(window.location.search).has("com3ds");
-            if (usar3ds) {
-              const authResult = await caktoSdk.authenticate3DS({
-                card: card,
-                customer: {
-                  amount: VALOR_CENTAVOS,
-                  currency: "BRL",
-                  email: email,
-                  name: name,
-                  phone: phone,
-                  paymentMethod: "credit"
-                }
-              });
-              if (!authResult || !authResult.success) {
-                throw new Error((authResult && authResult.error) || "Falha na autenticação 3DS do cartão.");
-              }
-              corpo.threeDSecure = {
-                cavv: authResult.cavv,
-                eci: authResult.eci,
-                xid: authResult.xid,
-                referenceId: authResult.referenceId,
-                version: authResult.version
-              };
-            }
           }
 
           // 3) Envia pro nosso backend seguro (ele cobra com o client_secret)
@@ -1579,10 +1548,7 @@
           const data = await resp.json();
 
           if (!resp.ok) {
-            const dbg = new URLSearchParams(window.location.search).has("teste")
-              ? ("\n\n[DEBUG] http=" + resp.status + "\nantifraudRef=" + JSON.stringify(corpo.antifraudRef) + "\nresposta=" + JSON.stringify(data))
-              : "";
-            throw new Error(((data && (data.detail || data.error)) || "Não foi possível processar o pagamento.") + dbg);
+            throw new Error((data && (data.detail || data.error)) || "Não foi possível processar o pagamento.");
           }
 
           loadingScreen.style.display = "none";
@@ -1615,12 +1581,9 @@
           } else {
             // Cartão: resposta é síncrona (paid / declined / refused)
             if (data.status !== "paid") {
-              const dbg = new URLSearchParams(window.location.search).has("teste")
-                ? ("\n\n[DEBUG] status=" + (data.status || "?") + "\nantifraudRef=" + JSON.stringify(corpo.antifraudRef) + "\nresposta=" + JSON.stringify(data))
-                : "";
-              throw new Error((data.status === "declined"
+              throw new Error(data.status === "declined"
                 ? "Cartão recusado pelo banco. Confira os dados ou use outro cartão."
-                : "Não foi possível processar o cartão. Tente novamente ou use o Pix.") + dbg);
+                : "Não foi possível processar o cartão. Tente novamente ou use o Pix.");
             }
             if (caktoSdk && caktoSdk.cleanupAntifraud) caktoSdk.cleanupAntifraud();
             window.location.href = UPSELL_URL;
