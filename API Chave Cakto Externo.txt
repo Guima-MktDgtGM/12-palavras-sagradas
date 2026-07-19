@@ -1,0 +1,3 @@
+cliente id: aiX1U4ryg2nDatNXD10NFWZ8QFvc41qyzNK0UtMS
+
+cliente secret: Le6F8vcoe38ZDOSubtN1ATczpD7Q3yCH8ls3tcrN1sAxqDuXHrA9U8RaaFwh2jK7ktWEhB0ZtdVJaBFul70QBzgkfmqSbWH8hBGtFuj3lm0lgpwdiQhj31pc5ZfiMAgv
