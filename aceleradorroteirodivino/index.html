@@ -174,17 +174,18 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   <!-- Bloco Oculto Ativado via Script do VTurb -->
   <div id="resto-pagina">
 
-      <!-- CTA principal (aparece quando o VTurb revela) -->
+      <!-- BOTAO REVELAR (VTurb mostra so isso; clicar revela todo o conteudo abaixo) -->
       <div class="cta-area" style="margin: 8px 0 20px;">
-        <cakto-upsell-buttons>
-          <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="zrfxbr2" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">Eu aceito esse presente!</cakto-upsell-accept>
-        </cakto-upsell-buttons>
+        <button type="button" id="btn-aceitar-presente" style="background:#00ff0c;color:#000;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:17px;padding:16px 28px;border-radius:50px;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,12,.3);max-width:340px;width:100%;transition:transform .2s;">Eu aceito esse presente!</button>
       </div>
 
       <!-- Imagem do Acelerador -->
       <div style="text-align:center;margin:0 0 32px;">
         <img src="https://noticiasdafe.com.br/Imagens/acelerador-roteiro-divino.png" alt="Acelerador do Roteiro Divino" style="max-width:340px;width:100%;height:auto;">
       </div>
+
+      <!-- CONTEUDO revelado ao clicar no botao acima -->
+      <div id="conteudo-acelerador" style="display:none;">
 
       <!-- Narrativa Black / Mecanismo Plural -->
       <div class="section">
@@ -301,6 +302,22 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
       <div class="section">
         <p style="text-align:center;font-size:14.5px;color:#c0392b;font-weight:700;line-height:1.6;">⚠️ Se você fechar ou atualizar esta página, a oportunidade some e seu Roteiro rodará na velocidade normal. Escolha o atalho agora.</p>
       </div>
+
+      </div><!-- /fim do #conteudo-acelerador -->
+
+      <script>
+        (function(){
+          var b = document.getElementById('btn-aceitar-presente');
+          var c = document.getElementById('conteudo-acelerador');
+          if(b && c){
+            b.addEventListener('click', function(){
+              c.style.display = 'block';
+              b.style.display = 'none';
+              setTimeout(function(){ c.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+            });
+          }
+        })();
+      </script>
 
   </div><!-- /fim do bloco oculto -->
 
