@@ -82,7 +82,6 @@ if (isset($_GET['status'])) {
 // Uso: /pagamento.php?debug=pix  (nao afeta o checkout dos clientes)
 if (isset($_GET['debug']) && $_GET['debug'] === 'pix') {
     $payload = [
-        'productId'     => CAKTO_PRODUCT_ID,
         'paymentMethod' => 'pix',
         'customer'      => [
             'name' => 'Teste Debug', 'email' => 'teste@teste.com',
@@ -90,7 +89,6 @@ if (isset($_GET['debug']) && $_GET['debug'] === 'pix') {
             'docType' => 'cpf', 'docNumber' => '12345678909',
         ],
         'items' => [['offerId' => ($_GET['offer'] ?? '96yyuuz')]],
-        'antifraudProfilingAttemptReference' => 'debug-ref-123',
     ];
     $ch = curl_init(CAKTO_BASE . '/public_api/payments/');
     curl_setopt_array($ch, [
@@ -128,16 +126,13 @@ $customer = [
 
 if ($method === 'pix') {
     $payload = [
-        'productId'     => CAKTO_PRODUCT_ID,
         'paymentMethod' => 'pix',
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
-        'antifraudProfilingAttemptReference' => $ref,
     ];
 } else {
     // Cartão SEM 3DS (paymentMethod credit_card). Menos atrito; chargeback fica com o produtor.
     $payload = [
-        'productId'     => CAKTO_PRODUCT_ID,
         'paymentMethod' => 'credit_card',
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
@@ -145,7 +140,6 @@ if ($method === 'pix') {
             'token'        => $input['cardToken'] ?? '',
             'installments' => intval($input['installments'] ?? 1),
         ],
-        'antifraudProfilingAttemptReference' => $ref,
     ];
 }
 
