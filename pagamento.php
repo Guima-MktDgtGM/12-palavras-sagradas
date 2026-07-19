@@ -102,6 +102,31 @@ if (isset($_GET['debug']) && $_GET['debug'] === 'pix') {
     exit;
 }
 
+// ─── MODO DEBUG pix_auto (Pix Automatico / recorrencia) ──────────────────────
+// Uso: /pagamento.php?debug=pixauto&offer=cfqcu7s
+if (isset($_GET['debug']) && $_GET['debug'] === 'pixauto') {
+    $payload = [
+        'paymentMethod' => 'pix_auto',
+        'customer'      => [
+            'name' => 'Teste Debug', 'email' => 'teste@teste.com',
+            'phone' => '5511999999999', 'fingerprint' => 'debug-ref-123',
+            'docType' => 'cpf', 'docNumber' => '12345678909',
+        ],
+        'items' => [['offerId' => ($_GET['offer'] ?? 'cfqcu7s')]],
+        'antifraudProfilingAttemptReference' => 'debug-ref-123',
+    ];
+    $ch = curl_init(CAKTO_BASE . '/public_api/payments/');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Authorization: Bearer '.$token,'Content-Type: application/json','X-Idempotency-Key: '.uuidv4()],
+        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_TIMEOUT => 40,
+    ]);
+    $r = curl_exec($ch); $co = curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+    echo json_encode(['http_code'=>$co, 'payload_enviado'=>$payload, 'resposta_cakto'=>json_decode($r, true)], JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // ─── Criar cobranca (Pix ou Cartao/3DS) ──────────────────────────────────────
 $input = json_decode(file_get_contents('php://input'), true);
 if (!$input) {
