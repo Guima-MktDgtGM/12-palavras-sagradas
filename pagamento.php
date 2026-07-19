@@ -166,6 +166,13 @@ if ($method === 'pix') {
         'customer'      => $customer,
         'items'         => [['offerId' => $offerId]],
     ];
+} elseif ($method === 'pix_auto') {
+    // Pix Automatico (recorrencia) — usado no upsell/assinatura.
+    $payload = [
+        'paymentMethod' => 'pix_auto',
+        'customer'      => $customer,
+        'items'         => [['offerId' => $offerId]],
+    ];
 } elseif (!empty($input['threeDSecure'])) {
     // Cartão COM 3DS (paymentMethod threeDs). O antifraude + 3DS aumentam MUITO a aprovação.
     // O campo antifraud_profiling_attempt_reference é obrigatorio na cobranca de cartao.

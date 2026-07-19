@@ -208,7 +208,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         <!-- Primeiro CTA Intermediário -->
         <div class="cta-area" style="margin-top: 32px;">
           <cakto-upsell-buttons>
-            <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="cfqcu7s" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">QUERO ADICIONAR O ACELERADOR AGORA</cakto-upsell-accept>
+            <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="x8q7utk" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">QUERO ADICIONAR O ACELERADOR AGORA</cakto-upsell-accept>
           </cakto-upsell-buttons>
         </div>
       </div>
@@ -290,13 +290,67 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         <div style="margin-top:24px;">
           <div id="cta-card">
             <cakto-upsell-buttons>
-              <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="cfqcu7s" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">QUERO ATIVAR MEU ACELERADOR COM ESTORNO GARANTIDO</cakto-upsell-accept>
+              <cakto-upsell-accept bg-color="#00ff0cff" text-color="#000000" upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos" offer-id="x8q7utk" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">QUERO ATIVAR MEU ACELERADOR COM ESTORNO GARANTIDO</cakto-upsell-accept>
               <cakto-upsell-reject upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis">Não. Eu não quero resultados rápidos...</cakto-upsell-reject>
             </cakto-upsell-buttons>
             <a href="https://noticiasdafe.com.br/aceleradorgratis" style="display:inline-block;margin-top:16px;max-width:300px;width:100%;padding:9px 16px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:12px;text-decoration:none;box-shadow:0 4px 14px #e0435244;line-height:1.35;">Não, prefiro que meu Roteiro rode na velocidade normal.</a>
           </div>
         </div>
       </div>
+
+      <!-- PIX AUTOMATICO (recorrencia, checkout transparente) -->
+      <div class="section" style="text-align:center;">
+        <div class="section-label">→ Prefere pagar no Pix?</div>
+        <button type="button" id="btn-abrir-pix" style="background:#0a7d3c;color:#fff;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:15px;padding:14px 22px;border-radius:50px;cursor:pointer;max-width:420px;width:100%;box-shadow:0 4px 14px rgba(10,125,60,.3);">📱 Pagar com Pix Automático</button>
+
+        <div id="pix-auto-form" style="display:none;max-width:420px;margin:18px auto 0;background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:20px;text-align:left;">
+          <p style="font-family:'Cinzel',serif;font-weight:700;color:#241f38;font-size:16px;margin-bottom:2px;">Pix Automático — R$19,90/mês</p>
+          <p style="font-size:12px;color:#6a6280;margin-bottom:14px;">Assinatura recorrente mensal. Cancele quando quiser.</p>
+          <input id="pa-nome" placeholder="Nome completo" style="width:100%;padding:11px;margin-bottom:9px;border:1px solid #ddd;border-radius:8px;font-size:14px;">
+          <input id="pa-email" type="email" placeholder="Seu melhor e-mail" style="width:100%;padding:11px;margin-bottom:9px;border:1px solid #ddd;border-radius:8px;font-size:14px;">
+          <input id="pa-tel" placeholder="WhatsApp (com DDD)" style="width:100%;padding:11px;margin-bottom:9px;border:1px solid #ddd;border-radius:8px;font-size:14px;">
+          <input id="pa-cpf" placeholder="CPF" style="width:100%;padding:11px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;">
+          <button type="button" id="pa-gerar" style="width:100%;background:#0a7d3c;color:#fff;border:none;padding:14px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;">Gerar Pix Automático</button>
+          <p id="pa-loading" style="display:none;text-align:center;color:#6a6280;margin-top:12px;">Gerando Pix, aguarde...</p>
+          <div id="pa-resultado" style="display:none;text-align:center;margin-top:16px;">
+            <img id="pa-qr" alt="QR Code Pix" style="max-width:220px;width:100%;margin:0 auto 12px;">
+            <textarea id="pa-code" readonly style="width:100%;height:70px;font-size:11px;padding:8px;border:1px solid #ddd;border-radius:8px;resize:none;"></textarea>
+            <button type="button" id="pa-copiar" style="width:100%;margin-top:8px;background:#241f38;color:#fff;border:none;padding:11px;border-radius:8px;font-weight:700;cursor:pointer;">Copiar código Pix</button>
+            <p style="font-size:12px;color:#0a4a8c;margin-top:12px;line-height:1.4;">⚠️ Após autorizar o Pix Automático no app do seu banco, volte aqui — seu acesso é liberado automaticamente.</p>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+      <script>
+        (function(){
+          var BACKEND="https://noticiasdafe.com.br/pagamento.php", OFFER="x8q7utk";
+          var abrir=document.getElementById('btn-abrir-pix'), form=document.getElementById('pix-auto-form');
+          if(abrir&&form){ abrir.addEventListener('click',function(){ form.style.display='block'; form.scrollIntoView({behavior:'smooth',block:'center'}); }); }
+          var gerar=document.getElementById('pa-gerar');
+          if(gerar){ gerar.addEventListener('click',function(){
+            var nome=(document.getElementById('pa-nome').value||'').trim();
+            var email=(document.getElementById('pa-email').value||'').trim();
+            var tel=(document.getElementById('pa-tel').value||'').replace(/\D/g,'');
+            var cpf=(document.getElementById('pa-cpf').value||'').replace(/\D/g,'');
+            if(!nome||!email||!tel||!cpf){ alert('Preencha todos os campos.'); return; }
+            document.getElementById('pa-loading').style.display='block'; gerar.disabled=true;
+            fetch(BACKEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+              method:'pix_auto', offerId:OFFER, antifraudRef:'up-'+Date.now(),
+              customer:{name:nome,email:email,phone:tel,cpf:cpf}
+            })}).then(function(r){return r.json();}).then(function(data){
+              document.getElementById('pa-loading').style.display='none';
+              var code=(data.pix&&data.pix.qrCode)||'';
+              if(!code){ alert('Nao foi possivel gerar o Pix. Tente novamente.'); gerar.disabled=false; return; }
+              document.getElementById('pa-code').value=code;
+              if(typeof qrcode!=='undefined'){ try{ var q=qrcode(0,'M'); q.addData(code); q.make(); document.getElementById('pa-qr').src=q.createDataURL(5,8);}catch(e){} }
+              document.getElementById('pa-resultado').style.display='block'; gerar.style.display='none';
+            }).catch(function(){ document.getElementById('pa-loading').style.display='none'; alert('Erro ao gerar o Pix.'); gerar.disabled=false; });
+          }); }
+          var copiar=document.getElementById('pa-copiar');
+          if(copiar){ copiar.addEventListener('click',function(){ var t=document.getElementById('pa-code'); t.select(); if(navigator.clipboard) navigator.clipboard.writeText(t.value); copiar.textContent='Copiado!'; }); }
+        })();
+      </script>
 
       <!-- Garantia -->
       <div class="section">
