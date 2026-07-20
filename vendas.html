@@ -1685,6 +1685,7 @@
                 : "Não foi possível processar o cartão. Tente novamente ou use o Pix.");
             }
             if (caktoSdk && caktoSdk.cleanupAntifraud) caktoSdk.cleanupAntifraud();
+            if (typeof fbq === "function") fbq("track", "Purchase", { value: 67.00, currency: "BRL" });
             window.location.href = UPSELL_URL;
           }
 
@@ -1736,6 +1737,7 @@
             // Se retornar status aprovado ou pago
             if (data.status === "paid" || data.status === "approved" || data.status === "completed" || data.status === "authorized") {
               clearInterval(pollingInterval);
+              if (typeof fbq === "function") fbq("track", "Purchase", { value: 67.00, currency: "BRL" });
               loadingText.textContent = "Pagamento confirmado! Redirecionando...";
               loadingScreen.style.display = "flex";
               setTimeout(function() {
