@@ -58,6 +58,59 @@ function enviarEmailAcesso($para, $nome, $login) {
     curl_exec($ch); curl_close($ch);
 }
 
+// Envia a venda DIRETO pra API da UTMify (com os UTMs reais). Deduplica por orderId.
+function enviarVendaUtmify($lead, $emailReal, $nome, $telReal) {
+    if (!defined('UTMIFY_TOKEN') || empty($lead['order_id'])) return;
+    $mapMetodo = ['pix' => 'pix', 'pix_auto' => 'pix', 'card' => 'credit_card', 'credit_card' => 'credit_card', 'boleto' => 'boleto'];
+    $pm = $mapMetodo[$lead['metodo'] ?? 'pix'] ?? 'pix';
+    $cents = intval($lead['amount_cents'] ?? 0);
+    if ($cents <= 0) $cents = 6700; // fallback
+    $t = is_array($lead['tracking'] ?? null) ? $lead['tracking'] : [];
+    $payload = [
+        'orderId'       => $lead['order_id'],
+        'platform'      => 'Cakto',
+        'paymentMethod' => $pm,
+        'status'        => 'paid',
+        'createdAt'     => $lead['data'] ?? date('Y-m-d H:i:s'),
+        'approvedDate'  => date('Y-m-d H:i:s'),
+        'refundedAt'    => null,
+        'customer'      => [
+            'name'     => $nome ?: ($lead['nome'] ?? ''),
+            'email'    => $emailReal,
+            'phone'    => $telReal ?: ($lead['telefone'] ?? ''),
+            'document' => $lead['cpf'] ?? '',
+        ],
+        'products'      => [[
+            'id'           => ($lead['produto_id'] ?? '') ?: ($lead['oferta'] ?? 'produto'),
+            'name'         => ($lead['produto_nome'] ?? '') ?: 'Roteiro Divino das 12 Palavras',
+            'quantity'     => 1,
+            'priceInCents' => $cents,
+        ]],
+        'trackingParameters' => [
+            'src'          => $t['src'] ?? null,
+            'sck'          => $t['sck'] ?? null,
+            'utm_source'   => $t['utm_source'] ?? null,
+            'utm_campaign' => $t['utm_campaign'] ?? null,
+            'utm_medium'   => $t['utm_medium'] ?? null,
+            'utm_content'  => $t['utm_content'] ?? null,
+            'utm_term'     => $t['utm_term'] ?? null,
+        ],
+        'commission'    => [
+            'totalPriceInCents'     => $cents,
+            'gatewayFeeInCents'     => 0,
+            'userCommissionInCents' => $cents,
+        ],
+        'isTest'        => false,
+    ];
+    $ch = curl_init('https://api.utmify.com.br/api-credentials/orders');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['x-api-token: ' . UTMIFY_TOKEN, 'Content-Type: application/json'],
+        CURLOPT_POSTFIELDS => json_encode($payload), CURLOPT_TIMEOUT => 20,
+    ]);
+    curl_exec($ch); curl_close($ch);
+}
+
 $payload = file_get_contents('php://input');
 $data    = json_decode($payload, true);
 
@@ -154,7 +207,7 @@ if ($evento === 'pix_gerado') {
     unset($item);
 
     // O email que a Cakto manda pode ser um ALIAS. Mapeia pro contato REAL do nosso checkout.
-    $emailReal = $email; $telReal = $telefone; $loginApp = $email;
+    $emailReal = $email; $telReal = $telefone; $loginApp = $email; $leadMatch = null;
     $leadsChk = file_exists(LEADS_FILE) ? (json_decode(@file_get_contents(LEADS_FILE), true) ?: []) : [];
     for ($i = count($leadsChk) - 1; $i >= 0; $i--) {
         $L = $leadsChk[$i];
@@ -162,6 +215,7 @@ if ($evento === 'pix_gerado') {
             $emailReal = ($L['email'] ?? '') ?: $email;
             $telReal   = ($L['telefone'] ?? '') ?: $telefone;
             $loginApp  = ($L['email_cakto'] ?? '') ?: $email; // login = o email que a Appsell recebeu
+            $leadMatch = $L;
             break;
         }
     }
@@ -178,6 +232,9 @@ if ($evento === 'pix_gerado') {
         // NOSSO email oficial de acesso, pro email REAL do cliente (uma vez só).
         enviarEmailAcesso($emailReal, $nome, $loginApp);
     }
+
+    // Envia a venda DIRETO pra UTMify com os UTMs reais (UTMify deduplica por orderId).
+    if ($leadMatch) enviarVendaUtmify($leadMatch, $emailReal, $nome, $telReal);
 }
 
 file_put_contents(FILA_FILE, json_encode($fila, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));

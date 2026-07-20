@@ -240,6 +240,10 @@ $lead = [
     'oferta'      => $offerId,
     'status'      => is_array($resp_dec) && isset($resp_dec['status']) ? $resp_dec['status'] : ('http_' . $code),
     'order_id'    => is_array($resp_dec) && isset($resp_dec['id']) ? $resp_dec['id'] : '',
+    'tracking'    => $meta,   // UTMs pra enviar direto pra UTMify no webhook
+    'amount_cents'=> (is_array($resp_dec) && isset($resp_dec['baseAmount'])) ? intval(round(floatval($resp_dec['baseAmount']) * 100)) : 0,
+    'produto_id'  => (is_array($resp_dec) && isset($resp_dec['product']['id']))   ? $resp_dec['product']['id']   : '',
+    'produto_nome'=> (is_array($resp_dec) && isset($resp_dec['product']['name'])) ? $resp_dec['product']['name'] : '',
 ];
 $leads_file = $dados_dir . '/checkout_leads.json';
 $lf = fopen($leads_file, 'c+');
