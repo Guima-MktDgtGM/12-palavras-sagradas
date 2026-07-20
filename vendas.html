@@ -1422,10 +1422,16 @@
       const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
       // Checkout transparente ATIVO pra todo mundo. O CTA abre o formulário inline.
+      var icDisparado = false;
       if (checkoutBtn && checkoutWrapper) {
         checkoutBtn.addEventListener("click", function(e) {
           e.preventDefault();
           checkoutWrapper.style.display = "block";
+          // Dispara InitiateCheckout (uma vez) ao abrir o checkout
+          if (!icDisparado && typeof fbq === "function") {
+            fbq("track", "InitiateCheckout", { value: 67.00, currency: "BRL" });
+            icDisparado = true;
+          }
           setTimeout(function() {
             checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 150);
