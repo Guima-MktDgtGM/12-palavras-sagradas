@@ -377,9 +377,10 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
             if(!nome||!email||!tel||!cpf){ alert('Preencha todos os campos.'); return; }
             if(!cpfValido(cpf)){ alert('CPF inválido. Confira os números e tente novamente.'); return; }
             document.getElementById('pa-loading').style.display='block'; gerar.disabled=true;
+            var _utms={}; try{ _utms=JSON.parse(localStorage.getItem("rd_utms")||"{}"); }catch(e){}
             fetch(BACKEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
               method:'pix_auto', offerId:OFFER, antifraudRef:'up-'+Date.now(),
-              customer:{name:nome,email:email,phone:tel,cpf:cpf}
+              customer:{name:nome,email:email,phone:tel,cpf:cpf}, tracking:_utms
             })}).then(function(r){return r.json();}).then(function(data){
               document.getElementById('pa-loading').style.display='none';
               var code=(data.pix&&data.pix.qrCode)||'';

@@ -15,6 +15,18 @@
     a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
     document.head.appendChild(a);
   </script>
+  <!-- Captura e guarda os UTMs na chegada (sobrevivem a reload/navegacao) -->
+  <script>
+    (function(){
+      try {
+        var p = new URLSearchParams(location.search);
+        var keys = ["utm_source","utm_campaign","utm_medium","utm_content","utm_term","sck","src"];
+        var found = {}, has = false;
+        keys.forEach(function(k){ var v = p.get(k); if(v){ found[k]=v; has=true; } });
+        if (has) localStorage.setItem("rd_utms", JSON.stringify(found));
+      } catch(e){}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -1609,16 +1621,19 @@
           // Teste do alias: ?alias=1 na URL faz o backend mandar email-alias pra Cakto.
           if (new URLSearchParams(window.location.search).has("alias")) corpo.aliasTeste = true;
 
-          // Captura os UTMs da URL pra atribuicao na UTMify (vai no metadata da Cakto)
+          // UTMs pra atribuicao na UTMify: usa os GUARDADOS (localStorage), com fallback pra URL atual
           var _p = new URLSearchParams(window.location.search);
+          var _saved = {};
+          try { _saved = JSON.parse(localStorage.getItem("rd_utms") || "{}"); } catch(e){}
+          function _utm(k){ return (_saved[k] || _p.get(k) || ""); }
           corpo.tracking = {
-            utm_source:   _p.get("utm_source")   || "",
-            utm_campaign: _p.get("utm_campaign") || "",
-            utm_medium:   _p.get("utm_medium")   || "",
-            utm_content:  _p.get("utm_content")  || "",
-            utm_term:     _p.get("utm_term")     || "",
-            sck:          _p.get("sck")          || "",
-            src:          _p.get("src")          || ""
+            utm_source:   _utm("utm_source"),
+            utm_campaign: _utm("utm_campaign"),
+            utm_medium:   _utm("utm_medium"),
+            utm_content:  _utm("utm_content"),
+            utm_term:     _utm("utm_term"),
+            sck:          _utm("sck"),
+            src:          _utm("src")
           };
 
           // ── CARTÃO (sem 3DS): tokeniza e envia. O antifraude aprova. ──
