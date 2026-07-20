@@ -441,7 +441,7 @@ $labels = [
     ?>
     <tr>
       <td style="color:#6a5f8a;"><?= count($chk_uniq) - $i ?></td>
-      <td style="font-size:13px;color:#9a8fbb;"><?= htmlspecialchars($r['data'] ?? '-') ?></td>
+      <td style="font-size:13px;color:#9a8fbb;"><?= !empty($r['data']) ? date('d/m/y H:i', strtotime($r['data'])) : '-' ?></td>
       <td><?= htmlspecialchars($r['nome'] ?? '-') ?></td>
       <td><?= htmlspecialchars($r['email'] ?? '-') ?></td>
       <td style="font-size:12px;color:#6a5f8a;"><?= htmlspecialchars($r['email_cakto'] ?? $r['alias'] ?? '-') ?></td>

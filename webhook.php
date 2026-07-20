@@ -22,16 +22,26 @@ function enviarEmailAcesso($para, $nome, $login) {
     $nome = htmlspecialchars($nome ?: 'Amigo(a)');
     $login = htmlspecialchars($login);
     $url  = APP_LOGIN_URL;
-    $html = '<div style="font-family:Arial,sans-serif;max-width:440px;margin:0 auto;text-align:center;color:#1f2937;">'
+    $wa = 'https://wa.me/5511980921067';
+    $html = '<div style="font-family:Arial,sans-serif;max-width:460px;margin:0 auto;text-align:center;color:#1f2937;">'
       . '<img src="https://noticiasdafe.com.br/Imagens/logo.png" alt="Roteiro Divino" style="max-width:120px;height:auto;margin-bottom:12px;">'
-      . '<h2 style="color:#c9a84c;margin:0 0 4px;font-size:22px;">Acesso Liberado! 🙏</h2>'
-      . '<p style="margin:0 0 16px;font-size:14px;">Oi, ' . $nome . '! Seu acesso já está liberado.</p>'
-      . '<div style="background:#f7f3e6;border-radius:10px;padding:16px;margin:0 0 20px;text-align:left;">'
-      . '<p style="margin:0 0 6px;font-size:13px;"><strong>🔑 Seus dados de acesso</strong></p>'
-      . '<p style="margin:0;font-size:14px;">Login: <strong>' . $login . '</strong></p>'
-      . '<p style="margin:6px 0 0;font-size:14px;">Senha: <em>Defina no primeiro acesso</em></p>'
+      . '<h2 style="color:#c9a84c;margin:0 0 4px;font-size:23px;">Acesso Liberado! 🙏</h2>'
+      . '<p style="margin:0 0 18px;font-size:15px;line-height:1.5;">Oi, ' . $nome . '! Sua compra foi confirmada e o seu <strong>Roteiro Divino das 12 Palavras</strong> já está liberado. Que essa jornada transforme a sua vida. 🕯️</p>'
+      . '<div style="background:#f7f3e6;border-radius:10px;padding:18px;margin:0 0 8px;text-align:left;">'
+      . '<p style="margin:0 0 8px;font-size:14px;"><strong>🔑 Seus dados de acesso</strong></p>'
+      . '<p style="margin:0;font-size:15px;">Login (email): <strong>' . $login . '</strong></p>'
+      . '<p style="margin:8px 0 0;font-size:15px;">Senha: <strong>você cria a sua no primeiro acesso</strong></p>'
       . '</div>'
-      . '<a href="' . $url . '" style="display:inline-block;background:#c9a84c;color:#111;font-weight:bold;padding:15px 34px;border-radius:8px;text-decoration:none;font-size:16px;">Acessar Meu Aplicativo</a>'
+      . '<p style="font-size:12px;color:#6b7280;margin:0 0 18px;">Use o email acima para entrar e defina sua senha na primeira vez que acessar.</p>'
+      . '<a href="' . $url . '" style="display:inline-block;background:#c9a84c;color:#111;font-weight:bold;padding:16px 36px;border-radius:8px;text-decoration:none;font-size:16px;">Acessar Meu Aplicativo</a>'
+      . '<div style="margin:26px 0 0;padding:18px;background:#fff8e6;border:1px solid #f0d98a;border-radius:12px;text-align:left;">'
+      . '<p style="margin:0 0 6px;font-size:15px;font-weight:bold;color:#a5741a;">⚡ Um aviso importante antes de começar</p>'
+      . '<p style="margin:0;font-size:13.5px;line-height:1.55;">Dentro do app você vai encontrar o <strong>Acelerador do Roteiro Divino</strong> — a ferramenta que faz suas orações agirem <strong>até 10x mais rápido</strong>. Quem ativa costuma sentir a diferença em <strong>poucas horas</strong>. Não deixe de conhecer: pode ser o atalho que faltava pra sua bênção se manifestar. 🙏</p>'
+      . '</div>'
+      . '<div style="margin:22px 0 0;">'
+      . '<p style="font-size:14px;margin:0 0 8px;">Ficou com alguma dúvida? Estou aqui pra te ajudar:</p>'
+      . '<a href="' . $wa . '" style="display:inline-block;background:#25d366;color:#fff;font-weight:bold;padding:12px 26px;border-radius:50px;text-decoration:none;font-size:14px;">💬 Falar no WhatsApp</a>'
+      . '</div>'
       . '</div>';
     $body = json_encode([
         'from'    => 'Gabriel Luz <gabriel.luz@noticiasdafe.com.br>',
