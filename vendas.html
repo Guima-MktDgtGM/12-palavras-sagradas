@@ -24,6 +24,8 @@
         var found = {}, has = false;
         keys.forEach(function(k){ var v = p.get(k); if(v){ found[k]=v; has=true; } });
         if (has) localStorage.setItem("rd_utms", JSON.stringify(found));
+        // Selo de funil: quem chega na pagina principal (veio do anuncio) pode ver o upsell real
+        localStorage.setItem("rd_funnel", String(Date.now()));
       } catch(e){}
     })();
   </script>

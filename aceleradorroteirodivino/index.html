@@ -143,6 +143,16 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   </script></head>
 <body>
 
+<!-- PAGINA CLEAN (mostrada a quem entra direto no link, sem vir do funil) -->
+<div id="pagina-clean" style="max-width:600px;margin:0 auto;padding:60px 24px;text-align:center;font-family:'Lato',sans-serif;color:#2e2a3f;">
+  <h1 style="font-family:'Cinzel',serif;font-size:26px;color:#241f38;margin-bottom:16px;">Roteiro Divino das 12 Palavras</h1>
+  <p style="font-size:17px;color:#5f5876;line-height:1.6;margin-bottom:28px;">Reflexões, fé e palavras de esperança para o seu dia a dia. Que a sua caminhada seja sempre abençoada. 🙏</p>
+  <a href="https://noticiasdafe.com.br/" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:14px 30px;border-radius:8px;text-decoration:none;font-size:16px;">Conhecer o Roteiro Divino</a>
+</div>
+
+<!-- CONTEUDO REAL (so aparece pra quem veio do funil) -->
+<div id="conteudo-real" style="display:none;">
+
 <!-- Barra de etapas -->
 <div class="steps-bar">
   <div class="step done"><span class="n">✓</span> Roteiro Divino</div>
@@ -426,6 +436,24 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   </div>
 
 </div>
+
+</div><!-- /conteudo-real -->
+
+<!-- CLOAKER DO UPSELL: so quem veio do funil (passou pela pagina principal) ve o conteudo real -->
+<script>
+  (function(){
+    try {
+      var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
+      var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // selo valido por 3h
+      if (veioDoFunil) {
+        var real = document.getElementById("conteudo-real");
+        var clean = document.getElementById("pagina-clean");
+        if (real) real.style.display = "block";
+        if (clean) clean.style.display = "none";
+      }
+    } catch(e){}
+  })();
+</script>
 
 <!-- Esconde o botão de recusar e o preço dentro do componente da Cakto -->
 <style>
