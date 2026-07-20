@@ -138,6 +138,8 @@ $c       = $input['customer'] ?? [];
 $offerId = $input['offerId'] ?? '';
 $ref     = $input['antifraudRef'] ?? '';
 $method  = $input['method'] ?? 'pix';
+// UTMs pra atribuicao na UTMify (vai no metadata da cobranca Cakto)
+$meta    = (isset($input['tracking']) && is_array($input['tracking'])) ? array_filter($input['tracking']) : [];
 
 $emailReal = trim($c['email'] ?? '');
 $telReal   = preg_replace('/\D/', '', $c['phone'] ?? '');
@@ -203,6 +205,9 @@ if ($method === 'pix') {
         'antifraud_profiling_attempt_reference' => $ref,
     ];
 }
+
+// Anexa os UTMs (atribuicao UTMify) no metadata da cobranca
+if (!empty($meta)) $payload['metadata'] = $meta;
 
 $ch = curl_init(CAKTO_BASE . '/public_api/payments/');
 curl_setopt_array($ch, [

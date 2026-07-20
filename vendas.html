@@ -1609,6 +1609,18 @@
           // Teste do alias: ?alias=1 na URL faz o backend mandar email-alias pra Cakto.
           if (new URLSearchParams(window.location.search).has("alias")) corpo.aliasTeste = true;
 
+          // Captura os UTMs da URL pra atribuicao na UTMify (vai no metadata da Cakto)
+          var _p = new URLSearchParams(window.location.search);
+          corpo.tracking = {
+            utm_source:   _p.get("utm_source")   || "",
+            utm_campaign: _p.get("utm_campaign") || "",
+            utm_medium:   _p.get("utm_medium")   || "",
+            utm_content:  _p.get("utm_content")  || "",
+            utm_term:     _p.get("utm_term")     || "",
+            sck:          _p.get("sck")          || "",
+            src:          _p.get("src")          || ""
+          };
+
           // ── CARTÃO (sem 3DS): tokeniza e envia. O antifraude aprova. ──
           if (selectedMethod === "card") {
             const rawExpiry = document.getElementById("card-expiry").value.split("/");
