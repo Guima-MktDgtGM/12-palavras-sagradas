@@ -136,6 +136,8 @@ $email    = $customer['email'] ?? '';
 $telefone = $customer['phone'] ?? '';
 
 file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . " evento=$evento email=$email tel=$telefone\n", FILE_APPEND);
+// DEBUG temporario: guarda o payload cru da Cakto pra conferir os campos (order id, valor)
+file_put_contents($dados_dir . '/webhook_debug.txt', date('Y-m-d H:i:s') . ' ' . substr($payload, 0, 4000) . "\n\n", FILE_APPEND);
 
 // Precisa de PELO MENOS um canal de contato: e-mail OU telefone.
 if (empty($email) && empty($telefone)) { http_response_code(200); exit('No contact'); }
