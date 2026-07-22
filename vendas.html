@@ -756,7 +756,7 @@
       <p class="cta-preco-riscado">Valor de referência do Roteiro Divino: <span>R$997</span></p>
       <p class="cta-preco-riscado">Investimento apresentado: <span>R$167</span></p>
       <p class="cta-preco-atual">Condição especial de hoje: <span>R$67</span> — Pagamento Único</p>
-      <a id="btn-checkout-front" class="cta-comprar" style="cursor:pointer;">
+      <a href="https://pay.cakto.com.br/96yyuuz_949695" id="btn-checkout-front" class="cta-comprar">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span>Comprar o Roteiro Divino agora</span>
       </a>
@@ -1434,9 +1434,15 @@
       const checkoutBtn = document.getElementById("btn-checkout-front");
       const checkoutWrapper = document.getElementById("checkout-inline-wrap");
 
-      // Checkout transparente ATIVO pra todo mundo. O CTA abre o formulário inline.
+      // ═══════════════════════════════════════════════════════════════════════
+      // INTERRUPTOR DO CHECKOUT:
+      //   false = checkout HOSPEDADO da Cakto (o botão leva pro pay.cakto.com.br) — modo atual
+      //   true  = checkout TRANSPARENTE na própria página (abre o formulário inline)
+      // Para voltar pro transparente: troque para true.
+      // ═══════════════════════════════════════════════════════════════════════
+      var USAR_CHECKOUT_TRANSPARENTE = false;
       var icDisparado = false;
-      if (checkoutBtn && checkoutWrapper) {
+      if (USAR_CHECKOUT_TRANSPARENTE && checkoutBtn && checkoutWrapper) {
         checkoutBtn.addEventListener("click", function(e) {
           e.preventDefault();
           checkoutWrapper.style.display = "block";
@@ -1449,6 +1455,9 @@
             checkoutWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 150);
         });
+      } else if (checkoutWrapper) {
+        // Modo hospedado: esconde o formulário transparente (o botão leva pro checkout da Cakto)
+        checkoutWrapper.style.display = "none";
       }
 
       // 2. Lógica das Abas de Pagamento (PIX vs Cartão)

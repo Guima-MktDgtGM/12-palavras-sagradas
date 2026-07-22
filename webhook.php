@@ -231,8 +231,8 @@ if ($evento === 'pix_gerado') {
         ];
         file_put_contents(CLIENTES_FILE, json_encode($clientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        // NOSSO email oficial de acesso, pro email REAL do cliente (uma vez só).
-        enviarEmailAcesso($emailReal, $nome, $loginApp);
+        // NOSSO email so no checkout TRANSPARENTE (quando ha lead/alias). No hospedado, a Appsell entrega nativo.
+        if ($leadMatch) enviarEmailAcesso($emailReal, $nome, $loginApp);
     }
 
     // Envia a venda DIRETO pra UTMify com os UTMs reais (UTMify deduplica por orderId).
