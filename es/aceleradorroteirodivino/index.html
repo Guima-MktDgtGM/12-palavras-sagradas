@@ -27,7 +27,7 @@
       background: #faf7f2;
       color: #2e2a3f;
       font-family: 'Lato', sans-serif;
-      line-height: 1.7;
+      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -36,7 +36,7 @@
     /* Barra de etapas */
     .steps-bar {
       background: #fff;
-      padding: 16px 12px;
+      padding: 12px;
       display: flex;
       justify-content: center;
       gap: 12px;
@@ -46,25 +46,25 @@
     .step {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: #f5f1e8;
       color: #9a8f7a;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 8px 18px;
+      padding: 6px 14px;
       border-radius: 30px;
       border: 1px solid #e6ddc9;
     }
     .step .n {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #e6ddc9;
       color: #9a8f7a;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10px;
     }
     .step.done {
       background: #eafaf0;
@@ -79,7 +79,7 @@
       background: linear-gradient(135deg, #b8232f, #e04352);
       color: #fff;
       border-color: #e04352;
-      box-shadow: 0 4px 16px rgba(224, 67, 82, 0.25);
+      box-shadow: 0 4px 12px rgba(224, 67, 82, 0.2);
     }
     .step.active .n {
       background: #fff;
@@ -87,30 +87,10 @@
     }
 
     .container {
-      max-width: 620px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 24px 16px 60px;
       width: 100%;
-    }
-
-    /* Alerta Superior */
-    .alert-banner {
-      background: linear-gradient(135deg, #d93838, #b81414);
-      color: #fff;
-      text-align: center;
-      padding: 16px 20px;
-      border-radius: 12px;
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      letter-spacing: 1px;
-      font-size: clamp(14px, 3.5vw, 18px);
-      margin-bottom: 30px;
-      box-shadow: 0 6px 24px rgba(184, 20, 20, 0.3);
-      animation: pulse 2.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
     }
 
     /* Card Principal */
@@ -118,68 +98,68 @@
       background: #fff;
       border: 1px solid #e8dcc0;
       border-radius: 20px;
-      padding: 40px 24px;
-      box-shadow: 0 10px 30px rgba(180, 140, 40, 0.06);
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(180, 140, 40, 0.05);
       text-align: center;
     }
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(22px, 5vw, 32px);
+      font-size: clamp(20px, 4.5vw, 28px);
       color: #1a1040;
       line-height: 1.3;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     h1 span.highlight {
       color: #bf8f2e;
     }
 
     .subtitle {
-      font-size: 16px;
+      font-size: 15px;
       color: #6a6280;
-      margin-bottom: 32px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
+      margin-bottom: 24px;
+      font-weight: 700;
     }
     
     .divine-notice {
       background: #faf8f2;
       border-left: 3px solid #bf8f2e;
-      padding: 16px;
+      padding: 14px;
       text-align: left;
-      font-size: 14.5px;
+      font-size: 14px;
       color: #5f5876;
       border-radius: 0 8px 8px 0;
-      margin-bottom: 32px;
-      line-height: 1.6;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
     .divine-notice strong {
       color: #1a1040;
     }
 
-    /* Imagem do Mockup */
-    .product-mockup {
-      max-width: 300px;
+    /* Imagem do Mockup Frequências */
+    .product-image {
+      max-width: 280px;
       width: 100%;
       height: auto;
-      margin: 0 auto 36px;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.12));
+      border-radius: 12px;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border: 2px solid #e8dcc0;
+      display: block;
     }
 
-    /* Benefícios */
+    /* Benefícios Curtos */
     .benefits-list {
       list-style: none;
       text-align: left;
-      max-width: 480px;
-      margin: 0 auto 40px;
+      max-width: 440px;
+      margin: 0 auto 28px;
     }
     .benefits-list li {
       position: relative;
-      padding-left: 36px;
-      margin-bottom: 20px;
-      font-size: 15px;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      font-size: 14.5px;
       color: #453f5c;
     }
     .benefits-list li::before {
@@ -187,80 +167,53 @@
       position: absolute;
       left: 0;
       top: 2px;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       background: #eafaf0;
       color: #27ae60;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 900;
     }
     .benefits-list li strong {
       color: #1a1040;
-      display: block;
-      font-size: 16px;
-      margin-bottom: 2px;
     }
 
     /* Wrapper do botão do Kash Pay */
     .kashpay-btn-wrapper {
-      margin: 20px auto;
-      max-width: 480px;
+      margin: 20px auto 10px;
+      max-width: 460px;
       width: 100%;
     }
     
     /* Hover e animação no botão do KashPay */
     .kashpay-btn-wrapper button {
       transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-      box-shadow: 0 6px 20px rgba(53, 0, 199, 0.25) !important;
-      animation: buttonPulse 2s infinite !important;
+      box-shadow: 0 6px 20px rgba(53, 0, 199, 0.3) !important;
+      animation: buttonPulse 1.8s infinite !important;
       width: 100% !important;
     }
     .kashpay-btn-wrapper button:hover {
       transform: translateY(-2px) !important;
-      box-shadow: 0 10px 28px rgba(53, 0, 199, 0.4) !important;
+      box-shadow: 0 10px 28px rgba(53, 0, 199, 0.45) !important;
     }
     @keyframes buttonPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
     }
 
-    /* Botão Cancelar */
-    .btn-decline {
-      display: inline-block;
-      margin-top: 24px;
-      color: #9a8f7a;
-      font-size: 13.5px;
-      text-decoration: underline;
-      transition: color 0.15s;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .btn-decline:hover {
-      color: #e04352;
-    }
-
     /* Footer */
     .footer {
       margin-top: auto;
       background: #1f1929;
-      color: rgba(255,255,255,0.45);
-      padding: 30px 20px;
+      color: rgba(255,255,255,0.4);
+      padding: 24px 16px;
       text-align: center;
-      font-size: 11px;
-      line-height: 1.6;
-    }
-    .footer a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      margin: 0 8px;
-    }
-    .footer a:hover {
-      color: #fff;
-      text-decoration: underline;
+      font-size: 10.5px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -284,64 +237,41 @@
     </div>
 
     <div class="container">
-      <!-- Alerta Superior -->
-      <div class="alert-banner">
-        ⚠️ ¡ATENCIÓN! NO CIERRES NI ACTUALICES ESTA PÁGINA
-      </div>
-
       <!-- Card Principal -->
       <div class="upsell-card">
         <h1>¡Has sido bendecido(a) con una <span class="highlight">oportunidad divina!</span></h1>
         
         <p class="subtitle">
-          El sistema te ha identificado como el comprador número <strong>777</strong> de esta jornada.
+          Identificado(a) como el comprador número <strong>777</strong> de esta jornada.
         </p>
 
         <div class="divine-notice">
-          En las Sagradas Escrituras, el número <strong>777</strong> representa la perfección absoluta, la plenitud espiritual y el favor directo del Creador. Al ser el comprador número 777, has sido elegido(a) para recibir el acceso especial al **Acelerador del Guion Divino** para bendecir tu camino.
+          En las Sagradas Escrituras, el número <strong>777</strong> representa la perfección absoluta, la plenitud espiritual y el favor directo del Creador. Al ser el comprador número 777, has sido elegido(a) para recibir el acceso especial al **Acelerador del Guion Divino**.
         </div>
 
-        <!-- Mockup del Acelerador -->
-        <img src="../../Imagens/acelerador-roteiro-divino.png" alt="Acelerador del Guion Divino" class="product-mockup">
+        <!-- Nova Imagem de Frequências -->
+        <img src="../../Imagens/acelerador-es.jpg" alt="Frecuencias Divinas del Acelerador" class="product-image">
 
-        <!-- Lista de Beneficios -->
+        <!-- Lista de Beneficios Cortos -->
         <ul class="benefits-list">
-          <li>
-            <strong>7 Meditaciones de Activación</strong>
-            Audios sintonizados en frecuencia sagrada de 528Hz para destruir bloqueos financieros y mentales de forma inmediata.
-          </li>
-          <li>
-            <strong>Frecuencias en Estado Theta</strong>
-            Herramienta auditiva binaural para reprogramar el subconsciente y atraer paz y prosperidad divina mientras duermes.
-          </li>
-          <li>
-            <strong>Protocolo Acelerado de 7 Días</strong>
-            La guía diaria paso a paso para maximizar el poder de tus 12 Palabras Sagradas desde hoy.
-          </li>
+          <li><strong>Audios sintonizados en 528Hz:</strong> Destruyen bloqueos financieros y mentales.</li>
+          <li><strong>Frecuencias en Estado Theta:</strong> Reprogramación subconsciente mientras duermes.</li>
+          <li><strong>Protocolo Acelerado:</strong> Activa el poder de las 12 Palabras 10 veces más rápido.</li>
         </ul>
 
-        <!-- Botón de Confirmación de KashPay -->
+        <!-- Botón de Confirmación de KashPay (Inmediatamente visible) -->
         <div class="kashpay-btn-wrapper">
           <button type="button" onclick="acceptUpsell('https://app.kashpay.com.br/u/94dd1c369c8691e2')" style="font-family: 'Montserrat'; font-size: 17px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #3500c7; border: none; border-radius: 10px; padding: 13px 7%; cursor: pointer; text-align: center; display: block; margin: auto;">¡SÍ, QUIERO OBTENER RESULTADOS MÁS RÁPIDOS!</button>
         </div>
 
-        <!-- Enlace para rechazar la oferta -->
-        <div>
-          <a href="../obrigado/index.html" class="btn-decline">
-            No, gracias. Prefiero continuar al área de miembros sin el acelerador.
-          </a>
-        </div>
       </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
       <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los derechos reservados.</p>
-      <p style="margin-top: 6px; font-size: 9.5px; opacity: 0.75; max-width: 580px; margin-left: auto; margin-right: auto;">
+      <p style="margin-top: 6px; font-size: 9px; opacity: 0.7; max-width: 540px; margin-left: auto; margin-right: auto;">
         Aviso: este producto tiene un carácter exclusivamente espiritual y educativo y no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.
-      </p>
-      <p style="margin-top: 12px;">
-        <a href="#">Política de Privacidad</a> | <a href="#">Términos de Uso</a> | <a href="mailto:gabriel.luz@noticiasdafe.com.br">Soporte</a>
       </p>
     </footer>
 
