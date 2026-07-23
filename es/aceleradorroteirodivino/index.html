@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Oferta Especial — Acelerador del Guion Divino</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <title>Bendición Divina — Acelerador del Guion Divino</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
   <!-- Utmify Pixel -->
@@ -17,6 +17,9 @@
     a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
     document.head.appendChild(a);
   </script>
+  
+  <!-- Script de Upsell de KashPay -->
+  <script src="https://app.kashpay.com.br/scripts/upsell-processor.js"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -138,11 +141,27 @@
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.6;
+    }
+    
+    .divine-notice {
+      background: #faf8f2;
+      border-left: 3px solid #bf8f2e;
+      padding: 16px;
+      text-align: left;
+      font-size: 14.5px;
+      color: #5f5876;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .divine-notice strong {
+      color: #1a1040;
     }
 
     /* Imagem do Mockup */
     .product-mockup {
-      max-width: 320px;
+      max-width: 300px;
       width: 100%;
       height: auto;
       margin: 0 auto 36px;
@@ -154,7 +173,7 @@
       list-style: none;
       text-align: left;
       max-width: 480px;
-      margin: 0 auto 36px;
+      margin: 0 auto 40px;
     }
     .benefits-list li {
       position: relative;
@@ -186,72 +205,27 @@
       margin-bottom: 2px;
     }
 
-    /* Caixa de Preço */
-    .price-box {
-      background: #fffdf6;
-      border: 2px dashed #bf8f2e;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 30px;
-      display: inline-block;
+    /* Wrapper do botão do Kash Pay */
+    .kashpay-btn-wrapper {
+      margin: 20px auto;
+      max-width: 480px;
       width: 100%;
-      max-width: 440px;
     }
-    .price-old {
-      font-size: 15px;
-      color: #999;
-      text-decoration: line-through;
+    
+    /* Hover e animação no botão do KashPay */
+    .kashpay-btn-wrapper button {
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      box-shadow: 0 6px 20px rgba(53, 0, 199, 0.25) !important;
+      animation: buttonPulse 2s infinite !important;
+      width: 100% !important;
     }
-    .price-new {
-      font-family: 'Cinzel', serif;
-      font-size: 38px;
-      font-weight: 800;
-      color: #27ae60;
-      margin-top: 4px;
-      line-height: 1.1;
-    }
-    .price-new small {
-      font-size: 18px;
-      font-weight: 600;
-    }
-    .price-info {
-      font-size: 12px;
-      color: #b07d1e;
-      font-weight: 700;
-      margin-top: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Botão CTA Principal */
-    .btn-confirm {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 440px;
-      padding: 20px 24px;
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: #fff;
-      font-family: 'Cinzel', serif;
-      font-size: clamp(14px, 3.5vw, 18px);
-      font-weight: 800;
-      text-decoration: none;
-      border-radius: 50px;
-      box-shadow: 0 8px 24px rgba(39, 174, 96, 0.3);
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-      letter-spacing: 0.5px;
-      animation: buttonPulse 2s infinite;
-    }
-    .btn-confirm:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(39, 174, 96, 0.45);
+    .kashpay-btn-wrapper button:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 28px rgba(53, 0, 199, 0.4) !important;
     }
     @keyframes buttonPulse {
-      0%, 100% { box-shadow: 0 8px 24px rgba(39, 174, 96, 0.3); }
-      50% { box-shadow: 0 8px 36px rgba(39, 174, 96, 0.6); transform: scale(1.01); }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
     }
 
     /* Botão Cancelar */
@@ -292,7 +266,7 @@
 </head>
 <body>
 
-  <!-- PAGINA CLEAN (mostrada a quien entra directo al enlace, sin venir del embudo) -->
+  <!-- PAGINA CLEAN (mostrada a quien entra direto al enlace, sin venir del embudo) -->
   <div id="pagina-clean" style="max-width:600px;margin:0 auto;padding:60px 24px;text-align:center;font-family:'Lato',sans-serif;color:#2e2a3f;">
     <h1 style="font-family:'Cinzel',serif;font-size:26px;color:#241f38;margin-bottom:16px;">Guion Divino de las 12 Palabras</h1>
     <p style="font-size:17px;color:#5f5876;line-height:1.6;margin-bottom:28px;">Reflexiones, fe y palabras de esperanza para tu día a día. Que tu camino esté siempre bendecido. 🙏</p>
@@ -317,11 +291,15 @@
 
       <!-- Card Principal -->
       <div class="upsell-card">
-        <h1>¡Multiplica tus resultados hasta <span class="highlight">10 veces más rápido!</span></h1>
+        <h1>¡Has sido bendecido(a) con una <span class="highlight">oportunidad divina!</span></h1>
         
         <p class="subtitle">
-          Activa hoy mismo el Acelerador del Guion Divino. Esta oferta especial y con descuento solo se presentará una vez.
+          El sistema te ha identificado como el comprador número <strong>777</strong> de esta jornada.
         </p>
+
+        <div class="divine-notice">
+          En las Sagradas Escrituras, el número <strong>777</strong> representa la perfección absoluta, la plenitud espiritual y el favor directo del Creador. Al ser el comprador número 777, has sido elegido(a) para recibir el acceso especial al **Acelerador del Guion Divino** para bendecir tu camino.
+        </div>
 
         <!-- Mockup del Acelerador -->
         <img src="../../Imagens/acelerador-roteiro-divino.png" alt="Acelerador del Guion Divino" class="product-mockup">
@@ -329,37 +307,28 @@
         <!-- Lista de Beneficios -->
         <ul class="benefits-list">
           <li>
-            <strong>7 Meditaciones de Activación Mental</strong>
+            <strong>7 Meditaciones de Activación</strong>
             Audios sintonizados en frecuencia sagrada de 528Hz para destruir bloqueos financieros y mentales de forma inmediata.
           </li>
           <li>
-            <strong>Meditación en Estado Theta</strong>
-            Herramienta auditiva binaural para reprogramar el subconsciente y atraer abundancia mientras duermes.
+            <strong>Frecuencias en Estado Theta</strong>
+            Herramienta auditiva binaural para reprogramar el subconsciente y atraer paz y prosperidad divina mientras duermes.
           </li>
           <li>
             <strong>Protocolo Acelerado de 7 Días</strong>
-            La guía paso a paso para maximizar el poder de las 12 Palabras Sagradas desde la primera noche.
+            La guía diaria paso a paso para maximizar el poder de tus 12 Palabras Sagradas desde hoy.
           </li>
         </ul>
 
-        <!-- Caixa de Precios -->
-        <div class="price-box">
-          <div class="price-old">Precio regular: US$97</div>
-          <div class="price-new">US$27 <small>/ pago único</small></div>
-          <div class="price-info">✓ Garantía de satisfacción de 7 días</div>
-        </div>
-
-        <!-- Botón de Confirmación -->
-        <div>
-          <a href="#LINK-UPSELL-ES" class="btn-confirm">
-            SÍ, QUIERO AGREGAR EL ACELERADOR A MI PEDIDO
-          </a>
+        <!-- Botón de Confirmación de KashPay -->
+        <div class="kashpay-btn-wrapper">
+          <button type="button" onclick="acceptUpsell('https://app.kashpay.com.br/u/94dd1c369c8691e2')" style="font-family: 'Montserrat'; font-size: 17px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #3500c7; border: none; border-radius: 10px; padding: 13px 7%; cursor: pointer; text-align: center; display: block; margin: auto;">¡SÍ, QUIERO OBTENER RESULTADOS MÁS RÁPIDOS!</button>
         </div>
 
         <!-- Enlace para rechazar la oferta -->
         <div>
           <a href="../obrigado/index.html" class="btn-decline">
-            No, gracias. Prefiero continuar con el Guion Divino a velocidad normal y sin el acelerador.
+            No, gracias. Prefiero continuar al área de miembros sin el acelerador.
           </a>
         </div>
       </div>
@@ -367,7 +336,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los direitos reservados.</p>
+      <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los derechos reservados.</p>
       <p style="margin-top: 6px; font-size: 9.5px; opacity: 0.75; max-width: 580px; margin-left: auto; margin-right: auto;">
         Aviso: este producto tiene un carácter exclusivamente espiritual y educativo y no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.
       </p>
