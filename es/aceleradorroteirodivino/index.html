@@ -292,79 +292,107 @@
 </head>
 <body>
 
-  <!-- Barra de etapas -->
-  <div class="steps-bar">
-    <div class="step done"><span class="n">✓</span> Guion Divino</div>
-    <div class="step active"><span class="n">2</span> Confirmar Upgrade</div>
-    <div class="step"><span class="n">3</span> Acceso Liberado</div>
+  <!-- PAGINA CLEAN (mostrada a quien entra directo al enlace, sin venir del embudo) -->
+  <div id="pagina-clean" style="max-width:600px;margin:0 auto;padding:60px 24px;text-align:center;font-family:'Lato',sans-serif;color:#2e2a3f;">
+    <h1 style="font-family:'Cinzel',serif;font-size:26px;color:#241f38;margin-bottom:16px;">Guion Divino de las 12 Palabras</h1>
+    <p style="font-size:17px;color:#5f5876;line-height:1.6;margin-bottom:28px;">Reflexiones, fe y palabras de esperanza para tu día a día. Que tu camino esté siempre bendecido. 🙏</p>
+    <a href="https://noticiasdafe.com.br/es/" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:14px 30px;border-radius:8px;text-decoration:none;font-size:16px;">Conocer el Guion Divino</a>
   </div>
 
-  <div class="container">
-    <!-- Alerta Superior -->
-    <div class="alert-banner">
-      ⚠️ ¡ATENCIÓN! NO CIERRES NI ACTUALICES ESTA PÁGINA
+  <!-- CONTEUDO REAL (solo aparece para quien viene del embudo) -->
+  <div id="conteudo-real" style="display:none; flex-direction:column; min-height:100vh; width:100%;">
+
+    <!-- Barra de etapas -->
+    <div class="steps-bar">
+      <div class="step done"><span class="n">✓</span> Guion Divino</div>
+      <div class="step active"><span class="n">2</span> Confirmar Upgrade</div>
+      <div class="step"><span class="n">3</span> Acceso Liberado</div>
     </div>
 
-    <!-- Card Principal -->
-    <div class="upsell-card">
-      <h1>¡Multiplica tus resultados hasta <span class="highlight">10 veces más rápido!</span></h1>
-      
-      <p class="subtitle">
-        Activa hoy mismo el Acelerador del Guion Divino. Esta oferta especial y con descuento solo se presentará una vez.
+    <div class="container">
+      <!-- Alerta Superior -->
+      <div class="alert-banner">
+        ⚠️ ¡ATENCIÓN! NO CIERRES NI ACTUALICES ESTA PÁGINA
+      </div>
+
+      <!-- Card Principal -->
+      <div class="upsell-card">
+        <h1>¡Multiplica tus resultados hasta <span class="highlight">10 veces más rápido!</span></h1>
+        
+        <p class="subtitle">
+          Activa hoy mismo el Acelerador del Guion Divino. Esta oferta especial y con descuento solo se presentará una vez.
+        </p>
+
+        <!-- Mockup del Acelerador -->
+        <img src="../../Imagens/acelerador-roteiro-divino.png" alt="Acelerador del Guion Divino" class="product-mockup">
+
+        <!-- Lista de Beneficios -->
+        <ul class="benefits-list">
+          <li>
+            <strong>7 Meditaciones de Activación Mental</strong>
+            Audios sintonizados en frecuencia sagrada de 528Hz para destruir bloqueos financieros y mentales de forma inmediata.
+          </li>
+          <li>
+            <strong>Meditación en Estado Theta</strong>
+            Herramienta auditiva binaural para reprogramar el subconsciente y atraer abundancia mientras duermes.
+          </li>
+          <li>
+            <strong>Protocolo Acelerado de 7 Días</strong>
+            La guía paso a paso para maximizar el poder de las 12 Palabras Sagradas desde la primera noche.
+          </li>
+        </ul>
+
+        <!-- Caixa de Precios -->
+        <div class="price-box">
+          <div class="price-old">Precio regular: US$97</div>
+          <div class="price-new">US$27 <small>/ pago único</small></div>
+          <div class="price-info">✓ Garantía de satisfacción de 7 días</div>
+        </div>
+
+        <!-- Botón de Confirmación -->
+        <div>
+          <a href="#LINK-UPSELL-ES" class="btn-confirm">
+            SÍ, QUIERO AGREGAR EL ACELERADOR A MI PEDIDO
+          </a>
+        </div>
+
+        <!-- Enlace para rechazar la oferta -->
+        <div>
+          <a href="../obrigado/index.html" class="btn-decline">
+            No, gracias. Prefiero continuar con el Guion Divino a velocidad normal y sin el acelerador.
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los direitos reservados.</p>
+      <p style="margin-top: 6px; font-size: 9.5px; opacity: 0.75; max-width: 580px; margin-left: auto; margin-right: auto;">
+        Aviso: este producto tiene un carácter exclusivamente espiritual y educativo y no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.
       </p>
+      <p style="margin-top: 12px;">
+        <a href="#">Política de Privacidad</a> | <a href="#">Términos de Uso</a> | <a href="mailto:gabriel.luz@noticiasdafe.com.br">Soporte</a>
+      </p>
+    </footer>
 
-      <!-- Mockup del Acelerador -->
-      <img src="../../Imagens/acelerador-roteiro-divino.png" alt="Acelerador del Guion Divino" class="product-mockup">
-
-      <!-- Lista de Beneficios -->
-      <ul class="benefits-list">
-        <li>
-          <strong>7 Meditaciones de Activación Mental</strong>
-          Audios sintonizados en frecuencia sagrada de 528Hz para destruir bloqueos financieros y mentales de forma inmediata.
-        </li>
-        <li>
-          <strong>Meditación en Estado Theta</strong>
-          Herramienta auditiva binaural para reprogramar el subconsciente y atraer abundancia mientras duermes.
-        </li>
-        <li>
-          <strong>Protocolo Acelerado de 7 Días</strong>
-          La guía paso a paso para maximizar el poder de las 12 Palabras Sagradas desde la primera noche.
-        </li>
-      </ul>
-
-      <!-- Caja de Precios -->
-      <div class="price-box">
-        <div class="price-old">Precio regular: US$97</div>
-        <div class="price-new">US$27 <small>/ pago único</small></div>
-        <div class="price-info">✓ Garantía de satisfacción de 7 días</div>
-      </div>
-
-      <!-- Botón de Confirmación -->
-      <div>
-        <a href="#LINK-UPSELL-ES" class="btn-confirm">
-          SÍ, QUIERO AGREGAR EL ACELERADOR A MI PEDIDO
-        </a>
-      </div>
-
-      <!-- Enlace para rechazar la oferta -->
-      <div>
-        <a href="../obrigado/index.html" class="btn-decline">
-          No, gracias. Prefiero continuar con el Guion Divino a velocidad normal y sin el acelerador.
-        </a>
-      </div>
-    </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los derechos reservados.</p>
-    <p style="margin-top: 6px; font-size: 9.5px; opacity: 0.75; max-width: 580px; margin-left: auto; margin-right: auto;">
-      Aviso: este producto tiene un carácter exclusivamente espiritual y educativo y no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.
-    </p>
-    <p style="margin-top: 12px;">
-      <a href="#">Política de Privacidad</a> | <a href="#">Términos de Uso</a> | <a href="mailto:gabriel.luz@noticiasdafe.com.br">Soporte</a>
-    </p>
-  </footer>
+  <!-- CLOAKER DEL UPSELL: solo quien viene del embudo (pasó por la página principal) ve el contenido real -->
+  <script>
+    (function(){
+      try {
+        var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
+        var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // sello válido por 3h
+        if (veioDoFunil) {
+          var real = document.getElementById("conteudo-real");
+          var clean = document.getElementById("pagina-clean");
+          if (real) real.style.display = "flex";
+          if (clean) clean.style.display = "none";
+        }
+      } catch(e){}
+    })();
+  </script>
 
 </body>
 </html>
