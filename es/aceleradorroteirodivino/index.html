@@ -223,7 +223,27 @@
   <div id="pagina-clean" style="max-width:600px;margin:0 auto;padding:60px 24px;text-align:center;font-family:'Lato',sans-serif;color:#2e2a3f;">
     <h1 style="font-family:'Cinzel',serif;font-size:26px;color:#241f38;margin-bottom:16px;">Guion Divino de las 12 Palabras</h1>
     <p style="font-size:17px;color:#5f5876;line-height:1.6;margin-bottom:28px;">Reflexiones, fe y palabras de esperanza para tu día a día. Que tu camino esté siempre bendecido. 🙏</p>
-    <a href="https://noticiasdafe.com.br/es/" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:14px 30px;border-radius:8px;text-decoration:none;font-size:16px;">Conocer el Guion Divino</a>
+    <button type="button" id="btn-mostrar-oracao" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:14px 30px;border-radius:8px;border:none;font-size:16px;cursor:pointer;font-family:'Lato',sans-serif;transition:background 0.2s;">Conocer más sobre la oración</button>
+    
+    <div id="texto-oracao-clean" style="display:none; text-align:left; margin-top:30px; font-size:15px; color:#5f5876; line-height:1.6; max-width:550px; margin-left:auto; margin-right:auto;">
+      <p style="margin-bottom:12px; font-weight:700; color:#241f38;">La Oración Contemplativa en la Vida Diaria</p>
+      <p style="margin-bottom:12px;">La práctica de la oración contemplativa es una de las tradiciones más antiguas de la fe cristiana. Consiste en silenciar la mente para concentrarse en la presencia divina y reflexionar sobre la gracia y el propósito de vida que Dios tiene para cada uno de nosotros.</p>
+      <p style="margin-bottom:12px;">Dedicar unos minutos cada mañana o antes de dormir para meditar en palabras de gratitud y esperanza ayuda a reducir la ansiedad, mejorar la concentración y fortalecer la resiliencia espiritual ante las dificultades del día a día.</p>
+      <p>Al igual que el salmista escribió: <em>"En el silencio de la noche medito en tus palabras"</em>, te invitamos a integrar momentos de reflexión en tu rutina para cultivar la paz interior y renovar tu fe en el camino del bien.</p>
+    </div>
+    
+    <script>
+      (function(){
+        var btn = document.getElementById("btn-mostrar-oracao");
+        var txt = document.getElementById("texto-oracao-clean");
+        if (btn && txt) {
+          btn.addEventListener("click", function(){
+            txt.style.display = "block";
+            btn.style.display = "none";
+          });
+        }
+      })();
+    </script>
   </div>
 
   <!-- CONTEUDO REAL (solo aparece para quien viene del embudo) -->
