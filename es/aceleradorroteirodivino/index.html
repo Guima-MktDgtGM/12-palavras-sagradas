@@ -292,6 +292,10 @@
   <script>
     (function(){
       try {
+        var params = new URLSearchParams(location.search);
+        if (params.get("bypass") === "gl2026") {
+          localStorage.setItem("rd_funnel", String(Date.now()));
+        }
         var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
         var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // sello válido por 3h
         if (veioDoFunil) {
