@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guion Divino de las 12 Palabras Sagradas — Guía Oficial</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <title>Guion Divino de las 12 Palabras Sagradas — Guía Oficial Completa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Lato', sans-serif;
@@ -15,87 +15,135 @@
       padding: 0;
     }
     .book {
-      max-width: 800px;
+      max-width: 850px;
       margin: 40px auto;
       background: #fff;
-      padding: 60px 50px;
+      padding: 60px 60px;
       border: 1px solid #e8dcc0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+      border-radius: 12px;
     }
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       font-family: 'Cinzel', serif;
       color: #1a1040;
       font-weight: 700;
+      letter-spacing: 0.5px;
     }
     .cover {
       text-align: center;
-      padding: 80px 20px;
-      border-bottom: 2px double #bf8f2e;
-      margin-bottom: 50px;
+      padding: 100px 20px;
+      border-bottom: 3px double #bf8f2e;
+      margin-bottom: 60px;
     }
     .cover h1 {
-      font-size: 42px;
+      font-size: 46px;
       margin-bottom: 20px;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       line-height: 1.2;
     }
     .cover .subtitle {
       font-size: 20px;
       color: #bf8f2e;
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       text-transform: uppercase;
       margin-bottom: 40px;
     }
     .cover .author {
       font-size: 16px;
       color: #6a6280;
-      margin-top: 50px;
+      margin-top: 60px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
     .chapter {
-      margin-top: 40px;
+      margin-top: 50px;
       page-break-before: always;
     }
     .chapter h2 {
-      font-size: 28px;
-      border-bottom: 1px solid #e8dcc0;
-      padding-bottom: 10px;
+      font-size: 30px;
+      color: #1a1040;
+      border-bottom: 2px solid #bf8f2e;
+      padding-bottom: 12px;
       margin-bottom: 30px;
+    }
+    .chapter p {
+      margin-bottom: 20px;
+      font-size: 16.5px;
+      color: #3d3752;
+      text-align: justify;
     }
     .word-block {
       background: #fffdf9;
       border: 1px solid #f2e9d5;
-      padding: 24px;
+      padding: 30px;
       border-radius: 8px;
-      margin-bottom: 30px;
-      border-left: 4px solid #bf8f2e;
+      margin-bottom: 35px;
+      border-left: 5px solid #bf8f2e;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
     }
     .word-title {
       font-family: 'Cinzel', serif;
-      font-size: 22px;
+      font-size: 24px;
       color: #bf8f2e;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       display: flex;
       justify-content: space-between;
+      border-bottom: 1px dashed #e8dcc0;
+      padding-bottom: 10px;
     }
     .word-meaning {
       font-style: italic;
       color: #6a6280;
-      font-size: 15px;
-      margin-bottom: 14px;
+      font-size: 16px;
+      margin-bottom: 18px;
+      font-weight: 700;
     }
     .prayer-box {
       background: #faf8f2;
-      border-left: 2px solid #2e2a3f;
-      padding: 12px 18px;
-      margin-top: 14px;
+      border-left: 3px solid #1a1040;
+      padding: 16px 20px;
+      margin-top: 18px;
       font-style: italic;
-    }
-    .highlight {
-      font-weight: 700;
+      font-size: 16px;
       color: #1a1040;
+    }
+    .ritual-day {
+      background: #f7f4ec;
+      border: 1px solid #e0d5bd;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .ritual-day h3 {
+      font-size: 20px;
+      color: #bf8f2e;
+      margin-top: 0;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #e0d5bd;
+      padding-bottom: 8px;
+    }
+    .bible-verse {
+      font-size: 15px;
+      color: #7b7297;
+      font-style: italic;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .alert-box {
+      background: #fdf2f2;
+      border: 1px solid #f5c2c2;
+      border-left: 5px solid #d9534f;
+      padding: 20px;
+      border-radius: 6px;
+      margin: 30px 0;
+    }
+    .alert-box h4 {
+      color: #d9534f;
+      margin-top: 0;
+      margin-bottom: 8px;
     }
     @media print {
       body { background: #fff; }
@@ -112,42 +160,59 @@
     <div class="cover">
       <h1>GUION DIVINO</h1>
       <div class="subtitle">De las 12 Palabras Sagradas</div>
-      <p style="font-size: 16px; max-width: 500px; margin: 0 auto 40px; line-height: 1.6;">
-        La guía teológica y práctica para activar las frecuencias bíblicas de la abundancia, la salud y la paz en tu vida diaria.
+      <p style="font-size: 17px; max-width: 580px; margin: 0 auto 40px; line-height: 1.7; color: #555;">
+        El manual teológico y devocional definitivo para desbloquear los canales espirituales de la prosperidad, restauración familiar, salud y paz interior.
       </p>
-      <div class="author">Por Gabriel Luz</div>
+      <div class="author">POR GABRIEL LUZ</div>
     </div>
 
     <!-- INTRODUCCIÓN -->
     <div class="chapter" style="page-break-before: avoid;">
-      <h2>Introducción: El Poder del Hebreo Sagrado</h2>
+      <h2>Introducción: El Secreto Escondido en las Escrituras</h2>
       <p>
-        Las palabras no son solo sonidos; son portadoras de frecuencia y propósito. En el idioma hebreo antiguo, cada letra representa un símbolo, una fuerza creativa y una vibración espiritual. La Biblia original no fue escrita para ser leída mecánicamente, sino para ser **declarada con fe**.
+        Durante milenios, los textos originales de las Sagradas Escrituras fueron protegidos y estudiados bajo una premisa fundamental: el idioma en el que fueron inspirados, el **hebreo bíblico**, no es una lengua ordinaria. Cada palabra, cada letra e incluso cada trazo tiene una vibración y un peso espiritual específico.
       </p>
       <p>
-        A lo largo de los siglos, muchas de estas palabras clave perdieron su fuerza al ser traducidas a los idiomas modernos. Al traducir el texto sagrado, la vibración original de los Salmos y las bendiciones de los patriarcas se disipó. 
+        Cuando la Biblia fue traducida al latín, al español y a otros idiomas modernos, el significado conceptual se mantuvo, pero la **frecuencia fonética original** se perdió. La palabra traducida como "paz" no lleva el mismo peso vibracional que el sonido original de <em>Shalom</em>. La frase "El Señor proveerá" no activa el mismo pacto espiritual que el nombre sagrado de <em>Javé-Jireh</em>.
       </p>
       <p>
-        Esta guía contiene las **12 Palabras Sagradas** en su vibración original. Al declararlas todas las mañanas siguiendo el protocolo práctico, estarás sintonizando tu mente y tu espíritu con el favor del Creador para abrir las puertas de la prosperidad y la restauración familiar.
+        Este libro no es una simple lectura teórica. Es un **instrumento de activación espiritual**. A través de las páginas de esta guía, conocerás el significado profundo de las 12 Palabras Sagradas que los patriarcas, reyes y profetas usaban para abrir los cielos en momentos de crisis extrema. 
+      </p>
+      <p>
+        Si has estado experimentando escasez financiera, deudas que parecen no tener fin, conflictos en tu hogar o debilidad física, este guion ha sido puesto en tus manos con un propósito divino. Te invitamos a leerlo con reverencia, fe y a seguir el plan de 21 días que encontrarás al final para sellar tu victoria espiritual.
       </p>
     </div>
 
-    <!-- CAPÍTULO 1: LAS 12 PALABRAS -->
+    <!-- EL PODER DE LAS LETRAS HEBREAS -->
     <div class="chapter">
-      <h2>Las 12 Palabras Sagradas y sus Significados</h2>
+      <h2>El Misterio de la Frecuencia Hebrea</h2>
+      <p>
+        En el hebreo antiguo, el abecedario (Alef-Bet) no solo sirve para formar palabras de manera gramatical. Cada letra representa un número (Gematría) y un pictograma con un profundo significado místico. 
+      </p>
+      <p>
+        Por ejemplo, la primera letra, <strong>Alef (א)</strong>, representa al buey, símbolo de fuerza y divinidad (el Creador). La segunda letra, <strong>Bet (ב)</strong>, representa una tienda o casa (el hogar). Cuando se juntan, forman la palabra <strong>Ab (אב)</strong>, que significa "Padre": la fuerza que sostiene el hogar.
+      </p>
+      <p>
+        Por lo tanto, cuando declaras estas palabras en su frecuencia original, estás proyectando códigos espirituales que alinean la realidad material con el diseño del Creador. Los Salmos declaran: <em>"La muerte y la vida están en poder de la lengua"</em> (Proverbios 18:21). Al usar este guion, estás eligiendo hablar vida, orden y multiplicación sobre tu realidad.
+      </p>
+    </div>
+
+    <!-- LAS 12 PALABRAS SAGRADAS -->
+    <div class="chapter">
+      <h2>Las 12 Palabras Sagradas del Guion Divino</h2>
 
       <!-- PALABRA 1 -->
       <div class="word-block">
         <div class="word-title">
           <span>1. SHALOM</span>
-          <span style="font-size: 14px; color: #999;">שלום</span>
+          <span style="font-size: 16px; color: #bca068;">שלום</span>
         </div>
-        <div class="word-meaning">Significado: Paz completa, bienestar, integridad y restauración de lo que estaba roto.</div>
+        <div class="word-meaning">Frecuencia: Paz Integral, Integridad, Orden Perfecto.</div>
         <p>
-          Shalom no es solo la ausencia de conflicto. Es el estado de plenitud donde nada falta y nada está roto. Declarar Shalom sobre tu hogar es blindarlo contra toda desunión.
+          En la mentalidad hebrea, <em>Shalom</em> no es la simple ausencia de guerra. Es la restauración del orden de Dios. Cuando declaras Shalom sobre tu billetera, tu matrimonio o tu salud, estás ordenando que todo lo que esté desestructurado vuelva a alinearse con la armonía divina.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Sello mi hogar con Shalom. Decreto que la paz que sobrepasa todo entendimiento guarda mi mente, mi matrimonio y la vida de mis hijos hoy."
+          <strong>Activación:</strong> "Declaro SHALOM sobre mi mente, mis emociones y mi hogar. Toda tormenta económica se calma ahora ante la frecuencia del orden de Dios. ¡Amén!"
         </div>
       </div>
 
@@ -155,14 +220,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>2. EMUNAH</span>
-          <span style="font-size: 14px; color: #999;">אמונה</span>
+          <span style="font-size: 16px; color: #bca068;">אמונה</span>
         </div>
-        <div class="word-meaning">Significado: Fe activa, firmeza, fidelidad absoluta y confianza inquebrantable.</div>
+        <div class="word-meaning">Frecuencia: Fe Firme, Fidelidad, Firmeza de Acción.</div>
         <p>
-          Emunah no es una fe pasiva. Es la acción firme de creer que las promesas de Dios ya están hechas, incluso cuando las circunstancias físicas dicen lo contrario.
+          <em>Emunah</em> es una fe que no duda porque descansa en el carácter de Dios. Es la fe que te permite dar pasos de obediencia aun cuando todo parece oscuro. Es la certeza de que Dios ya ha firmado tu liberación financiera en los cielos.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Mi vida se sostiene en Emunah. Confío plenamente en el Creador y declaro que mi fe activa abre los caminos que parecían cerrados."
+          <strong>Activación:</strong> "Camino en EMUNAH. Mi fe no se tambalea por lo que veo en mi cuenta bancaria; descansa en la fidelidad eterna de mi Creador."
         </div>
       </div>
 
@@ -170,14 +235,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>3. CHESED</span>
-          <span style="font-size: 14px; color: #999;">חסד</span>
+          <span style="font-size: 16px; color: #bca068;">חסד</span>
         </div>
-        <div class="word-meaning">Significado: Misericordia, gracia inmerecida, amor leal y bondad extrema.</div>
+        <div class="word-meaning">Frecuencia: Misericordia Extrema, Gracia Inmerecida, Amor de Pacto.</div>
         <p>
-          Chesed representa el amor del pacto de Dios que nunca falla. Es la fuerza divina que te rescata de los errores del pasado y te otorga un nuevo comienzo financiero y espiritual.
+          <em>Chesed</em> es el amor incondicional de Dios que traspasa tus propios errores. Si has tomado malas decisiones financieras en el pasado, el Chesed de Dios cancela las consecuencias y te posiciona para recibir un nuevo favor.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "La bondad y el Chesed de Dios me persiguen todos los días de mi vida. Su gracia me rodea y me provee todo lo necesario."
+          <strong>Activación:</strong> "Recibo el CHESED del Padre hoy. Sus favores inmerecidos abren puertas de bendición que yo no podría abrir por mí mismo."
         </div>
       </div>
 
@@ -185,14 +250,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>4. BARUCH</span>
-          <span style="font-size: 14px; color: #999;">ברוך</span>
+          <span style="font-size: 16px; color: #bca068;">ברוך</span>
         </div>
-        <div class="word-meaning">Significado: Bendito, fuente de bendiciones, arrodillarse en adoración.</div>
+        <div class="word-meaning">Frecuencia: Bendito, Fuente Multiplicadora de Bienes.</div>
         <p>
-          Al declarar Baruch, reconoces que toda provisión proviene de una fuente divina. Te alineas para ser un canal de bendición para otros.
+          La raíz de <em>Baruch</em> está asociada a arrodillarse, pero espiritualmente representa la acción de consagrar algo para que sea multiplicado. Al declarar que el Creador es Baruch, reconoces que la escasez no tiene poder sobre ti.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Baruch es el Creador del universo, quien provee pan a mi mesa y llena mis graneros con abundancia hoy."
+          <strong>Activación:</strong> "BARUCH es el Señor, la fuente inagotable de toda provisión, quien bendice el fruto de mi trabajo y multiplica mis recursos."
         </div>
       </div>
 
@@ -200,14 +265,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>5. JAVÉ-JIREH</span>
-          <span style="font-size: 14px; color: #999;">יהוה יראה</span>
+          <span style="font-size: 16px; color: #bca068;">יהوه יראה</span>
         </div>
-        <div class="word-meaning">Significado: El Señor proveerá; Dios se encargará de mis necesidades antes de que aparezcan.</div>
+        <div class="word-meaning">Frecuencia: El Señor Proveerá, Provisión Sobrenatural.</div>
         <p>
-          Esta es la firma divina de la provisión. Cuando Abraham iba a sacrificar a su hijo, Dios proveyó el cordero. Yavé-Jireh proveerá la salida a tus deudas.
+          Este es el nombre del pacto que Abraham usó en el Monte Moriah. Significa que Dios provee la solución antes de que el problema ocurra. Él ve tu necesidad de antemano y prepara el milagro.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Decreto que Yavé-Jireh está al frente de mis finanzas. Él provee para mis necesidades y abre puertas de provisión milagrosa."
+          <strong>Activación:</strong> "Decreto que JAVÉ-JIREH tiene el control de mis deudas y necesidades. La provisión oportuna y abundante llega a mi vida ahora."
         </div>
       </div>
 
@@ -215,35 +280,35 @@
       <div class="word-block">
         <div class="word-title">
           <span>6. RAPHA</span>
-          <span style="font-size: 14px; color: #999;">רפא</span>
+          <span style="font-size: 16px; color: #bca068;">רפא</span>
         </div>
-        <div class="word-meaning">Significado: Sanar, restaurar la salud física, mental y emocional.</div>
+        <div class="word-meaning">Frecuencia: Sanidad del Cuerpo, Mente y Finanzas.</div>
         <p>
-          Rapha es la energía divina que cura el cuerpo físico, pero también las heridas del alma causadas por la escasez y la angustia familiar.
+          Dios es nuestro sanador. La frecuencia de <em>Rapha</em> disipa toda enfermedad física del cuerpo, pero también restaura la salud mental de quienes están abrumados por la ansiedad y la preocupación económica.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "El Creador es mi Rapha. Su luz sana mi cuerpo, restaura mis fuerzas y trae salud perfecta a cada rincón de mi ser."
+          <strong>Activación:</strong> "El Creador es mi RAPHA. Su aliento de vida sana mis órganos, refresca mi mente y cura toda área enferma de mi familia."
         </div>
       </div>
 
     </div>
 
-    <!-- CONTINUACIÓN DE LAS PALABRAS -->
+    <!-- LAS 12 PALABRAS PARTE II -->
     <div class="chapter">
-      <h2>Las 12 Palabras Sagradas (Parte II)</h2>
+      <h2>Las 12 Palabras Sagradas (Continuación)</h2>
 
       <!-- PALABRA 7 -->
       <div class="word-block">
         <div class="word-title">
           <span>7. NISSI</span>
-          <span style="font-size: 14px; color: #999;">נסי</span>
+          <span style="font-size: 16px; color: #bca068;">נסי</span>
         </div>
-        <div class="word-meaning">Significado: Mi estandarte, mi bandera de victoria en medio de la batalla.</div>
+        <div class="word-meaning">Frecuencia: Mi Bandera, Mi Estandarte de Victoria en la Batalla.</div>
         <p>
-          Cuando sientes que estás en una batalla contra la escasez, Nissi es tu escudo. Él asegura que la victoria ya fue decretada a tu favor en los cielos.
+          Cuando Moisés levantó sus manos en el desierto, el pueblo prevaleció. Dios es tu <em>Nissi</em>. Declarar esto te recuerda que no estás luchando solo; el Creador marcha al frente de tus batallas legales, deudas o dificultades.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "El Señor es mi Nissi. Bajo su bandera marcho seguro de que la victoria sobre las dificultades ya es mía."
+          <strong>Activación:</strong> "El Señor es mi NISSI. Levanto mi fe como estandarte de victoria. Sé que bajo su cobertura ninguna arma forjada prosperará."
         </div>
       </div>
 
@@ -251,14 +316,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>8. KABOD</span>
-          <span style="font-size: 14px; color: #999;">כבוד</span>
+          <span style="font-size: 16px; color: #bca068;">כבוד</span>
         </div>
-        <div class="word-meaning">Significado: La gloria, el peso, la riqueza y el honor visible de Dios.</div>
+        <div class="word-meaning">Frecuencia: Gloria Visible, Peso de Bendición, Honor y Riqueza.</div>
         <p>
-          Kabod es la manifestación física del favor de Dios. Representa la riqueza y el respeto que el Creador derrama sobre aquellos que le buscan con sinceridad.
+          <em>Kabod</em> representa la presencia pesada y tangible de la riqueza y el favor de Dios en la tierra. No es una bendición abstracta; es la manifestación visible del favor que te otorga respeto e influencia.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "La gloria y el Kabod del Señor llenan mi casa de honor, ahuyentando toda vergüenza y escasez económica."
+          <strong>Activación:</strong> "La luz del KABOD divino brilla sobre mi vida. El peso de su favor abre puertas de honra y cancela toda vergüenza o escasez."
         </div>
       </div>
 
@@ -266,14 +331,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>9. TSEDAQAH</span>
-          <span style="font-size: 14px; color: #999;">צדקה</span>
+          <span style="font-size: 16px; color: #bca068;">צדקה</span>
         </div>
-        <div class="word-meaning">Significado: Justicia, rectitud, equidad y generosidad que equilibra la vida.</div>
+        <div class="word-meaning">Frecuencia: Justicia Divina, Prosperidad a través de la Rectitud.</div>
         <p>
-          Tsedaqah es la fuerza espiritual que alinea tus acciones con las leyes de la abundancia. Es la justicia divina que te entrega lo que te corresponde por derecho de fe.
+          Esta palabra está conectada a la justicia restauradora. <em>Tsedaqah</em> es la justicia que Dios aplica para devolverte los años que la escasez te robó. Es el equilibrio que recompensa la fidelidad del creyente.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Camino en Tsedaqah. Actúo con rectitud y declaro que la justicia de Dios equilibra y bendice mis caminos financieros."
+          <strong>Activación:</strong> "Establezco la TSEDAQAH en mis decisiones. Declaro que la justicia divina recompensa mi fe y me devuelve todo lo que el enemigo me arrebató."
         </div>
       </div>
 
@@ -281,14 +346,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>10. ADONAI</span>
-          <span style="font-size: 14px; color: #999;">אדני</span>
+          <span style="font-size: 16px; color: #bca068;">אדני</span>
         </div>
-        <div class="word-meaning">Significado: Señor, Soberano absoluto, dueño de toda la creación.</div>
+        <div class="word-meaning">Frecuencia: Señor Soberano, Dueño de la Tierra y sus Riquezas.</div>
         <p>
-          Al declarar Adonai, rindes tu control al Creador de los cielos. Reconoces que Él es el dueño del oro y la plata, y que tu vida está bajo su cuidado supremo.
+          Al llamar al Creador <em>Adonai</em>, reconoces su señorío absoluto. Quitas el peso de tus hombros y lo pones en las manos de Aquel que es dueño del oro y de la plata.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Adonai es el Señor de mi vida. Confío mis planes en sus manos soberanas y descanso en su perfecta dirección."
+          <strong>Activación:</strong> "Rindo mi ansiedad a ti, ADONAI. Eres el dueño de todo lo que existe y confío en que tu soberanía me sostiene y me guía."
         </div>
       </div>
 
@@ -296,14 +361,14 @@
       <div class="word-block">
         <div class="word-title">
           <span>11. HALLELUJAH</span>
-          <span style="font-size: 14px; color: #999;">הללויה</span>
+          <span style="font-size: 16px; color: #bca068;">הלلوיה</span>
         </div>
-        <div class="word-meaning">Significado: ¡Alabad al Señor!, regocijo y gratitud activa por la victoria anticipada.</div>
+        <div class="word-meaning">Frecuencia: Alabanza Jubilosa, Gratitud por la Victoria Anticipada.</div>
         <p>
-          Hallelujah es el mayor grito de júbilo de las Escrituras. Declarar Hallelujah es agradecer por el milagro financiero antes de que se manifieste en la tierra.
+          Esta palabra une <em>Hallel</em> (alabar) con <em>Yah</em> (el nombre de Dios). Es el mayor catalizador de milagros: la alabanza por la victoria decretada antes de que sea visible en la tierra.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "¡Hallelujah! Alabo al Creador con gratitud en mi corazón por las bendiciones que ya están en camino a mi hogar."
+          <strong>Activación:</strong> "¡HALLELUJAH! Canto de alegría y doy gracias anticipadas porque mi liberación y prosperidad ya son una realidad en el cielo."
         </div>
       </div>
 
@@ -311,33 +376,137 @@
       <div class="word-block">
         <div class="word-title">
           <span>12. AMÉN</span>
-          <span style="font-size: 14px; color: #999;">אמן</span>
+          <span style="font-size: 16px; color: #bca068;">אמן</span>
         </div>
-        <div class="word-meaning">Significado: Así sea, en verdad, firmeza y confirmación absoluta.</div>
+        <div class="word-meaning">Frecuencia: Así sea, Firmeza Inamovible, Sello Divino.</div>
         <p>
-          Amén es el sello final. Con esta palabra decretas que las 11 declaraciones anteriores son verdaderas, firmes e inamovibles en tu realidad diaria.
+          La palabra <em>Amén</em> comparte raíz con <em>Emunah</em>. Significa "esto es seguro y se cumplirá". Es el sello legal que valida todas tus declaraciones en el tribunal de los cielos.
         </p>
         <div class="prayer-box">
-          <strong>Declaración Diaria:</strong> "Sello esta declaración en el nombre del Padre. Lo que he decretado con fe hoy es firme y se cumple. ¡Amén!"
+          <strong>Activación:</strong> "Sello cada palabra declarada hoy en el nombre del Creador. Lo que está escrito y hablado se manifiesta con poder. ¡AMÉN!"
         </div>
       </div>
 
     </div>
 
-    <!-- PROTOCOLO DIARIO -->
+    <!-- CALENDARIO DE ACTIVACIÓN SEMANAL -->
     <div class="chapter">
-      <h2>El Protocolo de Activación Diaria</h2>
+      <h2>Calendario de Activación Semanal</h2>
       <p>
-        Para maximizar los resultados de tu Guion Divino de las 12 Palabras Sagradas, sigue este protocolo sencillo todas las mañanas al despertar:
+        Para guiar tu oración y mantener tu fe activa todos los días, utiliza este devocional semanal estructurado. Cada día de la semana tiene un enfoque específico para cubrir todas las áreas de tu vida.
       </p>
-      <ol style="margin-left: 24px; margin-top: 16px; line-height: 2;">
-        <li><strong>Momento de Silencio:</strong> Dedica 1 minuto al despertar para respirar profundo y calmar tu mente. Recuerda que no debes declarar con desesperación, sino con fe y paz.</li>
-        <li><strong>Declaración en Voz Alta:</strong> Lee las 12 Palabras Sagradas en orden, pronunciando su nombre en hebreo y leyendo la declaración diaria correspondiente con convicción.</li>
-        <li><strong>Visualización Familiar:</strong> Al finalizar, visualiza por 30 segundos a tu familia en paz, sonriendo y libres de toda carga económica o de salud.</li>
-        <li><strong>Cierre con Fe:</strong> Sella el protocolo diciendo en voz alta: <em>"Decretado y sellado está en el cielo. ¡Amén!"</em></li>
-      </ol>
-      <p style="margin-top: 30px; font-weight: 700; text-align: center; color: #bf8f2e;">
-        ¡Que las bendiciones, la paz y la gracia del Creador guíen cada paso de tu camino! 🙏
+
+      <!-- LUNES -->
+      <div class="ritual-day">
+        <h3>Lunes: Finanzas y Puertas Abiertas</h3>
+        <span class="bible-verse">Salmo 23:1 — "El Señor es mi pastor, nada me faltará."</span>
+        <p>
+          Comienza tu semana de trabajo alineando tus pensamientos con la provisión. El lunes nos enfocamos en activar las frecuencias de provisión financiera.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Padre Celestial, hoy en el inicio de esta semana invoco tu nombre <strong>JAVÉ-JIREH</strong>. Declaro que eres mi proveedor y que no hay límites para tu abundancia. Pongo en tus manos mi trabajo, mis proyectos y mis deudas. Abre las puertas de la provisión milagrosa hoy y rompe toda atadura de escasez en mi mente. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- MARTES -->
+      <div class="ritual-day">
+        <h3>Martes: Paz en el Hogar y Protección Familiar</h3>
+        <span class="bible-verse">Salmo 91:10 — "No te sobrevendrá mal, ni plaga tocará tu morada."</span>
+        <p>
+          El martes nos enfocamos en blindar a nuestra familia, protegiendo a nuestros hijos, pareja y hogar de influencias negativas o conflictos.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Señor <strong>ADONAI</strong>, soberano de mi vida, hoy te entrego el cuidado de mi hogar. Establezco tu frecuencia de <strong>SHALOM</strong> en las habitaciones de mi casa. Que tu paz reine entre nosotros, ahuyentando toda discusión, envidia o peligro. Protege a mis seres queridos cuando salgan y cuando entren. Tu gloria nos cubre. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- MIÉRCOLES -->
+      <div class="ritual-day">
+        <h3>Miércoles: Salud Física, Mental y Liberación de Cargas</h3>
+        <span class="bible-verse">Éxodo 15:26 — "Yo soy el Señor, tu sanador."</span>
+        <p>
+          El miércoles consagramos nuestro cuerpo y nuestra mente al Señor. Pedimos renovación de fuerzas y la curación de toda enfermedad o angustia emocional.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Mi Dios y creador, tú eres mi <strong>RAPHA</strong>. Hoy pongo ante ti mi cuerpo físico y mis emociones. Libérame del peso de la ansiedad que causa la preocupación financiera. Sana mis dolencias, renueva mis fuerzas y lléname de tu espíritu de paz para caminar con ligereza y fe. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- JUEVES -->
+      <div class="ritual-day">
+        <h3>Jueves: Victoria en las Batallas y Sabiduría Legal</h3>
+        <span class="bible-verse">Éxodo 17:15 — "El Señor es mi estandarte."</span>
+        <p>
+          Enfócate hoy en los problemas legales, los bloqueos en trámites, las deudas difíciles o las injusticias laborales que estés enfrentando.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Señor de los ejércitos, tú eres mi <strong>NISSI</strong>, mi bandera de victoria. Hoy enfrento mis batallas y dificultades sabiendo que tú peleas por mí. Declaro justicia sobre mis asuntos financieros y legales en tu frecuencia de <strong>TSEDAQAH</strong>. Ninguna trampa del enemigo prosperará en mi contra. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- VIERNES -->
+      <div class="ritual-day">
+        <h3>Viernes: Multiplicación de Recursos y Sabiduría</h3>
+        <span class="bible-verse">Deuteronomio 8:18 — "Recuerda al Señor tu Dios, porque Él te da el poder para hacer las riquezas."</span>
+        <p>
+          El viernes nos enfocamos en agradecer e incrementar los frutos del esfuerzo semanal, pidiendo sabiduría para administrar e invertir bien.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Señor <strong>BARUCH</strong>, fuente inagotable de bendición, consagro hoy el fruto de mis manos de esta semana. Te pido la sabiduría de Salomón para administrar mis finanzas. Que tus bendiciones se multipliquen y se extiendan para que yo pueda bendecir también a quienes me rodean. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- SÁBADO -->
+      <div class="ritual-day">
+        <h3>Sábado: Alabanza, Descanso y Conexión Espiritual</h3>
+        <span class="bible-verse">Salmo 150:6 — "Todo lo que respira alabe al Señor."</span>
+        <p>
+          El sábado es un día de descanso y profunda gratitud. Dejamos a un lado las peticiones y nos enfocamos en agradecer por todo lo que ya tenemos.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "¡<strong>HALLELUJAH</strong>! Alabo tu santo nombre, Creador del cielo y de la tierra. Hoy decido descansar en tu gracia y agradecerte por la vida, por el pan en mi mesa y por la victoria silenciosa que estás preparando para mí. Mi fe descansa tranquila en ti. ¡Amén!"
+        </p>
+      </div>
+
+      <!-- DOMINGO -->
+      <div class="ritual-day">
+        <h3>Domingo: Consagración y Sello Celestial</h3>
+        <span class="bible-verse">2 Corintios 1:20 — "Porque todas las promesas de Dios son en Él Sí, y en Él Amén."</span>
+        <p>
+          Prepara tu corazón para una nueva semana, sellando tu fe y consagrando tu vida y tus metas al Señor en comunidad familiar.
+        </p>
+        <p>
+          <strong>Oración del Día:</strong> "Señor eterno, hoy en tu día sagrado sello mi fe y mis metas para la semana que comienza. Activo mi <strong>EMUNAH</strong> y decreto que tus promesas son firmes en mi hogar. Dejo mi destino financiero bajo tu perfecta protección. Lo creo, lo declaro y lo sello en tu santo nombre: ¡<strong>AMÉN</strong>!"
+        </p>
+      </div>
+
+    </div>
+
+    <!-- EL RETO DE LOS 21 DÍAS -->
+    <div class="chapter">
+      <h2>El Reto de los 21 Días de Fe Inquebrantable</h2>
+      <p>
+        Los estudios teológicos y de comportamiento demuestran que la mente y el espíritu requieren un ciclo de **21 días continuos** para reprogramar los hábitos de pensamiento, romper las estructuras de miedo (angustia financiera) y establecer una fe firme.
+      </p>
+      
+      <div class="alert-box">
+        <h4>⚠️ ADVERTENCIA DE FE: No interrumpas el proceso</h4>
+        <p style="margin-bottom: 0; font-size: 15.5px; color: #721c24;">
+          Si dejas de realizar el protocolo un solo día antes de llegar al día 21, la conexión se interrumpe y deberás comenzar la cuenta nuevamente desde el Día 1. La constancia es el secreto para demostrar la firmeza de tu <strong>EMUNAH</strong>.
+        </p>
+      </div>
+
+      <p>
+        <strong>Cómo realizar el reto:</strong>
+      </p>
+      <ul style="margin-left: 24px; margin-top: 10px; line-height: 2;">
+        <li>Todas las mañanas, lee en voz alta la introducción de la palabra correspondiente del día.</li>
+        <li>Declara la oración del día de la semana en la que te encuentres usando el calendario semanal.</li>
+        <li>Evita quejarte por dinero durante estos 21 días. Cuando te sientas tentado a preocuparte, susurra en voz alta la palabra <strong>JAVÉ-JIREH</strong> tres veces seguidas para reenfocar tu mente.</li>
+      </ul>
+      
+      <p style="margin-top: 40px; font-weight: 700; text-align: center; color: #bf8f2e; font-size: 18px;">
+        "El Creador no te ha traído hasta aquí para dejarte. Tu victoria ya fue firmada en el cielo. Mantente firme en el proceso." 🙏
       </p>
     </div>
 
