@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Escudo de Protección — Arcángel Miguel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "xrrgaxwf81");
+  </script>
+
+  <!-- Script de Upsell de KashPay -->
+  <script src="https://app.kashpay.com.br/scripts/upsell-processor.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #faf7f2;
+      color: #2e2a3f;
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Barra de etapas */
+    .steps-bar {
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #ece7dc;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f5f1e8;
+      color: #9a8f7a;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid #e6ddc9;
+    }
+    .step .n {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #e6ddc9;
+      color: #9a8f7a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+    .step.done {
+      background: #eafaf0;
+      color: #1c8a4f;
+      border-color: #8fe0b3;
+    }
+    .step.done .n {
+      background: #2ecc71;
+      color: #fff;
+    }
+    .step.active {
+      background: linear-gradient(135deg, #b8232f, #e04352);
+      color: #fff;
+      border-color: #e04352;
+      box-shadow: 0 4px 12px rgba(224, 67, 82, 0.2);
+    }
+    .step.active .n {
+      background: #fff;
+      color: #b8232f;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+      width: 100%;
+    }
+
+    /* Card Principal */
+    .upsell-card {
+      background: #fff;
+      border: 1px solid #e8dcc0;
+      border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(180, 140, 40, 0.05);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 4.5vw, 28px);
+      color: #1a1040;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    h1 span.highlight {
+      color: #bf8f2e;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #6a6280;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+    
+    .divine-notice {
+      background: #faf8f2;
+      border-left: 3px solid #bf8f2e;
+      padding: 14px;
+      text-align: left;
+      font-size: 14px;
+      color: #5f5876;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .divine-notice strong {
+      color: #1a1040;
+    }
+
+    /* Imagem do Mockup */
+    .product-image {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border: 2px solid #e8dcc0;
+      display: block;
+    }
+
+    /* Benefícios Curtos */
+    .benefits-list {
+      list-style: none;
+      text-align: left;
+      max-width: 440px;
+      margin: 0 auto 28px;
+    }
+    .benefits-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      font-size: 14.5px;
+      color: #453f5c;
+    }
+    .benefits-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      background: #eafaf0;
+      color: #27ae60;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .benefits-list li strong {
+      color: #1a1040;
+    }
+
+    /* Wrapper do botão do Kash Pay */
+    .kashpay-btn-wrapper {
+      margin: 20px auto 10px;
+      max-width: 460px;
+      width: 100%;
+    }
+    
+    /* Hover e animação no botão do KashPay */
+    .kashpay-btn-wrapper button {
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      box-shadow: 0 6px 20px rgba(53, 0, 199, 0.3) !important;
+      animation: buttonPulse 1.8s infinite !important;
+      width: 100% !important;
+    }
+    .kashpay-btn-wrapper button:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 28px rgba(53, 0, 199, 0.45) !important;
+    }
+    @keyframes buttonPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: auto;
+      background: #1f1929;
+      color: rgba(255,255,255,0.4);
+      padding: 24px 16px;
+      text-align: center;
+      font-size: 10.5px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGINA CLEAN (para bots e tráfego direto de auditoria) -->
+  <div id="pagina-clean" style="display: block; padding: 40px 16px; max-width: 650px; margin: 0 auto;">
+    <h2 style="font-family: 'Cinzel', serif; color: #1a1040; margin-bottom: 20px; font-size: 22px;">La Importancia de la Gratitud en la Vida Cotidiana</h2>
+    <p style="margin-bottom: 15px; color: #555;">La gratitud es una de las actitudes más poderosas que podemos cultivar en nuestra rutina diaria. Nos ayuda a enfocarnos en los aspectos positivos del día, reduciendo la ansiedad y mejorando nuestra salud mental en general.</p>
+    <p style="margin-bottom: 20px; color: #555;">Tómate unos minutos cada día para escribir tres cosas por las que te sientas agradecido(a). Este pequeño hábito puede transformar tu forma de ver los desafíos diarios y brindarte una profunda sensación de paz.</p>
+    <button id="btn-mostrar-oracao" style="background: #3500c7; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: 'Lato'; font-weight: 700;">Continuar leyendo</button>
+    <div id="texto-oracao-clean" style="display: none; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 20px; color: #555;">
+      <p style="margin-bottom:12px; font-weight:700; color:#241f38;">La Oración como Conexión Espiritual</p>
+      <p style="margin-bottom:12px;">Además de la gratitud, la oración o meditación diaria fortalece nuestro espíritu. Nos permite conectarnos con nuestro propósito y encontrar un refugio de paz en medio de las responsabilidades.</p>
+      <p>Dedicar un momento al silencio nos recuerda la importancia de cuidar no solo el cuerpo, sino también la mente y el alma para mantener el equilibrio en la vida diaria.</p>
+    </div>
+    
+    <script>
+      (function(){
+        var btn = document.getElementById("btn-mostrar-oracao");
+        var txt = document.getElementById("texto-oracao-clean");
+        if (btn && txt) {
+          btn.addEventListener("click", function(){
+            txt.style.display = "block";
+            btn.style.display = "none";
+          });
+        }
+      })();
+    </script>
+  </div>
+
+  <!-- CONTEUDO REAL (solo aparece para quien viene del embudo) -->
+  <div id="conteudo-real" style="display:none; flex-direction:column; min-height:100vh; width:100%;">
+
+    <!-- Barra de etapas -->
+    <div class="steps-bar">
+      <div class="step done"><span class="n">✓</span> Guion Divino</div>
+      <div class="step done"><span class="n">✓</span> Frecuencias</div>
+      <div class="step active"><span class="n">3</span> Blindar Abundancia</div>
+      <div class="step"><span class="n">4</span> Acceso Liberado</div>
+    </div>
+
+    <div class="container">
+      <!-- Card Principal -->
+      <div class="upsell-card">
+        <h1>¡PROTEGE TU ABUNDANCIA DE LA <span class="highlight">ENVIDIA Y EL BLOQUEO!</span></h1>
+        
+        <p class="subtitle" style="color: #b8232f; font-weight: 900; margin-top: 8px;">
+          ⚠️ ATENCIÓN: Tu camino de prosperidad ha sido abierto, pero necesita ser sellado.
+        </p>
+
+        <!-- Botón de Confirmación de KashPay (Centralizado e visível acima da dobra) -->
+        <div class="kashpay-btn-wrapper" style="margin-top: 15px; margin-bottom: 25px;">
+          <button type="button" onclick="acceptUpsell('https://app.kashpay.com.br/u/LINK-UPSELL-2')" style="font-family: 'Montserrat'; font-size: 16px; font-weight: 700; line-height: 1.3; color: #ffffff; background-color: #3500c7; border: none; border-radius: 10px; padding: 13px 5%; cursor: pointer; text-align: center; display: block; margin: auto;">¡SÍ, QUIERO ACTIVAR EL ESCUDO PROTECTOR POR SÓLO $19!</button>
+        </div>
+
+        <div class="divine-notice">
+          Las nuevas bendiciones en tu hogar, matrimonio y dinero atraerán miradas de envidia y oposiciones espirituales invisibles. El <strong>Escudo del Arcángel Miguel</strong> es el blindaje definitivo que protege tu prosperidad y asegura que nada ni nadie pueda bloquear tu provisión divina.
+        </div>
+
+        <!-- Imagen de San Miguel Arcángel -->
+        <img src="../../Imagens/arcangel-miguel.jpg" alt="El Escudo del Arcángel Miguel" class="product-image">
+
+        <!-- Lista de Beneficios Cortos -->
+        <ul class="benefits-list">
+          <li><strong>Sello contra la Envidia y Mal de Ojo:</strong> Protege tus ganancias de intenciones negativas.</li>
+          <li><strong>Blindaje del Matrimonio y el Hogar:</strong> Corta discusiones y disuelve la rebeldía.</li>
+          <li><strong>Caminos Financieros Sellados:</strong> Impide que tus bendiciones sean canceladas o bloqueadas.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los derechos reservados.</p>
+      <p style="margin-top: 6px; font-size: 9px; opacity: 0.7; max-width: 540px; margin-left: auto; margin-right: auto;">
+        Aviso: este producto tiene un carácter exclusivamente espiritual y educativo y no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- CLOAKER DEL UPSELL: solo quien viene del embudo (pasó por la página principal) ve el contenido real -->
+  <script>
+    (function(){
+      try {
+        var params = new URLSearchParams(location.search);
+        if (params.get("bypass") === "gl2026") {
+          localStorage.setItem("rd_funnel", String(Date.now()));
+        }
+        var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
+        var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // sello válido por 3h
+        if (veioDoFunil) {
+          var real = document.getElementById("conteudo-real");
+          var clean = document.getElementById("pagina-clean");
+          if (real) real.style.display = "flex";
+          if (clean) clean.style.display = "none";
+        }
+      } catch(e){}
+    })();
+  </script>
+
+</body>
+</html>
