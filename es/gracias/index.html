@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Gracias por tu compra! — Acceso Confirmado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      color: #2e2a3f;
+      background: #faf7f2;
+      padding: 0;
+      margin: 0;
+    }
+    .header-logo {
+      text-align: center;
+      padding: 30px 16px 10px;
+    }
+    .logo-img {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 1.5px solid #bf8f2e;
+    }
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+    }
+    .main-card {
+      background: #fff;
+      border: 1px solid #e8dcc0;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(180, 140, 40, 0.05);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background: #eafaf0;
+      color: #2ecc71;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 24px;
+      border: 2px solid #8fe0b3;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(22px, 5vw, 30px);
+      color: #1a1040;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .p-lead {
+      font-size: 16px;
+      color: #5a5270;
+      margin-bottom: 30px;
+    }
+    .info-box {
+      background: #faf8f2;
+      border-left: 4px solid #bf8f2e;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .info-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      color: #1a1040;
+      margin-bottom: 8px;
+    }
+    .info-box p {
+      font-size: 14.5px;
+      color: #5f5876;
+    }
+    .support-link {
+      color: #3500c7;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .support-link:hover {
+      text-decoration: underline;
+    }
+    .guarantee-box {
+      background: #fcfcfc;
+      border: 1px dashed #bf8f2e;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+    .guarantee-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      color: #b8232f;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .guarantee-box p {
+      font-size: 14.5px;
+      color: #5f5876;
+    }
+
+    /* Seção de depoimentos */
+    .testimonials-title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: #1a1040;
+      text-align: center;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid #e8dcc0;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #bf8f2e;
+      flex-shrink: 0;
+    }
+    .testimonial-body {
+      flex-grow: 1;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      color: #1a1040;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .stars {
+      color: #f1c40f;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .testimonial-text {
+      font-size: 14px;
+      color: #5a5270;
+      line-height: 1.5;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(0,0,0,0.4);
+      margin-top: 40px;
+      border-top: 1px solid #e8dcc0;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .testimonial-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .avatar {
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabecalho com Logo -->
+  <div class="header-logo">
+    <img src="../../Imagens/logo.png" alt="Guion Divino" class="logo-img">
+  </div>
+
+  <div class="container">
+    <!-- Card de Agradecimento Principal -->
+    <div class="main-card">
+      <div class="success-icon">✓</div>
+      <h1>¡Gracias por dar este salto de fe!</h1>
+      <p class="p-lead">
+        Tu camino de transformación espiritual y bendición en el hogar ha comenzado con éxito.
+      </p>
+
+      <!-- Caixa de Informacao de Acesso -->
+      <div class="info-box">
+        <h3>📬 Tu acceso ha sido enviado por correo</h3>
+        <p>
+          En los próximos 5 minutos recibirás un correo electrónico con las instrucciones completas para acceder a tu material.
+          <br><br>
+          <strong>⚠️ IMPORTANTE:</strong> No olvides revisar tu carpeta de <strong>Spam, Promociones o Correo no deseado</strong>, ya que a veces los filtros automáticos bloquean la entrega inicial.
+          <br><br>
+          Si tienes alguna duda o necesitas asistencia, escríbenos directamente a: <a href="mailto:gabriel.luz@noticiasdafe.com.br" class="support-link">gabriel.luz@noticiasdafe.com.br</a>.
+        </p>
+      </div>
+
+      <!-- Caixa de Garantia -->
+      <div class="guarantee-box">
+        <h3>🛡️ Garantía Incondicional de Paz</h3>
+        <p>
+          Queremos que tomes esta decisión con total tranquilidad. Si por cualquier motivo sientes que este manual o las frecuencias no son lo que esperabas, el proceso de reembolso es sumamente sencillo. 
+          <br><br>
+          Solo envíanos un correo a nuestro soporte solicitando la devolución e indicando tu motivo. Te devolveremos el <strong>100% de tu dinero de forma íntegra</strong> y lo más rápido posible. Tu paz y bienestar son nuestra prioridad.
+        </p>
+      </div>
+    </div>
+
+    <!-- Depoimentos Reais -->
+    <h2 class="testimonials-title">Testimonios de quienes ya activaron el Guion</h2>
+
+    <!-- Depoimento 1 -->
+    <div class="testimonial-card">
+      <img src="../../Imagens/depoimento1.jpg" alt="Mateo y Sofía" class="avatar">
+      <div class="testimonial-body">
+        <div class="testimonial-name">Mateo y Sofía (Guatemala)</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Nuestra familia estaba pasando por discusiones diarias que parecían no tener fin. Empezamos a orar juntos con las 12 palabras y la paz volvió a nuestro hogar de inmediato. La provisión económica también mejoró muchísimo. ¡Estamos muy felices y unidos!"
+        </p>
+      </div>
+    </div>
+
+    <!-- Depoimento 2 -->
+    <div class="testimonial-card">
+      <img src="../../Imagens/depoimento2.jpg" alt="María Elena R." class="avatar">
+      <div class="testimonial-body">
+        <div class="testimonial-name">María Elena R. (México)</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Había intentado de todo para salir de las deudas y la angustia constante. Desde que empecé el protocolo de 21 días y lo complementé con las frecuencias aceleradoras, sentí una paz increíble en mi mente. De la nada surgieron nuevas oportunidades de trabajo que me permitieron pagar mis cuentas pendientes. ¡Es una bendición real!"
+        </p>
+      </div>
+    </div>
+
+    <!-- Depoimento 3 -->
+    <div class="testimonial-card">
+      <img src="../../Imagens/depoimento3.jpg" alt="Gabriela S." class="avatar">
+      <div class="testimonial-body">
+        <div class="testimonial-name">Gabriela S. (Colombia)</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "El cambio en mi hogar fue inmediato. Mis hijos, que estaban muy rebeldes, comenzaron a cambiar de actitud y el ambiente pesado que se sentía en la casa desapareció por completo. Recomiendo a todos que den este salto de fe sin dudarlo, realmente funciona cuando lo declaras con el corazón."
+        </p>
+      </div>
+    </div>
+
+    <!-- Depoimento 4 -->
+    <div class="testimonial-card">
+      <img src="../../Imagens/depoimento4.jpg" alt="Carlos H." class="avatar">
+      <div class="testimonial-body">
+        <div class="testimonial-name">Carlos H. (Ecuador)</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Estaba un poco escéptico al principio, pero decidí probar la guía del manual de las 12 palabras sagradas. La claridad mental y las puertas financieras que se me abrieron en la primera semana son inexplicables. Me siento seguro y con un rumbo claro. Muchas gracias por hacer llegar este material."
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Copyright © 2026 — Guion Divino de las 12 Palabras Sagradas. Todos los derechos reservados.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
