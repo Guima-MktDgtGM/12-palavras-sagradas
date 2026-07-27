@@ -1781,31 +1781,5 @@
     });
   </script>
 
-  <!-- SCRIPT DE DELAY (SINCRONIZAÇÃO VTURB) -->
-  <script>
-      // Altere o tempo abaixo (em segundos) para o momento em que o pitch de vendas começa
-      const SECONDS_TO_DISPLAY = 600; 
-
-      const showEls = function () {
-          const blocoCta = document.getElementById("bloco-cta");
-          if(blocoCta) blocoCta.style.display = 'block';
-          
-          const checkoutInline = document.getElementById("checkout-inline-wrap");
-          if(checkoutInline) checkoutInline.style.display = 'block';
-      }
-
-      const vturbCheck = setInterval(() => {
-          const smartplayer = document.querySelector('vturb-smartplayer');
-          if (smartplayer && smartplayer.smartplayer && smartplayer.smartplayer.video) {
-              const video = smartplayer.smartplayer.video;
-              video.addEventListener('timeupdate', () => {
-                  if (video.currentTime >= SECONDS_TO_DISPLAY) {
-                      showEls();
-                  }
-              });
-              clearInterval(vturbCheck);
-          }
-      }, 1000);
-  </script>
 </body>
 </html>
