@@ -383,7 +383,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     try {
       var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
       var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // selo valido por 3h
-      var previewMode = (new URLSearchParams(location.search).get("ver") === "gl2026"); // preview interno
+      var previewMode = (new URLSearchParams(location.search).get("bypass") === "gl2026"); // preview interno
       if (veioDoFunil || previewMode) {
         var real = document.getElementById("conteudo-real");
         var clean = document.getElementById("pagina-clean");
