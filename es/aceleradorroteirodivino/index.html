@@ -107,16 +107,16 @@
 
     /* TESTIMONIALS CAROUSEL */
     .testimonials-section { margin-top: 24px; }
-    .carousel-wrap { position: relative; overflow: hidden; border-radius: 16px; }
-    .carousel-track { display: flex; transition: transform 0.4s ease; }
-    .testimonial-card { min-width: 100%; background: #12102a; border: 1px solid #2e2550; border-radius: 16px; padding: 24px 20px; flex-shrink: 0; }
+    .carousel-wrap { position: relative; overflow: hidden; border-radius: 16px; width: 100%; }
+    .carousel-track { display: flex; transition: transform 0.4s ease; width: 100%; }
+    .testimonial-card { min-width: 100%; width: 100%; box-sizing: border-box; background: #12102a; border: 1px solid #2e2550; border-radius: 16px; padding: 24px 20px; flex-shrink: 0; word-break: break-word; overflow: hidden; }
     .testimonial-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .testimonial-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid #9333ea; flex-shrink: 0; }
     .testimonial-avatar-placeholder { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #6b21a8, #9333ea); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: #fff; flex-shrink: 0; }
     .testimonial-name { font-weight: 700; font-size: 15px; color: #f0ece0; }
     .testimonial-location { font-size: 12px; color: #9d8fc0; }
     .testimonial-stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; }
-    .testimonial-text { font-size: 14px; color: #c4b5e0; line-height: 1.6; font-style: italic; }
+    .testimonial-text { font-size: 14px; color: #c4b5e0; line-height: 1.7; font-style: italic; white-space: normal; word-wrap: break-word; }
     .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 16px; }
     .carousel-btn { width: 36px; height: 36px; border-radius: 50%; background: #2a1f4a; border: 1px solid #3d2e6a; color: #c4b5e0; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .carousel-btn:hover { background: #9333ea; border-color: #9333ea; color: #fff; }
@@ -283,6 +283,76 @@
               <p class="testimonial-text">"Llevaba meses rezando sin sentir nada. Un amigo me habló del Acelerador y decidí probar. En 3 días mi mente estaba más clara, los bloqueos desaparecieron y empecé a ver oportunidades que antes no veía. Increíble."</p>
             </div>
 
+            <!-- CARD 5 -->
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <img src="../../Imagens/patricia-nogueira.jpg" alt="Patricia N." class="testimonial-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="testimonial-avatar-placeholder" style="display:none">P</div>
+                <div>
+                  <div class="testimonial-name">Patricia Nogueira</div>
+                  <div class="testimonial-location">📍 Chile</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Tenía mucho escepticismo al principio, pero decidí intentarlo porque nada más funcionaba. Después de 4 noches con el audio del Acelerador, empecé a rezar el Guion Divino y sentí algo diferente. Como si una puerta se abriera dentro de mí. Una paz que hace años no sentía."</p>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <img src="../../Imagens/rosangela.jpg" alt="Rosangela V." class="testimonial-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="testimonial-avatar-placeholder" style="display:none">R</div>
+                <div>
+                  <div class="testimonial-name">Rosángela V.</div>
+                  <div class="testimonial-location">📍 Venezuela</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Comencé el Acelerador un lunes por la noche. El miércoles por la mañana recibí una llamada inesperada con una buena noticia que llevaba meses esperando. Coincidencia o no, no voy a dejar de usar esto. El Guion Divino junto con el Acelerador es algo diferente."</p>
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <img src="../../Imagens/sandra-mota.jpg" alt="Sandra M." class="testimonial-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="testimonial-avatar-placeholder" style="display:none">S</div>
+                <div>
+                  <div class="testimonial-name">Sandra Mota</div>
+                  <div class="testimonial-location">📍 Colombia</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Mi hijo me recomendó el Acelerador. Soy mayor y dudé mucho, pero empecé a escucharlo antes de dormir. Al segundo día ya notaba que mis sueños eran más tranquilos. Al quinto día recé el Guion Divino y lloré de emoción. Sentí la presencia de Dios de verdad."</p>
+            </div>
+
+            <!-- CARD 8 -->
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <img src="../../Imagens/perfil 3.jpg" alt="Lucía E." class="testimonial-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="testimonial-avatar-placeholder" style="display:none">L</div>
+                <div>
+                  <div class="testimonial-name">Lucía Esperanza R.</div>
+                  <div class="testimonial-location">📍 México</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Llevaba un año sin trabajo y con deudas. Empecé el Acelerador un domingo. En menos de una semana, un negocio que pensé que estaba cerrado se reactivó. No sé si es la frecuencia, no sé si es la fe, pero algo cambió. Hoy digo que valió cada centavo y más."</p>
+            </div>
+
+            <!-- CARD 9 -->
+            <div class="testimonial-card">
+              <div class="testimonial-header">
+                <img src="../../Imagens/perfil 4.jpg" alt="Carmen D." class="testimonial-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="testimonial-avatar-placeholder" style="display:none">C</div>
+                <div>
+                  <div class="testimonial-name">Carmen D. Herrera</div>
+                  <div class="testimonial-location">📍 Perú</div>
+                </div>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Mi relación con Dios siempre fue difícil. Rezaba pero no sentía nada. Una amiga me habló del Acelerador. Desde la primera noche, algo cambió. La calma al despertar era diferente. Y cuando rezo el Guion Divino ahora, cada palabra tiene un peso diferente. Gracias."</p>
+            </div>
+
           </div>
         </div>
         <!-- CONTROLES -->
@@ -334,7 +404,7 @@
   <!-- CAROUSEL JS -->
   <script>
     var currentSlide = 0;
-    var totalSlides = 4;
+    var totalSlides = 9;
     var track = document.getElementById('carouselTrack');
     var dotsContainer = document.getElementById('carouselDots');
 
