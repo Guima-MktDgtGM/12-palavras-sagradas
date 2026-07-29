@@ -111,6 +111,69 @@ function enviarVendaUtmify($lead, $emailReal, $nome, $telReal) {
     curl_exec($ch); curl_close($ch);
 }
 
+// ── Meta CAPI: envia o Purchase server-side (com event_source_url + dados hasheados) ──
+// Exige META_CAPI_TOKEN em /dados/config.php. O pixel pode vir de META_PIXEL_ID (opcional).
+function hashCapi($v) {
+    $v = trim(mb_strtolower((string)$v));
+    return $v === '' ? null : hash('sha256', $v);
+}
+
+function enviarPurchaseCapi($orderId, $email, $telefone, $nome, $cpf, $valorCentavos, $tracking, $sourceUrl) {
+    if (!defined('META_CAPI_TOKEN') || META_CAPI_TOKEN === '') return;
+    if (empty($orderId)) return;
+
+    $pixelId = defined('META_PIXEL_ID') ? META_PIXEL_ID : '1036714235373736';
+
+    // Telefone: só dígitos, com DDI 55 quando vier sem.
+    $tel = preg_replace('/\D/', '', (string)$telefone);
+    if ($tel !== '' && strlen($tel) <= 11) $tel = '55' . $tel;
+
+    // Nome separado (a Meta casa melhor com first/last name).
+    $partes = preg_split('/\s+/', trim((string)$nome));
+    $fn = $partes[0] ?? '';
+    $ln = count($partes) > 1 ? end($partes) : '';
+
+    $userData = array_filter([
+        'em'          => hashCapi($email),
+        'ph'          => $tel !== '' ? hash('sha256', $tel) : null,
+        'fn'          => hashCapi($fn),
+        'ln'          => hashCapi($ln),
+        'external_id' => hashCapi(preg_replace('/\D/', '', (string)$cpf)),
+        'country'     => hash('sha256', 'br'),
+        // fbc/fbp melhoram MUITO a atribuicao quando disponiveis (vindos do navegador).
+        'fbc'         => !empty($tracking['fbc']) ? $tracking['fbc'] : null,
+        'fbp'         => !empty($tracking['fbp']) ? $tracking['fbp'] : null,
+    ]);
+
+    $evento = [
+        'event_name'       => 'Purchase',
+        'event_time'       => time(),
+        'event_id'         => (string)$orderId,   // deduplicacao na Meta
+        'event_source_url' => $sourceUrl,         // <- o parametro que a Meta passou a exigir
+        'action_source'    => 'website',
+        'user_data'        => $userData,
+        'custom_data'      => [
+            'currency' => 'BRL',
+            'value'    => round(intval($valorCentavos) / 100, 2),
+        ],
+    ];
+
+    $ch = curl_init("https://graph.facebook.com/v21.0/{$pixelId}/events");
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+        CURLOPT_POSTFIELDS => json_encode([
+            'data'         => [$evento],
+            'access_token' => META_CAPI_TOKEN,
+        ]),
+        CURLOPT_TIMEOUT => 20,
+    ]);
+    $resp = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . " CAPI order=$orderId http=$code resp=" . substr((string)$resp, 0, 300) . "\n", FILE_APPEND);
+}
+
 $payload = file_get_contents('php://input');
 $data    = json_decode($payload, true);
 
@@ -237,6 +300,24 @@ if ($evento === 'pix_gerado') {
 
     // Envia a venda DIRETO pra UTMify com os UTMs reais (UTMify deduplica por orderId).
     if ($leadMatch) enviarVendaUtmify($leadMatch, $emailReal, $nome, $telReal);
+
+    // ── Purchase para a Meta via CAPI (funciona no hospedado E no transparente) ──
+    $d = $data['data'] ?? [];
+    // Order id: tenta os nomes mais comuns no payload da Cakto; cai pro lead se preciso.
+    $orderId = $d['id'] ?? $d['order_id'] ?? $d['orderId'] ?? $d['reference'] ?? $d['refId']
+               ?? ($leadMatch['order_id'] ?? '');
+    // Valor: payload da Cakto (reais) ou centavos do nosso lead.
+    $valorCents = 0;
+    foreach (['amount','total','value','price','paid_amount'] as $k) {
+        if (isset($d[$k]) && is_numeric($d[$k])) { $valorCents = (int)round(floatval($d[$k]) * 100); break; }
+    }
+    if ($valorCents <= 0) $valorCents = intval($leadMatch['amount_cents'] ?? 0);
+
+    $trk = is_array($leadMatch['tracking'] ?? null) ? $leadMatch['tracking'] : [];
+    $cpfReal = $leadMatch['cpf'] ?? ($customer['docNumber'] ?? $customer['document'] ?? '');
+    $srcUrl  = 'https://noticiasdafe.com.br/';
+
+    enviarPurchaseCapi($orderId, $emailReal, $telReal, $nome, $cpfReal, $valorCents, $trk, $srcUrl);
 }
 
 file_put_contents(FILA_FILE, json_encode($fila, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
