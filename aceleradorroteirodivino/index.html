@@ -216,6 +216,21 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
       <div id="conteudo-acelerador">
 
+      <!-- PRIMEIRO CTA — one-click da Cakto (primeira coisa que aparece, logo abaixo da VSL) -->
+      <div class="cta-area" id="cta-topo" style="margin:8px 0 34px;">
+        <cakto-upsell-buttons>
+          <cakto-upsell-accept
+            bg-color="#0f7865"
+            text-color="#ffffff"
+            upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos/"
+            offer-id="8xdi2wg"
+            app-base-url="https://app.cakto.com.br"
+            offer-type="upsell"
+            upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
+          >Vou acelerar meus resultados!</cakto-upsell-accept>
+        </cakto-upsell-buttons>
+      </div>
+
       <!-- Imagem do Acelerador (centralizada) -->
       <div style="text-align:center;margin:0 0 32px;">
         <img src="https://noticiasdafe.com.br/Imagens/acelerador-roteiro-divino.png" alt="Acelerador do Roteiro Divino" style="max-width:340px;width:100%;height:auto;margin:0 auto;">
@@ -238,21 +253,6 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
           <div class="rate high"><div class="num">91%</div><div class="lbl">Resultado rápido<br>COM o Acelerador</div></div>
         </div>
         <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
-
-        <!-- PRIMEIRO CTA — one-click da Cakto (mesma oferta 8xdi2wg) -->
-        <div class="cta-area" style="margin-top:32px;">
-          <cakto-upsell-buttons>
-            <cakto-upsell-accept
-              bg-color="#0f7865"
-              text-color="#ffffff"
-              upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos/"
-              offer-id="8xdi2wg"
-              app-base-url="https://app.cakto.com.br"
-              offer-type="upsell"
-              upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
-            >Vou acelerar meus resultados!</cakto-upsell-accept>
-          </cakto-upsell-buttons>
-        </div>
       </div>
 
       <!-- Recomendado -->
@@ -376,6 +376,31 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 </div>
 
 </div><!-- /conteudo-real -->
+
+<!-- Auto-scroll: quando o VTurb revelar o #bloco_cta, rola ate o botao -->
+<script>
+  (function(){
+    var bloco = document.getElementById('bloco_cta');
+    if (!bloco || !window.MutationObserver) return;
+    var jaRolou = false;
+    function visivel(el){
+      return el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
+    }
+    function rolar(){
+      if (jaRolou) return;
+      jaRolou = true;
+      setTimeout(function(){
+        var alvo = document.getElementById('cta-topo') || bloco;
+        alvo.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 250); // deixa o botao da Cakto renderizar antes de rolar
+    }
+    var obs = new MutationObserver(function(){
+      if (visivel(bloco)) { rolar(); obs.disconnect(); }
+    });
+    obs.observe(bloco, {attributes:true, attributeFilter:['style','class','hidden']});
+    if (visivel(bloco)) { rolar(); obs.disconnect(); }
+  })();
+</script>
 
 <!-- CLOAKER DO UPSELL: so quem veio do funil (passou pela pagina principal) ve o conteudo real -->
 <script>
