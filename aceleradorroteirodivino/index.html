@@ -201,17 +201,11 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     </div>
   </div>
 
-  <!-- BLOCO REVELADO PELO VTURB no tempo do pitch (id configurado no painel: bloco_cta) -->
+  <!-- TODO O CONTEUDO — revelado pelo VTurb no tempo do pitch (ID no painel: bloco_cta).
+       Ao entrar na pagina aparece SO a VSL acima. -->
   <div id="bloco_cta" style="display:none;">
-    <div class="cta-area" style="margin:8px 0 20px;">
-      <button type="button" id="btn-aceitar-presente" style="background:#00ff0c;color:#000;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:17px;padding:16px 28px;border-radius:50px;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,12,.3);max-width:360px;width:100%;transition:transform .2s;">Eu quero acelerar meus resultados!</button>
-    </div>
-  </div>
 
-  <!-- Conteudo do acelerador — revelado ao clicar no botao acima -->
-  <div id="resto-pagina">
-
-      <div id="conteudo-acelerador" style="display:none;">
+      <div id="conteudo-acelerador">
 
       <!-- Imagem do Acelerador (centralizada) -->
       <div style="text-align:center;margin:0 0 32px;">
@@ -236,16 +230,20 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         </div>
         <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
 
-        <!-- Primeiro CTA Intermediário — rola ate a area de pagamento -->
-        <div class="cta-area" style="margin-top: 32px;">
-          <button type="button" id="btn-ir-pagamento" style="width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#2ecc71,#27ae60);border:none;border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.1vw,20px);font-weight:800;color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,.3);">Vou acelerar meus resultados!</button>
+        <!-- PRIMEIRO CTA — one-click da Cakto (mesma oferta 8xdi2wg) -->
+        <div class="cta-area" style="margin-top:32px;">
+          <cakto-upsell-buttons>
+            <cakto-upsell-accept
+              bg-color="#0f7865"
+              text-color="#ffffff"
+              upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos/"
+              offer-id="8xdi2wg"
+              app-base-url="https://app.cakto.com.br"
+              offer-type="upsell"
+              upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
+            >Vou acelerar meus resultados!</cakto-upsell-accept>
+          </cakto-upsell-buttons>
         </div>
-        <script>
-          (function(){
-            var b=document.getElementById('btn-ir-pagamento');
-            if(b) b.addEventListener('click',function(){ var a=document.getElementById('area-pagamento'); if(a) a.scrollIntoView({behavior:'smooth',block:'start'}); });
-          })();
-        </script>
       </div>
 
       <!-- Recomendado -->
@@ -277,9 +275,12 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         <div class="section-label">→ Tudo que você recebe hoje</div>
         <h2>Resumo do Kit do Acelerador</h2>
         <ul class="meds">
-          <li><span class="med-icon">🧠</span><div class="med-text"><h4><span>Incluso:</span> 7 Meditações Divinas Personalizadas</h4></div><span class="med-val">R$ 679</span></li>
-          <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Incluso:</span> Meditação do Estado Theta</h4></div><span class="med-val">R$ 97</span></li>
-          <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Incluso:</span> Protocolo Acelerado de 7 Dias</h4></div><span class="med-val">R$ 197</span></li>
+          <li><span class="med-icon">🧠</span><div class="med-text"><h4><span>Incluso:</span> 7 Meditações Divinas Personalizadas</h4></div></li>
+          <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Incluso:</span> Meditação do Estado Theta</h4></div></li>
+          <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Incluso:</span> Protocolo Acelerado de 7 Dias</h4></div></li>
+          <li><span class="med-icon">🎧</span><div class="med-text"><h4><span>Incluso:</span> Frequências Divinas para ouvir antes de dormir</h4></div></li>
+          <li><span class="med-icon">📱</span><div class="med-text"><h4><span>Incluso:</span> Acesso vitalício dentro do seu app</h4></div></li>
+          <li><span class="med-icon">✈️</span><div class="med-text"><h4><span>Incluso:</span> Sua vaga no sorteio da viagem à Itália</h4></div></li>
         </ul>
       </div>
 
@@ -308,21 +309,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         </div>
       </div>
 
-      <!-- Valor Final Otimizado + Explicação de Estorno (PIX/Cartão) -->
+      <!-- Garantia de Prosperidade -->
       <div class="section cta-area">
-        <div class="section-label">→ Sua condição nesta página</div>
-        <div class="value-stack">
-          <div class="vrow"><span>7 Meditações Divinas Personalizadas</span><span>R$ 679</span></div>
-          <div class="vrow"><span>Meditação do Estado Theta</span><span>R$ 97</span></div>
-          <div class="vrow"><span>Protocolo Acelerado de 7 Dias</span><span>R$ 197</span></div>
-          <div class="vrow total"><span>Valor real de tudo</span><span>R$ 973</span></div>
-
-          <div id="preco-pix">
-            <div style="font-size:13px;color:#a5741a;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:20px;">A sua condição especial de hoje</div>
-            <div style="font-family:'Cinzel',serif;font-size:clamp(20px,4.5vw,26px);font-weight:800;color:#27ae60;line-height:1.3;margin:10px 0 4px;">Você acabou de ver no vídeo 🙏</div>
-            <div class="value-desc">Oferta única — se você sair desta página, ela não aparece novamente.</div>
-          </div>
-        </div>
 
         <!-- Bloco da Garantia de Prosperidade (reembolso ao concluir o programa) -->
         <div class="estorno-info-box">
@@ -380,21 +368,6 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
 </div><!-- /conteudo-real -->
 
-<!-- Botao "Eu quero acelerar meus resultados" revela a oferta -->
-<script>
-  (function(){
-    var b = document.getElementById('btn-aceitar-presente');
-    var c = document.getElementById('conteudo-acelerador');
-    if (b && c) {
-      b.addEventListener('click', function(){
-        c.style.display = 'block';
-        b.style.display = 'none';
-        setTimeout(function(){ c.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
-      });
-    }
-  })();
-</script>
-
 <!-- CLOAKER DO UPSELL: so quem veio do funil (passou pela pagina principal) ve o conteudo real -->
 <script>
   (function(){
@@ -408,11 +381,8 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         if (real) real.style.display = "block";
         if (clean) clean.style.display = "none";
       }
-      if (previewMode) { // revela tudo (pula o gate do video e o botao de aceitar)
+      if (previewMode) { // revela o conteudo sem esperar o tempo do video
         var bc = document.getElementById("bloco_cta"); if (bc) bc.style.display = "block";
-        var resto = document.getElementById("resto-pagina"); if (resto) resto.style.display = "block";
-        var btnAP = document.getElementById("btn-aceitar-presente"); if (btnAP) btnAP.style.display = "none";
-        var ca = document.getElementById("conteudo-acelerador"); if (ca) ca.style.display = "block";
       }
     } catch(e){}
   })();
