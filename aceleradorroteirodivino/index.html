@@ -113,7 +113,7 @@ p.body strong{color:#a5741a;}
 /* Botões Cakto estilizados */
 cakto-upsell-accept::part(button){
   width:100%;max-width:480px;padding:23px 24px;
-  background:linear-gradient(135deg,#0070ba,#005a9c)!important;
+  background:linear-gradient(135deg,#0f7865,#0a5c4d)!important;
   border:none;border-radius:50px;
   font-family:'Cinzel',serif;font-size:clamp(16px,3.1vw,20px);font-weight:800;color:#fff;
   letter-spacing:.5px;box-shadow:0 8px 28px #2ecc7144;cursor:pointer;
@@ -309,19 +309,23 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
           <h2 style="margin-bottom:8px;">Confirme o seu Acelerador</h2>
           <p style="max-width:480px;margin:0 auto 18px;font-size:14.5px;color:#453f5c;line-height:1.5;">Pagamento <strong>único</strong> de <strong>R$297</strong> — sem mensalidade. O acesso é liberado na hora, dentro do mesmo app do seu Roteiro Divino.</p>
 
-          <!-- ============================================================ -->
-          <!-- PLACEHOLDER: cole aqui o componente ONE-CLICK da Cakto da     -->
-          <!-- oferta do Acelerador de R$297 (pagamento unico).             -->
-          <!-- Enquanto nao tiver o one-click, o botao abaixo leva para o    -->
-          <!-- checkout hospedado — troque o href pelo link real da oferta.  -->
-          <!-- ============================================================ -->
+          <!-- ONE-CLICK DA CAKTO (offer 8xdi2wg) -->
+          <!-- ACEITA  -> up2 /canticosdosanjos | RECUSA -> down1 /aceleradorgratis -->
           <div id="painel-oneclick" style="max-width:480px;margin:0 auto;">
-            <a href="https://pay.cakto.com.br/8xdi2wg_995420" id="btn-aceitar-297" style="display:block;width:100%;padding:23px 24px;background:linear-gradient(135deg,#0070ba,#005a9c);border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.1vw,20px);font-weight:800;color:#fff;text-decoration:none;box-shadow:0 8px 28px #0070ba55;">⚡ ATIVAR MEU ACELERADOR AGORA</a>
-          </div>
-
-          <!-- RECUSAR -->
-          <div style="margin-top:22px;">
-            <a href="https://noticiasdafe.com.br/aceleradorgratis" style="display:inline-block;max-width:340px;width:100%;padding:11px 16px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 4px 14px #e0435244;line-height:1.35;">Não, quero seguir na velocidade normal</a>
+            <cakto-upsell-buttons>
+              <cakto-upsell-accept
+                bg-color="#0f7865"
+                text-color="#ffffff"
+                upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos/"
+                offer-id="8xdi2wg"
+                app-base-url="https://app.cakto.com.br"
+                offer-type="upsell"
+                upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
+              >⚡ QUERO ACELERAR MEUS RESULTADOS</cakto-upsell-accept>
+              <cakto-upsell-reject
+                upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
+              >Prefiro esperar mais tempo</cakto-upsell-reject>
+            </cakto-upsell-buttons>
           </div>
         </div>
 
@@ -385,7 +389,6 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
 <!-- Esconde o botão de recusar e o preço dentro do componente da Cakto -->
 <style>
-  cakto-upsell-reject { display: none !important; }
   cakto-upsell-accept::part(price) { display: none !important; }
   .gate-btn { transition: background .15s, border-color .15s, color .15s; }
   .gate-btn:hover { background: #eafaf0 !important; border-color: #2ecc71 !important; color: #1c8a4f !important; }
