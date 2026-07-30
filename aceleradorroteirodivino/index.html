@@ -406,10 +406,18 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 <script>
   (function(){
     try {
+      var VALIDADE_SELO = 7 * 24 * 60 * 60 * 1000; // 7 dias (Pix/boleto podem ser pagos depois)
       var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
-      var veioDoFunil = t && (Date.now() - t) < (3 * 60 * 60 * 1000); // selo valido por 3h
+      var temSelo = t && (Date.now() - t) < VALIDADE_SELO;
+
+      // Quem acabou de sair do checkout da Cakto E COMPROU tem que ver o upsell,
+      // mesmo sem selo (pagou de outro aparelho, aba anonima, Pix pago horas depois...).
+      var ref = (document.referrer || "").toLowerCase();
+      var veioDaCakto = ref.indexOf("cakto.com.br") !== -1;
+      if (veioDaCakto) { try { localStorage.setItem("rd_funnel", Date.now()); } catch(e){} }
+
       var previewMode = (new URLSearchParams(location.search).get("bypass") === "gl2026"); // preview interno
-      if (veioDoFunil || previewMode) {
+      if (temSelo || veioDaCakto || previewMode) {
         var real = document.getElementById("conteudo-real");
         var clean = document.getElementById("pagina-clean");
         if (real) real.style.display = "block";
