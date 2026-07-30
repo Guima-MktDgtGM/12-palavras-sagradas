@@ -9,6 +9,9 @@
 
 <!-- Otimização de Velocidade de Carregamento - VTurb -->
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a6aca6bf005a3af398dcf2a/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/6a6aca0580b4cbb479746a97/main.m3u8" as="fetch">
 <link rel="dns-prefetch" href="https://cdn.converteai.net">
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
 <link rel="dns-prefetch" href="https://images.converteai.net">
@@ -177,24 +180,38 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   <div class="step"><span class="n">3</span> Pedido Concluído</div>
 </div>
 
-<!-- Faixa congrats modificada para o comprador 777 -->
-<div class="congrats">Parabéns! 🎉 Identificamos você como o comprador místico 777. Uma benção foi liberada...</div>
+<!-- Faixa congrats -->
+<div class="congrats">Parabéns! 🎉 Uma bênção especial acaba de ser liberada no seu nome...</div>
 
 <div class="container">
 
-  <!-- Alerta Superior Vermelho -->
+  <!-- Alerta Superior Vermelho (pulsante) -->
   <div class="alert">⚠️ ESPERE! NÃO FECHE ESTA PÁGINA</div>
 
-  <!-- Header Modificado -->
+  <!-- Header -->
   <div class="header">
-    <h1>Você foi <span class="gold">abençoado por Deus</span> e ganhou o acelerador para ter resultados até <span style="color:#2ecc71;">10 vezes mais rápido!</span></h1>
-    <p class="subtitle">Veja abaixo como ativar a sua benção e ter resultados até 10 vezes mais rápido.</p>
+    <h1>Espere! Uma <span class="gold">bênção</span> acaba de ser liberada para você</h1>
+    <p class="subtitle">Você foi selecionado(a) para acelerar seus resultados em <strong style="color:#2ecc71;">10x</strong> e concorrer a uma <strong style="color:#bf8f2e;">viagem à Itália com tudo pago</strong>. Assista ao vídeo rápido de <strong>3 minutos</strong> abaixo para receber a sua bênção.</p>
+
+    <!-- VSL (VTurb) -->
+    <div class="video-wrapper">
+      <vturb-smartplayer id="vid-6a6aca6bf005a3af398dcf2a" style="display:block;margin:0 auto;width:100%;">
+        <div class="vturb-player-placeholder" style="position:relative;width:100%;padding:56.25% 0 0;z-index:0;background-color:black;"></div>
+      </vturb-smartplayer>
+    </div>
   </div>
 
-  <!-- Conteudo do acelerador (exibido diretamente, sem gate de video) -->
+  <!-- BLOCO REVELADO PELO VTURB no tempo do pitch (id configurado no painel: bloco_cta) -->
+  <div id="bloco_cta" style="display:none;">
+    <div class="cta-area" style="margin:8px 0 20px;">
+      <button type="button" id="btn-aceitar-presente" style="background:#00ff0c;color:#000;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:17px;padding:16px 28px;border-radius:50px;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,12,.3);max-width:360px;width:100%;transition:transform .2s;">Eu quero acelerar meus resultados!</button>
+    </div>
+  </div>
+
+  <!-- Conteudo do acelerador — revelado ao clicar no botao acima -->
   <div id="resto-pagina">
 
-      <div id="conteudo-acelerador" style="display:block;">
+      <div id="conteudo-acelerador" style="display:none;">
 
       <!-- Imagem do Acelerador (centralizada) -->
       <div style="text-align:center;margin:0 0 32px;">
@@ -328,6 +345,21 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
 </div><!-- /conteudo-real -->
 
+<!-- Botao "Eu quero acelerar meus resultados" revela a oferta -->
+<script>
+  (function(){
+    var b = document.getElementById('btn-aceitar-presente');
+    var c = document.getElementById('conteudo-acelerador');
+    if (b && c) {
+      b.addEventListener('click', function(){
+        c.style.display = 'block';
+        b.style.display = 'none';
+        setTimeout(function(){ c.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+      });
+    }
+  })();
+</script>
+
 <!-- CLOAKER DO UPSELL: so quem veio do funil (passou pela pagina principal) ve o conteudo real -->
 <script>
   (function(){
@@ -342,6 +374,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         if (clean) clean.style.display = "none";
       }
       if (previewMode) { // revela tudo (pula o gate do video e o botao de aceitar)
+        var bc = document.getElementById("bloco_cta"); if (bc) bc.style.display = "block";
         var resto = document.getElementById("resto-pagina"); if (resto) resto.style.display = "block";
         var btnAP = document.getElementById("btn-aceitar-presente"); if (btnAP) btnAP.style.display = "none";
         var ca = document.getElementById("conteudo-acelerador"); if (ca) ca.style.display = "block";
@@ -360,4 +393,12 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
 <!-- Scripts de Funcionamento -->
 <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+
+<!-- Player VTurb (VSL) -->
+<script type="text/javascript">
+  var s=document.createElement("script");
+  s.src="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a6aca6bf005a3af398dcf2a/v4/player.js";
+  s.async=!0;
+  document.head.appendChild(s);
+</script>
 
