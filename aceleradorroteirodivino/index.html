@@ -636,6 +636,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   ];
 
   var currentVagas    = 9;     // Começa com 9 vagas restantes na primeira notificação
+  var VAGA_MINIMA     = 3;     // Ao exibir esta quantidade, para de mostrar notificações
   var MOSTRAR_VAGAS   = true;  // false = esconde a linha de vagas
 
   var ATRASO_INICIAL  = 5000;  // 5s depois que o bloco_cta aparece para fazer a primeira chamada rápido
@@ -685,10 +686,10 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     setTimeout(function(){
       el.classList.remove('on');
 
-      // Reduz a quantidade de vagas restantes apenas se for maior do que 3
-      if (currentVagas > 3) {
-        currentVagas--;
-      }
+      // Chegou em VAGA_MINIMA: esta foi a ultima notificacao, nao mostra mais nenhuma.
+      if (currentVagas <= VAGA_MINIMA) return;
+
+      currentVagas--;
 
       if (mostradas < MAX_NOTIFICACOES) {
         var espera = INTERVALO_MIN + Math.random() * (INTERVALO_MAX - INTERVALO_MIN);
@@ -758,6 +759,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         var clean = document.getElementById("pagina-clean");
         if (real) real.style.display = "block";
         if (clean) clean.style.display = "none";
+        window.__RD_LIBERADO = true; // libera o carregamento do player da VSL
       }
       if (previewMode) { // revela o conteudo sem esperar o tempo do video
         var bc = document.getElementById("bloco_cta"); if (bc) bc.style.display = "block";
@@ -776,11 +778,14 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 <!-- Scripts de Funcionamento -->
 <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 
-<!-- Player VTurb (VSL) -->
+<!-- Player VTurb (VSL) — so carrega para quem foi liberado pelo cloaker.
+     Sem isso o player iniciava (e tocava audio) tambem para quem ve a pagina clean. -->
 <script type="text/javascript">
-  var s=document.createElement("script");
-  s.src="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a6aca6bf005a3af398dcf2a/v4/player.js";
-  s.async=!0;
-  document.head.appendChild(s);
+  if (window.__RD_LIBERADO) {
+    var s=document.createElement("script");
+    s.src="https://scripts.converteai.net/141468aa-0e0b-4b46-b784-a9403b5f9a1c/players/6a6aca6bf005a3af398dcf2a/v4/player.js";
+    s.async=!0;
+    document.head.appendChild(s);
+  }
 </script>
 
