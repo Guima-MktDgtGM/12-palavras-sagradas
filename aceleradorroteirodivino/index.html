@@ -68,13 +68,15 @@ h2{font-family:'Cinzel',serif;font-size:clamp(21px,3.7vw,29px);color:#241f38;mar
 p.body{font-size:16.5px;color:#453f5c;margin-bottom:16px;}
 p.body strong{color:#a5741a;}
 
-/* Taxa de sucesso */
-.rate-box{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
-.rate{flex:1;min-width:150px;text-align:center;background:#fff;border:1px solid #ece7dc;border-radius:14px;padding:24px 16px;box-shadow:0 4px 16px rgba(120,100,50,.06);}
-.rate .num{font-family:'Cinzel',serif;font-size:46px;font-weight:800;line-height:1;}
-.rate.low .num{color:#e04352;}
-.rate.high .num{color:#27ae60;}
-.rate .lbl{font-size:13.5px;color:#6a6280;margin-top:10px;}
+/* Taxa de sucesso — comparativo clean com troféu */
+.rate-clean{display:flex;align-items:center;justify-content:center;gap:6px;margin:18px 0 4px;}
+.rate-clean .rc-lado{flex:1;text-align:center;max-width:200px;}
+.rate-clean .rc-emo{font-size:clamp(28px,7vw,38px);line-height:1;}
+.rate-clean .rc-lbl{font-size:clamp(12px,2.6vw,14px);font-weight:900;color:#5f5876;margin-top:6px;letter-spacing:.2px;}
+.rate-clean .rc-num{font-family:'Cinzel',serif;font-size:clamp(30px,8vw,44px);font-weight:800;line-height:1.15;margin-top:2px;}
+.rate-clean .rc-num.low{color:#e04352;}
+.rate-clean .rc-num.high{color:#27ae60;}
+.rate-clean .rc-trofeu{font-size:clamp(32px,8vw,46px);line-height:1;flex-shrink:0;padding:0 4px;}
 .confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17.5px;color:#a5741a;font-weight:700;}
 
 /* Bloco destaque */
@@ -282,9 +284,22 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
       <div class="section">
         <div class="section-label">→ A diferença que ele faz</div>
         <h2>Membros que ativam o Acelerador manifestam muito mais rápido</h2>
-        <div class="rate-box">
-          <div class="rate low"><div class="num">18%</div><div class="lbl">Resultado rápido<br>SEM o Acelerador</div></div>
-          <div class="rate high"><div class="num">91%</div><div class="lbl">Resultado rápido<br>COM o Acelerador</div></div>
+        <p style="text-align:center;font-family:'Cinzel',serif;font-size:clamp(16px,3.4vw,20px);font-weight:800;color:#c0392b;margin:26px 0 4px;">Taxa de resultado do Roteiro Divino:</p>
+
+        <div class="rate-clean">
+          <div class="rc-lado">
+            <div class="rc-emo">😕</div>
+            <div class="rc-lbl">SEM o Acelerador</div>
+            <div class="rc-num low">18%</div>
+          </div>
+
+          <div class="rc-trofeu">🏆</div>
+
+          <div class="rc-lado">
+            <div class="rc-emo">🤩</div>
+            <div class="rc-lbl">COM o Acelerador</div>
+            <div class="rc-num high">91%</div>
+          </div>
         </div>
         <div class="confirm-line">✅ 93% dos membros do Roteiro Divino confirmam este upgrade</div>
       </div>
