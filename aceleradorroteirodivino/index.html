@@ -79,6 +79,36 @@ p.body strong{color:#a5741a;}
 .rate-clean .rc-trofeu{font-size:clamp(32px,8vw,46px);line-height:1;flex-shrink:0;padding:0 4px;}
 .confirm-line{margin-top:24px;text-align:center;font-family:'Cinzel',serif;font-size:17.5px;color:#a5741a;font-weight:700;}
 
+/* Carrossel de relatos (arrasta para o lado, proximo card aparece cortado) */
+.relatos-track{
+  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 4px 14px;margin-top:20px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin;
+}
+.relatos-track::-webkit-scrollbar{height:6px;}
+.relatos-track::-webkit-scrollbar-thumb{background:#e0d6bd;border-radius:10px;}
+.relato-card{
+  flex:0 0 84%;max-width:340px;scroll-snap-align:center;
+  background:#fffdf6;border:1px solid #e8dcc4;border-radius:16px;
+  padding:20px 18px;box-shadow:0 6px 20px rgba(180,140,40,.10);
+}
+@media(min-width:700px){ .relato-card{flex-basis:46%;} }
+.relato-card .rl-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.relato-card .rl-foto{
+  width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #c9a84c;
+  background:linear-gradient(135deg,#c9a84c,#b8860b);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-weight:800;font-size:20px;
+}
+.relato-card .rl-nome{font-weight:900;font-size:15px;color:#241f38;line-height:1.25;}
+.relato-card .rl-meta{font-size:12.5px;color:#7a7488;margin-top:1px;}
+.relato-card .rl-estrelas{color:#d4a017;font-size:14px;letter-spacing:1px;}
+.relato-card .rl-txt{font-size:14.5px;color:#453f5c;line-height:1.65;}
+.relato-card .rl-selo{
+  display:inline-block;margin-top:12px;background:#eafaf0;color:#1c8a4f;
+  font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;
+}
+
 /* Bloco destaque */
 .highlight{background:#fffdf6;border:1px solid #e8dcc0;border-radius:18px;padding:32px 26px;box-shadow:0 6px 24px rgba(180,140,40,.08);}
 .highlight .htitle{font-family:'Cinzel',serif;font-size:clamp(20px,3.5vw,26px);color:#a5741a;text-align:center;margin-bottom:24px;line-height:1.35;}
@@ -319,13 +349,12 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         <p style="text-align:center;font-family:'Cinzel',serif;font-size:17px;color:#a5741a;font-weight:700;margin-top:24px;line-height:1.5;">Se você marcou pelo menos uma, não foi coincidência você estar lendo isto. 🙏</p>
       </div>
 
-      <!-- Depoimentos / Provas Sociais -->
-      <div class="section">
+      <!-- Depoimentos / Provas Sociais — carrossel horizontal -->
+      <div class="section" id="sec-relatos" style="display:none;">
         <div class="section-label">→ Quem já ativou, aprova</div>
-        <div style="display:flex;flex-direction:column;gap:16px;max-width:420px;margin:24px auto 0;">
-          <img src="https://noticiasdafe.com.br/Imagens/print%20wpp1.png" alt="Relato real no WhatsApp" style="width:100%;border-radius:14px;border:1px solid #ece7dc;box-shadow:0 4px 16px rgba(120,100,50,.10);">
-          <img src="https://noticiasdafe.com.br/Imagens/print%20wpp%202.png" alt="Relato real no WhatsApp" style="width:100%;border-radius:14px;border:1px solid #ece7dc;box-shadow:0 4px 16px rgba(120,100,50,.10);">
-        </div>
+        <h2>Relatos de quem pegou o Acelerador</h2>
+        <div class="relatos-track" id="relatos-track"><!-- preenchido pelo script --></div>
+        <p style="text-align:center;font-size:12.5px;color:#9a8f7a;margin-top:10px;">← arraste para o lado para ver mais →</p>
       </div>
 
       <!-- Lista Resumida dos Entregáveis -->
@@ -482,6 +511,66 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 </div>
 
 </div><!-- /conteudo-real -->
+
+<!-- ============================================================
+     RELATOS (carrossel) — preencher a lista RELATOS abaixo com
+     depoimentos REAIS de quem pegou o Acelerador.
+     Campos: nome, meta (idade/cidade), texto, foto (opcional),
+             selo (opcional, ex.: "Compra verificada")
+     Se a lista ficar vazia, a secao inteira nao aparece.
+     ============================================================ -->
+<script>
+(function(){
+  var RELATOS = [
+    // {
+    //   nome: "Maria S.",
+    //   meta: "47 anos · Salvador, BA",
+    //   texto: "Escreva aqui o relato real da pessoa, com as palavras dela.",
+    //   foto: "https://noticiasdafe.com.br/Imagens/perfil%201.jpg", // opcional
+    //   selo: "Compra verificada"                                   // opcional
+    // },
+  ];
+
+  if (!RELATOS.length) return;
+
+  var sec   = document.getElementById('sec-relatos');
+  var track = document.getElementById('relatos-track');
+  if (!sec || !track) return;
+
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  var html = '';
+  for (var i = 0; i < RELATOS.length; i++) {
+    var r = RELATOS[i];
+    var inicial = (r.nome || '?').charAt(0).toUpperCase();
+    var foto = r.foto
+      ? '<img class="rl-foto" src="' + esc(r.foto) + '" alt="' + esc(r.nome) + '">'
+      : '<div class="rl-foto">' + esc(inicial) + '</div>';
+    var selo = r.selo
+      ? '<div class="rl-selo">✓ ' + esc(r.selo) + '</div>'
+      : '';
+    html +=
+      '<div class="relato-card">' +
+        '<div class="rl-top">' + foto +
+          '<div>' +
+            '<div class="rl-estrelas">★★★★★</div>' +
+            '<div class="rl-nome">' + esc(r.nome) + '</div>' +
+            '<div class="rl-meta">' + esc(r.meta) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rl-txt">' + esc(r.texto) + '</div>' +
+        selo +
+      '</div>';
+  }
+
+  track.innerHTML = html;
+  sec.style.display = 'block';
+})();
+</script>
 
 <!-- ============================================================
      NOTIFICACAO DE COMPRA — preencher a lista COMPRAS abaixo
