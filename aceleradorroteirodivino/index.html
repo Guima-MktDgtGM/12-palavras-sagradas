@@ -119,6 +119,33 @@ p.body strong{color:#a5741a;}
 /* CTA */
 .cta-area{text-align:center;margin:25px 0;}
 
+/* Notificacao de compra (canto inferior esquerdo) */
+#notif-compra{
+  position:fixed;left:12px;bottom:12px;z-index:9999;max-width:310px;width:calc(100% - 24px);
+  background:#fff;border:1px solid #e8dcc4;border-left:4px solid #2ecc71;border-radius:12px;
+  padding:12px 14px;box-shadow:0 8px 28px rgba(60,50,20,.18);
+  font-family:'Lato',sans-serif;
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease;
+}
+#notif-compra.on{opacity:1;transform:translateY(0);}
+#notif-compra .nc-top{display:flex;align-items:center;gap:11px;}
+#notif-compra .nc-ini{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#c9a84c,#b8860b);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-weight:800;font-size:16px;
+}
+#notif-compra .nc-nome{font-weight:900;font-size:14px;color:#241f38;line-height:1.3;}
+#notif-compra .nc-txt{font-size:12.5px;color:#5f5876;line-height:1.4;}
+#notif-compra .nc-vagas{
+  margin-top:9px;padding-top:8px;border-top:1px dashed #e8dcc4;
+  font-size:12.5px;font-weight:800;color:#c0392b;text-align:center;letter-spacing:.3px;
+}
+@media(max-width:480px){
+  #notif-compra{max-width:none;left:10px;right:10px;width:auto;bottom:10px;padding:11px 13px;}
+}
+
 /* Botões Cakto estilizados */
 cakto-upsell-accept::part(button){
   width:100%;max-width:480px;padding:23px 24px;
@@ -199,8 +226,15 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
   <!-- Header -->
   <div class="header">
-    <h1>Espere! Uma <span class="gold">bênção</span> acaba de ser liberada para você</h1>
-    <p class="subtitle">Você foi selecionado(a) para acelerar seus resultados em <strong style="color:#2ecc71;">10x</strong> e concorrer a uma <strong style="color:#bf8f2e;">viagem à Itália com tudo pago</strong>. Assista ao vídeo rápido de <strong>3 minutos</strong> abaixo para receber a sua bênção.</p>
+    <p style="font-family:'Lato',sans-serif;font-style:italic;font-weight:900;font-size:clamp(14px,3vw,17px);color:#5f5876;margin-bottom:14px;">Oferta especial APENAS para quem acaba de entrar no Roteiro Divino...</p>
+
+    <h1>Receba a sua bênção em <span style="text-decoration:line-through;color:#9a8f7a;font-weight:400;">90 dias</span> <span class="gold">apenas 3 dias</span> com o Acelerador</h1>
+
+    <div style="background:#241f38;color:#fff;border-radius:12px;padding:16px 20px;margin:18px auto 0;max-width:560px;font-size:clamp(15px,3.2vw,18px);line-height:1.5;">
+      A taxa de resultado rápido do Roteiro Divino sozinho é de <strong style="color:#ff8a8a;">18%</strong>. Com o Acelerador, ela vai para <strong style="color:#7dffb0;">91%</strong>!
+    </div>
+
+    <p class="subtitle">Assista ao vídeo rápido de <strong>3 minutos</strong> abaixo para entender como ativar a sua bênção. 🙏</p>
 
     <!-- VSL (VTurb) -->
     <div class="video-wrapper">
@@ -288,9 +322,79 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
           <li><span class="med-icon">🌙</span><div class="med-text"><h4><span>Incluso:</span> Meditação do Estado Theta</h4></div></li>
           <li><span class="med-icon">🔥</span><div class="med-text"><h4><span>Incluso:</span> Protocolo Acelerado de 7 Dias</h4></div></li>
           <li><span class="med-icon">🎧</span><div class="med-text"><h4><span>Incluso:</span> Frequências Divinas para ouvir antes de dormir</h4></div></li>
-          <li><span class="med-icon">📱</span><div class="med-text"><h4><span>Incluso:</span> Acesso vitalício dentro do seu app</h4></div></li>
-          <li><span class="med-icon">✈️</span><div class="med-text"><h4><span>Incluso:</span> Sua vaga no sorteio da viagem à Itália</h4></div></li>
+          <li><span class="med-icon">♾️</span><div class="med-text"><h4><span>Incluso:</span> Acesso vitalício, direto no seu dispositivo</h4></div></li>
         </ul>
+      </div>
+
+      <!-- BONUS DESBLOQUEADOS (saem de graca junto com o Acelerador) -->
+      <div class="section">
+        <div class="section-label">→ E tudo isto vem junto, sem pagar nada a mais</div>
+        <h2>Você também desbloqueia <span style="color:#bf8f2e;">9 Meditações Sagradas</span> — todas de graça</h2>
+        <p class="body" style="text-align:center;max-width:560px;margin:0 auto 26px;">Cada uma delas é vendida separadamente. Hoje, ao confirmar o Acelerador, <strong>todas são liberadas gratuitamente para você</strong>. 🙏</p>
+
+        <div style="max-width:560px;margin:0 auto;">
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Sabedoria de Salomão <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 97</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para tomar decisões com clareza divina e nunca mais se arrepender das escolhas do dia a dia.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Prosperidade de José do Egito <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 127</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">O mesmo princípio que tirou José da prisão e o levou ao palácio — para abrir portas de provisão na sua vida.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Fé de Abraão <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 97</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para continuar acreditando mesmo quando ainda não dá para ver — a fé que sustenta nos períodos de espera.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Coragem de Davi <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 87</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para enfrentar os gigantes da sua vida sem medo — dívidas, medos e situações que parecem grandes demais.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Restauração de Jó <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 127</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para quem já perdeu muito e precisa acreditar que tudo pode ser devolvido em dobro.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Paz que Excede o Entendimento <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 87</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para acalmar a ansiedade e dormir tranquilo mesmo com problemas ainda sem solução.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Cura de Ezequias <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 97</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Uma meditação de fortalecimento e esperança para os dias em que o corpo e a alma estão cansados.</p>
+          </div>
+
+          <div style="border-bottom:1px solid #f0e8d8;padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Blindagem Espiritual <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 127</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">Para proteger a sua casa e a sua família de tudo aquilo que tenta roubar a sua paz.</p>
+          </div>
+
+          <div style="padding:14px 0;">
+            <span style="display:inline-block;background:#2ecc71;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.6px;padding:3px 9px;border-radius:20px;">🔓 DESBLOQUEADO</span>
+            <h4 style="font-family:'Cinzel',serif;font-size:16px;color:#241f38;margin:7px 0 3px;">Meditação da Gratidão que Multiplica <span style="color:#9a8f7a;font-weight:400;text-decoration:line-through;font-size:13px;">R$ 87</span> <span style="color:#1c8a4f;font-weight:900;font-size:13px;">GRÁTIS</span></h4>
+            <p style="font-size:13.5px;color:#5f5876;line-height:1.55;margin:0;">O hábito que faz o pouco render muito — e prepara o seu coração para receber ainda mais.</p>
+          </div>
+
+        </div>
+
+        <div style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:22px;max-width:560px;margin:26px auto 0;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
+          <p style="font-size:14.5px;color:#5f5876;margin-bottom:6px;">Valor real de todas as meditações:</p>
+          <p style="font-family:'Cinzel',serif;font-size:30px;font-weight:800;color:#e04352;text-decoration:line-through;line-height:1.1;">R$ 933</p>
+          <p style="font-family:'Cinzel',serif;font-size:22px;font-weight:800;color:#1c8a4f;margin-top:8px;">Hoje saem <span style="font-size:26px;">100% DE GRAÇA</span> com o Acelerador 🎁</p>
+        </div>
       </div>
 
       <!-- SORTEIO DA VIAGEM À ITÁLIA -->
@@ -318,23 +422,10 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
         </div>
       </div>
 
-      <!-- Garantia de Prosperidade -->
-      <div class="section cta-area">
-
-        <!-- Bloco da Garantia de Prosperidade (reembolso ao concluir o programa) -->
-        <div class="estorno-info-box">
-          <h5>🙏 Garantia de Prosperidade — seu esforço vale o dinheiro de volta</h5>
-          <p>Dentro do seu app existe um módulo exclusivo com a nossa <strong>Garantia de Prosperidade</strong>: se você seguir o Acelerador do começo ao fim, basta entrar em contato com o nosso suporte que <strong>devolvemos integralmente o seu pagamento</strong>.</p>
-          <p><strong>E por que fazemos isso?</strong> Porque estamos aprofundando as nossas pesquisas sobre o poder das 12 Palavras. Precisamos de relatos reais de pessoas que aplicaram o Acelerador de verdade — então é só você nos contar <strong>todos os resultados que ele gerou na sua vida</strong>. Com esses relatos em mãos, conseguimos aperfeiçoar o método e <strong>levar essa bênção para muito mais pessoas</strong>.</p>
-          <p>Ou seja: o seu risco é zero. Você vive a transformação, compartilha o seu testemunho com a gente e <strong>recebe o seu dinheiro de volta</strong> — e a sua história ainda ajuda outras famílias. 💚🙏</p>
-        </div>
-
-        </div>
-
-        <!-- CHECKOUT DO UPSELL (pagamento unico R$297) -->
+        <!-- CHECKOUT DO UPSELL -->
         <div class="section" id="area-pagamento" style="text-align:center;">
           <h2 style="margin-bottom:8px;">Confirme o seu Acelerador</h2>
-          <p style="max-width:480px;margin:0 auto 10px;font-size:14.5px;color:#453f5c;line-height:1.5;">Pagamento <strong>único</strong>, sem mensalidade. O acesso é liberado <strong>na hora</strong>, dentro do mesmo app do seu Roteiro Divino.</p>
+          <p style="max-width:480px;margin:0 auto 10px;font-size:14.5px;color:#453f5c;line-height:1.5;">Seu acesso é liberado <strong>imediatamente</strong>, ali mesmo no seu dispositivo. Você não precisa esperar nada.</p>
           <p style="max-width:480px;margin:0 auto 18px;font-size:14px;color:#1c8a4f;font-weight:700;line-height:1.5;">✈️ Ao confirmar, o seu nome entra automaticamente no sorteio da viagem à Itália (resultado dia 05/08).</p>
 
           <!-- ONE-CLICK DA CAKTO (offer 8xdi2wg) -->
@@ -376,6 +467,105 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 </div>
 
 </div><!-- /conteudo-real -->
+
+<!-- ============================================================
+     NOTIFICACAO DE COMPRA — preencher a lista COMPRAS abaixo
+     com nomes REAIS tirados do painel da Cakto.
+     Formato: ["Primeiro nome + inicial", "Estado"]
+     Enquanto a lista estiver vazia, nada aparece na pagina.
+     ============================================================ -->
+<div id="notif-compra" aria-live="polite">
+  <div class="nc-top">
+    <div class="nc-ini" id="nc-ini">M</div>
+    <div>
+      <div class="nc-nome" id="nc-nome">—</div>
+      <div class="nc-txt">acabou de adquirir o <strong>Acelerador do Roteiro Divino</strong></div>
+      <div class="nc-txt" id="nc-local" style="opacity:.85;"></div>
+    </div>
+  </div>
+  <div class="nc-vagas" id="nc-vagas"></div>
+</div>
+
+<script>
+(function(){
+  // ====== CONFIGURACAO ======
+  var COMPRAS = [
+    // ["Maria S.",  "Bahia"],
+    // ["Joao P.",   "Sao Paulo"],
+    // ["Ana C.",    "Minas Gerais"],
+  ];
+
+  var VAGAS_RESTANTES = 10;    // numero real de vagas que voce esta limitando
+  var MOSTRAR_VAGAS   = true;  // false = esconde a linha de vagas
+
+  var ATRASO_INICIAL  = 15000; // 15s depois que o bloco_cta aparece
+  var INTERVALO_MIN   = 45000; // 45s
+  var INTERVALO_MAX   = 75000; // 75s
+  var TEMPO_NA_TELA   = 5500;  // 5,5s visivel
+  var MAX_NOTIFICACOES = 8;
+  // ==========================
+
+  var el = document.getElementById('notif-compra');
+  var bloco = document.getElementById('bloco_cta');
+  if (!el || !bloco || !COMPRAS.length) return;
+
+  var elIni   = document.getElementById('nc-ini');
+  var elNome  = document.getElementById('nc-nome');
+  var elLocal = document.getElementById('nc-local');
+  var elVagas = document.getElementById('nc-vagas');
+
+  if (MOSTRAR_VAGAS && elVagas) {
+    elVagas.textContent = '🔥 ' + VAGAS_RESTANTES + (VAGAS_RESTANTES === 1 ? ' vaga restante' : ' vagas restantes');
+  } else if (elVagas) {
+    elVagas.style.display = 'none';
+  }
+
+  // Embaralha a lista para nao repetir sempre a mesma ordem
+  var fila = COMPRAS.slice();
+  for (var i = fila.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = fila[i]; fila[i] = fila[j]; fila[j] = tmp;
+  }
+
+  var idx = 0, mostradas = 0;
+
+  function proxima(){
+    if (mostradas >= MAX_NOTIFICACOES) return;
+    var item = fila[idx % fila.length];
+    idx++; mostradas++;
+
+    var nome  = item[0] || '';
+    var local = item[1] || '';
+
+    elNome.textContent  = nome;
+    elIni.textContent   = (nome.charAt(0) || '?').toUpperCase();
+    elLocal.textContent = local;
+
+    el.classList.add('on');
+    setTimeout(function(){
+      el.classList.remove('on');
+      if (mostradas < MAX_NOTIFICACOES) {
+        var espera = INTERVALO_MIN + Math.random() * (INTERVALO_MAX - INTERVALO_MIN);
+        setTimeout(proxima, espera);
+      }
+    }, TEMPO_NA_TELA);
+  }
+
+  // So comeca depois que o conteudo (bloco_cta) for revelado — nao atrapalha a VSL
+  function visivel(){
+    return bloco.style.display !== 'none' && getComputedStyle(bloco).display !== 'none';
+  }
+  function iniciar(){ setTimeout(proxima, ATRASO_INICIAL); }
+
+  if (visivel()) { iniciar(); }
+  else if (window.MutationObserver) {
+    var obs = new MutationObserver(function(){
+      if (visivel()) { obs.disconnect(); iniciar(); }
+    });
+    obs.observe(bloco, {attributes:true, attributeFilter:['style','class','hidden']});
+  }
+})();
+</script>
 
 <!-- Auto-scroll: quando o VTurb revelar o #bloco_cta, rola ate o botao -->
 <script>
