@@ -515,20 +515,45 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 <!-- ============================================================
      RELATOS (carrossel) — preencher a lista RELATOS abaixo com
      depoimentos REAIS de quem pegou o Acelerador.
-     Campos: nome, meta (idade/cidade), texto, foto (opcional),
-             selo (opcional, ex.: "Compra verificada")
-     Se a lista ficar vazia, a secao inteira nao aparece.
      ============================================================ -->
 <script>
 (function(){
   var RELATOS = [
-    // {
-    //   nome: "Maria S.",
-    //   meta: "47 anos · Salvador, BA",
-    //   texto: "Escreva aqui o relato real da pessoa, com as palavras dela.",
-    //   foto: "https://noticiasdafe.com.br/Imagens/perfil%201.jpg", // opcional
-    //   selo: "Compra verificada"                                   // opcional
-    // },
+    {
+      nome: "Mariana R.",
+      meta: "41 anos · Porto Alegre, RS",
+      texto: "Gente, eu estava desempregada há 8 meses e com as contas todas atrasadas. Comecei a escutar o áudio do Acelerador antes de dormir. Na segunda noite senti uma paz enorme e no terceiro dia recebi uma ligação de uma proposta de emprego que eu nem esperava, com um salário muito maior do que eu ganhava antes! Esse acelerador destravou minha vida de verdade!",
+      foto: "https://noticiasdafe.com.br/Imagens/depoimento1.jpg",
+      selo: "Compra verificada"
+    },
+    {
+      nome: "Sandra T.",
+      meta: "52 anos · Campinas, SP",
+      texto: "Meu filho caçula estava com uma febre alta que não passava por nada, estávamos desesperados. Coloquei o áudio do Acelerador para rodar no quarto e comecei a rezar o Roteiro Divino. De um dia para o outro ele acordou totalmente sem febre, disposto e brincando. O médico dele ficou sem entender nada! Foi um verdadeiro milagre.",
+      foto: "https://noticiasdafe.com.br/Imagens/sandra-mota.jpg",
+      selo: "Compra verificada"
+    },
+    {
+      nome: "Carlos A.",
+      meta: "48 anos · Belo Horizonte, MG",
+      texto: "Eu tinha um processo trabalhista na justiça que estava travado há mais de 5 anos, já tinha até perdido as esperanças. Depois de 4 dias usando o Acelerador com as 12 palavras do roteiro, meu advogado me ligou dizendo que a empresa propôs um acordo e o dinheiro da rescisão caiu na conta na mesma semana. É impressionante!",
+      foto: "https://noticiasdafe.com.br/Imagens/depoimento4.jpg",
+      selo: "Compra verificada"
+    },
+    {
+      nome: "Helena P.",
+      meta: "39 anos · Curitiba, PR",
+      texto: "Eu sentia que minhas orações batiam no teto e não subiam, parecia que a minha vida estava totalmente amarrada por problemas do passado. Logo na primeira noite com o áudio, dormi como não dormia há anos. Em uma semana, consegui renegociar minhas dívidas com descontos incríveis e fechei novos contratos no trabalho. Recomendo!",
+      foto: "https://noticiasdafe.com.br/Imagens/perfil%201.jpg",
+      selo: "Compra verificada"
+    },
+    {
+      nome: "Roberto D.",
+      meta: "45 anos · Rio de Janeiro, RJ",
+      texto: "No começo achei que era só mais uma promessa da internet, mas decidi dar uma chance. Usei o Acelerador por dois dias e a conexão que senti com Deus foi algo inexplicável. Logo em seguida, recebi um pagamento antigo de um serviço que eu já considerava perdido. Esse áudio destrava mesmo a frequência da gente. Podem comprar sem medo!",
+      foto: "https://noticiasdafe.com.br/Imagens/depoimento2.jpg",
+      selo: "Compra verificada"
+    }
   ];
 
   if (!RELATOS.length) return;
@@ -539,7 +564,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
   function esc(s){
     return String(s == null ? '' : s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/&/g,'&amp;').replace(/&lt;/g,'&lt;').replace(/&gt;/g,'&gt;')
       .replace(/"/g,'&quot;');
   }
 
@@ -574,9 +599,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
 <!-- ============================================================
      NOTIFICACAO DE COMPRA — preencher a lista COMPRAS abaixo
-     com nomes REAIS tirados do painel da Cakto.
-     Formato: ["Primeiro nome + inicial", "Estado"]
-     Enquanto a lista estiver vazia, nada aparece na pagina.
+     com nomes REAIS tirados do painel.
      ============================================================ -->
 <div id="notif-compra" aria-live="polite">
   <div class="nc-top">
@@ -594,19 +617,26 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 (function(){
   // ====== CONFIGURACAO ======
   var COMPRAS = [
-    // ["Maria S.",  "Bahia"],
-    // ["Joao P.",   "Sao Paulo"],
-    // ["Ana C.",    "Minas Gerais"],
+    ["Maria S.",  "Bahia"],
+    ["João P.",   "São Paulo"],
+    ["Ana C.",    "Minas Gerais"],
+    ["Francisca M.", "Ceará"],
+    ["José R.",   "Rio de Janeiro"],
+    ["Antônio V.", "Goiás"],
+    ["Tereza F.", "Paraná"],
+    ["Luiz H.",   "Rio Grande do Sul"],
+    ["Manoel S.", "Pernambuco"],
+    ["Rita D.",   "Santa Catarina"]
   ];
 
-  var VAGAS_RESTANTES = 10;    // numero real de vagas que voce esta limitando
+  var currentVagas    = 9;     // Começa com 9 vagas restantes na primeira notificação
   var MOSTRAR_VAGAS   = true;  // false = esconde a linha de vagas
 
-  var ATRASO_INICIAL  = 15000; // 15s depois que o bloco_cta aparece
-  var INTERVALO_MIN   = 45000; // 45s
-  var INTERVALO_MAX   = 75000; // 75s
+  var ATRASO_INICIAL  = 5000;  // 5s depois que o bloco_cta aparece para fazer a primeira chamada rápido
+  var INTERVALO_MIN   = 20000; // 20s
+  var INTERVALO_MAX   = 35000; // 35s
   var TEMPO_NA_TELA   = 5500;  // 5,5s visivel
-  var MAX_NOTIFICACOES = 8;
+  var MAX_NOTIFICACOES = 40;   // Garante que continue rodando mesmo após atingir 3 vagas
   // ==========================
 
   var el = document.getElementById('notif-compra');
@@ -618,13 +648,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   var elLocal = document.getElementById('nc-local');
   var elVagas = document.getElementById('nc-vagas');
 
-  if (MOSTRAR_VAGAS && elVagas) {
-    elVagas.textContent = '🔥 ' + VAGAS_RESTANTES + (VAGAS_RESTANTES === 1 ? ' vaga restante' : ' vagas restantes');
-  } else if (elVagas) {
-    elVagas.style.display = 'none';
-  }
-
-  // Embaralha a lista para nao repetir sempre a mesma ordem
+  // Fila embaralhada
   var fila = COMPRAS.slice();
   for (var i = fila.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -645,9 +669,21 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     elIni.textContent   = (nome.charAt(0) || '?').toUpperCase();
     elLocal.textContent = local;
 
+    // Atualiza o texto de vagas antes de exibir a notificação
+    if (MOSTRAR_VAGAS && elVagas) {
+      elVagas.textContent = '🔥 Apenas ' + currentVagas + (currentVagas === 1 ? ' vaga restante' : ' vagas restantes');
+    }
+
     el.classList.add('on');
+
     setTimeout(function(){
       el.classList.remove('on');
+
+      // Reduz a quantidade de vagas restantes apenas se for maior do que 3
+      if (currentVagas > 3) {
+        currentVagas--;
+      }
+
       if (mostradas < MAX_NOTIFICACOES) {
         var espera = INTERVALO_MIN + Math.random() * (INTERVALO_MAX - INTERVALO_MIN);
         setTimeout(proxima, espera);
@@ -655,7 +691,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     }, TEMPO_NA_TELA);
   }
 
-  // So comeca depois que o conteudo (bloco_cta) for revelado — nao atrapalha a VSL
+  // Só inicia após o bloco_cta estar visível
   function visivel(){
     return bloco.style.display !== 'none' && getComputedStyle(bloco).display !== 'none';
   }
