@@ -284,17 +284,9 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 
       <!-- PRIMEIRO CTA — one-click da Cakto (primeira coisa que aparece, logo abaixo da VSL) -->
       <div class="cta-area" id="cta-topo" style="margin:8px 0 34px;">
-        <cakto-upsell-buttons>
-          <cakto-upsell-accept
-            bg-color="#0f7865"
-            text-color="#ffffff"
-            upsell-accept-url="https://noticiasdafe.com.br/canticosdosanjos/"
-            offer-id="8xdi2wg"
-            app-base-url="https://app.cakto.com.br"
-            offer-type="upsell"
-            upsell-reject-url="https://noticiasdafe.com.br/aceleradorgratis/"
-          >Vou acelerar meus resultados!</cakto-upsell-accept>
-        </cakto-upsell-buttons>
+        <!-- CTA do topo: NAO e one-click (uma instancia so por pagina).
+             Apenas rola ate a area de pagamento, onde fica o one-click de verdade. -->
+        <button type="button" id="btn-ir-pagamento" style="width:100%;max-width:480px;padding:23px 24px;background:linear-gradient(135deg,#0f7865,#0a5c4d);border:none;border-radius:50px;font-family:'Cinzel',serif;font-size:clamp(16px,3.1vw,20px);font-weight:800;color:#fff;cursor:pointer;box-shadow:0 8px 28px rgba(15,120,101,.35);transition:transform .2s;">Vou acelerar meus resultados!</button>
       </div>
 
       <!-- Imagem do Acelerador (centralizada) -->
@@ -712,6 +704,18 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
     obs.observe(bloco, {attributes:true, attributeFilter:['style','class','hidden']});
   }
 })();
+</script>
+
+<!-- CTA do topo rola ate a area de pagamento (onde fica o one-click) -->
+<script>
+  (function(){
+    var b = document.getElementById('btn-ir-pagamento');
+    if (!b) return;
+    b.addEventListener('click', function(){
+      var a = document.getElementById('area-pagamento');
+      if (a) a.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  })();
 </script>
 
 <!-- Auto-scroll: quando o VTurb revelar o #bloco_cta, rola ate o botao -->
