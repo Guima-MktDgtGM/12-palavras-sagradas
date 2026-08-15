@@ -11,220 +11,136 @@
 body{background:#faf7f0;color:#2e2a3f;font-family:'Lato',sans-serif;line-height:1.75;}
 img{max-width:100%;display:block;}
 
-.topo{background:linear-gradient(135deg,#241f38,#3a2f5c);color:#fff;text-align:center;padding:38px 22px 32px;}
-.topo .selo{font-size:44px;line-height:1;margin-bottom:10px;}
-.topo h1{font-family:'Cinzel',serif;font-size:clamp(23px,5vw,34px);line-height:1.3;}
+.topo{background:linear-gradient(135deg,#241f38,#3a2f5c);color:#fff;text-align:center;padding:40px 22px 34px;}
+.topo .selo{font-size:46px;line-height:1;margin-bottom:8px;}
+.topo .tag{display:inline-block;background:rgba(232,199,106,.15);border:1px solid #e8c76a;color:#e8c76a;font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:14px;}
+.topo h1{font-family:'Cinzel',serif;font-size:clamp(24px,5.2vw,35px);line-height:1.3;}
 .topo h1 span{color:#e8c76a;}
-.topo p{font-size:16px;color:#cfc8e0;max-width:560px;margin:14px auto 0;}
+.topo p{font-size:16.5px;color:#cfc8e0;max-width:560px;margin:16px auto 0;}
 
-.container{max-width:680px;margin:0 auto;padding:34px 22px 80px;}
-.section{padding:32px 0;border-bottom:1px solid #ece7dc;}
+.container{max-width:660px;margin:0 auto;padding:34px 22px 60px;}
+.section{padding:30px 0;border-bottom:1px solid #ece7dc;}
 .section:last-child{border-bottom:none;}
-.section-label{font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#b07d1e;margin-bottom:14px;text-align:center;}
-h2{font-family:'Cinzel',serif;font-size:clamp(20px,3.6vw,27px);color:#241f38;margin-bottom:14px;line-height:1.35;text-align:center;}
+.section-label{font-family:'Cinzel',serif;font-size:13.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#b07d1e;margin-bottom:12px;text-align:center;}
+h2{font-family:'Cinzel',serif;font-size:clamp(20px,3.8vw,27px);color:#241f38;margin-bottom:14px;line-height:1.35;text-align:center;}
 p.body{font-size:16.5px;color:#453f5c;margin-bottom:14px;}
 p.body strong{color:#a5741a;}
 
-/* Busca por data */
-.busca{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:28px 24px;text-align:center;box-shadow:0 8px 28px rgba(201,168,76,.16);}
-.busca label{display:block;font-family:'Cinzel',serif;font-size:16px;color:#a5741a;font-weight:700;margin-bottom:12px;}
-.busca input{width:100%;max-width:260px;padding:14px;border:1px solid #ddd6c4;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;text-align:center;}
-.busca button{width:100%;max-width:320px;margin-top:14px;padding:16px 24px;border:none;border-radius:50px;background:linear-gradient(135deg,#c9a84c,#b8860b);color:#fff;font-family:'Cinzel',serif;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(201,168,76,.35);transition:transform .2s;}
-.busca button:hover{transform:translateY(-2px);}
-
-/* Resultado */
-#resultado{display:none;margin-top:26px;background:#fff;border:1px solid #e8dcc4;border-radius:18px;padding:28px 24px;text-align:center;box-shadow:0 8px 28px rgba(120,100,50,.10);}
-#resultado .rotulo{font-size:14px;color:#7a7488;letter-spacing:1px;text-transform:uppercase;}
-#resultado .nome{font-family:'Cinzel',serif;font-size:clamp(28px,7vw,40px);font-weight:800;color:#bf8f2e;line-height:1.2;margin:6px 0 4px;}
-#resultado .regencia{font-size:15px;color:#5f5876;font-style:italic;margin-bottom:20px;}
-.bloco-info{text-align:left;background:#fbf7ec;border:1px solid #e8dcc4;border-radius:14px;padding:18px 20px;margin-top:16px;}
-.bloco-info h4{font-family:'Cinzel',serif;font-size:16px;color:#a5741a;margin-bottom:8px;}
-.bloco-info p{font-size:15px;color:#453f5c;line-height:1.7;}
-.oracao{font-style:italic;color:#3a3550;border-left:3px solid #c9a84c;padding-left:14px;}
-
-.passos{list-style:none;padding:0;max-width:560px;margin:0 auto;}
-.passos li{position:relative;padding:12px 0 12px 40px;font-size:16px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
+/* Passos */
+.passos{list-style:none;padding:0;max-width:520px;margin:22px auto 0;}
+.passos li{position:relative;padding:14px 0 14px 46px;font-size:16px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
 .passos li:last-child{border-bottom:none;}
-.passos li .n{position:absolute;left:0;top:12px;width:26px;height:26px;border-radius:50%;background:#c9a84c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;}
+.passos li .n{position:absolute;left:0;top:14px;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#c9a84c,#b8860b);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:14px;}
+.passos li strong{color:#a5741a;}
 
-.aviso{background:#eafaf0;border:1px solid #8fe0b3;border-radius:14px;padding:18px 20px;font-size:15px;color:#2d6a4f;line-height:1.7;}
+/* Entregáveis */
+.entrega{background:#fffdf6;border:2px solid #c9a84c;border-radius:18px;padding:26px 22px;box-shadow:0 8px 28px rgba(201,168,76,.14);}
+.entrega .htitle{font-family:'Cinzel',serif;font-size:clamp(18px,3.4vw,23px);color:#a5741a;text-align:center;margin-bottom:18px;line-height:1.35;}
+.hlist{list-style:none;padding:0;}
+.hlist li{position:relative;padding:12px 0 12px 34px;font-size:15.5px;color:#453f5c;border-bottom:1px solid #f0e8d8;}
+.hlist li:last-child{border-bottom:none;}
+.hlist li::before{content:"✓";position:absolute;left:0;top:12px;width:22px;height:22px;background:#2ecc71;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+.hlist li strong{color:#a5741a;}
 
-.rodape{text-align:center;padding:30px 22px 40px;font-size:13px;color:#9a8f7a;}
+/* App */
+.app-box{background:#f3f0fa;border:1px solid #d9d1ee;border-radius:16px;padding:22px 20px;text-align:center;}
+.app-box h4{font-family:'Cinzel',serif;font-size:17px;color:#3a2f5c;margin-bottom:8px;}
+.app-box p{font-size:15px;color:#544b73;line-height:1.7;}
+
+/* CTA */
+.cta-area{text-align:center;padding:34px 0 10px;}
+.cta-btn{display:block;width:100%;max-width:460px;margin:0 auto;padding:20px 24px;border-radius:50px;background:linear-gradient(135deg,#c9a84c,#b8860b);color:#fff;font-family:'Cinzel',serif;font-size:clamp(16px,3.3vw,20px);font-weight:800;text-decoration:none;box-shadow:0 8px 28px rgba(201,168,76,.4);transition:transform .2s;animation:pulsa 2.5s infinite;}
+.cta-btn:hover{transform:translateY(-2px);}
+@keyframes pulsa{0%,100%{box-shadow:0 8px 28px rgba(201,168,76,.4);}50%{box-shadow:0 8px 40px rgba(201,168,76,.7);}}
+.cta-nota{font-size:13.5px;color:#9a8f7a;margin-top:12px;}
+
+.aviso{background:#eafaf0;border:1px solid #8fe0b3;border-radius:14px;padding:18px 20px;font-size:15px;color:#2d6a4f;line-height:1.7;text-align:center;}
+
+.rodape{text-align:center;padding:26px 22px 40px;font-size:12.5px;color:#9a8f7a;}
+.rodape a{color:#9a8f7a;}
 </style>
 </head>
 <body>
 
 <div class="topo">
   <div class="selo">👼</div>
-  <h1>Revelação do <span>Seu Anjo da Guarda</span></h1>
-  <p>Ele caminha com você desde o dia em que você nasceu. Chegou a hora de saber o nome dele — e aprender a conversar com ele. 🙏</p>
+  <div class="tag">Exclusivo para alunos do Roteiro Divino</div>
+  <h1>Descubra agora qual é o <span>anjo que caminha com você</span></h1>
+  <p>Ele está ao seu lado desde o dia em que você nasceu. E ele tem um nome — que você provavelmente nunca soube. 🙏</p>
 </div>
 
 <div class="container">
 
-  <!-- BUSCA POR DATA DE NASCIMENTO -->
+  <!-- HOOK -->
   <div class="section">
-    <div class="section-label">→ Comece por aqui</div>
-    <h2>Descubra o seu anjo pela data de nascimento</h2>
-    <p class="body" style="text-align:center;">Informe o dia e o mês em que você nasceu. O seu anjo regente será revelado na hora.</p>
-
-    <div class="busca">
-      <label for="data-nasc">Sua data de nascimento</label>
-      <input type="date" id="data-nasc">
-      <button type="button" id="btn-revelar">🕊️ Revelar o meu Anjo</button>
-
-      <div id="resultado">
-        <div class="rotulo">O seu Anjo da Guarda é</div>
-        <div class="nome" id="r-nome">—</div>
-        <div class="regencia" id="r-regencia"></div>
-
-        <div class="bloco-info">
-          <h4>✨ O que ele rege na sua vida</h4>
-          <p id="r-atributos"></p>
-        </div>
-
-        <div class="bloco-info">
-          <h4>🙏 Oração de Chamado</h4>
-          <p class="oracao" id="r-oracao"></p>
-        </div>
-
-        <div class="bloco-info">
-          <h4>📖 O Salmo do seu Anjo</h4>
-          <p id="r-salmo"></p>
-        </div>
-
-        <div class="bloco-info">
-          <h4>⏰ O melhor horário para chamá-lo</h4>
-          <p id="r-horario"></p>
-        </div>
-      </div>
-    </div>
+    <p class="body">Desde criança você aprendeu a rezar o <strong>“Santo Anjo do Senhor”</strong>. Uma oração linda — mas que é a mesma para todo mundo, no mundo inteiro.</p>
+    <p class="body">A tradição sagrada ensina algo que poucos conhecem: <strong>cada período do ano é regido por um anjo diferente</strong>. E o anjo que rege o dia em que você nasceu é o seu guardião pessoal — aquele que foi designado só para você.</p>
+    <p class="body">Ele tem um nome. Tem uma oração própria. Tem um salmo e até um horário do dia em que o chamado dele é mais forte.</p>
+    <p class="body"><strong>Imagine a diferença</strong> entre rezar uma oração genérica e chamar o seu anjo pelo nome dele, com as palavras feitas para ele, na hora certa. É outra conversa.</p>
   </div>
 
-  <!-- COMO FAZER O CHAMADO -->
+  <!-- COMO FUNCIONA -->
   <div class="section">
-    <div class="section-label">→ O ritual</div>
-    <h2>Como fazer o seu primeiro chamado</h2>
+    <div class="section-label">→ Como funciona</div>
+    <h2>Simples assim, em 3 passos</h2>
     <ul class="passos">
-      <li><span class="n">1</span>Escolha um lugar tranquilo, onde ninguém vá te interromper.</li>
-      <li><span class="n">2</span>Se puder, acenda uma vela branca — ela simboliza a luz que abre o caminho.</li>
-      <li><span class="n">3</span>Respire fundo três vezes e diga o nome do seu anjo em voz alta, três vezes.</li>
-      <li><span class="n">4</span>Reze a Oração de Chamado com atenção em cada palavra, sem pressa.</li>
-      <li><span class="n">5</span>Leia o Salmo do seu anjo.</li>
-      <li><span class="n">6</span>Faça o seu pedido em silêncio e agradeça como se já tivesse recebido.</li>
+      <li><span class="n">1</span>Você garante o seu acesso e ele é <strong>liberado na hora</strong>, dentro do mesmo app do seu Roteiro Divino.</li>
+      <li><span class="n">2</span>Lá dentro, você informa a sua <strong>data de nascimento</strong>.</li>
+      <li><span class="n">3</span>Na mesma hora, o seu anjo é revelado — com o nome dele, as <strong>orações</strong> e os <strong>cânticos</strong> correspondentes ao seu anjo.</li>
     </ul>
   </div>
 
-  <!-- OS 3 PEDIDOS -->
+  <!-- O QUE VOCÊ RECEBE -->
   <div class="section">
-    <div class="section-label">→ Bônus</div>
-    <h2>A Oração dos 3 Pedidos</h2>
-    <p class="body">No primeiro contato com o seu anjo, a tradição ensina a fazer <strong>três pedidos</strong>: um para a sua vida material, um para a sua saúde e um para alguém que você ama. Peça nessa ordem — primeiro por você, por último por outra pessoa. É o gesto de generosidade que sela o pedido.</p>
-
-    <div class="bloco-info">
-      <h4>🙏 Oração dos 3 Pedidos</h4>
-      <p class="oracao">[COLOCAR AQUI O TEXTO DA ORAÇÃO DOS 3 PEDIDOS]</p>
+    <div class="section-label">→ O que você recebe</div>
+    <div class="entrega">
+      <div class="htitle">Tudo isto é revelado para você 👇</div>
+      <ul class="hlist">
+        <li><strong>O nome do seu Anjo da Guarda</strong> — revelado pela sua data de nascimento</li>
+        <li><strong>A área da sua vida que ele rege</strong> — o que ele foi designado para proteger em você</li>
+        <li><strong>A Oração de Chamado exclusiva dele</strong> — as palavras certas para abrir o contato</li>
+        <li><strong>Os cânticos e o Salmo do seu anjo</strong> — para tocar enquanto você reza</li>
+        <li><strong>O melhor horário para invocá-lo</strong> — a hora em que o chamado é mais forte</li>
+        <li><strong>O ritual do primeiro chamado</strong> — o passo a passo completo</li>
+        <li><strong>A Oração dos 3 Pedidos</strong> — o que pedir no primeiro contato</li>
+      </ul>
     </div>
   </div>
 
-  <!-- AVISO FINAL -->
+  <!-- ONDE ACESSA -->
+  <div class="section">
+    <div class="app-box">
+      <h4>📱 Tudo dentro do seu app</h4>
+      <p>Você não precisa baixar nada novo nem criar outra conta. A Revelação aparece <strong>no mesmo aplicativo</strong> onde você já acessa o seu Roteiro Divino — liberada <strong>imediatamente</strong> após a confirmação.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-area">
+    <a href="https://pay.cakto.com.br/nnmbpr8_1012954" class="cta-btn">👼 QUERO DESCOBRIR O MEU ANJO</a>
+    <p class="cta-nota">🔒 Acesso liberado na hora, direto no seu app.</p>
+  </div>
+
+  <!-- FECHAMENTO -->
   <div class="section">
     <div class="aviso">
-      💚 <strong>Guarde esta página nos seus favoritos.</strong> Você pode voltar aqui sempre que precisar rezar com o seu anjo. Se tiver qualquer dúvida, fale com a gente: <a href="mailto:gabriel.luz@noticiasdafe.com.br" style="color:#1c8a4f;font-weight:700;">gabriel.luz@noticiasdafe.com.br</a>
+      🙏 Ele nunca saiu do seu lado. Só faltava você saber o nome dele para poder chamá-lo.
     </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-area" style="padding-top:8px;">
+    <a href="https://pay.cakto.com.br/nnmbpr8_1012954" class="cta-btn">👼 DESCOBRIR O MEU ANJO AGORA</a>
+    <p class="cta-nota">Acesso imediato dentro do app do Roteiro Divino.</p>
   </div>
 
 </div>
 
 <div class="rodape">
   <p><em>Conteúdo de caráter espiritual e devocional.</em></p>
-  <p style="margin-top:8px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas.</p>
+  <p style="margin-top:8px;">Dúvidas? <a href="mailto:gabriel.luz@noticiasdafe.com.br">gabriel.luz@noticiasdafe.com.br</a></p>
+  <p style="margin-top:6px;">Copyright © 2026 — Roteiro Divino das 12 Palavras Sagradas.</p>
 </div>
-
-<script>
-(function(){
-  // ============================================================
-  //  TABELA DOS ANJOS — preencher com os 72 anjos.
-  //  Cada item: de/ate no formato "MM-DD" (mes-dia).
-  //  Os 3 primeiros estao preenchidos como exemplo do formato.
-  // ============================================================
-  var ANJOS = [
-    {
-      de: "03-21", ate: "03-25",
-      nome: "Vehuiah",
-      regencia: "Regente de 21 a 25 de março",
-      atributos: "Anjo da vontade e da força para recomeçar. Ajuda quem precisa de coragem para iniciar algo novo e romper com o passado.",
-      oracao: "Vehuiah, anjo da minha guarda, coloca em mim a força para recomeçar. Que a tua luz afaste o medo do meu coração e me dê coragem para dar o primeiro passo. Amém.",
-      salmo: "Salmo 3, versículo 4 — \"Mas tu, Senhor, és o escudo que me protege, tu és a minha glória e me fazes andar de cabeça erguida.\"",
-      horario: "Ao amanhecer, entre 5h e 6h da manhã."
-    },
-    {
-      de: "03-26", ate: "03-30",
-      nome: "Jeliel",
-      regencia: "Regente de 26 a 30 de março",
-      atributos: "Anjo do amor e da paz no lar. Ajuda a restaurar relações rompidas e trazer harmonia dentro de casa.",
-      oracao: "Jeliel, anjo da minha guarda, traz a paz para a minha casa e para o meu coração. Restaura o que foi quebrado e reacende o amor entre mim e os meus. Amém.",
-      salmo: "Salmo 22, versículo 20 — \"Mas tu, Senhor, não fiques longe de mim; tu que és a minha força, vem depressa em meu socorro.\"",
-      horario: "No início da noite, entre 18h e 19h."
-    },
-    {
-      de: "03-31", ate: "04-04",
-      nome: "Sitael",
-      regencia: "Regente de 31 de março a 4 de abril",
-      atributos: "Anjo da proteção contra adversidades. Ampara quem enfrenta dificuldades financeiras e injustiças.",
-      oracao: "Sitael, anjo da minha guarda, sê o meu escudo diante das dificuldades. Abre os caminhos que estão fechados e protege o meu sustento e a minha honra. Amém.",
-      salmo: "Salmo 91, versículo 2 — \"Digo ao Senhor: tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio.\"",
-      horario: "Ao meio-dia, quando o sol está mais forte."
-    }
-    // ... continuar até completar os 72
-  ];
-
-  function chave(mes, dia){
-    return (mes < 10 ? '0' + mes : '' + mes) + '-' + (dia < 10 ? '0' + dia : '' + dia);
-  }
-
-  function acharAnjo(mes, dia){
-    var k = chave(mes, dia);
-    for (var i = 0; i < ANJOS.length; i++) {
-      var a = ANJOS[i];
-      // Faixa normal (nao cruza o fim do ano)
-      if (a.de <= a.ate) { if (k >= a.de && k <= a.ate) return a; }
-      // Faixa que cruza a virada do ano (ex.: 12-28 a 01-01)
-      else { if (k >= a.de || k <= a.ate) return a; }
-    }
-    return null;
-  }
-
-  var btn = document.getElementById('btn-revelar');
-  var campo = document.getElementById('data-nasc');
-  var box = document.getElementById('resultado');
-
-  btn.addEventListener('click', function(){
-    var v = campo.value; // formato YYYY-MM-DD
-    if (!v) { alert('Escolha a sua data de nascimento primeiro.'); return; }
-
-    var partes = v.split('-');
-    var mes = parseInt(partes[1], 10);
-    var dia = parseInt(partes[2], 10);
-
-    var anjo = acharAnjo(mes, dia);
-    if (!anjo) {
-      alert('Ainda não encontramos o anjo dessa data. Fale com o nosso suporte que revelamos para você.');
-      return;
-    }
-
-    document.getElementById('r-nome').textContent      = anjo.nome;
-    document.getElementById('r-regencia').textContent  = anjo.regencia || '';
-    document.getElementById('r-atributos').textContent = anjo.atributos || '';
-    document.getElementById('r-oracao').textContent    = anjo.oracao || '';
-    document.getElementById('r-salmo').textContent     = anjo.salmo || '';
-    document.getElementById('r-horario').textContent   = anjo.horario || '';
-
-    box.style.display = 'block';
-    setTimeout(function(){ box.scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
-  });
-})();
-</script>
 
 </body>
 </html>
