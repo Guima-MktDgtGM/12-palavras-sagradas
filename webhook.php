@@ -16,6 +16,22 @@ define('LEADS_FILE',    $dados_dir . '/checkout_leads.json');
 define('LOG_FILE',      $dados_dir . '/log.txt');
 define('APP_LOGIN_URL', 'https://app.appsell.ai/roteiro-divino-das-12-palavras-161/login');
 
+// Manda o e-mail automatico de recuperacao tambem para quem ABANDONOU o checkout.
+// Fica desligado por padrao: ligar so quando o dominio estiver 100% no Resend,
+// porque o volume de abandono e ~5x maior que o de Pix gerado.
+if (!defined('ENVIAR_EMAIL_ABANDONO')) define('ENVIAR_EMAIL_ABANDONO', false);
+
+// Biblioteca de leads/atribuicao. Carregada de forma defensiva: se o arquivo
+// sumir ou tiver erro, o webhook continua funcionando exatamente como antes.
+$RD_LIB_OK = false;
+try {
+    $rd_lib = __DIR__ . '/leads_lib.php';
+    if (file_exists($rd_lib)) { require_once $rd_lib; $RD_LIB_OK = function_exists('rd_extrair'); }
+} catch (\Throwable $e) {
+    $RD_LIB_OK = false;
+    @file_put_contents($dados_dir . '/log.txt', date('Y-m-d H:i:s') . ' ERRO leads_lib: ' . $e->getMessage() . "\n", FILE_APPEND);
+}
+
 // Envia NOSSO email oficial de acesso (via Resend) — instantaneo, no pagamento aprovado.
 function enviarEmailAcesso($para, $nome, $login) {
     if (!defined('RESEND_API_KEY') || $para === '') return;
@@ -194,9 +210,21 @@ if ($lock_fp) { flock($lock_fp, LOCK_EX); }
 
 $evento   = $data['event'] ?? '';
 $customer = $data['data']['customer'] ?? [];
-$nome     = $customer['name']  ?? 'Amigo(a)';
-$email    = $customer['email'] ?? '';
-$telefone = $customer['phone'] ?? '';
+
+// A Cakto manda o contato em DOIS formatos diferentes:
+//   pix/boleto/compra  -> data.customer.{name,email,phone}
+//   checkout_abandonment -> data.customerName / customerEmail / customerCellphone
+// Sem tratar os dois, todo abandono chegava sem contato e era descartado logo abaixo.
+$rd_info  = null;
+if ($RD_LIB_OK) {
+    try { $rd_info = rd_extrair($data); } catch (\Throwable $e) { $rd_info = null; }
+}
+// Prioriza SEMPRE o campo original do payload (nao mexe em nada que ja funciona);
+// o formato do abandono entra so quando o campo padrao vem vazio.
+$nome     = ($customer['name']  ?? '') !== '' ? $customer['name']  : (string)($rd_info['nome']     ?? '');
+$email    = ($customer['email'] ?? '') !== '' ? $customer['email'] : (string)($rd_info['email']    ?? '');
+$telefone = ($customer['phone'] ?? '') !== '' ? $customer['phone'] : (string)($rd_info['telefone'] ?? '');
+if ($nome === '') $nome = 'Amigo(a)';
 
 file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . " evento=$evento email=$email tel=$telefone\n", FILE_APPEND);
 // DEBUG temporario: guarda o payload cru da Cakto pra conferir os campos (order id, valor)
@@ -213,6 +241,26 @@ $canal = $email !== '' ? 'email' : 'whatsapp';
 $fila    = file_exists(FILA_FILE)     ? (json_decode(file_get_contents(FILA_FILE),     true) ?? []) : [];
 $clientes = file_exists(CLIENTES_FILE) ? (json_decode(file_get_contents(CLIENTES_FILE), true) ?? []) : [];
 $agora   = time();
+
+// ── Painel: registra o lead e guarda a atribuicao de campanha ───────────────
+// Roda dentro da trava global, junto com as outras escritas. Qualquer erro aqui
+// e registrado no log e ignorado — nunca interrompe o fluxo de e-mail/cliente.
+if ($RD_LIB_OK && is_array($rd_info)) {
+    try {
+        $rd_info['nome']     = $rd_info['nome']     ?: $nome;
+        $rd_info['email']    = $rd_info['email']    ?: strtolower(trim($email));
+        $rd_info['telefone'] = $rd_info['telefone'] ?: preg_replace('/\D/', '', $telefone);
+
+        $rd_tipo = rd_tipo_do_evento($evento);
+        if ($rd_tipo !== '') rd_lead_registrar($rd_info, $rd_tipo);
+
+        // Toda intencao/compra que chega COM utm alimenta a tabela de atribuicao —
+        // e dela que o upsell one-click herda a campanha depois.
+        rd_atribuicao_salvar($rd_info);
+    } catch (\Throwable $e) {
+        file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . ' ERRO lead: ' . $e->getMessage() . "\n", FILE_APPEND);
+    }
+}
 
 function jaExisteFila($fila, $ident, $tipo, $agora) {
     foreach ($fila as $item) {
@@ -256,7 +304,9 @@ if ($evento === 'pix_gerado') {
 
 // ── Abandono de checkout ─────────────────────────────────────────────────────
 } elseif (in_array($evento, ['checkout_abandonment','abandono_de_checkout','checkout_abandonado'])) {
-    if (!jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, 'abandono', $agora)) {
+    // O lead ja foi registrado acima (aparece no painel + WhatsApp).
+    // O e-mail automatico so entra na fila se ENVIAR_EMAIL_ABANDONO estiver ligado.
+    if (ENVIAR_EMAIL_ABANDONO && !jaEhCliente($clientes, $email) && !jaExisteFila($fila, $ident, 'abandono', $agora)) {
         $fila[] = ['nome'=>$nome,'email'=>$email,'telefone'=>$telefone,'canal'=>$canal,'tipo'=>'abandono','template'=>'email-abandono','enviar_em'=>$agora+(20*60),'enviado'=>false,'status'=>'aguardando','criado_em'=>date('Y-m-d H:i:s')];
     }
 
@@ -300,6 +350,39 @@ if ($evento === 'pix_gerado') {
 
     // Envia a venda DIRETO pra UTMify com os UTMs reais (UTMify deduplica por orderId).
     if ($leadMatch) enviarVendaUtmify($leadMatch, $emailReal, $nome, $telReal);
+
+    // ── Painel + atribuicao do upsell one-click ────────────────────────────
+    if ($RD_LIB_OK && is_array($rd_info)) {
+        try {
+            // Quem pagou sai das listas de recuperacao (so os leads criados ATE agora;
+            // um Pix gerado DEPOIS da compra continua pendente, como deve ser).
+            rd_leads_marcar_pago($rd_info['email'] ?: $emailReal, $rd_info['telefone'] ?: $telReal, $rd_info['quando']);
+
+            // O upsell one-click chega SEM utm, porque nao passa por URL de checkout.
+            // So nesse caso herdamos a campanha da compra anterior do mesmo cliente
+            // e mandamos pra UTMify ja atribuido. Pedido que ja veio com utm nao e tocado.
+            if (empty($rd_info['utm']['utm_source']) && !empty($rd_info['order_id'])) {
+                $pai = rd_atribuicao_buscar($rd_info, 24);
+                if ($pai && !empty($pai['utm']['utm_source'])) {
+                    $leadHerdado = [
+                        'order_id'     => $rd_info['order_id'],
+                        'metodo'       => $rd_info['metodo'],
+                        'amount_cents' => (int)round(((float)$rd_info['valor']) * 100),
+                        'tracking'     => $pai['utm'],
+                        'cpf'          => $rd_info['cpf'],
+                        'produto_id'   => $rd_info['produto_id'],
+                        'produto_nome' => $rd_info['produto'],
+                        'data'         => $rd_info['quando'],
+                    ];
+                    enviarVendaUtmify($leadHerdado, $emailReal, $nome, $telReal);
+                    file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . ' UTM herdado order=' . $rd_info['order_id']
+                        . ' campanha=' . ($pai['utm']['utm_campaign'] ?? '') . "\n", FILE_APPEND);
+                }
+            }
+        } catch (\Throwable $e) {
+            file_put_contents(LOG_FILE, date('Y-m-d H:i:s') . ' ERRO atribuicao: ' . $e->getMessage() . "\n", FILE_APPEND);
+        }
+    }
 
     // ── Purchase para a Meta via CAPI (funciona no hospedado E no transparente) ──
     $d = $data['data'] ?? [];
