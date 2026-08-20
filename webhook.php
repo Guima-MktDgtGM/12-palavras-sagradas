@@ -354,6 +354,9 @@ if ($evento === 'pix_gerado') {
     // ── Painel + atribuicao do upsell one-click ────────────────────────────
     if ($RD_LIB_OK && is_array($rd_info)) {
         try {
+            // Registra a VENDA (um por pedido: conta order bump, upsell e recompra).
+            rd_venda_registrar($rd_info);
+
             // Quem pagou sai das listas de recuperacao (so os leads criados ATE agora;
             // um Pix gerado DEPOIS da compra continua pendente, como deve ser).
             rd_leads_marcar_pago($rd_info['email'] ?: $emailReal, $rd_info['telefone'] ?: $telReal, $rd_info['quando']);

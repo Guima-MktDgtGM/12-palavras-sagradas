@@ -13,6 +13,7 @@ if (php_sapi_name() !== 'cli' && basename($_SERVER['SCRIPT_FILENAME'] ?? '') ===
 
 if (!defined('RD_DADOS_DIR')) define('RD_DADOS_DIR', __DIR__ . '/../dados');
 define('RD_LEADS_FILE',      RD_DADOS_DIR . '/leads.json');
+define('RD_VENDAS_FILE',     RD_DADOS_DIR . '/vendas.json');
 define('RD_ATRIB_FILE',      RD_DADOS_DIR . '/atribuicao.json');
 define('RD_CONTATADOS_FILE', RD_DADOS_DIR . '/contatados.json');
 define('RD_DEBUG_FILE',      RD_DADOS_DIR . '/webhook_debug.txt');
@@ -80,6 +81,17 @@ function rd_extrair($payload) {
         $valor = (float)$d['offer']['price'];
     }
 
+    // Liquido do produtor (o numero que aparece no painel da Cakto).
+    $liquido = 0.0;
+    if (isset($d['commissions']) && is_array($d['commissions'])) {
+        foreach ($d['commissions'] as $com) {
+            if (($com['type'] ?? '') === 'producer' && isset($com['totalAmount']) && is_numeric($com['totalAmount'])) {
+                $liquido = (float)$com['totalAmount'];
+                break;
+            }
+        }
+    }
+
     // UTMs: no abandono nao vem soltos, so dentro do checkoutUrl.
     $utm = [];
     foreach (['utm_source','utm_campaign','utm_medium','utm_content','utm_term','utm_id','sck','src','fbc','fbp'] as $k) {
@@ -96,6 +108,7 @@ function rd_extrair($payload) {
         'telefone'     => rd_so_digitos($tel),
         'cpf'          => rd_so_digitos($cpf),
         'valor'        => $valor,
+        'liquido'      => $liquido,
         'oferta'       => (string)($d['offer']['id'] ?? ''),
         'oferta_nome'  => (string)($d['offer']['name'] ?? ''),
         'produto'      => (string)($d['product']['name'] ?? ''),
@@ -197,12 +210,22 @@ function rd_marcar_pago_array($leads, $email, $telefone, $quando) {
     $tel   = rd_so_digitos($telefone);
     if ($email === '' && $tel === '') return $leads;
 
+    $tsCompra = strtotime((string)$quando) ?: time();
     foreach ($leads as $i => $L) {
         if (!empty($L['pago'])) continue;
         $bateEmail = $email !== '' && strtolower($L['email'] ?? '') === $email;
         $bateTel   = $tel   !== '' && rd_so_digitos($L['telefone'] ?? '') === $tel;
         if (!$bateEmail && !$bateTel) continue;
-        if (strcmp((string)($L['quando'] ?? ''), (string)$quando) > 0) continue; // criado depois da compra
+
+        // O evento de abandono da Cakto chega ATRASADO (ela so marca "abandonou"
+        // depois de alguns minutos parado), entao o horario dele costuma cair
+        // DEPOIS da compra da mesma pessoa. Por isso o abandono ganha tolerancia.
+        // Pix/boleto continuam na regra estrita: gerado depois da compra = pendente
+        // de verdade (e um segundo pedido, de outro produto).
+        $tolerancia = (($L['tipo'] ?? '') === 'abandono') ? 3 * 3600 : 0;
+        $tsLead = strtotime((string)($L['quando'] ?? '')) ?: 0;
+        if ($tsLead - $tolerancia > $tsCompra) continue; // criado depois da compra
+
         $leads[$i]['pago']    = true;
         $leads[$i]['pago_em'] = $quando;
     }
@@ -214,6 +237,59 @@ function rd_leads_marcar_pago($email, $telefone, $quando = null) {
     $leads  = rd_json_ler(RD_LEADS_FILE);
     $novo   = rd_marcar_pago_array($leads, $email, $telefone, $quando);
     if ($novo !== $leads) rd_json_gravar(RD_LEADS_FILE, $novo);
+}
+
+// ---------------------------------------------------------------------------
+// Vendas: um registro por PEDIDO aprovado (nao por cliente).
+// clientes.json so ganha linha quando o e-mail e novo, entao nao serve pra
+// contar venda: order bump, upsell e recompra ficavam de fora da conta.
+// ---------------------------------------------------------------------------
+function rd_venda_registrar($info, $vendas = null) {
+    $externo = is_array($vendas);
+    if (!$externo) $vendas = rd_json_ler(RD_VENDAS_FILE);
+
+    // Chave: o id do pedido. Sem ele, cai pro contato + horario.
+    $chave = (string)($info['order_id'] ?? '');
+    if ($chave === '') $chave = ($info['email'] ?? '') . '|' . ($info['quando'] ?? '');
+
+    foreach ($vendas as $V) {
+        if ((string)($V['chave'] ?? '') === $chave) {
+            return $externo ? $vendas : null; // webhook repetido: nao conta duas vezes
+        }
+    }
+
+    $vendas[] = [
+        'chave'    => $chave,
+        'order_id' => $info['order_id'],
+        'nome'     => $info['nome'],
+        'email'    => $info['email'],
+        'telefone' => $info['telefone'],
+        'produto'  => $info['produto'],
+        'oferta'   => $info['oferta'],
+        'valor'    => (float)$info['valor'],
+        'liquido'  => (float)($info['liquido'] ?? 0),
+        'metodo'   => $info['metodo'],
+        'utm'      => $info['utm'],
+        'quando'   => $info['quando'],
+    ];
+    if (count($vendas) > RD_MAX_LEADS) $vendas = array_slice($vendas, -RD_MAX_LEADS);
+
+    if ($externo) return $vendas;
+    rd_json_gravar(RD_VENDAS_FILE, $vendas);
+    return null;
+}
+
+// Vendas de um dia (formato Y-m-d). O total usa o LIQUIDO do produtor — o mesmo
+// numero que aparece no painel da Cakto. Cai pro bruto quando o liquido nao veio.
+function rd_vendas_do_dia($vendas, $dia) {
+    $qtd = 0; $total = 0.0;
+    foreach ($vendas as $V) {
+        if (strpos((string)($V['quando'] ?? ''), $dia) !== 0) continue;
+        $qtd++;
+        $liq = (float)($V['liquido'] ?? 0);
+        $total += $liq > 0 ? $liq : (float)($V['valor'] ?? 0);
+    }
+    return ['qtd' => $qtd, 'total' => $total];
 }
 
 // ---------------------------------------------------------------------------

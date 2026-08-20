@@ -85,19 +85,20 @@ if ($rd_lib_ok && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])
     } elseif ($_POST['acao'] === 'reconstruir') {
         // Reconstrói leads.json e atribuicao.json a partir do histórico de payloads.
         $n = rd_reconstruir_historico();
-        $aviso = "Histórico reconstruído: {$n['leads']} leads e {$n['atrib']} registros de campanha.";
+        $aviso = "Histórico reconstruído: {$n['leads']} leads, {$n['vendas']} vendas e {$n['atrib']} registros de campanha.";
     }
 }
 
 // Reconstrução: lê o webhook_debug.txt (payloads crus) em ordem cronológica.
 function rd_reconstruir_historico() {
     $arquivo = RD_DEBUG_FILE;
-    $leads = [];
-    $atrib = [];
-    if (!file_exists($arquivo)) return ['leads' => 0, 'atrib' => 0];
+    $leads  = [];
+    $atrib  = [];
+    $vendas = [];
+    if (!file_exists($arquivo)) return ['leads' => 0, 'atrib' => 0, 'vendas' => 0];
 
     $fh = fopen($arquivo, 'r');
-    if (!$fh) return ['leads' => 0, 'atrib' => 0];
+    if (!$fh) return ['leads' => 0, 'atrib' => 0, 'vendas' => 0];
 
     while (($linha = fgets($fh)) !== false) {
         if (!preg_match('/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\{.*)$/', rtrim($linha), $m)) continue;
@@ -111,7 +112,8 @@ function rd_reconstruir_historico() {
         if ($tipo !== '') {
             $leads = rd_lead_registrar($info, $tipo, $leads);
         } elseif (in_array(strtolower($info['evento']), ['purchase_approved','compra_aprovada'])) {
-            $leads = rd_marcar_pago_array($leads, $info['email'], $info['telefone'], $info['quando']);
+            $leads  = rd_marcar_pago_array($leads, $info['email'], $info['telefone'], $info['quando']);
+            $vendas = rd_venda_registrar($info, $vendas);
         }
 
         if (!empty($info['utm']['utm_source'])) {
@@ -129,8 +131,9 @@ function rd_reconstruir_historico() {
 
     if (count($atrib) > RD_MAX_ATRIB) $atrib = array_slice($atrib, -RD_MAX_ATRIB);
     rd_json_gravar(RD_LEADS_FILE, $leads);
+    rd_json_gravar(RD_VENDAS_FILE, $vendas);
     rd_json_gravar(RD_ATRIB_FILE, ['registros' => $atrib]);
-    return ['leads' => count($leads), 'atrib' => count($atrib)];
+    return ['leads' => count($leads), 'atrib' => count($atrib), 'vendas' => count($vendas)];
 }
 
 // ─── Dados ───────────────────────────────────────────────────────────────────
@@ -158,7 +161,26 @@ function rd_casa_busca($L, $q) {
     return mb_strpos($alvo, mb_strtolower($q)) !== false;
 }
 
-$leads_abandono = array_values(array_filter($leads, fn($L) => ($L['tipo'] ?? '') === 'abandono' && empty($L['pago']) && rd_casa_busca($L, $busca)));
+// Índice de quem já é cliente (por e-mail e por telefone).
+$cli_email = [];
+$cli_tel   = [];
+foreach ($clientes as $c) {
+    $e = strtolower(trim((string)($c['email'] ?? '')));
+    if ($e !== '') $cli_email[$e] = true;
+    $t = preg_replace('/\D/', '', (string)($c['telefone'] ?? ''));
+    if ($t !== '') $cli_tel[$t] = true;
+}
+// Abandono de quem JÁ COMPROU não é lead de recuperação — não adianta chamar
+// no WhatsApp perguntando por que não finalizou se a pessoa finalizou.
+// Vale só pro abandono: um Pix pendente de um cliente pode ser um segundo pedido real.
+function rd_e_cliente($L, $cli_email, $cli_tel) {
+    $e = strtolower(trim((string)($L['email'] ?? '')));
+    if ($e !== '' && isset($cli_email[$e])) return true;
+    $t = preg_replace('/\D/', '', (string)($L['telefone'] ?? ''));
+    return $t !== '' && isset($cli_tel[$t]);
+}
+
+$leads_abandono = array_values(array_filter($leads, fn($L) => ($L['tipo'] ?? '') === 'abandono' && empty($L['pago']) && !rd_e_cliente($L, $cli_email, $cli_tel) && rd_casa_busca($L, $busca)));
 $leads_pgto     = array_values(array_filter($leads, fn($L) => in_array($L['tipo'] ?? '', $TIPOS_PAGAMENTO) && empty($L['pago']) && rd_casa_busca($L, $busca)));
 
 // ─── Horários (lê só o final do log, que já passou de 38 MB) ────────────────
@@ -194,8 +216,14 @@ $tot_ab    = array_sum($horas_ab);
 // ─── Números do topo ─────────────────────────────────────────────────────────
 $hoje           = date('Y-m-d');
 $total_clientes = count($clientes);
-$vendas_hoje    = count(array_filter($clientes, fn($c) => strpos((string)($c['comprado_em'] ?? ''), $hoje) === 0));
-$qtd_abandono   = count(array_filter($leads, fn($L) => ($L['tipo'] ?? '') === 'abandono' && empty($L['pago'])));
+
+// Vendas de hoje contadas por PEDIDO (inclui order bump, upsell e recompra) —
+// diferente de clientes.json, que só ganha linha quando o e-mail é inédito.
+$vendas_arq  = $rd_lib_ok ? rd_json_ler(RD_VENDAS_FILE) : [];
+$hoje_stats  = $rd_lib_ok ? rd_vendas_do_dia($vendas_arq, $hoje) : ['qtd' => 0, 'total' => 0];
+$vendas_hoje = $hoje_stats['qtd'];
+$fat_hoje    = $hoje_stats['total'];
+$qtd_abandono   = count(array_filter($leads, fn($L) => ($L['tipo'] ?? '') === 'abandono' && empty($L['pago']) && !rd_e_cliente($L, $cli_email, $cli_tel)));
 $qtd_pgto       = count(array_filter($leads, fn($L) => in_array($L['tipo'] ?? '', $TIPOS_PAGAMENTO) && empty($L['pago'])));
 
 $aba = $_GET['aba'] ?? 'abandono';
@@ -317,7 +345,8 @@ function rd_url_atual() {
   <div class="card"><div class="num" style="color:#c080f0"><?= $qtd_abandono ?></div><div class="label">Abandonos a recuperar</div></div>
   <div class="card"><div class="num"><?= $qtd_pgto ?></div><div class="label">Pagamentos pendentes</div></div>
   <div class="card"><div class="num" style="color:#2ecc71"><?= $total_clientes ?></div><div class="label">Clientes pagos ✓</div></div>
-  <div class="card"><div class="num" style="color:#2ecc71"><?= $vendas_hoje ?></div><div class="label">Vendas hoje</div></div>
+  <div class="card"><div class="num" style="color:#2ecc71"><?= $vendas_hoje ?></div><div class="label">Pedidos hoje</div></div>
+  <div class="card"><div class="num" style="color:#2ecc71;font-size:24px;">R$ <?= number_format((float)$fat_hoje, 2, ',', '.') ?></div><div class="label">Faturamento hoje</div></div>
 </div>
 
 <div class="abas">
