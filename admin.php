@@ -352,6 +352,7 @@ function rd_url_atual() {
 <div class="abas">
   <a href="?aba=abandono"   class="aba <?= $aba==='abandono'?'ativa':'' ?>">🛒 Abandono de checkout</a>
   <a href="?aba=pendentes"  class="aba <?= $aba==='pendentes'?'ativa':'' ?>">⏳ Gerou e não pagou</a>
+  <a href="?aba=vendas"     class="aba <?= $aba==='vendas'?'ativa':'' ?>">💰 Vendas e campanha</a>
   <a href="?aba=clientes"   class="aba <?= $aba==='clientes'?'ativa':'' ?>">🏆 Clientes</a>
   <a href="?aba=emails"     class="aba <?= $aba==='emails'?'ativa':'' ?>">✉️ Fila de e-mails</a>
   <a href="?aba=checkout"   class="aba <?= $aba==='checkout'?'ativa':'' ?>">🧾 Checkout (antigo)</a>
@@ -455,6 +456,72 @@ function rd_form_busca($aba, $busca) { ?>
   </p>
   <?php rd_form_busca('pendentes', $busca); ?>
   <?php rd_tabela_leads($leads_pgto, $contatados, $csrf, 'Nenhum pagamento pendente.'); ?>
+
+<?php elseif ($aba === 'vendas'):
+  // Pedidos aprovados, com a campanha de origem. Quando o pedido chega sem UTM
+  // (upsell one-click), herda a campanha da compra anterior do mesmo cliente —
+  // a mesma lógica que o webhook usa pra mandar a atribuição pra UTMify.
+  $lista_vendas = array_reverse($vendas_arq);
+  if ($busca !== '') {
+      $lista_vendas = array_values(array_filter($lista_vendas, fn($V) =>
+          mb_strpos(mb_strtolower(($V['nome'] ?? '') . ' ' . ($V['email'] ?? '') . ' ' . ($V['telefone'] ?? '') . ' ' . ($V['produto'] ?? '')), mb_strtolower($busca)) !== false));
+  }
+  $lista_vendas = array_slice($lista_vendas, 0, 300);
+?>
+
+<p style="font-size:14px;color:#9a8fbb;margin-bottom:18px;">
+  Cada <strong>pedido aprovado</strong> com a campanha que originou a venda. Busque pelo e-mail do cliente
+  para descobrir de onde veio — inclusive nos <strong>upsells</strong>, que chegam sem rastreio e herdam a campanha da compra anterior.
+</p>
+
+<?php rd_form_busca('vendas', $busca); ?>
+
+<table>
+  <thead>
+    <tr><th>Data</th><th>Cliente</th><th>Produto</th><th>Valor</th><th>Método</th><th>Campanha</th><th>Anúncio</th></tr>
+  </thead>
+  <tbody>
+  <?php if (empty($lista_vendas)): ?>
+    <tr><td colspan="7" style="text-align:center;color:#6a5f8a;padding:30px;">
+      <?= $busca !== '' ? 'Nenhuma venda encontrada para essa busca.' : 'Nenhuma venda registrada ainda — rode o "Reconstruir agora" na aba Horários.' ?>
+    </td></tr>
+  <?php else: foreach ($lista_vendas as $V):
+      $utm  = is_array($V['utm'] ?? null) ? $V['utm'] : [];
+      $camp = rd_campanha($utm);
+      $anun = rd_anuncio($utm);
+      $herdado = false;
+      // Sem UTM no próprio pedido: procura a compra anterior do mesmo cliente.
+      if ($camp === '') {
+          $pai = rd_atribuicao_buscar([
+              'parent_order' => '', 'cpf' => '',
+              'email' => $V['email'] ?? '', 'telefone' => $V['telefone'] ?? '',
+          ], 24);
+          if ($pai) { $utm = $pai['utm']; $camp = rd_campanha($utm); $anun = rd_anuncio($utm); $herdado = $camp !== ''; }
+      }
+      $liq = (float)($V['liquido'] ?? 0); if ($liq <= 0) $liq = (float)($V['valor'] ?? 0);
+  ?>
+    <tr>
+      <td style="font-size:13px;color:#9a8fbb;white-space:nowrap;"><?= rd_fmt_data($V['quando'] ?? '') ?></td>
+      <td style="font-size:13px;">
+        <?= htmlspecialchars($V['nome'] ?? '-') ?><br>
+        <span style="color:#9a8fbb;"><?= htmlspecialchars($V['email'] ?? '-') ?></span>
+      </td>
+      <td style="font-size:13px;"><?= htmlspecialchars($V['produto'] ?? '-') ?></td>
+      <td style="white-space:nowrap;color:#2ecc71;">R$ <?= number_format($liq, 2, ',', '.') ?></td>
+      <td style="font-size:13px;color:#c080f0;"><?= htmlspecialchars($V['metodo'] ?? '-') ?></td>
+      <td class="campanha">
+        <?php if ($camp !== ''): ?>
+          <?= htmlspecialchars($camp) ?>
+          <?php if ($herdado): ?><br><small style="color:#6a5f8a;">herdado da compra anterior</small><?php endif; ?>
+        <?php else: ?>
+          <span style="color:#4a4160;">sem rastreio</span>
+        <?php endif; ?>
+      </td>
+      <td style="font-size:13px;color:#9a8fbb;"><?= $anun !== '' ? htmlspecialchars($anun) : '-' ?></td>
+    </tr>
+  <?php endforeach; endif; ?>
+  </tbody>
+</table>
 
 <?php elseif ($aba === 'clientes'): ?>
 
