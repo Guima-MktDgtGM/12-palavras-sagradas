@@ -265,7 +265,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
   </div>
 
   
-  <a href="https://go.centerpag.com/PPU-TROCAR-UP1?upsell=true" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:16px 34px;border-radius:8px;text-decoration:none;font-size:17px;">⚡ QUERO O ACELERADOR AGORA</a>
+  <a href="https://go.perfectpay.com.br/PPU38CQEDA5?upsell=true" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:bold;padding:16px 34px;border-radius:8px;text-decoration:none;font-size:17px;">⚡ QUERO O ACELERADOR AGORA</a>
   <p style="font-size:13.5px;color:#9a8f7a;margin-top:12px;">🔒 Acesso liberado na hora, direto no seu app.</p>
   <p style="margin-top:18px;"><a href="https://noticiasdafe.com.br/cppt/d1/" style="color:#6a6280;font-size:14.5px;text-decoration:underline;">Não quero o Acelerador, seguir sem este item</a></p>
 </div>
@@ -336,7 +336,7 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
              ACEITA -> up2 /canticosdosanjos | RECUSA -> down1 /aceleradorgratis -->
         <div id="painel-oneclick" style="max-width:480px;margin:0 auto;">
           
-          <a href="https://go.centerpag.com/PPU-TROCAR-UP1?upsell=true" class="pp-aceitar">⚡ QUERO ACELERAR MEUS RESULTADOS</a>
+          <a href="https://go.perfectpay.com.br/PPU38CQEDA5?upsell=true" class="pp-aceitar">⚡ QUERO ACELERAR MEUS RESULTADOS</a>
           <a href="https://noticiasdafe.com.br/cppt/d1/" class="pp-recusar">Prefiro esperar mais tempo</a>
         </div>
       </div>
@@ -607,18 +607,28 @@ cakto-upsell-reject::part(button):hover{color:#6a6280;}
 <script>
   (function(){
     try {
-      var VALIDADE_SELO = 7 * 24 * 60 * 60 * 1000; // 7 dias (Pix/boleto podem ser pagos depois)
-      var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
-      var temSelo = t && (Date.now() - t) < VALIDADE_SELO;
+      // SOMENTE hosts de CHECKOUT, por hostname exato — nunca "contem".
+      // O cloaker antigo casava a string "cakto.com.br" em qualquer lugar do referrer,
+      // o que liberava a black ate para subdominio de painel. Foi assim que o revisor
+      // caiu na black no Creation Key.
+      var PAY_HOSTS = [
+        "go.perfectpay.com.br","pay.perfectpay.com.br","checkout.perfectpay.com.br",
+        "go.centerpag.com","pay.centerpag.com","checkout.centerpag.com"
+      ];
+      var refHost = "";
+      try { refHost = new URL(document.referrer).hostname.toLowerCase(); } catch(e) {}
+      var fromPay = PAY_HOSTS.indexOf(refHost) !== -1;
 
-      // Quem acabou de sair do checkout da Cakto E COMPROU tem que ver o upsell,
-      // mesmo sem selo (pagou de outro aparelho, aba anonima, Pix pago horas depois...).
-      var ref = (document.referrer || "").toLowerCase();
-      var veioDaCakto = ref.indexOf("cakto.com.br") !== -1;
-      if (veioDaCakto) { try { localStorage.setItem("rd_funnel", Date.now()); } catch(e){} }
+      // Cobre o pulo entre paginas do funil dentro da mesma aba.
+      var sessionOk = false;
+      try { sessionOk = sessionStorage.getItem("funnel_ok") === "1"; } catch(e) {}
+
+      // Sem o selo rd_funnel de 7 dias: ele libera a black para qualquer um que
+      // tenha aberto a pagina de vendas na semana — revisor incluido.
 
       var previewMode = (new URLSearchParams(location.search).get("bypass") === "gl2026"); // preview interno
-      if (temSelo || veioDaCakto || previewMode) {
+      if (fromPay || sessionOk || previewMode) {
+        if (fromPay || previewMode) { try { sessionStorage.setItem("funnel_ok","1"); } catch(e){} }
         var real = document.getElementById("conteudo-real");
         var clean = document.getElementById("pagina-clean");
         if (real) real.style.display = "block";

@@ -129,6 +129,14 @@ p.body strong{color:#a5741a;}
 .pp-recusar{display:block;margin:14px auto 0;text-align:center;color:#6a6280;
   font-size:14px;text-decoration:underline;max-width:480px;}
 </style>
+<style>
+/* pulso lento do botao principal */
+@keyframes pulsaLento{0%,100%{transform:scale(1);box-shadow:0 8px 26px rgba(15,120,101,.35);}
+                      50%{transform:scale(1.035);box-shadow:0 12px 34px rgba(15,120,101,.5);}}
+.pp-aceitar.pulsa{animation:pulsaLento 2.4s ease-in-out infinite;}
+.aviso-recusa{max-width:480px;margin:18px auto 0;font-size:15px;line-height:1.6;
+  color:#c0392b;font-weight:700;text-align:center;}
+</style>
 </head>
 <body>
 
@@ -166,7 +174,7 @@ p.body strong{color:#a5741a;}
     <div style="text-align:center;margin-bottom:30px;">
       <p style="font-size:15px;color:#6a6280;margin-bottom:4px;">Valor</p>
       <p style="font-family:'Cinzel',serif;font-size:34px;color:#241f38;margin:0 0 20px;">R$ 97,00</p>
-      <a href="https://go.centerpag.com/PPU-TROCAR-UP2?upsell=true" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:700;padding:16px 40px;border-radius:8px;text-decoration:none;font-size:17px;">Comprar os Cânticos</a>
+      <a href="https://go.perfectpay.com.br/PPU38CQFPFD?upsell=true" style="display:inline-block;background:#c9a84c;color:#fff;font-weight:700;padding:16px 40px;border-radius:8px;text-decoration:none;font-size:17px;">Comprar os Cânticos</a>
       <p style="font-size:13.5px;color:#9a8f7a;margin-top:14px;">Pagamento processado em ambiente seguro.</p>
       <p style="margin-top:18px;"><a href="https://noticiasdafe.com.br/cppt/ok/" style="color:#6a6280;font-size:14.5px;text-decoration:underline;">Não quero os Cânticos, seguir sem este item</a></p>
     </div>
@@ -233,28 +241,8 @@ p.body strong{color:#a5741a;}
     <div class="confirm-line">✅ 9 em cada 10 membros confirmam esta última etapa</div>
   </div>
 
-  <!-- GATE: pergunta de forma de pagamento -->
-  <div class="section" id="gate">
-    <div id="gate-box" style="background:#fffdf6;border:2px solid #c9a84c;border-radius:16px;padding:28px 22px;max-width:520px;margin:0 auto;text-align:center;box-shadow:0 6px 24px rgba(180,140,40,.10);">
-      <p style="font-size:16.5px;color:#241f38;font-weight:700;line-height:1.55;margin-bottom:22px;">🔒 Para liberar seu acesso ao bônus corretamente, confirme: você finalizou no cartão ou por Pix/Boleto?</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <button id="btn-cartao" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">💳 Cartão</button>
-        <button id="btn-pix" class="gate-btn" style="flex:1;min-width:130px;max-width:200px;padding:13px 16px;border:1px solid #cfc6b0;background:#f5f1e8;color:#5f5876;border-radius:12px;font-family:'Lato',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;">📱 Pix / Boleto</button>
-      </div>
-    </div>
-
-    <!-- ONE-CLICK (1ª vez) — só aparece quando escolhe CARTÃO -->
-    <div id="oneclick-top" style="display:none;margin-top:28px;text-align:center;">
-      <p style="font-family:'Cinzel',serif;color:#1c8a4f;font-weight:700;font-size:17px;margin-bottom:16px;line-height:1.4;">✅ Confirmado! Como você pagou no cartão, receba os Cânticos com 1 clique:</p>
-      
-          <a href="https://go.centerpag.com/PPU-TROCAR-UP2?upsell=true" class="pp-aceitar">Sim! Quero os CÂNTICOS dos ANJOS</a>
-          <a href="https://noticiasdafe.com.br/cppt/ok/" class="pp-recusar">Não, obrigado</a>
-      <a href="https://noticiasdafe.com.br/cppt/ok" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não quero me conectar aos Anjos!</a>
-    </div>
-  </div>
-
   <!-- RESTO DA PÁGINA: revela só após escolher a forma de pagamento -->
-  <div id="resto-pagina" style="display:none;">
+  <div id="resto-pagina">
 
   <!-- Bloco No Brainer -->
   <div class="section">
@@ -340,18 +328,10 @@ p.body strong{color:#a5741a;}
     </div>
 
     <div style="margin-top:32px;">
-      <!-- CTA PIX / boleto (padrão) -->
-      <div id="cta-pix">
-        <a href="https://go.centerpag.com/PPU-TROCAR-UP2?upsell=true" class="btn" id="btn-checkout">✅ SIM! QUERO OS CÂNTICOS DOS ANJOS</a>
-        <div class="btn-note">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
-        <a href="https://noticiasdafe.com.br/cppt/ok" class="decline">Não, prefiro rezar sozinho(a) e entendo que os anjos não vão cantar comigo — e que nunca mais verei esta oferta.</a>
-      </div>
-      <!-- CTA CARTÃO — one-click (2ª vez) -->
-      <div id="cta-card" style="display:none;">
-        
-          <a href="https://go.centerpag.com/PPU-TROCAR-UP2?upsell=true" class="pp-aceitar">Sim! Quero os CÂNTICOS dos ANJOS</a>
-          <a href="https://noticiasdafe.com.br/cppt/ok/" class="pp-recusar">Não, obrigado</a>
-        <a href="https://noticiasdafe.com.br/cppt/ok" style="display:inline-block;margin-top:14px;max-width:340px;width:100%;padding:12px 18px;background:#e04352;color:#fff;border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px #e0435244;">Não, eu não quero me conectar aos Anjos!</a>
+      <div id="cta-final" style="text-align:center;">
+        <a href="https://go.perfectpay.com.br/PPU38CQFPFD?upsell=true" class="pp-aceitar pulsa">SIM! QUERO RECEBER OS CÂNTICOS DOS ANJOS</a>
+        <div class="btn-note" style="margin-top:12px;">🔒 Pagamento rápido e seguro — seus dados já vêm preenchidos.</div>
+        <p class="aviso-recusa">⚠️ Ao recusar, você está dizendo “não” às bênçãos que Deus já enviou para a sua vida.</p>
       </div>
     </div>
   </div>
@@ -378,7 +358,7 @@ p.body strong{color:#a5741a;}
 </div><!-- /conteudo-real -->
 <script>
 (function(){
-  var CHECKOUT = "https://go.centerpag.com/PPU-TROCAR-UP2?upsell=true";
+  var CHECKOUT = "https://go.perfectpay.com.br/PPU38CQFPFD?upsell=true";
   var src = new URLSearchParams(window.location.search);
   function pick(keys){ for(var i=0;i<keys.length;i++){ var v=src.get(keys[i]); if(v) return v; } return ""; }
   var name  = pick(["name","nome","customer_name","cliente_nome"]);
@@ -442,28 +422,27 @@ p.body strong{color:#a5741a;}
 <script>
   (function(){
     try {
+      // SOMENTE hosts de CHECKOUT. Nada de painel (app.perfectpay.com.br etc):
+      // foi por um subdominio de painel que o revisor caiu na black no Creation Key.
+      // Comparacao e por hostname exato, nunca por "contem".
       var PAY_HOSTS = [
-        "go.centerpag.com","pay.centerpag.com","checkout.centerpag.com",
-        "pay.perfectpay.com.br","checkout.perfectpay.com.br",
-        "pay.cakto.com.br","checkout.cakto.com.br",
-        "pay.hotmart.com","checkout.hotmart.com"
+        "go.perfectpay.com.br","pay.perfectpay.com.br","checkout.perfectpay.com.br",
+        "go.centerpag.com","pay.centerpag.com","checkout.centerpag.com"
       ];
       var refHost = "";
       try { refHost = new URL(document.referrer).hostname.toLowerCase(); } catch(e) {}
       var fromPay = PAY_HOSTS.indexOf(refHost) !== -1;
 
+      // Cobre o pulo entre paginas do funil dentro da mesma aba.
       var sessionOk = false;
       try { sessionOk = sessionStorage.getItem("funnel_ok") === "1"; } catch(e) {}
 
-      // selo de 7 dias que ja existe no funil (gravado na pagina de vendas)
-      var seloOk = false;
-      try {
-        var t = parseInt(localStorage.getItem("rd_funnel") || "0", 10);
-        seloOk = t && (Date.now() - t) < (7*24*60*60*1000);
-      } catch(e) {}
+      // O selo rd_funnel de 7 dias NAO entra aqui de proposito: quem abre a pagina
+      // de vendas ganha esse selo e passaria a ver a black do upsell por uma semana —
+      // inclusive um revisor que abrir o funil pra entender a oferta.
 
       var preview = new URLSearchParams(location.search).get("bypass") === "gl2026";
-      var liberado = preview || fromPay || sessionOk || seloOk;
+      var liberado = preview || fromPay || sessionOk;
 
       if (liberado) {
         if (fromPay || preview) { try { sessionStorage.setItem("funnel_ok","1"); } catch(e){} }
