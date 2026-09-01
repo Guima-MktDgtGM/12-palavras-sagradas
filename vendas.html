@@ -46,10 +46,12 @@
   <link rel="dns-prefetch" href="https://license.vturb.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-  <!-- Cakto SDK (tokenizacao de cartao, 3DS e antifraude) -->
+  <!-- Cakto SDK + gerador de QR Code: SO o checkout TRANSPARENTE usa os dois.
+       Como USAR_CHECKOUT_TRANSPARENTE esta em false, eles nao sao carregados.
+       >>> SE VOLTAR O INTERRUPTOR PARA true, DESCOMENTE AS DUAS LINHAS ABAIXO <<<
   <script src="https://cakto-sdk.pages.dev/cakto-sdk.min.js"></script>
-  <!-- Gerador de QR Code (para o Pix copia-e-cola) -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  -->
   
   <style>
     *, ::after, ::before, body { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1048,7 +1050,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>412</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1060,7 +1062,7 @@
           <div class="a-fb-children">
             <div class="a-fb-parent">
               <div class="a-fb-thumb a-fb-thumb-child">
-                <img src="https://i.pravatar.cc/48?img=32" alt="" class="a-fb-thumb-img" width="48" height="48">
+                <img src="Imagens/ext/avatar-48-32.jpg" alt="" class="a-fb-thumb-img" width="48" height="48">
               </div>
               <div class="a-fb-info">
                 <div class="a-fb-text">
@@ -1074,7 +1076,7 @@
                     <div class="a-fb-misc-txt">Responder</div>
                     <div class="a-fb-likes">
                       <p class="a-fb-dot">·</p>
-                      <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                      <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                       <span>15</span>
                     </div>
                     <p class="a-fb-dot">·</p>
@@ -1090,7 +1092,7 @@
         <div class="flexBox">
           <div class="a-fb-parent">
             <div class="a-fb-thumb">
-              <img src="https://i.pravatar.cc/70?img=47" alt="" class="a-fb-thumb-img" width="70" height="70">
+              <img src="Imagens/ext/avatar-70-47.jpg" alt="" class="a-fb-thumb-img" width="70" height="70">
             </div>
             <div class="a-fb-info">
               <div class="a-fb-text">
@@ -1104,7 +1106,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>8</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1116,7 +1118,7 @@
           <div class="a-fb-children">
             <div class="a-fb-parent">
               <div class="a-fb-thumb a-fb-thumb-child">
-                <img src="https://i.pravatar.cc/48?img=13" alt="" class="a-fb-thumb-img" width="48" height="48">
+                <img src="Imagens/ext/avatar-48-13.jpg" alt="" class="a-fb-thumb-img" width="48" height="48">
               </div>
               <div class="a-fb-info">
                 <div class="a-fb-text">
@@ -1130,7 +1132,7 @@
                     <div class="a-fb-misc-txt">Responder</div>
                     <div class="a-fb-likes">
                       <p class="a-fb-dot">·</p>
-                      <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                      <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                       <span>34</span>
                     </div>
                     <p class="a-fb-dot">·</p>
@@ -1141,7 +1143,7 @@
             </div>
             <div class="a-fb-parent">
               <div class="a-fb-thumb a-fb-thumb-child">
-                <img src="https://i.pravatar.cc/48?img=45" alt="" class="a-fb-thumb-img" width="48" height="48">
+                <img src="Imagens/ext/avatar-48-45.jpg" alt="" class="a-fb-thumb-img" width="48" height="48">
               </div>
               <div class="a-fb-info">
                 <div class="a-fb-text">
@@ -1155,7 +1157,7 @@
                     <div class="a-fb-misc-txt">Responder</div>
                     <div class="a-fb-likes">
                       <p class="a-fb-dot">·</p>
-                      <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                      <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                       <span>21</span>
                     </div>
                     <p class="a-fb-dot">·</p>
@@ -1171,7 +1173,7 @@
         <div class="flexBox">
           <div class="a-fb-parent">
             <div class="a-fb-thumb">
-              <img src="https://i.pravatar.cc/70?img=12" alt="" class="a-fb-thumb-img" width="70" height="70">
+              <img src="Imagens/ext/avatar-70-12.jpg" alt="" class="a-fb-thumb-img" width="70" height="70">
             </div>
             <div class="a-fb-info">
               <div class="a-fb-text">
@@ -1185,7 +1187,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>55</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1200,7 +1202,7 @@
         <div class="flexBox">
           <div class="a-fb-parent">
             <div class="a-fb-thumb">
-              <img src="https://i.pravatar.cc/70?img=5" alt="" class="a-fb-thumb-img" width="70" height="70">
+              <img src="Imagens/ext/avatar-70-5.jpg" alt="" class="a-fb-thumb-img" width="70" height="70">
             </div>
             <div class="a-fb-info">
               <div class="a-fb-text">
@@ -1214,7 +1216,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>18</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1229,7 +1231,7 @@
         <div class="flexBox">
           <div class="a-fb-parent">
             <div class="a-fb-thumb">
-              <img src="https://i.pravatar.cc/70?img=68" alt="" class="a-fb-thumb-img" width="70" height="70">
+              <img src="Imagens/ext/avatar-70-68.jpg" alt="" class="a-fb-thumb-img" width="70" height="70">
             </div>
             <div class="a-fb-info">
               <div class="a-fb-text">
@@ -1243,7 +1245,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>18</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1272,7 +1274,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>74</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1298,7 +1300,7 @@
                     <div class="a-fb-misc-txt">Responder</div>
                     <div class="a-fb-likes">
                       <p class="a-fb-dot">·</p>
-                      <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                      <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                       <span>31</span>
                     </div>
                     <p class="a-fb-dot">·</p>
@@ -1328,7 +1330,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>56</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1357,7 +1359,7 @@
                   <div class="a-fb-misc-txt">Responder</div>
                   <div class="a-fb-likes">
                     <p class="a-fb-dot">·</p>
-                    <img class="a-fb-like-img" src="https://media.atomicatmedia.net/p/fblike.webp?height=48&width=48" alt="likes">
+                    <img class="a-fb-like-img" src="Imagens/ext/fblike.webp" alt="likes">
                     <span>43</span>
                   </div>
                   <p class="a-fb-dot">·</p>
@@ -1370,7 +1372,7 @@
 
         <div class="a-co-f">
           <div class="a-co-fc">
-            <img class="a-co-fb" src="https://media.atomicatmedia.net/p/fblogo.webp?height=48&width=48" alt="fblogo">
+            <img class="a-co-fb" src="Imagens/ext/fblogo.webp" alt="fblogo">
             <p class="a-co-ft">Facebook Social Plugin</p>
           </div>
         </div>
