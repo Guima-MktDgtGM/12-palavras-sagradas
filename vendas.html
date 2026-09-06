@@ -745,7 +745,7 @@
         <span class="headline-urgente">URGENTE:</span> Pesquisador independente <span class="headline-destaque">recebe ameaças de morte</span> após revelar as 12 Palavras Sagradas da Bíblia <span class="headline-underline">QUE ATRAEM ABUNDÂNCIA EM 24 HORAS</span>
       </h1>
       <p class="meta-author">Por <strong>Gabriel Luz</strong></p>
-      <p class="meta-date"><span id="data-hoje">28/07/2026</span> - Atualizado há 2 horas</p>
+      <p class="meta-date"><span id="data-hoje">05/09/2026</span> - Atualizado há 2 horas</p>
     </div>
 
     <!-- VIDEO VTURB -->
@@ -1788,5 +1788,20 @@
     });
   </script>
 
+<!-- Data da materia: escreve sempre o dia de hoje (fuso de Brasilia).
+     O valor no HTML e so um reserva, caso o JS nao rode. -->
+<script>
+  (function(){
+    try {
+      var el = document.getElementById("data-hoje");
+      if (!el) return;
+      var hoje = new Date().toLocaleDateString("pt-BR", {
+        timeZone: "America/Sao_Paulo",
+        day: "2-digit", month: "2-digit", year: "numeric"
+      });
+      el.textContent = hoje;
+    } catch(e){}
+  })();
+</script>
 </body>
 </html>
