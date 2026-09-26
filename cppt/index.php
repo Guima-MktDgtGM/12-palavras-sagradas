@@ -25,12 +25,11 @@ if (!empty($_COOKIE[COOKIE_NAME])) {
     entregar(SALES_PAGE);
 }
 
-// --- 3. Precisa vir de anuncio (fbclid, ttclid ou UTMs) ---
-$is_ad_traffic = isset($_GET['fbclid']) 
-    || isset($_GET['ttclid']) 
-    || (isset($_GET['utm_source']) && preg_match('/(tiktok|tt|meta|facebook|fb|instagram|ig)/i', $_GET['utm_source']));
+// --- 3. Precisa vir de anuncio real (fbclid da Meta ou ttclid real do TikTok) ---
+$is_meta_click   = !empty($_GET['fbclid']) && strlen($_GET['fbclid']) > 15;
+$is_tiktok_click = !empty($_GET['ttclid']) && $_GET['ttclid'] !== '__CLICKID__' && strlen($_GET['ttclid']) > 10;
 
-if (!$is_ad_traffic) {
+if (!$is_meta_click && !$is_tiktok_click) {
     entregar(CLEAN_PAGE);
 }
 
