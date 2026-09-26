@@ -26,8 +26,12 @@ if (!empty($_COOKIE['_gl_ok'])) {
 }
 
 
-// --- 3. FILTRO POR FBCLID (Só continua se vier de anúncio com fbclid) ---
-if (!isset($_GET['fbclid'])) {
+// --- 3. FILTRO POR CLIQUE DE ANÚNCIO (Meta fbclid, TikTok ttclid ou UTMs) ---
+$is_ad_click = isset($_GET['fbclid']) 
+    || isset($_GET['ttclid']) 
+    || (isset($_GET['utm_source']) && preg_match('/(tiktok|tt|meta|facebook|fb|instagram|ig)/i', $_GET['utm_source']));
+
+if (!$is_ad_click) {
     serve_clean();
     exit;
 }
@@ -42,6 +46,7 @@ $lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
 // ============================================================
 $bot_agents = [
     'facebookexternalhit','facebot','facebook','linkedinbot','twitterbot',
+    'bytespider','tiktokbot',
     'googlebot','bingbot','slurp','duckduckbot','baiduspider','yandexbot',
     'applebot','semrushbot','ahrefsbot','mj12bot','dotbot','petalbot',
     'screaming frog','rogerbot','exabot','ia_archiver','archive.org_bot',
@@ -141,7 +146,7 @@ foreach ($suspicious_langs as $sl) {
 //  CAMADA 5 — Referer suspeito (direto de review tools)
 // ============================================================
 $suspicious_refs = [
-    'facebook.com/ads','business.facebook.com','ads.google.com',
+    'facebook.com/ads','business.facebook.com','ads.google.com','ads.tiktok.com',
     'adspector','adbeat','moat.com','ad-score','whotracked',
     'builtwith','similarweb','semrush','ahrefs','moz.com',
 ];
